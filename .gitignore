@@ -1,0 +1,14 @@
+# IDE files
+.idea
+.vscode
+
+# Packages
+node_modules
+
+# Generated files
+.nyc_output/**
+coverage/**
+dist/**
+
+# Local configuration
+.env

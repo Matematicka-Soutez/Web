@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for tests/unit/common/validation.spec.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">tests/unit/common</a> validation.spec.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.07% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>106/107</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>25/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">99.07% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>106/107</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">256x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable max-len */
+&nbsp;
+const validators = require('../../../src/utils/validators')
+const appErrors = require('../../../src/utils/errors/application')
+const validationUtils = require('../../../src/common/validation')
+&nbsp;
+require('chai').should()
+&nbsp;
+describe('Common FE/BE Validation', () =&gt; {
+  describe('User name validation', () =&gt; {
+    describe('numberInString', () =&gt; {
+      it('should return validate false when number is in name field', () =&gt; {
+        const expectedResp = { valid: false, message: 'Must not contain numbers' }
+        validationUtils.numberInString('Joseph1').should.be.deep.equal(expectedResp)
+        validationUtils.numberInString('1ee').should.be.deep.equal(expectedResp)
+        validationUtils.numberInString('Mi1e').should.be.deep.equal(expectedResp)
+      })
+      it('should return validate true when no number is in name field', () =&gt; {
+        const expectedResp = { valid: true }
+        validationUtils.numberInString('Josephine').should.be.deep.equal(expectedResp)
+        validationUtils.numberInString('snEk').should.be.deep.equal(expectedResp)
+        validationUtils.numberInString('Mike').should.be.deep.equal(expectedResp)
+        validationUtils.numberInString('scooter').should.be.deep.equal(expectedResp)
+      })
+    })
+&nbsp;
+    describe('allLowercase', () =&gt; {
+      it('should return validate false when name field is all lowercase', () =&gt; {
+        const expectedResp = { valid: false, message: 'Must not be all lowercase' }
+        validationUtils.allLowercase('john doe').should.be.deep.equal(expectedResp)
+        validationUtils.allLowercase('van de camp').should.be.deep.equal(expectedResp)
+        validationUtils.allLowercase('alice calmy-rey').should.be.deep.equal(expectedResp)
+        validationUtils.allLowercase('j').should.be.deep.equal(expectedResp)
+      })
+      it('should return validate true when name field does contain at least one symbol which isn\'t lowercase', () =&gt; {
+        const expectedResp = { valid: true }
+        validationUtils.allLowercase('Josephine').should.be.deep.equal(expectedResp)
+        validationUtils.allLowercase('snEk').should.be.deep.equal(expectedResp)
+        validationUtils.allLowercase('Mike').should.be.deep.equal(expectedResp)
+        validationUtils.allLowercase('MICKEY').should.be.deep.equal(expectedResp)
+      })
+    })
+&nbsp;
+    describe('allUppercase', () =&gt; {
+      it('should return validate false when name field is all uppercase', () =&gt; {
+        const expectedResp = { valid: false, message: 'Must not be all uppercase' }
+        validationUtils.allUppercase('JOHN DOE').should.be.deep.equal(expectedResp)
+        validationUtils.allUppercase('JOHN').should.be.deep.equal(expectedResp)
+        validationUtils.allUppercase('ALICE CALMY-REY').should.be.deep.equal(expectedResp)
+        validationUtils.allUppercase('D').should.be.deep.equal(expectedResp)
+      })
+      it('should return validate true when name field does contain at least one symbol which isn\'t uppercase', () =&gt; {
+        const expectedResp = { valid: true }
+        validationUtils.allUppercase('Josephine').should.be.deep.equal(expectedResp)
+        validationUtils.allUppercase('snEk').should.be.deep.equal(expectedResp)
+        validationUtils.allUppercase('Mike').should.be.deep.equal(expectedResp)
+      })
+    })
+&nbsp;
+    describe('containsSpecialCharacter', () =&gt; {
+      it('should return validate false when name field contains special characters', () =&gt; {
+        const expectedResp = { valid: false, message: 'Must not contain character: $' }
+        validationUtils.containsSpecialCharacter('K$SHA').should.be.deep.equal(expectedResp)
+        expectedResp.message = 'Must not contain character: !'
+        validationUtils.containsSpecialCharacter('My! Name').should.be.deep.equal(expectedResp)
+        expectedResp.message = 'Must not contain characters: {, !, @, #, $, %, ^, &amp;, *, (, )'
+        validationUtils.containsSpecialCharacter('{!@#$%^&amp;*()').should.be.deep.equal(expectedResp)
+        expectedResp.message = 'Must not contain characters: ), ;'
+        validationUtils.containsSpecialCharacter('Robert\'); DROP TABLE Students;--').should.be.deep.equal(expectedResp)
+        expectedResp.message = 'Must not contain character: ;'
+        validationUtils.containsSpecialCharacter(';;;;;;;;;;').should.be.deep.equal(expectedResp)
+      })
+      it('should return validate true when name field does not contain special characters', () =&gt; {
+        const expectedResp = { valid: true }
+        validationUtils.containsSpecialCharacter('Josephine J. Doe').should.be.deep.equal(expectedResp)
+        validationUtils.containsSpecialCharacter('Micheline Calmy-Rey').should.be.deep.equal(expectedResp)
+        validationUtils.containsSpecialCharacter('Lauren-May Doe').should.be.deep.equal(expectedResp)
+        validationUtils.containsSpecialCharacter('McDonald\'s').should.be.deep.equal(expectedResp)
+        validationUtils.containsSpecialCharacter('Van de Camp').should.be.deep.equal(expectedResp)
+        validationUtils.containsSpecialCharacter('J.Z.').should.be.deep.equal(expectedResp)
+      })
+    })
+  })
+&nbsp;
+  describe('isLatinString', () =&gt; {
+    it('returns true when using latin characters', () =&gt; {
+      let i
+      for (i = 0; i &lt;= 255; i++) {
+        validationUtils.isLatinString(String.fromCharCode(i)).valid.should.be.equal(true)
+      }
+    })
+&nbsp;
+    it('returns true when using latin characters', () =&gt; {
+      validationUtils.isLatinString('aaýá־בֵּית עִבְרִי').valid.should.be.equal(false)
+      validationUtils.isLatinString('aSSDDSdděščřžýáíé').valid.should.be.equal(true)
+      validationUtils.isLatinString('י').valid.should.be.equal(false)
+      validationUtils.isLatinString('י3').valid.should.be.equal(false)
+      validationUtils.isLatinString('asdasdי3').valid.should.be.equal(false)
+      validationUtils.isLatinString('יdd3ddd').valid.should.be.equal(false)
+      validationUtils.isLatinString('asdas').valid.should.be.equal(true)
+    })
+&nbsp;
+    it('returns true when passing phone numbers', () =&gt; {
+      validationUtils.isLatinString('202-555-0199').valid.should.be.equal(true)
+      validationUtils.isLatinString('+1-202-555-0183').valid.should.be.equal(true)
+      validationUtils.isLatinString('+44 1632 960114').valid.should.be.equal(true)
+      validationUtils.isLatinString('(239)597-9103').valid.should.be.equal(true)
+    })
+&nbsp;
+    it('returns true when passing ZIP codes', () =&gt; {
+      validationUtils.isLatinString('46342').valid.should.be.equal(true)
+      validationUtils.isLatinString('C1420').valid.should.be.equal(true)
+      validationUtils.isLatinString('460 14').valid.should.be.equal(true)
+      validationUtils.isLatinString('Q8300').valid.should.be.equal(true)
+    })
+&nbsp;
+    it('returns true when passing emails', () =&gt; {
+      validationUtils.isLatinString('cilarretem-3145@yopmail.com').valid.should.be.equal(true)
+      validationUtils.isLatinString('jiri.erhart@strv.com').valid.should.be.equal(true)
+      validationUtils.isLatinString('jiri.erhart+23@strv.com').valid.should.be.equal(true)
+      validationUtils.isLatinString('you@there.com').valid.should.be.equal(true)
+    })
+&nbsp;
+    it('returns true when passing URLs', () =&gt; {
+      validationUtils.isLatinString('https://s3.amazonaws.com/buddy-production/public/pouches/2/specs.pdf').valid.should.be.equal(true)
+      validationUtils.isLatinString('https://s3.amazonaws.com/buddy-production/public/images/bills/subscription.png').valid.should.be.equal(true)
+      validationUtils.isLatinString('https://s3.amazonaws.com/buddy-production/public/images/suplements/vitamin-c.jpg').valid.should.be.equal(true)
+      validationUtils.isLatinString('https://www.buddy.com/pouches?this=ok&amp;that=too%023').valid.should.be.equal(true)
+    })
+  })
+&nbsp;
+  describe('latinString json schema format', () =&gt; {
+    before(function() {
+      this.schema = {
+        type: 'Object', required: true, additionalProperties: false,
+        properties: {
+          value: { type: 'string', required: true, format: 'latinString' },
+        },
+      }
+    })
+&nbsp;
+    it('should fail validation when passing non-latin string', function() {
+      const input = { value: 'adsdasio ער' }
+      try {
+        validators.validate(input, this.schema)
+<span class="cstat-no" title="statement not covered" >        throw new Error('It should not go to this scope')</span>
+      } catch (err) {
+        err.should.be.an.instanceof(appErrors.ValidationError)
+      }
+    })
+&nbsp;
+    it('should pass validation when passing latin string', function() {
+      const input = { value: '+ěščřžýáíáíéú).[].sssdafaioj' }
+      return validators.validate(input, this.schema).errors.should.be.empty
+    })
+  })
+})
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 03 2018 16:09:27 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

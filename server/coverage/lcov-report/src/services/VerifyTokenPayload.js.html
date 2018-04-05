@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/services/VerifyTokenPayload.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">src/services</a> VerifyTokenPayload.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">27.59% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>8/29</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">27.59% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>8/29</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const Promise = require('bluebird')
+const AbstractService = require('./AbstractService')
+const userRepository = require('./../repositories/user')
+const adminRepository = require('./../repositories/admin')
+const appErrors = require('./../utils/errors/application')
+const configIdleTimeoutSec = require('../config').auth.jwt.idleTimeoutSec
+&nbsp;
+const configIdleTimeoutMs = configIdleTimeoutSec * 1000
+&nbsp;
+module.exports = class VerifyTokenPayload extends AbstractService {
+<span class="fstat-no" title="function not covered" >  sc</span>hema() {
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      type: 'Object',
+      properties: {
+        token: { type: 'string', required: true },
+        userId: { type: ['number'], required: false, minimum: 1 },
+        adminId: { type: ['number'], required: false, minimum: 1 },
+        tokenIssuedAt: { type: 'number', required: true, minimum: 1 },
+      },
+      anyOf: [
+        { required: ['userId'] },
+        { required: ['adminId'] },
+      ],
+    }
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  ru</span>n() {
+<span class="cstat-no" title="statement not covered" >    return Promise</span>
+      .all([this.getAdmin, this.getAndCheckUser])
+      .spread(<span class="fstat-no" title="function not covered" >(a</span>dmin, userData) =&gt; <span class="cstat-no" title="statement not covered" >parseResponse(admin, userData))</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  ge</span>tAdmin() {
+<span class="cstat-no" title="statement not covered" >    return this.requestData.adminId</span>
+      ? adminRepository.findById(this.requestData.adminId)
+      : null
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  as</span>ync getAndCheckUser() {
+<span class="cstat-no" title="statement not covered" >    if (this.requestData.userId) {</span>
+      // If admin is logged as user he is not using stored token in DB
+      const requiredToken = <span class="cstat-no" title="statement not covered" >!this.requestData.adminId</span>
+      const user = <span class="cstat-no" title="statement not covered" >await userRepository.findByIdAndAccessToken(this.requestData.userId, this.requestData.token, requiredToken)</span>
+&nbsp;
+      // Important 5 second tolerance to iat (token issued at)
+<span class="cstat-no" title="statement not covered" >      if (this.requestData.tokenIssuedAt + 5 &lt; Math.floor(user.passwordLastUpdatedAt.getTime() / 1000)) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new appErrors.TokenRevokedError()</span>
+      }
+<span class="cstat-no" title="statement not covered" >      if (user &amp;&amp; user.lastActivityAt &amp;&amp; ((user.lastActivityAt.getTime() + configIdleTimeoutMs) &lt; Date.now())) {</span>
+<span class="cstat-no" title="statement not covered" >        throw new appErrors.TokenIdleTimoutError()</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (user &amp;&amp; user.accessToken &amp;&amp; user.accessToken.id) {</span>
+<span class="cstat-no" title="statement not covered" >        userRepository.update(user.id, { lastActivityAt: new Date().toISOString() })</span>
+      }
+<span class="cstat-no" title="statement not covered" >      return user</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return null</span>
+  }
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >parseResponse(</span>admin, userData) {
+  let user
+  let loginTimeout
+  let loginIdleTimeout
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (userData) {</span>
+<span class="cstat-no" title="statement not covered" >    loginTimeout = userData.accessToken ? userData.accessToken.expiresAt.getTime() : null</span>
+<span class="cstat-no" title="statement not covered" >    loginIdleTimeout = userData.accessToken ? userData.accessToken.lastActivityAt.getTime() + configIdleTimeoutMs : null</span>
+<span class="cstat-no" title="statement not covered" >    delete userData.accessToken</span>
+<span class="cstat-no" title="statement not covered" >    user = userData</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    admin: admin || null,
+    user: user || null,
+    loginTimeout,
+    loginIdleTimeout,
+  }
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 03 2018 16:09:27 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

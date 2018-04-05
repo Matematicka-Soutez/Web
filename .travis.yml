@@ -1,0 +1,38 @@
+sudo: required
+language: node_js
+node_js:
+- 8.9
+before_install:
+- npm i -g npm@$(node -p "require('./package').engines.npm")
+before_script:
+  - psql -c 'create database "maso-db-test";' -U postgres
+script:
+- make lint
+- make security-test
+- make coverage
+env:
+  global:
+  - CXX=g++-5
+  - NODE_ENV=test
+  - secure: nSZd0esiib2RALb7BmQm7QRRSQolmvYwkfis4u1tfghfTSEnHTpzLAeKtU4Vkcw9WOjLhi/xgUJbARhaN14bCDfk0MJI1X5XPBFgNnvHS3/Ib2Tfr4fhy+01jF0b4bPrfzW6CzVC7YoIaM4pWtYnwCtYkn+RX2Fh5Wn8N9Sh4RmjpCqSruWXVGXA5FNv1kiK/fXnR/prjn5CX4/uDwygtqaKgpSxWgdzK4YHO+SS/5zPxvtkJ119XU1eCTkrvMCx9GGqQqx121Xc5XF2UBPlurWPIOa2W/kQvbqZ8UpGAM8VKFfnCq0G5bGWPYaUpcLgi6LhhFr7tjNgR/acqk6TW1B9cca2gmoNQqSI1xdaQoKxUUQAcG5WJjkbxHCOC59zhAfOizVEv5fsuQCdRff3VAF6/hQqKsV4c6XTdf7t+Dz08M+jGgKPlQvk6Iu2l8lV59DpWMWBaSxC1ixTa+AceC/vlx6nQWOkL5vceFe95t7Qzwut64mTm359NcsYAtt1OXZ50cj991A9iUk3w1qvB6iPQJJ+dapT+3wbS9XzcaqdUgPBxuYPar3Pbs4tfJQc3TLpxWKo8hiUe9mtHHqXGQXktryvneI6f0mpSFIG6KlL1sZs+r2feceIxaBWnk5GRtgnFvopDKQB6PEhElfx5kzIJr1TMnMaxnvW8voBLoEdYsg=
+addons:
+  postgresql: "9.6"
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
+cache:
+  directories:
+  - node_modules
+before_deploy: rm -rf server/node_modules server/coverage
+deploy:
+  skip_cleanup: true
+  provider: heroku
+  api_key:
+    secure: UNYh4sqai1P40Ky8WfCvRmlACVjTOixteu0MIlXfV0/XavghchjLpUGYGVUj4IOUbUGYONAPiQ5gCBvHRQkLQ3TRTGN9TcBLM9Whiyk+4XcCZkj04VR60Fo1wzLDxU2AG5fFdhRGpdjl/TDVYmw8D7yjMM8WHxNzEbpq2EieDHzSWbWpj5UYHvirXO9vB5xEOrCgC5hLuaiE7PRGMzJvJs3WDhBp7043RVrMWsH1XEC2ZsOdMH0w0Qi1Zqi/5wQex+itYify1rnlZqQ9bfxEvOdMxXOnmibAVNld7AKfgAWmQU5IimnISV5K+X4E7VJgkTYTTV2mHXa5U2D4AbEldmaPXj2VPLoyd+4GKzLpa+n2bD+RhOnvbNJyRT503iz48zqEt2R1GBBYPrwnlGTwCZGAMkbfqj9zffWTa9OCQFPNI0KExhFZ4JPI5ooKos6vuWXOWq1yHo0Tt0frKl99c2wHA6q0yebuyV59Nk/ocxP271XugkKJpo6Hx/mbPQmAPVjNfHNyNdiGCye5XE5BbObdoOW10prPrh0YARQTUVmBm42zM0NQy0mOGNZgB8+iVjxTXqq6haJvtLTbZk4EcOC3Dsl7yLsrRK2jKt3YKtfKWO9Tl+K66VRIDyt0m/V+GNAp7wXEtigpe6vYi/KXdGlO8G+pIdM25S7m2lj6yDS7nuvrc=
+  app:
+    development: maso-development
+  on:
+    repo: snEk42/MaSo

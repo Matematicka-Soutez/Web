@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for tests/data/users.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">tests/data</a> users.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>26/26</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">66.67% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>2/3</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>4/4</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>25/25</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">102x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const db = require('../../src/database')
+const enums = require('../../src/common/enums')
+const crypto = require('../../src/utils/crypto')
+const Chance = require('chance')
+const _ = require('lodash')
+&nbsp;
+const chance = new Chance()
+&nbsp;
+module.exports = initUsers
+&nbsp;
+async function initUsers() {
+  const newcomer = {
+    email: chance.email({ domain: 'sink.sendgrid.net' }),
+  }
+&nbsp;
+  const stage2 = {
+    firstName: chance.first(),
+    lastName: chance.last(),
+    genderId: chance.pick(enums.GENDER.idsAsEnum),
+    dob: chance.birthday({ string: true }),
+    email: chance.email({ domain: 'sink.sendgrid.net' }),
+  }
+&nbsp;
+  const unconfirmed = {
+    firstName: chance.first(),
+    lastName: chance.last(),
+    genderId: chance.pick(enums.GENDER.idsAsEnum),
+    dob: chance.birthday({ string: true }),
+    email: chance.email({ domain: 'sink.sendgrid.net' }),
+    confirmed: false,
+  }
+&nbsp;
+  const confirmed = {
+    firstName: chance.first(),
+    lastName: chance.last(),
+    genderId: chance.pick(enums.GENDER.idsAsEnum),
+    dob: chance.birthday({ string: true }),
+    email: chance.email({ domain: 'sink.sendgrid.net' }),
+    weight: chance.integer({ min: 1, max: 300 }),
+    height: chance.integer({ min: 30, max: 250 }),
+    weeklyExcerciseFrequencyId: chance.pick(enums.WEEKLY_EXCERCISE_FREQUENCY.idsAsEnum),
+    confirmed: false,
+  }
+&nbsp;
+  const ordinal = {
+    firstName: chance.first(),
+    lastName: chance.last(),
+    genderId: chance.pick(enums.GENDER.idsAsEnum),
+    dob: chance.birthday({ string: true }),
+    email: chance.email({ domain: 'sink.sendgrid.net' }),
+    password: chance.word({ length: 10 }),
+    weight: chance.integer({ min: 1, max: 300 }),
+    height: chance.integer({ min: 30, max: 250 }),
+    weeklyExcerciseFrequencyId: chance.pick(enums.WEEKLY_EXCERCISE_FREQUENCY.idsAsEnum),
+    confirmed: true,
+  }
+  ordinal.addressId = await createAddress(ordinal.firstName, chance.last(), true)
+&nbsp;
+  const subscriber = {
+    firstName: chance.first(),
+    lastName: chance.last(),
+    genderId: chance.pick(enums.GENDER.idsAsEnum),
+    dob: chance.birthday({ string: true }),
+    email: chance.email({ domain: 'sink.sendgrid.net' }),
+    password: chance.word({ length: 10 }),
+    weight: chance.integer({ min: 1, max: 300 }),
+    height: chance.integer({ min: 30, max: 250 }),
+    weeklyExcerciseFrequencyId: chance.pick(enums.WEEKLY_EXCERCISE_FREQUENCY.idsAsEnum),
+    confirmed: true,
+  }
+  subscriber.addressId = await createAddress(subscriber.firstName, subscriber.lastName, true)
+&nbsp;
+  return {
+    newcomer,
+    stage2: await createUser(stage2),
+    unconfirmed: await createUser(unconfirmed),
+    confirmed: await createUser(confirmed),
+    ordinal: await createUser(ordinal),
+    subscriber: await createUser(subscriber),
+  }
+}
+&nbsp;
+/* PRIVATE METHODS */
+&nbsp;
+async function createUser(user) {
+  const newUser = _.cloneDeep(user)
+  if (newUser.password) {
+    newUser.password = await crypto.hashPassword(newUser.password)
+  }
+  const created = await db.User.create(newUser)
+  user.id = created.id
+  return user
+}
+&nbsp;
+async function createAddress(firstName, lastName, allowedState = <span class="branch-0 cbranch-no" title="branch not covered" >true)</span> {
+  const states = enums.STATES.idsAsEnum.filter(id =&gt; enums.STATES.ids[id].allowed === allowedState)
+  const address = await db.Address.create({
+    firstName,
+    lastName,
+    stateId: chance.pick(states),
+    city: chance.city(),
+    street: chance.address(),
+    zip: chance.zip(),
+  })
+  return address.id
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Jan 03 2018 16:09:27 GMT+0100 (CET)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>
