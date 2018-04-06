@@ -42,28 +42,28 @@ class Timer extends Component {
   render() {
     return (
       <div className="App-timer">
+      
+        {this.state.phase === 'BEFORE' &&
+        <div className="fullHeightCapture">
+          Vítejte na MaSe
+        </div>}
 
-        {this.state.phase === 'BEFORE'
-          && <div className="fullHeightCapture">
-              Vítejte na MaSe
-             </div>}
+        {this.state.phase === 'AFTER' &&
+        <div className="fullHeightCapture" style={{ color: 'red' }}>
+          Hra skončila
+        </div>}
 
-        {this.state.phase === 'AFTER'
-          && <div className="fullHeightCapture" style={{ color: 'red' }}>
-              Hra skončila
-             </div>}
+        {this.state.phase === 'COMMENCING' &&
+        <div>
+          <div className="capture">Hra začne za</div>
+          <div className="value">{formattedMS(getMSUntil(this.state.start))}</div>
+        </div>}
 
-        {this.state.phase === 'COMMENCING'
-          && <div>
-            <div className="capture">Hra začne za</div>
-            <div className="value">{formattedMS(getMSUntil(this.state.start))}</div>
-             </div>}
-
-        {this.state.phase === 'RUNNING'
-          && <div>
-            <div className="capture">Hra skončí za</div>
-            <div className="value">{formattedMS(getMSUntil(this.state.end))}</div>}
-             </div>}
+        {this.state.phase === 'RUNNING' &&
+        <div>
+          <div className="capture">Hra skončí za</div>
+          <div className="value">{formattedMS(getMSUntil(this.state.end))}</div>}
+        </div>}
       </div>
     )
   }

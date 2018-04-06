@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import Timer from './components/Timer'
-import Game from './games/mining/Game'
-import Input from './games/mining/Input'
+import Game from '../../games/mining/client/Game'
+import Input from '../../games/mining/client/Input'
 import masoLogo from './static/images/maso_logo.png'
 import './App.css'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      game: {
+        start: new Date('2018-04-05T16:00:00.000Z'),
+        end: new Date('2018-04-05T17:30:00.000Z')
+      }
+    }
+  }
+
   render() {
     return (
       <Router>
