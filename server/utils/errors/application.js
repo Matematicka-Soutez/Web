@@ -54,6 +54,12 @@ class InvalidTokenError extends AppError {
   }
 }
 
+class NotConfirmedError extends AppError {
+  constructor() {
+    super('E_NOT_CONFIRMED', true)
+  }
+}
+
 class UnauthorizedError extends AppError {
   constructor() {
     super('E_UNAUTH', true)
@@ -119,6 +125,7 @@ module.exports = {
   TokenRevokedError,
   TokenIdleTimoutError,
   NotFoundError,
+  NotConfirmedError,
   PasswordDoesntMatchError,
   PasswordWrongFormat,
   InvalidUserData,

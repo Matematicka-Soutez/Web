@@ -1,0 +1,14 @@
+{
+  "game": {
+    "grid": {
+      "width": 9,
+      "height": 9,
+      "start": 40
+    }
+  },
+  "common": {
+    "name": "Lahvování vody",
+    "routes": "/server/routes",
+    "databaseModels": "/server/database/models/"
+  }
+}

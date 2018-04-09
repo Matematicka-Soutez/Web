@@ -92,7 +92,7 @@ async function login(ctx) {
   try {
     ctx.body = await new LoginService()
       .execute({
-        userName: ctx.request.body.userName,
+        username: ctx.request.body.username,
         password: ctx.request.body.password,
       })
   } catch (err) {

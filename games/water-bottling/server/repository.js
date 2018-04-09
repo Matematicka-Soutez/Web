@@ -2,11 +2,11 @@ const db = require('../../../server/database')
 const appErrors = require('../../../server/utils/errors/application')
 
 module.exports = {
-  getGrid,
-  addPosition,
+  findTeamPositions,
+  addTeamPosition,
 }
 
-async function getGrid(dbTransaction) {
+async function findTeamPositions(dbTransaction) {
   const result = await db.TeamPosition.findAll({
     group: ['teamId'],
     attributes: [
@@ -16,7 +16,7 @@ async function getGrid(dbTransaction) {
     ],
     transaction: dbTransaction,
   })
-  return parseGrid(result)
+  return parseTeamPositions(result)
 }
 
 /**
@@ -25,23 +25,23 @@ async function getGrid(dbTransaction) {
  * @param {object} dbTransaction - Database transaction
  * @returns {object}
  */
-async function addPosition(position, dbTransaction) {
+async function addTeamPosition(position, dbTransaction) {
   const result = await db.TeamPosition.create(position, {
     returning: true,
     transaction: dbTransaction,
   })
-  return parsePosition(result)
+  return parseTeamPosition(result)
 }
 
 
 /* PRIVATE PARSING METHODS */
-function parseGrid(result) {
+function parseTeamPositions(result) {
   console.log(result)
   // TODO
   return result
 }
 
-function parsePosition(result) {
+function parseTeamPosition(result) {
   console.log(result)
   // TODO
   return result

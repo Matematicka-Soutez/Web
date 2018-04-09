@@ -9,14 +9,14 @@ module.exports = class LoginService extends AbstractService {
     return {
       type: 'Object',
       properties: {
-        userName: validator.emailValidator({ required: true }),
+        username: validator.emailValidator({ required: true }),
         password: { type: 'string', minLength: 1, maxLength: 255 },
       },
     }
   }
 
   async run() {
-    const user = await userRepository.findByEmail(this.requestData.userName.toLowerCase())
+    const user = await userRepository.findByEmail(this.requestData.username.toLowerCase())
     if (!user) {
       throw new appErrors.UnauthorizedError()
     }

@@ -6,7 +6,7 @@ const documentationRoutes = require('./documentation')
 const errorsHandler = require('./../handlers/errors')
 const responseErrors = require('./../utils/errors/response')
 const passportHandler = require('./../handlers/passport')
-const { publicGameRoutes, authenticatedGameRoutes, adminGameRoutes } = require('../../games/mining/server/routes')
+const { publicGameRoutes, authenticatedGameRoutes, adminGameRoutes } = require('../../games/water-bottling/server/routes')
 const config = require('../../config')
 
 const router = new Router()
