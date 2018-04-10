@@ -6,7 +6,7 @@ services:
     image: sameersbn/postgresql
     container_name: maso
     environment:
-    - DB_NAME=maso-db,maso-db-test
+    - DB_NAME=maso-local,maso-test
     - PG_TRUST_LOCALNET=true
     ports:
     - 5432:5432

@@ -14,6 +14,6 @@ module.exports = {
       logging: false,
     },
     connectionString: process.env.DATABASE_URL_TEST
-      || 'postgres://postgres@localhost:5432/maso-db-test',
+      || 'postgres://postgres@localhost:5432/maso-test',
   },
 }

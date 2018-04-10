@@ -8,7 +8,7 @@ module.exports = env => ({
   version: pkg.version,
   server: {
     concurrency: process.env.WEB_CONCURRENCY || 1,
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3001,
     isTravis: process.env.IS_TRAVIS || false,
     maxMemory: process.env.WEB_MEMORY || 512,
     killTimeout: 3000,
@@ -61,7 +61,7 @@ module.exports = env => ({
       logging: false,
     },
     connectionString: process.env.DATABASE_URL
-      || 'postgres://postgres@localhost:5432/maso-db',
+      || 'postgres://postgres@localhost:5432/maso-local',
   },
   logger: {
     stdout: true,

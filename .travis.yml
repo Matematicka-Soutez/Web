@@ -5,7 +5,7 @@ node_js:
 before_install:
 - npm i -g npm@$(node -p "require('./package').engines.npm")
 before_script:
-  - psql -c 'create database "maso-db-test";' -U postgres
+  - psql -c 'create database "maso-test";' -U postgres
 script:
 - make lint
 - make security-test

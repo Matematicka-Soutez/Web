@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react'
-import { subscribeToGridChange } from './sockets'
+// import { subscribeToGridChange } from './sockets'
 import Grid from './components/Grid'
 
 class Game extends Component {
@@ -9,7 +10,7 @@ class Game extends Component {
       fields: [],
       size: { height: 0, width: 0 },
     }
-    subscribeToGridChange(this.handleGridChange)
+    // subscribeToGridChange(this.handleGridChange)
   }
 
   handleGridChange(err, grid) {
@@ -24,10 +25,10 @@ class Game extends Component {
   async componentWillMount() {
     try {
       const res = await fetch('/api/game/grid')
-      const grid = res.json()
+      console.log(res)
+      const grid = await res.json()
       this.setState(grid)
-    }
-    catch (err) {
+    } catch (err) {
       console.log(err)
     }
   }

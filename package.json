@@ -2,13 +2,16 @@
   "name": "maso",
   "version": "1.0.0",
   "description": "Math competition MaSo web application.",
+  "proxy": "http://localhost:3001/",
   "main": "server/cluster.js",
   "scripts": {
-    "start-fe": "cd client && node scripts/start.js",
+    "client": "cd client && node scripts/start.js",
     "build": "node client/scripts/build.js",
-    "test-fe": "node client/scripts/test.js --env=jsdom",
-    "start": "node .",
-    "test": "./bin/test"
+    "postinstall": "npm run build",
+    "test": "./bin/test && node client/scripts/test.js --env=jsdom",
+    "server": "node .",
+    "dev-server": "nodemon .",
+    "dev": "node scripts/dbsync.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -81,6 +84,7 @@
     "chai-as-promised": "^7.1.1",
     "chai-shallow-deep-equal": "^1.4.6",
     "chance": "^1.0.13",
+    "concurrently": "^3.5.1",
     "dirty-chai": "^2.0.1",
     "dotenv": "^5.0.1",
     "eslint": "4.19.1",

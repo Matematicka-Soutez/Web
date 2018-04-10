@@ -14,9 +14,11 @@ module.exports = class GetCurrentGridService extends AbstractService {
     const positions = await repository.findTeamPositions()
     const teams = await repository.findTeams()
     const grid = {
-      height: gameConfig.height,
-      width: gameConfig.width,
       fields: getFields(teams, positions),
+      size: {
+        height: gameConfig.height,
+        width: gameConfig.width,
+      },
     }
     return grid
   }
