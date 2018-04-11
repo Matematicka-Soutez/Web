@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const autoprefixer = require('autoprefixer')
 const path = require('path')
 const webpack = require('webpack')
@@ -70,9 +71,9 @@ module.exports = {
     // We placed these paths second because we want `node_modules` to "win"
     // if there are any conflicts. This matches Node resolution mechanism.
     // https://github.com/facebookincubator/create-react-app/issues/253
-    modules: ['node_modules', paths.appNodeModules].concat(
+    modules: ['node_modules', paths.appNodeModules]
       // It is guaranteed to exist because we tweak it in `env.js`
-      process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
+      .concat(process.env.NODE_PATH.split(path.delimiter).filter(Boolean)),
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
     // some tools, although we do not recommend using it, see:
@@ -81,7 +82,6 @@ module.exports = {
     // for React Native Web.
     extensions: ['.web.js', '.mjs', '.js', '.json', '.web.jsx', '.jsx'],
     alias: {
-
       // Support React Native Web
       // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
       'react-native': 'react-native-web',
@@ -98,10 +98,6 @@ module.exports = {
   module: {
     strictExportPresence: true,
     rules: [
-      // TODO: Disable require.ensure as it's not a standard language feature.
-      // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
-      // { parser: { requireEnsure: false } },
-
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
@@ -170,13 +166,13 @@ module.exports = {
                   // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: 'postcss',
                   plugins: () => [
-                    require('postcss-flexbugs-fixes'),
+                    require('postcss-flexbugs-fixes'), // eslint-disable-line global-require
                     autoprefixer({
                       browsers: [
                         '>1%',
                         'last 4 versions',
                         'Firefox ESR',
-                        'not ie < 9', // React doesn't support IE8 anyway
+                        'not ie < 9',
                       ],
                       flexbox: 'no-2009',
                     }),
@@ -248,7 +244,7 @@ module.exports = {
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
-    child_process: 'empty',
+    child_process: 'empty', // eslint-disable-line camelcase
   },
   // Turn off performance hints during development because we don't do any
   // splitting or minification in interest of speed. These warnings become
