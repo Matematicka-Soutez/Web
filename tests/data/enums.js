@@ -1,5 +1,5 @@
-const db = require('../../src/database')
-const enums = require('../../src/common/enums')
+const db = require('../../server/database')
+const enums = require('../../common/enums')
 
 module.exports = initEnums
 

@@ -1,4 +1,4 @@
-const TransactionalService = require('../../../src/services/TransactionalService')
+const TransactionalService = require('../../../server/services/TransactionalService')
 
 require('chai').should()
 
@@ -7,7 +7,9 @@ describe('Transact service', () => {
     const TestService = class extends TransactionalService {
       schema() {
         return {
-          type: 'Object', required: true, additionalProperties: false,
+          type: 'Object',
+          required: true,
+          additionalProperties: false,
           properties: {
             data: { type: 'string', required: true },
           },

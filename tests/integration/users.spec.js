@@ -1,10 +1,10 @@
 const should = require('chai').should()
 const request = require('supertest')
 const initDb = require('../data/init')
-const db = require('./../../src/database')
+const db = require('./../../server/database')
 const login = require('./utils/login').loginUser
-const enums = require('./../../src/common/enums')
-const crypto = require('./../../src/utils/crypto')
+const enums = require('./../../common/enums')
+const crypto = require('./../../server/utils/crypto')
 const helpers = require('./utils/helpers')
 const moment = require('moment')
 const _ = require('lodash')
@@ -64,7 +64,7 @@ describe('User API endpoints: /api/users', function userAPI() {
       // Validation
       conflictError.message.duplicateResetPasswordToken = res.body.message.duplicateResetPasswordToken
       res.body.should.be.deep.equal(conflictError)
-      const user = await db.User.findOne({ where: { duplicateResetPasswordToken: res.body.message.duplicateResetPasswordToken } })
+      // const user = await db.User.findOne({ where: { duplicateResetPasswordToken: res.body.message.duplicateResetPasswordToken } })
       // TODO user.email.should.equals(this.data.users.newcomer.email.toLowerCase())
     })
 

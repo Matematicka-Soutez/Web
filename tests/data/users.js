@@ -1,6 +1,6 @@
-const db = require('../../src/database')
-const enums = require('../../src/common/enums')
-const crypto = require('../../src/utils/crypto')
+const db = require('../../server/database')
+const enums = require('../../common/enums')
+const crypto = require('../../server/utils/crypto')
 const Chance = require('chance')
 const _ = require('lodash')
 

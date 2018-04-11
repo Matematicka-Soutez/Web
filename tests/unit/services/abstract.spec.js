@@ -1,13 +1,15 @@
 require('chai').should()
-const AbstractService = require('../../../src/services/AbstractService')
-const appErrors = require('../../../src/utils/errors/application')
+const AbstractService = require('../../../server/services/AbstractService')
+const appErrors = require('../../../server/utils/errors/application')
 
 describe('Abstract service', () => {
   it('should run correctly on valid input data', () => {
     const TestService = class extends AbstractService {
       schema() {
         return {
-          type: 'Object', required: true, additionalProperties: false,
+          type: 'Object',
+          required: true,
+          additionalProperties: false,
           properties: {
             data: { type: 'string', required: true },
           },
@@ -49,7 +51,9 @@ describe('Abstract service', () => {
     const TestService = class extends AbstractService {
       schema() {
         return {
-          type: 'Object', required: true, additionalProperties: false,
+          type: 'Object',
+          required: true,
+          additionalProperties: false,
           properties: {
             name: { type: 'string', required: true },
           },
@@ -74,7 +78,9 @@ describe('Abstract service', () => {
     const TestService = class extends AbstractService {
       schema() {
         return {
-          type: 'Object', required: true, additionalProperties: false,
+          type: 'Object',
+          required: true,
+          additionalProperties: false,
           properties: {
             name: { type: 'string', required: true },
           },

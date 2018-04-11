@@ -1,8 +1,8 @@
 /* eslint-disable max-len */
 
-const validators = require('../../../src/utils/validators')
-const appErrors = require('../../../src/utils/errors/application')
-const validationUtils = require('../../../src/common/validation')
+const validators = require('../../../server/utils/validators')
+const appErrors = require('../../../server/utils/errors/application')
+const validationUtils = require('../../../common/validation')
 
 require('chai').should()
 
@@ -132,7 +132,9 @@ describe('Common FE/BE Validation', () => {
   describe('latinString json schema format', () => {
     before(function() {
       this.schema = {
-        type: 'Object', required: true, additionalProperties: false,
+        type: 'Object',
+required: true,
+additionalProperties: false,
         properties: {
           value: { type: 'string', required: true, format: 'latinString' },
         },

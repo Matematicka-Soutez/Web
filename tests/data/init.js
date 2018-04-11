@@ -1,4 +1,4 @@
-const db = require('../../src/database')
+const db = require('../../server/database')
 const initUsers = require('./users')
 // const initAdmin = require('./admin')
 const initEnums = require('./enums')

@@ -1,9 +1,9 @@
 /* eslint-disable max-len */
 
 const nock = require('nock')
-const config = require('../src/config')
-const app = require('../src/app')
-const log = require('../src/utils/logger').logger
+const config = require('../config')
+const app = require('../server/app')
+const log = require('../server/utils/logger').logger
 
 const nockSendGrid = () => {
   nock('https://api.sendgrid.com')

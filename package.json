@@ -8,7 +8,7 @@
     "client": "cd client && node scripts/start.js",
     "build": "node client/scripts/build.js",
     "postinstall": "npm run build",
-    "test": "./bin/test && node client/scripts/test.js --env=jsdom",
+    "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom && mocha --opts tests/mocha.opts tests && snyk auth $SNYK_TOKEN && snyk test",
     "server": "node .",
     "dev-server": "nodemon .",
     "dev": "node scripts/dbsync.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
@@ -49,7 +49,7 @@
     "koa-static2": "^0.1.8",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
-    "newrelic": "^3.3.0",
+    "newrelic": "^3.3.1",
     "object-assign": "4.1.1",
     "pg": "^7.4.1",
     "pg-safe-numbers": "^0.7.0",
@@ -116,21 +116,21 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "client/src/**/*.{js,jsx,mjs}"
+      "<rootDir>/client/src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
-      "client/config/polyfills.js"
+      "<rootDir>/client/config/polyfills.js"
     ],
     "testMatch": [
-      "client/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "client/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+      "<rootDir>/client/src/**/__tests__/**/*.{js,jsx,mjs}",
+      "<rootDir>/client/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
-      "^.+\\.(js|jsx|mjs)$": "node_modules/babel-jest",
-      "^.+\\.css$": "client/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "client/config/jest/fileTransform.js"
+      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/client/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/client/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
