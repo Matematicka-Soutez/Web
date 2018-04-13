@@ -8,7 +8,7 @@
     "client": "cd client && node scripts/start.js",
     "build": "node client/scripts/build.js",
     "postinstall": "npm run build",
-    "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom && mocha --opts tests/mocha.opts tests && snyk auth $SNYK_TOKEN && snyk test",
+    "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom --watchAll && mocha --opts tests/mocha.opts tests && snyk auth $SNYK_TOKEN && snyk test",
     "server": "node .",
     "dev-server": "nodemon .",
     "dev": "node scripts/dbsync.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
@@ -49,7 +49,7 @@
     "koa-static2": "^0.1.8",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
-    "newrelic": "^3.3.1",
+    "newrelic": "^4.0.0",
     "object-assign": "4.1.1",
     "pg": "^7.4.1",
     "pg-safe-numbers": "^0.7.0",

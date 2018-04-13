@@ -4,9 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     lastName: { type: DataTypes.STRING, allowNull: false, field: 'last_name' },
     email: { type: DataTypes.STRING, allowNull: false, field: 'email' },
     phone: { type: DataTypes.STRING, allowNull: false, field: 'phone' },
+    password: { type: DataTypes.STRING, allowNull: false, field: 'password' },
+    allowNotifications: { type: DataTypes.BOOLEAN, allowNull: false, dafaultValue: true, field: 'allow_notifications' },
   }, {
     tableName: 'Teachers',
   })
+
   Teacher.associate = models => {
     Teacher.hasMany(models.Team, {
       as: 'teacher',

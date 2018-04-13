@@ -1,17 +1,14 @@
-// eslint-disable max-len
-
 module.exports = (sequelize, DataTypes) => {
   const Team = sequelize.define('Team', {
     name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
-    abbr: { type: DataTypes.STRING, allowNull: false, field: 'abbr' },
-    allowed: { type: DataTypes.BOOLEAN, allowNull: false, field: 'allowed' },
+    arrived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'arrived' },
   }, {
     tableName: 'Teams',
   })
 
   Team.associate = models => {
-    Team.hasMany(models.Competitor, {
-      as: 'competitors',
+    Team.hasMany(models.TeamMember, {
+      as: 'teamMembers',
       foreignKey: { name: 'teamId', field: 'team_id' },
       onDelete: 'RESTRICT',
     })
@@ -23,6 +20,16 @@ module.exports = (sequelize, DataTypes) => {
     Team.belongsTo(models.School, {
       as: 'school',
       foreignKey: { name: 'schoolId', field: 'school_id' },
+      onDelete: 'RESTRICT',
+    })
+    Team.belongsTo(models.CompetitionVenue, {
+      as: 'competitionVenue',
+      foreignKey: { name: 'competitionVenueId', field: 'competition_venue_id' },
+      onDelete: 'RESTRICT',
+    })
+    Team.belongsTo(models.CompetitionVenueRoom, {
+      as: 'competitionVenueRoom',
+      foreignKey: { name: 'competitionVenueRoomId', field: 'competition_venue_room_id' },
       onDelete: 'RESTRICT',
     })
   }

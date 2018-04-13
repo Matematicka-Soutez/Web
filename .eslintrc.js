@@ -41,5 +41,12 @@ module.exports = {
     rules: {
       'prefer-arrow-callback': 0,
     }
+  }, {
+    // Little different rules for tests
+    files: ['server/database/models/*'],
+    rules: {
+      'max-len': 0,
+      'new-cap': 0,
+    }
   }]
 }

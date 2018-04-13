@@ -7,13 +7,22 @@ module.exports = (sequelize, DataTypes) => {
     zip: { type: DataTypes.STRING, allowNull: true, field: 'zip' },
   }, {
     tableName: 'Addresses',
-    timestamps: true,
   })
 
   Address.associate = models => {
-    Address.hasOne(models.User, {
-      as: 'user',
+    Address.hasOne(models.School, {
+      as: 'school',
       foreignKey: { name: 'addressId', field: 'address_id' },
+      onDelete: 'RESTRICT',
+    })
+    Address.hasOne(models.Venue, {
+      as: 'venue',
+      foreignKey: { name: 'addressId', field: 'address_id' },
+      onDelete: 'RESTRICT',
+    })
+    Address.belongsTo(models.Country, {
+      as: 'country',
+      foreignKey: { name: 'countryId', field: 'country_id' },
       onDelete: 'RESTRICT',
     })
   }
