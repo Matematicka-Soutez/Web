@@ -6,7 +6,7 @@
   "main": "server/cluster.js",
   "scripts": {
     "client": "cd client && node scripts/start.js",
-    "build": "node client/scripts/build.js",
+    "build": "cd client && node scripts/build.js",
     "postinstall": "npm run build",
     "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom --watchAll && mocha --opts tests/mocha.opts tests && snyk auth $SNYK_TOKEN && snyk test",
     "server": "node .",
