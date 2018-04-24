@@ -114,7 +114,6 @@ async function signUp(ctx) {
         // firstName: ctx.request.body.firstName,
         // lastName: ctx.request.body.lastName,
         // dob: ctx.request.body.dob,
-        // gender: ctx.request.body.gender,
       })
     ctx.status = 201
     ctx.body = responseParsers.parseUser(user)

@@ -9,6 +9,10 @@ node_modules
 .nyc_output/**
 coverage/**
 dist/**
+build/**
 
 # Local configuration
 .env
+
+# System files
+.DS_Store

@@ -48,6 +48,7 @@
     "koa-router": "^7.4.0",
     "koa-static2": "^0.1.8",
     "lodash": "^4.17.5",
+    "material-ui": "^1.0.0-beta.42",
     "moment": "^2.22.0",
     "newrelic": "^4.0.0",
     "object-assign": "4.1.1",
@@ -72,7 +73,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
-    "@strv/eslint-config-javascript": "^7.10.0",
+    "@strv/eslint-config-javascript": "^7.11.1",
     "babel-core": "6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "20.0.3",

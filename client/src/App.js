@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
+import Button from 'material-ui/Button'
 import Timer from './components/Timer'
 import Game from '../../games/water-bottling/client/Game'
 import Input from '../../games/water-bottling/client/Input'
@@ -34,6 +35,9 @@ class App extends Component {
           </header>
 
           <main>
+            <Button variant="raised" color="primary">
+              Hello World
+            </Button>
             <Route exact path="/" component={Game} />
             <Route exact path="/input" component={Input} />
           </main>

@@ -1,5 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const CompetitionVenueRoom = sequelize.define('CompetitionVenueRoom', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, }, 
     capacity: { type: DataTypes.INTEGER, allowNull: false, field: 'capacity' },
   }, {
     tableName: 'CompetitionVenueRooms',
