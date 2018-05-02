@@ -15,7 +15,18 @@ module.exports = (sequelize, DataTypes) => {
   Competition.associate = models => {
     Competition.belongsToMany(models.Venue, {
       as: 'venues',
-      through: 'CompetitionVenues',
+      through: models.CompetitionVenue,
+      foreignKey: { name: 'competitionId', field: 'competition_id' },
+      onDelete: 'RESTRICT',
+    })
+    Competition.belongsToMany(models.Organizer, {
+      as: 'organizers',
+      through: 'CompetitionOrganizers',
+      foreignKey: { name: 'competitionId', field: 'competition_id' },
+      onDelete: 'RESTRICT',
+    })
+    Competition.hasMany(models.CompetitionVenue, {
+      as: 'competitionVenues',
       foreignKey: { name: 'competitionId', field: 'competition_id' },
       onDelete: 'RESTRICT',
     })
@@ -24,9 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: { name: 'gameId', field: 'game_id' },
       onDelete: 'RESTRICT',
     })
-    Competition.belongsTo(models.Admin, {
+    Competition.belongsTo(models.Organizer, {
       as: 'createdBy',
-      foreignKey: { name: 'adminId', field: 'admin_id' },
+      foreignKey: { name: 'organizerId', field: 'organizer_id' },
       onDelete: 'RESTRICT',
     })
   }

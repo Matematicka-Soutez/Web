@@ -5,9 +5,17 @@ module.exports = (sequelize, DataTypes) => {
     email: { type: DataTypes.STRING, allowNull: false, field: 'email' },
     phone: { type: DataTypes.STRING, allowNull: false, field: 'phone' },
     password: { type: DataTypes.STRING, allowNull: false, field: 'password' },
-    allowNotifications: { type: DataTypes.BOOLEAN, allowNull: false, dafaultValue: true, field: 'allow_notifications' },
+    allowNotifications: { type: DataTypes.BOOLEAN, allowNull: true, dafaultValue: true, field: 'allow_notifications' },
+    /* ADMINISTRATIVE PROPERTIES */
+    publicToken: { type: DataTypes.STRING, field: 'public_token' },
+    passwordPublicToken: { type: DataTypes.STRING, field: 'password_public_token' },
+    duplicateResetPasswordToken: { type: DataTypes.STRING, field: 'duplicate_reset_password_token' },
+    confirmed: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'confirmed' },
+    passwordLastUpdatedAt: { type: DataTypes.DATE, defaultValue: new Date(), field: 'password_last_updated_at' },
+    lastLoginAt: { type: DataTypes.DATE, field: 'last_login_at' },
   }, {
     tableName: 'Teachers',
+    timestamps: true,
   })
 
   Teacher.associate = models => {

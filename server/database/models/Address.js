@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Address = sequelize.define('Address', {
-    firstName: { type: DataTypes.STRING, allowNull: false, field: 'first_name' },
-    lastName: { type: DataTypes.STRING, allowNull: false, field: 'last_name' },
+    titleLine1: { type: DataTypes.STRING, allowNull: false, field: 'title_line1' },
+    titleLine2: { type: DataTypes.STRING, allowNull: false, field: 'title_line2' },
     street: { type: DataTypes.STRING, allowNull: true, field: 'street' },
     city: { type: DataTypes.STRING, allowNull: true, field: 'city' },
     zip: { type: DataTypes.STRING, allowNull: true, field: 'zip' },

@@ -1,7 +1,7 @@
 {
   "name": "maso",
   "version": "1.0.0",
-  "description": "Math competition MaSo web application.",
+  "description": "Game platform for team math competition MaSo.",
   "proxy": "http://localhost:3001/",
   "main": "server/cluster.js",
   "scripts": {

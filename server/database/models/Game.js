@@ -1,9 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
   const Game = sequelize.define('Game', {
     name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
+    description: { type: DataTypes.STRING, allowNull: false, field: 'description' },
     folder: { type: DataTypes.STRING, allowNull: false, field: 'folder' },
   }, {
-    tableName: 'Game',
+    tableName: 'Games',
   })
 
   Game.associate = models => {

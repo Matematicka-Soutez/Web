@@ -1,15 +1,16 @@
 const db = require('../../server/database')
 const initUsers = require('./users')
-// const initAdmin = require('./admin')
 const initEnums = require('./enums')
+const initCommon = require('./common')
+const initStatic = require('./static')
 
 module.exports = init
 
 async function init() {
   await db.sequelize.sync({ force: true })
   await initEnums()
-  return {
-    users: await initUsers(),
-    admin: null,
-  }
+  await initStatic()
+  await initCommon()
+  await initUsers()
+  return true
 }

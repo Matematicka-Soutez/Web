@@ -1,7 +1,9 @@
 module.exports = (sequelize, DataTypes) => {
   const School = sequelize.define('School', {
-    name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
+    shortName: { type: DataTypes.STRING, allowNull: false, field: 'short_name' },
+    fullName: { type: DataTypes.STRING, allowNull: false, field: 'full_name' },
     aesopId: { type: DataTypes.STRING, allowNull: false, field: 'aesop_id' },
+    accessCode: { type: DataTypes.STRING, allowNull: false, field: 'access_code' },
   }, {
     tableName: 'Schools',
   })

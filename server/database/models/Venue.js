@@ -9,7 +9,12 @@ module.exports = (sequelize, DataTypes) => {
   Venue.associate = models => {
     Venue.belongsToMany(models.Competition, {
       as: 'competitions',
-      through: 'CompetitionVenues',
+      through: models.CompetitionVenue,
+      foreignKey: { name: 'venueId', field: 'venue_id' },
+      onDelete: 'RESTRICT',
+    })
+    Venue.hasMany(models.CompetitionVenue, {
+      as: 'competitionVenues',
       foreignKey: { name: 'venueId', field: 'venue_id' },
       onDelete: 'RESTRICT',
     })

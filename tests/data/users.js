@@ -1,106 +1,50 @@
-const db = require('../../server/database')
 const enums = require('../../common/enums')
-const crypto = require('../../server/utils/crypto')
-const Chance = require('chance')
-const _ = require('lodash')
-
-const chance = new Chance()
-
-module.exports = initUsers
+const { createOrganizer, createTeacher } = require('./generators')
 
 async function initUsers() {
-  const newcomer = {
-    email: chance.email({ domain: 'sink.sendgrid.net' }),
-  }
-
-  const stage2 = {
-    firstName: chance.first(),
-    lastName: chance.last(),
-    genderId: chance.pick(enums.GENDER.idsAsEnum),
-    dob: chance.birthday({ string: true }),
-    email: chance.email({ domain: 'sink.sendgrid.net' }),
+  const teacher = {
+    firstName: 'Josef',
+    lastName: 'Pedagog',
+    email: 'pedagog@sink.sendgrid.net',
+    phone: '+420 722 959 878',
+    password: 'Password123!',
+    schooldId: 1,
   }
 
   const unconfirmed = {
-    firstName: chance.first(),
-    lastName: chance.last(),
-    genderId: chance.pick(enums.GENDER.idsAsEnum),
-    dob: chance.birthday({ string: true }),
-    email: chance.email({ domain: 'sink.sendgrid.net' }),
+    firstName: 'Anička',
+    lastName: 'Nedoregistrovaná',
+    email: 'nedoregistrovana@sink.sendgrid.net',
     confirmed: false,
+    roleId: enums.ROLES.DRAFTSMAN.id,
   }
 
-  const confirmed = {
-    firstName: chance.first(),
-    lastName: chance.last(),
-    genderId: chance.pick(enums.GENDER.idsAsEnum),
-    dob: chance.birthday({ string: true }),
-    email: chance.email({ domain: 'sink.sendgrid.net' }),
-    weight: chance.integer({ min: 1, max: 300 }),
-    height: chance.integer({ min: 30, max: 250 }),
-    weeklyExcerciseFrequencyId: chance.pick(enums.WEEKLY_EXCERCISE_FREQUENCY.idsAsEnum),
-    confirmed: false,
-  }
-
-  const ordinal = {
-    firstName: chance.first(),
-    lastName: chance.last(),
-    genderId: chance.pick(enums.GENDER.idsAsEnum),
-    dob: chance.birthday({ string: true }),
-    email: chance.email({ domain: 'sink.sendgrid.net' }),
-    password: chance.word({ length: 10 }),
-    weight: chance.integer({ min: 1, max: 300 }),
-    height: chance.integer({ min: 30, max: 250 }),
-    weeklyExcerciseFrequencyId: chance.pick(enums.WEEKLY_EXCERCISE_FREQUENCY.idsAsEnum),
+  const draftsman = {
+    firstName: 'Jarda',
+    lastName: 'Kreslič',
+    email: 'kreslic@sink.sendgrid.net',
+    password: 'Password123!',
     confirmed: true,
+    roleId: enums.ROLES.DRAFTSMAN.id,
   }
-  ordinal.addressId = await createAddress(ordinal.firstName, chance.last(), true)
 
-  const subscriber = {
-    firstName: chance.first(),
-    lastName: chance.last(),
-    genderId: chance.pick(enums.GENDER.idsAsEnum),
-    dob: chance.birthday({ string: true }),
-    email: chance.email({ domain: 'sink.sendgrid.net' }),
-    password: chance.word({ length: 10 }),
-    weight: chance.integer({ min: 1, max: 300 }),
-    height: chance.integer({ min: 30, max: 250 }),
-    weeklyExcerciseFrequencyId: chance.pick(enums.WEEKLY_EXCERCISE_FREQUENCY.idsAsEnum),
+  const admin = {
+    firstName: 'Ondra',
+    lastName: 'Administrátor',
+    email: 'admin@sink.sendgrid.net',
+    password: 'Password123!',
     confirmed: true,
+    roleId: enums.ROLES.ADMIN.id,
   }
-  subscriber.addressId = await createAddress(subscriber.firstName, subscriber.lastName, true)
 
   return {
-    newcomer,
-    stage2: await createUser(stage2),
-    unconfirmed: await createUser(unconfirmed),
-    confirmed: await createUser(confirmed),
-    ordinal: await createUser(ordinal),
-    subscriber: await createUser(subscriber),
+    teacher: await createTeacher(teacher),
+    organizer: {
+      unconfirmed: await createOrganizer(unconfirmed),
+      draftsman: await createOrganizer(draftsman),
+      admin: await createOrganizer(admin),
+    },
   }
 }
 
-/* PRIVATE METHODS */
-
-async function createUser(user) {
-  const newUser = _.cloneDeep(user)
-  if (newUser.password) {
-    newUser.password = await crypto.hashPassword(newUser.password)
-  }
-  const created = await db.User.create(newUser)
-  user.id = created.id
-  return user
-}
-
-async function createAddress(firstName, lastName, allowedState = true) {
-  const states = enums.STATES.idsAsEnum.filter(id => enums.STATES.ids[id].allowed === allowedState)
-  const address = await db.Address.create({
-    firstName,
-    lastName,
-    stateId: chance.pick(states),
-    city: chance.city(),
-    street: chance.address(),
-    zip: chance.zip(),
-  })
-  return address.id
-}
+module.exports = initUsers

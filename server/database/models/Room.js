@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   Room.associate = models => {
     Room.belongsToMany(models.CompetitionVenue, {
       as: 'competitionVenues',
-      through: 'CompetitionVenueRooms',
+      through: models.CompetitionVenueRoom,
       foreignKey: { name: 'roomId', field: 'room_id' },
       onDelete: 'RESTRICT',
     })

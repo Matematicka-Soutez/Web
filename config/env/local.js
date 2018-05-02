@@ -7,5 +7,6 @@ module.exports = {
         ssl: false,
       },
     },
+    logging: true
   },
 }
