@@ -1,15 +1,27 @@
 module.exports = (sequelize, DataTypes) => {
   const TeamPosition = sequelize.define('TeamPosition', {
-    fieldIndex: { type: DataTypes.INTEGER, allowNull: false, field: 'field_index' },
-    createdAt: { type: DataTypes.DATE, field: 'createdAt', defaultValue: sequelize.fn('NOW') },
-    updatedAt: { type: DataTypes.DATE, field: 'updatedAt', defaultValue: sequelize.fn('NOW') },
+    horizontal: { type: DataTypes.INTEGER, allowNull: false, field: 'horizontal' },
+    vertical: { type: DataTypes.INTEGER, allowNull: false, field: 'vertical' },
+    power: { type: DataTypes.INTEGER, allowNull: false, field: 'power' },
   }, {
     tableName: 'TeamPositions',
+    timestamps: true,
   })
+
   TeamPosition.associate = models => {
     TeamPosition.belongsTo(models.Team, {
       as: 'team',
       foreignKey: { name: 'teamId', field: 'team_id' },
+      onDelete: 'RESTRICT',
+    })
+    TeamPosition.belongsTo(models.Competition, {
+      as: 'competition',
+      foreignKey: { name: 'competitionId', field: 'competition_id' },
+      onDelete: 'RESTRICT',
+    })
+    TeamPosition.belongsTo(models.Organizer, {
+      as: 'creator',
+      foreignKey: { name: 'organizerId', field: 'organizer_id' },
       onDelete: 'RESTRICT',
     })
     TeamPosition.hasOne(models.TeamPosition, {

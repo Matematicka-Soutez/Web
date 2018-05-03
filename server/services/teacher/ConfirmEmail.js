@@ -1,5 +1,5 @@
 const TransactionalService = require('./../TransactionalService')
-const userRepository = require('./../../repositories/user')
+const teacherRepository = require('./../../repositories/teacher')
 const crypto = require('./../../utils/crypto')
 
 module.exports = class ConfirmEmailService extends TransactionalService {
@@ -14,15 +14,19 @@ module.exports = class ConfirmEmailService extends TransactionalService {
 
   async run() {
     const transaction = await this.createOrGetTransaction()
-    const user = await userRepository.findByToken(this.requestData.confirmToken, null, transaction)
+    const teacher = await teacherRepository.findByToken(
+      this.data.confirmToken,
+      null,
+      transaction,
+    )
     const updateValues = {
       publicToken: null,
       confirmed: true,
       lastLoginAt: new Date().toISOString(),
     }
-    await userRepository.update(user.id, updateValues, transaction)
-    const token = await crypto.generateUserAccessToken(user.id)
-    user.accessToken = token
-    return user
+    await teacherRepository.update(teacher.id, updateValues, transaction)
+    const token = await crypto.generateUserAccessToken(teacher.id)
+    teacher.accessToken = token
+    return teacher
   }
 }

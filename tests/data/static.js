@@ -1,12 +1,21 @@
 const Promise = require('bluebird')
+const _ = require('lodash')
 const enums = require('../../common/enums')
-const { createVenue, createRoom, createGame } = require('./generators')
+const {
+  createVenue,
+  createRoom,
+  createGame,
+  createCompetition,
+  createCompetitionVenue,
+} = require('./generators')
 
 async function initStatic() {
   const games = await initGames()
   const venues = await initVenues()
   const rooms = await initRooms(venues)
-  return { games, rooms, venues }
+  const competitions = await initCompetitions(games)
+  await initCompetitionVenues(competitions, venues)
+  return { games, rooms, venues, competitions }
 }
 
 function initVenues() {
@@ -68,6 +77,37 @@ function initGames() {
     folder: 'watter-bottling',
   }]
   return Promise.map(games, game => createGame(game))
+}
+
+function initCompetitions(games) {
+  const competitions = [{
+    name: 'Jarní MaSo 2018',
+    date: new Date('2018-05-16T10:00:00.000Z'),
+    registrationRound1: new Date('2018-04-11T07:30:00.000Z'),
+    registrationRound2: new Date('2018-04-25T07:30:00.000Z'),
+    registrationRound3: new Date('2018-05-02T07:30:00.000Z'),
+    registrationEnd: new Date('2018-05-09T23:00:00.000Z'),
+    isPublic: true,
+    invitationEmailSent: true,
+    organizerId: null,
+    gameId: games[0].id,
+  }]
+  return Promise.map(competitions, competition => createCompetition(competition))
+}
+
+async function initCompetitionVenues(competitions, venues) {
+  const competitionVenues = await Promise.map(
+    competitions,
+    competition => Promise.mapSeries(
+      venues,
+      venue => createCompetitionVenue({
+        capacity: venue.defaultCapacity,
+        competitionId: competition.id,
+        venueId: venue.id,
+      }),
+    ),
+  )
+  return _.flatten(competitionVenues)
 }
 
 module.exports = initStatic

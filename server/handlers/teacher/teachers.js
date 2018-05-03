@@ -1,7 +1,7 @@
-const UpdatePasswordAuthenticatedService = require('./../../services/user/UpdatePasswordAuthenticated')
-// const UpdatePersonalInfoService = require('./../../services/user/UpdatePersonalInfo')
-const ResendConfirmEmailService = require('./../../services/user/ResendConfirmEmail')
-// const GetUsersPersonalInfo = require('./../../services/user/GetUsersPersonalInfo')
+const UpdatePasswordAuthenticatedService = require('./../../services/teacher/UpdatePasswordAuthenticated')
+// const UpdatePersonalInfoService = require('./../../services/teacher/UpdatePersonalInfo')
+const ResendConfirmEmailService = require('./../../services/teacher/ResendConfirmEmail')
+// const GetUsersPersonalInfo = require('./../../services/teacher/GetUsersPersonalInfo')
 const appErrors = require('./../../utils/errors/application')
 const responseErrors = require('./../../utils/errors/response')
 
@@ -54,7 +54,7 @@ async function updatePasswordAuthenticated(ctx) {
   try {
     ctx.body = await new UpdatePasswordAuthenticatedService()
       .execute({
-        userId: ctx.state.user.id,
+        teacherId: ctx.state.teacher.id,
         oldPassword: ctx.request.body.oldPassword,
         newPassword: ctx.request.body.newPassword,
       })
@@ -76,12 +76,12 @@ async function resendConfirmEmail(ctx) {
   try {
     ctx.body = await new ResendConfirmEmailService()
       .execute({
-        id: ctx.state.user.id,
-        publicToken: ctx.state.user.publicToken,
-        email: ctx.state.user.email,
-        firstName: ctx.state.user.firstName,
-        lastName: ctx.state.user.lastName,
-        confirmed: ctx.state.user.confirmed,
+        id: ctx.state.teacher.id,
+        publicToken: ctx.state.teacher.publicToken,
+        email: ctx.state.teacher.email,
+        firstName: ctx.state.teacher.firstName,
+        lastName: ctx.state.teacher.lastName,
+        confirmed: ctx.state.teacher.confirmed,
       })
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {

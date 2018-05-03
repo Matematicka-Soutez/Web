@@ -7,6 +7,28 @@ const enums = require('../../common/enums')
 
 const chance = new Chance()
 
+async function createCompetition(defaults) {
+  const year = new Date().getFullYear()
+  const names = [
+    `Jarní MaSo ${year}`,
+    `Podzimní MaSo ${year}`,
+  ]
+  const competition = _.assign({}, {
+    name: chance.pickone(names),
+    date: chance.date({ month: 5, year }),
+    registrationRound1: chance.date({ month: 1, year }),
+    registrationRound2: chance.date({ month: 2, year }),
+    registrationRound3: chance.date({ month: 3, year }),
+    registrationEnd: chance.date({ month: 4, year }),
+    isPublic: chance.bool(),
+    invitationEmailSent: chance.bool(),
+    organizerId: 1,
+    gameId: 1,
+  }, defaults)
+  const created = await db.Competition.create(competition)
+  return _.assign({}, competition, { id: created.id })
+}
+
 async function createVenue(defaults) {
   const address = await createAddress(defaults.address)
   const venue = _.assign({}, {
@@ -16,6 +38,16 @@ async function createVenue(defaults) {
   }, defaults)
   const created = await db.Venue.create(venue)
   return _.assign({}, venue, { id: created.id, address })
+}
+
+async function createCompetitionVenue(defaults) {
+  const competitionVenue = _.assign({}, {
+    capacity: chance.integer({ min: 30, max: 90 }),
+    competitionId: 1,
+    venueId: 1,
+  }, defaults)
+  const created = await db.CompetitionVenue.create(competitionVenue)
+  return _.assign({}, competitionVenue, { id: created.id })
 }
 
 async function createRoom(defaults) {
@@ -132,7 +164,9 @@ function createN(amount, generator) {
 }
 
 module.exports = {
+  createCompetition,
   createVenue,
+  createCompetitionVenue,
   createRoom,
   createGame,
   createOrganizer,

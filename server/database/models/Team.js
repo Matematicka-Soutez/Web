@@ -4,11 +4,12 @@ module.exports = (sequelize, DataTypes) => {
     arrived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'arrived' },
   }, {
     tableName: 'Teams',
+    timestamps: true,
   })
 
   Team.associate = models => {
     Team.hasMany(models.TeamMember, {
-      as: 'teamMembers',
+      as: 'members',
       foreignKey: { name: 'teamId', field: 'team_id' },
       onDelete: 'RESTRICT',
     })

@@ -1,5 +1,5 @@
 const AbstractService = require('./../AbstractService')
-const adminRepository = require('./../../repositories/admin')
+const organizerRepository = require('./../../repositories/organizer')
 const appErrors = require('./../../utils/errors/application')
 const crypto = require('./../../utils/crypto')
 
@@ -8,24 +8,24 @@ module.exports = class LoginService extends AbstractService {
     return {
       type: 'Object',
       properties: {
-        userName: { type: 'string', required: true, minimum: 1 },
+        email: { type: 'string', required: true, minimum: 1 },
         password: { type: 'string', required: true, minimum: 1 },
       },
     }
   }
 
   async run() {
-    const admin = await adminRepository.findByUserName(this.requestData.userName)
-    const verified = await crypto.comparePasswords(this.requestData.password, admin.password)
+    const organizer = await organizerRepository.findByEmail(this.data.email)
+    const verified = await crypto.comparePasswords(this.data.password, organizer.password)
 
-    if (!verified || admin.disabled) {
+    if (!verified || organizer.disabled) {
       throw new appErrors.UnauthorizedError()
     }
 
-    const accessToken = await crypto.generateAdminAccessToken(admin.id)
+    const accessToken = await crypto.generateAdminAccessToken(organizer.id)
     return {
-      id: admin.id,
-      userName: admin.userName,
+      id: organizer.id,
+      email: organizer.email,
       accessToken,
     }
   }

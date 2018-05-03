@@ -1,12 +1,6 @@
+const log = require('../utils/logger').logger
 const responseErrors = require('./../utils/errors/response')
 const { authorizeToken } = require('./../utils/authorize')
-const log = require('../utils/logger').logger
-
-module.exports = {
-  authenticateUser,
-  authenticateAdmin,
-  parseAuthHeader,
-}
 
 function authenticateTokenJWT(ctx, next) {
   if (!ctx) {
@@ -20,28 +14,28 @@ function authenticateTokenJWT(ctx, next) {
   return authorizeToken(parsedAuthHeader.value, ctx, next)
 }
 
-function authenticateUser(ctx, next) {
+function authenticateTeacher(ctx, next) {
   authenticateTokenJWT(ctx, (err, data) => {
     if (err) {
       return next(err)
-    } else if (!data || !data.user || !data.user.id) {
+    } else if (!data || !data.teacher || !data.teacher.id) {
       throw new responseErrors.UnauthorizedError()
     }
-    ctx.state.user = data.user
+    ctx.state.teacher = data.teacher
     return next()
   })
 }
 
-function authenticateAdmin(ctx, next) {
+function authenticateOrganizer(ctx, next) {
   authenticateTokenJWT(ctx, (err, data) => {
     if (err) {
       return next(err)
-    } else if (!data || !data.admin || !data.admin.id || data.admin.disabled) {
+    } else if (!data || !data.organizer || !data.organizer.id || data.organizer.disabled) {
       throw new responseErrors.UnauthorizedError()
     }
-    log.info(`Admin id: ${data.admin.id}`)
-    log.info(`Admin userName: ${data.admin.userName}`)
-    ctx.state.admin = data.admin
+    log.info(`Organizer id: ${data.organizer.id}`)
+    log.info(`Organizer userName: ${data.organizer.userName}`)
+    ctx.state.organizer = data.organizer
     return next()
   })
 }
@@ -53,4 +47,10 @@ function parseAuthHeader(hdrValue) {
   }
   const matches = hdrValue.match(re)
   return matches && { scheme: matches[1], value: matches[2] }
+}
+
+module.exports = {
+  authenticateTeacher,
+  authenticateOrganizer,
+  parseAuthHeader,
 }

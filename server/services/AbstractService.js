@@ -1,10 +1,10 @@
 const shortId = require('shortid')
-const validators = require('./../utils/validators')
 const appErrors = require('../utils/errors/application')
 const logger = require('../utils/logger').serviceLogger
 const traverse = require('traverse')
 const _ = require('lodash')
 const config = require('../../config')
+const validators = require('./../utils/validators')
 
 let newrelic
 if (config.newRelic.licenseKey) {
@@ -16,6 +16,7 @@ const sensitiveAttributes = ['password']
 module.exports = class AbstractService {
   constructor() {
     this.uuid = shortId.generate()
+    this.competitionId = 1
   }
 
   async execute(inputData) {
@@ -33,7 +34,7 @@ module.exports = class AbstractService {
             logger.info(validationErrors)
             throw new appErrors.ValidationError()
           }
-          this.requestData = inputData
+          this.data = inputData
         } else {
           return new Error('Method \'schema\' does not return an object')
         }

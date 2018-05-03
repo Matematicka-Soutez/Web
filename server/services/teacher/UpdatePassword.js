@@ -1,5 +1,5 @@
 const AbstractService = require('./../AbstractService')
-const userRepository = require('./../../repositories/user')
+const teacherRepository = require('./../../repositories/teacher')
 const crypto = require('./../../utils/crypto')
 const validators = require('./../../utils/validators')
 const appErrors = require('./../../utils/errors/application')
@@ -17,22 +17,25 @@ module.exports = class UpdatePasswordService extends AbstractService {
   }
 
   async run() {
-    await validators.advancePasswordValidation(this.requestData.password)
-    const user = await userRepository.findByToken(this.requestData.token, { passwordToken: true })
-    if (!user.confirmed) {
+    await validators.advancePasswordValidation(this.data.password)
+    const teacher = await teacherRepository.findByToken(
+      this.data.token,
+      { passwordToken: true },
+    )
+    if (!teacher.confirmed) {
       throw new appErrors.NotConfirmedError()
     }
-    if (!user.id || !user.firstName || !user.lastName || !user.email) {
+    if (!teacher.id || !teacher.firstName || !teacher.lastName || !teacher.email) {
       throw new Error('Expecting parameters \'id\', \'firstName\', \'lastName\', \'email\'.')
     }
-    await userRepository.update(user.id, {
-      password: await crypto.hashPassword(this.requestData.password),
+    await teacherRepository.update(teacher.id, {
+      password: await crypto.hashPassword(this.data.password),
       passwordPublicToken: null,
       passwordLastUpdatedAt: new Date().toISOString(),
     })
     await mailer.sendChangePasswordEmail({
-      fullName: `${user.firstName} ${user.lastName}`,
-      toAddress: user.email,
+      fullName: `${teacher.firstName} ${teacher.lastName}`,
+      toAddress: teacher.email,
     })
     return true
   }

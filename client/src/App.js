@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import Button from 'material-ui/Button'
-import Timer from './components/Timer'
 import Game from '../../games/water-bottling/client/Game'
 import Input from '../../games/water-bottling/client/Input'
+import Timer from './components/Timer'
 import masoLogo from './static/images/maso_logo.png'
 import './App.css'
 

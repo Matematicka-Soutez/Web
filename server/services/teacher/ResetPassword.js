@@ -1,5 +1,5 @@
 const AbstractService = require('./../AbstractService')
-const userRepository = require('./../../repositories/user')
+const teacherRepository = require('./../../repositories/teacher')
 const appErrors = require('./../../utils/errors/application')
 const crypto = require('./../../utils/crypto')
 const mailer = require('./../../utils/email/mailer')
@@ -21,33 +21,33 @@ module.exports = class ResetPasswordService extends AbstractService {
   }
 
   async run() {
-    const user = await this.findUser(this.requestData)
-    if (!user.confirmed) {
+    const teacher = await this.findUser(this.data)
+    if (!teacher.confirmed) {
       throw new appErrors.NotConfirmedError()
     }
     const passwordPublicToken = crypto.generateRandomToken()
     const updatePayload = { passwordPublicToken }
-    if (this.requestData.duplicateResetPasswordToken) {
+    if (this.data.duplicateResetPasswordToken) {
       updatePayload.duplicateResetPasswordToken = null
     }
-    await userRepository.update(user.id, updatePayload)
+    await teacherRepository.update(teacher.id, updatePayload)
     await mailer.sendResetPasswordEmail({
-      toAddress: user.email,
+      toAddress: teacher.email,
       resetPasswordToken: passwordPublicToken,
-      fullName: `${user.firstName} ${user.lastName}`,
+      fullName: `${teacher.firstName} ${teacher.lastName}`,
     })
     return true
   }
 
   async findUser(data) {
     if (data.email) {
-      const user = await userRepository.findByEmail(data.email.toLowerCase())
-      if (!user) {
+      const teacher = await teacherRepository.findByEmail(data.email.toLowerCase())
+      if (!teacher) {
         throw new appErrors.NotFoundError()
       }
-      return user
+      return teacher
     }
     const payload = { duplicateResetPasswordToken: true }
-    return userRepository.findByToken(data.duplicateResetPasswordToken, payload)
+    return teacherRepository.findByToken(data.duplicateResetPasswordToken, payload)
   }
 }

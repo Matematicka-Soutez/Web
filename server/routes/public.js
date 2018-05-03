@@ -1,7 +1,5 @@
 const Router = require('koa-router')
-const users = require('./../handlers/public/users')
-const hobbies = require('./../handlers/public/hobbies')
-// const cases = require('./../handlers/public/cases')
+const teachers = require('./../handlers/public/teachers')
 // const optionalToken = require('./../handlers/passport').optionalToken
 
 const router = new Router()
@@ -36,7 +34,7 @@ const router = new Router()
  * @apiUse UnauthorizedError
  *
  */
-router.post('/session/admin', users.adminLogin)
+router.post('/session/admin', teachers.adminLogin)
 
 /**
  * @api {post} /api/session/user Login user
@@ -56,7 +54,7 @@ router.post('/session/admin', users.adminLogin)
  * @apiUse UnauthorizedError
  *
  */
-router.post('/session/user', users.login)
+router.post('/session/user', teachers.login)
 
 /**
  * @api {POST} /api/users Sign Up
@@ -82,7 +80,7 @@ router.post('/session/user', users.login)
  * @apiUse ConflictError
  *
  */
-router.post('/users', users.signUp)
+router.post('/users', teachers.signUp)
 
 /**
  * @api {PUT} /api/users/confirm Confirm user email address
@@ -100,7 +98,7 @@ router.post('/users', users.signUp)
  * @apiUse ForbiddenError
  *
  */
-router.put('/users/confirm', users.confirmEmail)
+router.put('/users/confirm', teachers.confirmEmail)
 
 /**
  * @api {POST} /api/users/reset-password Initiates user password reset action
@@ -114,7 +112,7 @@ router.put('/users/confirm', users.confirmEmail)
  * @apiUse UnauthorizedError
  *
  */
-router.post('/users/reset-password', users.resetPassword)
+router.post('/users/reset-password', teachers.resetPassword)
 
 /**
  * @api {PUT} /api/users/reset-password Updates user password with new password
@@ -130,23 +128,6 @@ router.post('/users/reset-password', users.resetPassword)
  * @apiUse UnauthorizedError
  *
  */
-router.put('/users/reset-password', users.updatePassword)
-
-/**
- * @api {get} /api/hobbies Get Hobbies
- * @apiName GetHobbies
- * @apiGroup Testimonials
- *
- * @apiParam {Number}     [limit]                      Limit of elements (?limit=10)
- * @apiParam {String}     [prefix]                     Starting letters of hobby (?prefix=swi)
- * @apiParam {Boolean}    [typeId]                     List only hobbies of specified type (?typeId=1)
- *
- * @apiSuccess {Object[]} hobbies                      List of hobbies.
- * @apiSuccess {Integer}  hobbies.id                   Hobby id.
- * @apiSuccess {String}   hobbies.name                 Hobby name.
- * @apiSuccess {Integer}  hobbies.typeId               Hobby type (eg. 'featured', 'other', 'userAdded').
- *
- */
-router.get('/hobbies', hobbies.getAll)
+router.put('/users/reset-password', teachers.updatePassword)
 
 module.exports = router.routes()

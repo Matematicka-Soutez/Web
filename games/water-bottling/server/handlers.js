@@ -1,15 +1,13 @@
-const GetCurrentGridService = require('./services/GetCurrentGrid')
-const GetAllRoomsService = require('./services/GetAllRooms')
-const GetRoomService = require('./services/GetRoom')
-const GetTeamService = require('./services/GetTeam')
 const appErrors = require('../../../server/utils/errors/application')
 const responseErrors = require('../../../server/utils/errors/response')
+const GetCurrentGridService = require('./services/GetCurrentGrid')
+const GetTeamPositionService = require('./services/GetTeamPosition')
+const MoveTeamService = require('./services/MoveTeam')
 
 module.exports = {
   getCurrentGrid,
-  getAllRooms,
-  getRoom,
-  getTeam,
+  getTeamPosition,
+  moveTeam,
 }
 
 async function getCurrentGrid(ctx) {
@@ -23,21 +21,10 @@ async function getCurrentGrid(ctx) {
   }
 }
 
-async function getAllRooms(ctx) {
+async function getTeamPosition(ctx) {
   try {
-    ctx.body = await new GetAllRoomsService().execute({})
-  } catch (err) {
-    if (err instanceof appErrors.NotFoundError) {
-      throw new responseErrors.UnauthorizedError('Invalid credentials.')
-    }
-    throw err
-  }
-}
-
-async function getRoom(ctx) {
-  try {
-    ctx.body = await new GetRoomService().execute({
-      roomId: parseInt(ctx.request.query.roomId, 10),
+    ctx.body = await new GetTeamPositionService().execute({
+      teamId: parseInt(ctx.request.query.teamId, 10),
     })
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
@@ -47,12 +34,17 @@ async function getRoom(ctx) {
   }
 }
 
-async function getTeam(ctx) {
+async function moveTeam(ctx) {
   try {
-    ctx.body = await new GetTeamService().execute({
-      roomId: parseInt(ctx.request.query.teamId, 10),
+    ctx.body = await new MoveTeamService().execute({
+      teamId: parseInt(ctx.request.body.teamId, 10),
+      directionId: parseInt(ctx.request.body.directionId, 10),
+      organizerId: ctx.state.organizer.id,
     })
   } catch (err) {
+    if (err instanceof appErrors.CannotBeDoneError) {
+      throw new responseErrors.BadRequestError(err.message)
+    }
     if (err instanceof appErrors.NotFoundError) {
       throw new responseErrors.UnauthorizedError('Invalid credentials.')
     }

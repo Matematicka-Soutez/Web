@@ -1,5 +1,5 @@
 const Router = require('koa-router')
-const users = require('../handlers/authenticated/users')
+const teachers = require('../handlers/teacher/teachers')
 
 const router = new Router()
 
@@ -27,7 +27,7 @@ const router = new Router()
 // router.get('/users/me/personal-info', users.getPersonalInfo)
 
 /**
- * @api {put} /api/auth/users/me/password     Updates user password in settings.
+ * @api {put} /api/teacher/teachers/me/password     Updates user password in settings.
  * @apiName UpdateUserPasswordInSettings
  * @apiGroup Users
  *
@@ -42,10 +42,10 @@ const router = new Router()
  * @apiUse WrongPasswordFormat
  *
  */
-router.put('/users/me/password', users.updatePasswordAuthenticated)
+router.put('/teachers/me/password', teachers.updatePasswordAuthenticated)
 
 /**
- * @api {put} /api/auth/users/me/personal-info          Updates user personal info
+ * @api {put} /api/teacher/teachers/me/personal-info          Updates user personal info
  * @apiName UpdatePersonalInfo
  * @apiGroup Users
  *
@@ -68,7 +68,7 @@ router.put('/users/me/password', users.updatePasswordAuthenticated)
 // router.put('/users/me/personal-info', users.updatePersonalInfo)
 
 /**
- * @api {post} /api/auth/users/me/resend-confirmation-email Resend confirmation email
+ * @api {post} /api/teacher/teachers/me/resend-confirmation-email Resend confirmation email
  * @apiName Resend confirmation email
  * @apiGroup Users
  *
@@ -79,22 +79,6 @@ router.put('/users/me/password', users.updatePasswordAuthenticated)
  * @apiUse UnauthorizedError
  *
  */
-router.post('/users/me/resend-confirmation-email', users.resendConfirmEmail)
-
-
-/**
- * @api {get} /users/me/dashboard
- * @apiName Dashboard
- * @apiGroup Users
- *
- * @apiHeader {String}       Authorization        Format: JWT ${access_token}
- *
- * @apiUse BadRequestError
- * @apiUse ForbiddenError
- * @apiUse UnauthorizedError
- * @apiUse NotFoundError
- *
- */
-// router.get('/users/me/dashboard', users.dashboard)
+router.post('/teachers/me/resend-confirmation-email', teachers.resendConfirmEmail)
 
 module.exports = router.routes()

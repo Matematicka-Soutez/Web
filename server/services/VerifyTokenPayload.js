@@ -1,7 +1,7 @@
 const Promise = require('bluebird')
 const AbstractService = require('./AbstractService')
-const userRepository = require('./../repositories/user')
-const adminRepository = require('./../repositories/admin')
+const teacherRepository = require('./../repositories/teacher')
+const organizerRepository = require('./../repositories/organizer')
 const appErrors = require('./../utils/errors/application')
 const configIdleTimeoutSec = require('../../config').auth.jwt.idleTimeoutSec
 
@@ -26,53 +26,60 @@ module.exports = class VerifyTokenPayload extends AbstractService {
 
   run() {
     return Promise
-      .all([this.getAdmin, this.getAndCheckUser])
+      .all([this.getOrganizer, this.getAndCheckTeacher])
       .spread((admin, userData) => parseResponse(admin, userData))
   }
 
-  getAdmin() {
-    return this.requestData.adminId
-      ? adminRepository.findById(this.requestData.adminId)
+  getOrganizer() {
+    return this.data.adminId
+      ? organizerRepository.findById(this.data.adminId)
       : null
   }
 
-  async getAndCheckUser() {
-    if (this.requestData.userId) {
+  async getAndCheckTeacher() {
+    if (this.data.userId) {
       // If admin is logged as user he is not using stored token in DB
-      const requiredToken = !this.requestData.adminId
-      const user = await userRepository.findByIdAndAccessToken(this.requestData.userId, this.requestData.token, requiredToken)
+      const requiredToken = !this.data.adminId
+      const teacher = await teacherRepository.findByIdAndAccessToken(
+        this.data.userId,
+        this.data.token,
+        requiredToken,
+      )
 
       // Important 5 second tolerance to iat (token issued at)
-      if (this.requestData.tokenIssuedAt + 5 < Math.floor(user.passwordLastUpdatedAt.getTime() / 1000)) {
+      if (this.data.tokenIssuedAt + 5 < Math.floor(teacher.passwordLastUpdatedAt.getTime() / 1000)) {
         throw new appErrors.TokenRevokedError()
       }
-      if (user && user.lastActivityAt && ((user.lastActivityAt.getTime() + configIdleTimeoutMs) < Date.now())) {
+      if (teacher && teacher.lastActivityAt && ((teacher.lastActivityAt.getTime() + configIdleTimeoutMs) < Date.now())) {
         throw new appErrors.TokenIdleTimoutError()
       }
 
-      if (user && user.accessToken && user.accessToken.id) {
-        userRepository.update(user.id, { lastActivityAt: new Date().toISOString() })
+      if (teacher && teacher.accessToken && teacher.accessToken.id) {
+        teacherRepository.update(teacher.id, { lastActivityAt: new Date().toISOString() })
       }
-      return user
+      return teacher
     }
     return null
   }
 }
 
-function parseResponse(admin, userData) {
-  let user
+function parseResponse(organizer, teacherData) {
+  let teacher
   let loginTimeout
   let loginIdleTimeout
-
-  if (userData) {
-    loginTimeout = userData.accessToken ? userData.accessToken.expiresAt.getTime() : null
-    loginIdleTimeout = userData.accessToken ? userData.accessToken.lastActivityAt.getTime() + configIdleTimeoutMs : null
-    delete userData.accessToken
-    user = userData
+  if (teacherData) {
+    loginTimeout = teacherData.accessToken
+      ? teacherData.accessToken.expiresAt.getTime()
+      : null
+    loginIdleTimeout = teacherData.accessToken
+      ? teacherData.accessToken.lastActivityAt.getTime() + configIdleTimeoutMs
+      : null
+    delete teacherData.accessToken
+    teacher = teacherData
   }
   return {
-    admin: admin || null,
-    user: user || null,
+    organizer: organizer || null,
+    teacher: teacher || null,
     loginTimeout,
     loginIdleTimeout,
   }

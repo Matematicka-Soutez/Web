@@ -1,7 +1,7 @@
-const TransactionalService = require('./../TransactionalService')
-const userRepository = require('./../../repositories/user')
-const crypto = require('./../../utils/crypto')
 const validators = require('../../utils/validators')
+const TransactionalService = require('./../TransactionalService')
+const teacherRepository = require('./../../repositories/teacher')
+const crypto = require('./../../utils/crypto')
 const mailer = require('./../../utils/email/mailer')
 
 module.exports = class ResendConfirmEmailService extends TransactionalService {
@@ -25,28 +25,28 @@ module.exports = class ResendConfirmEmailService extends TransactionalService {
   }
 
   async run() {
-    let user = this.requestData
+    let teacher = this.data
     const transaction = await this.createOrGetTransaction()
-    if (this.requestData.adminAccess) {
-      user = await userRepository.getPersonalInfo(user.id, transaction)
-      return this.sendConfirmationEmail(user, transaction)
+    if (this.data.adminAccess) {
+      teacher = await teacherRepository.getPersonalInfo(teacher.id, transaction)
+      return this.sendConfirmationEmail(teacher, transaction)
     }
-    return this.sendConfirmationEmail(user, transaction)
+    return this.sendConfirmationEmail(teacher, transaction)
   }
 
-  async sendConfirmationEmail(user, transaction) {
-    if (user.confirmed) {
-      return user
+  async sendConfirmationEmail(teacher, transaction) {
+    if (teacher.confirmed) {
+      return teacher
     }
-    if (!user.publicToken) {
-      user.publicToken = await crypto.generateRandomToken()
-      await userRepository.update(user.id, { publicToken: user.publicToken }, transaction)
+    if (!teacher.publicToken) {
+      teacher.publicToken = await crypto.generateRandomToken()
+      await teacherRepository.update(teacher.id, { publicToken: teacher.publicToken }, transaction)
     }
     await mailer.sendInviteEmail({
-      toAddress: user.email,
-      confirmToken: user.publicToken,
-      fullName: `${user.firstName} ${user.lastName}`,
+      toAddress: teacher.email,
+      confirmToken: teacher.publicToken,
+      fullName: `${teacher.firstName} ${teacher.lastName}`,
     })
-    return user
+    return teacher
   }
 }

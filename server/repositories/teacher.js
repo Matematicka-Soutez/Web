@@ -2,17 +2,6 @@ const db = require('./../database')
 const parsers = require('./repositoryParsers')
 const appErrors = require('./../utils/errors/application')
 
-exports.create = create
-exports.count = count
-exports.findByEmail = findByEmail
-exports.findById = findById
-exports.findByIdAndAccessToken = findByIdAndAccessToken
-exports.getPersonalInfo = getPersonalInfo
-exports.findByToken = findByToken
-exports.update = update
-exports.findAllWithFilter = findAllWithFilter
-exports.changeEmail = changeEmail
-
 async function create(user, dbTransaction) {
   const createdUser = await db.User.create(user, { transaction: dbTransaction })
   return parsers.parseUser(createdUser)
@@ -25,10 +14,14 @@ function count() {
 async function findByEmail(email, dbTransaction) {
   const user = await db.User.findOne({
     include: [{
-      model: db.Address, as: 'address',
+      model: db.Address,
+      as: 'address',
       required: false,
     }],
-    where: db.sequelize.where(db.sequelize.fn('lower', db.sequelize.col('email')), db.sequelize.fn('lower', email)),
+    where: db.sequelize.where(
+      db.sequelize.fn('lower', db.sequelize.col('email')),
+      db.sequelize.fn('lower', email),
+    ),
     transaction: dbTransaction,
   })
   return parsers.parseUser(user)
@@ -155,4 +148,17 @@ async function changeEmail(userId, email, dbTransaction) {
     returning: true,
   })
   return parsers.parseUser(user)
+}
+
+module.exports = {
+  create,
+  count,
+  findByEmail,
+  findById,
+  findByIdAndAccessToken,
+  getPersonalInfo,
+  findByToken,
+  update,
+  findAllWithFilter,
+  changeEmail,
 }

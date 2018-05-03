@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
-const config = require('../config')
-const db = require('./../server/database')
-const initData = require('./../tests/data/init')
+const config = require('../../config')
+const db = require('./../../server/database')
+const initData = require('./init')
 
 async function syncDb() {
   try {

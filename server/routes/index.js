@@ -1,13 +1,16 @@
 const Router = require('koa-router')
+const {
+  organizerGameRoutes,
+  publicGameRoutes,
+} = require('../../games/water-bottling/server/routes')
+const config = require('../../config')
 const publicRoutes = require('./public')
-const authenticatedRoutes = require('./authenticated')
-const adminRoutes = require('./admin')
+const teacherRoutes = require('./teacher')
+const organizerRoutes = require('./organizer')
 const documentationRoutes = require('./documentation')
 const errorsHandler = require('./../handlers/errors')
 const responseErrors = require('./../utils/errors/response')
 const passportHandler = require('./../handlers/passport')
-const { publicGameRoutes, authenticatedGameRoutes, adminGameRoutes } = require('../../games/water-bottling/server/routes')
-const config = require('../../config')
 
 const router = new Router()
 const apiRouter = new Router()
@@ -24,13 +27,13 @@ if (config.env === 'production') {
 
 // Routes
 apiRouter.use(publicRoutes)
-apiRouter.use('/auth', passportHandler.authenticateUser, authenticatedRoutes)
-apiRouter.use('/admin', passportHandler.authenticateAdmin, adminRoutes)
+apiRouter.use('/teacher', passportHandler.authenticateTeacher, teacherRoutes)
+// apiRouter.use('/org', passportHandler.authenticateOrganizer, organizerRoutes)
+apiRouter.use('/org', organizerRoutes)
 
 // Game routes
 apiRouter.use('/game', publicGameRoutes)
-apiRouter.use('/auth/game', passportHandler.authenticateUser, authenticatedGameRoutes)
-apiRouter.use('/admin/game', passportHandler.authenticateAdmin, adminGameRoutes)
+apiRouter.use('/org/game', passportHandler.authenticateOrganizer, organizerGameRoutes)
 
 apiRouter.use(errorsHandler.handleNotFound)
 

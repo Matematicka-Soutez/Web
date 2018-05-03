@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const util = require('util')
 const Sequelize = require('sequelize')
-const config = require('../../config/index')
+const config = require('../../config')
 const { pgSetTypeParsers } = require('pg-safe-numbers')
 
 // Setup parsers for unsafe numbers.
@@ -19,7 +19,7 @@ pgSetTypeParsers({
   },
 })
 
-const sequelize = new Sequelize(config.database.connectionString, config.database.options)
+const sequelize = new Sequelize(config.database.connectionString, config.database)
 const db = {}
 
 function importModels(modelsPath) {

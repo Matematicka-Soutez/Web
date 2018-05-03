@@ -1,21 +1,12 @@
-const LoginService = require('./../../services/user/Login')
-const SignUpService = require('./../../services/user/SignUp')
-const ConfirmEmailService = require('./../../services/user/ConfirmEmail')
-const ResetPasswordService = require('./../../services/user/ResetPassword')
-const UpdatePasswordService = require('./../../services/user/UpdatePassword')
-const AdminLoginService = require('./../../services/admin/Login')
+const responseParsers = require('../responseParsers')
+const LoginService = require('./../../services/teacher/Login')
+const SignUpService = require('./../../services/teacher/SignUp')
+const ConfirmEmailService = require('./../../services/teacher/ConfirmEmail')
+const ResetPasswordService = require('./../../services/teacher/ResetPassword')
+const UpdatePasswordService = require('./../../services/teacher/UpdatePassword')
+const AdminLoginService = require('./../../services/organizer/Login')
 const appErrors = require('./../../utils/errors/application')
 const responseErrors = require('./../../utils/errors/response')
-const responseParsers = require('../responseParsers')
-
-module.exports = {
-  login,
-  adminLogin,
-  signUp,
-  confirmEmail,
-  resetPassword,
-  updatePassword,
-}
 
 async function adminLogin(ctx) {
   try {
@@ -130,4 +121,13 @@ async function signUp(ctx) {
     }
     throw err
   }
+}
+
+module.exports = {
+  login,
+  adminLogin,
+  signUp,
+  confirmEmail,
+  resetPassword,
+  updatePassword,
 }

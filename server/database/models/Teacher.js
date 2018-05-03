@@ -1,11 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
   const Teacher = sequelize.define('Teacher', {
+    /* COMMON PROPERTIES */
+    title: { type: DataTypes.STRING, allowNull: true, field: 'title' },
     firstName: { type: DataTypes.STRING, allowNull: false, field: 'first_name' },
     lastName: { type: DataTypes.STRING, allowNull: false, field: 'last_name' },
     email: { type: DataTypes.STRING, allowNull: false, field: 'email' },
-    phone: { type: DataTypes.STRING, allowNull: false, field: 'phone' },
+    phone: { type: DataTypes.STRING, allowNull: true, field: 'phone' },
     password: { type: DataTypes.STRING, allowNull: false, field: 'password' },
-    allowNotifications: { type: DataTypes.BOOLEAN, allowNull: true, dafaultValue: true, field: 'allow_notifications' },
+    allowNotifications: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true, field: 'allow_notifications' },
     /* ADMINISTRATIVE PROPERTIES */
     publicToken: { type: DataTypes.STRING, field: 'public_token' },
     passwordPublicToken: { type: DataTypes.STRING, field: 'password_public_token' },

@@ -17,7 +17,7 @@ describe('Abstract service', () => {
       }
 
       run() {
-        return this.requestData
+        return this.data
       }
     }
     const service = new TestService()
@@ -35,7 +35,7 @@ describe('Abstract service', () => {
       }
 
       run() {
-        return this.requestData
+        return this.data
       }
     }
     const service = new TestService()
@@ -61,7 +61,7 @@ describe('Abstract service', () => {
       }
 
       run() {
-        return this.requestData
+        return this.data
       }
     }
     const service = new TestService()
@@ -88,7 +88,7 @@ describe('Abstract service', () => {
       }
 
       run() {
-        return this.requestData
+        return this.data
       }
     }
     const service = new TestService()

@@ -1,4 +1,6 @@
 const Router = require('koa-router')
+const rooms = require('../handlers/organizer/rooms')
+const venues = require('../handlers/organizer/venues')
 // const user = require('../handlers/admin/user')
 
 const router = new Router()
@@ -86,6 +88,10 @@ const router = new Router()
  * @apiUse NotFoundError
  */
 // router.put('/users/:userId/email', user.changeEmail)
+
+
+router.get('/venues', venues.getAllByCompetition)
+router.get('/rooms', rooms.getAllByCompetitionVenue)
 
 
 module.exports = router.routes()

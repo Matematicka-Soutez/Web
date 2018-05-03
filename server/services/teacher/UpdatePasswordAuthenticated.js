@@ -1,5 +1,5 @@
 const AbstractService = require('./../AbstractService')
-const userRepository = require('./../../repositories/user')
+const teacherRepository = require('./../../repositories/teacher')
 const appErrors = require('./../../utils/errors/application')
 const crypto = require('./../../utils/crypto')
 const validators = require('./../../utils/validators')
@@ -10,7 +10,7 @@ module.exports = class UpdatePasswordService extends AbstractService {
     return {
       type: 'Object',
       properties: {
-        userId: { type: 'integer', required: true, minimum: 1 },
+        teacherId: { type: 'integer', required: true, minimum: 1 },
         oldPassword: validators.passwordValidator({ required: true }),
         newPassword: validators.passwordValidator({ required: true }),
       },
@@ -18,25 +18,25 @@ module.exports = class UpdatePasswordService extends AbstractService {
   }
 
   async run() {
-    validators.advancePasswordValidation(this.requestData.newPassword)
-    const user = await userRepository.findById(this.requestData.userId)
-    if (!user || !user.password) {
+    validators.advancePasswordValidation(this.data.newPassword)
+    const teacher = await teacherRepository.findById(this.data.teacherId)
+    if (!teacher || !teacher.password) {
       throw new appErrors.NotFoundError()
     }
-    const verified = await crypto.comparePasswords(this.requestData.oldPassword, user.password)
+    const verified = await crypto.comparePasswords(this.data.oldPassword, teacher.password)
     if (!verified) {
       throw new appErrors.PasswordDoesntMatchError()
     }
-    await userRepository.update(this.requestData.userId, {
-      password: await crypto.hashPassword(this.requestData.newPassword),
+    await teacherRepository.update(this.data.teacherId, {
+      password: await crypto.hashPassword(this.data.newPassword),
       publicToken: null,
       passwordLastUpdatedAt: new Date().toISOString(),
     })
     await mailer.sendChangePasswordEmail({
-      fullName: `${user.firstName} ${user.lastName}`,
-      toAddress: user.email,
+      fullName: `${teacher.firstName} ${teacher.lastName}`,
+      toAddress: teacher.email,
     })
-    const accessToken = await crypto.generateUserAccessToken(user.id)
+    const accessToken = await crypto.generateUserAccessToken(teacher.id)
     return { accessToken }
   }
 }

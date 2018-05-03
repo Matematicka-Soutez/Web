@@ -4,24 +4,24 @@ const parsers = require('./repositoryParsers')
 
 module.exports = {
   findById,
-  findByUserName,
+  findByName,
 }
 
 async function findById(id, dbTransaction) {
-  const admin = await db.Admin.findById(id, { transaction: dbTransaction })
-  if (!admin) {
+  const team = await db.Team.findById(id, { transaction: dbTransaction })
+  if (!team) {
     throw new appErrors.NotFoundError()
   }
-  return parsers.parseAdmin(admin)
+  return parsers.parseTeam(team)
 }
 
-async function findByUserName(username, dbTransaction) {
-  const admin = await db.Admin.findOne({
-    where: { username },
+async function findByName(name, dbTransaction) {
+  const team = await db.Team.findOne({
+    where: { name },
     transaction: dbTransaction,
   })
-  if (!admin) {
+  if (!team) {
     throw new appErrors.NotFoundError()
   }
-  return parsers.parseAdmin(admin)
+  return parsers.parseTeam(team)
 }
