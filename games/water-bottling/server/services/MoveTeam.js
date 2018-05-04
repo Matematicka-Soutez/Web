@@ -1,5 +1,5 @@
 const appErrors = require('../../../../server/utils/errors/application')
-const AbstractService = require('./../../../../server/services/AbstractService')
+const TransactionalService = require('./../../../../server/services/TransactionalService')
 const repository = require('./../repository')
 const gameEnums = require('./../../enums')
 const gameConfig = require('./../../config.json')
@@ -7,7 +7,7 @@ const gameConfig = require('./../../config.json')
 const GRID_WIDTH = gameConfig.game.grid.width
 const GRID_HEIGHT = gameConfig.game.grid.height
 
-module.exports = class MoveTeamService extends AbstractService {
+module.exports = class MoveTeamService extends TransactionalService {
   schema() {
     return {
       type: 'Object',
@@ -20,20 +20,20 @@ module.exports = class MoveTeamService extends AbstractService {
   }
 
   async run() {
-    const transaction = await this.createOrGetTransaction()
+    const dbTransaction = await this.createOrGetTransaction()
     const currentPosition = await repository.findTeamPosition(
       this.competitionId,
       this.data.teamId,
-      transaction,
+      dbTransaction,
     )
     const newPosition = move(this.data.directionId, currentPosition, this.data.organizerId)
     validate(newPosition)
-    return repository.addTeamPosition(newPosition, transaction)
+    return repository.addTeamPosition(newPosition, dbTransaction)
   }
 }
 
 function move(directionId, curPos, organizerId) {
-  const direction = gameEnums.ids[directionId]
+  const direction = gameEnums.DIRECTIONS.ids[directionId]
   return {
     horizontal: curPos.horizontal + direction.horizontalChange,
     vertical: curPos.vertical + direction.verticalChange,

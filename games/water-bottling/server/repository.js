@@ -9,6 +9,7 @@ module.exports = {
   findTeamPosition,
   addTeamPosition,
   createTeamPositions,
+  createTeamScores,
   getTeamScore,
 }
 
@@ -63,6 +64,11 @@ async function createTeamPositions(positions, dbTransaction) {
   return true
 }
 
+async function createTeamScores(scores, dbTransaction) {
+  await db.WatterBottlingTeamScore.bulkCreate(scores, { transaction: dbTransaction })
+  return true
+}
+
 async function findTeamPosition(competitionId, teamId, dbTransaction) {
   const position = await db.WatterBottlingTeamPosition.findOne({
     where: { competitionId, teamId },
@@ -75,14 +81,15 @@ async function findTeamPosition(competitionId, teamId, dbTransaction) {
   return parseTeamPosition(position)
 }
 
-function getTeamScore(competitionId, teamId, dbTransaction) {
+async function getTeamScore(competitionId, teamId, dbTransaction) {
   if (!competitionId || !teamId) {
     throw new Error('competitionId and teamId are required')
   }
-  return db.WatterBottlingTeamScore.sum({
+  const score = await db.WatterBottlingTeamScore.sum('score', {
     where: { competitionId, teamId },
     transaction: dbTransaction,
   })
+  return score || 0
 }
 
 async function createGrid(grid, dbTransaction) {
@@ -122,14 +129,15 @@ function parseTeamPosition(teamPos) {
     return teamPos
   }
   const parsed = {}
+  parsed.id = teamPos.id
   parsed.horizontal = teamPos.horizontal
   parsed.vertical = teamPos.vertical
   parsed.power = teamPos.power
   parsed.teamId = teamPos.teamId
-  parsed.competitionId = teamPos.competitionId
-  parsed.organizerId = teamPos.organizerId
-  parsed.previousPositionId = teamPos.previousPositionId
-  parsed.createdAt = teamPos.createdAt
-  parsed.updatedAt = teamPos.updatedAt
+  // parsed.competitionId = teamPos.competitionId
+  // parsed.organizerId = teamPos.organizerId
+  // parsed.previousPositionId = teamPos.previousPositionId
+  // parsed.createdAt = teamPos.createdAt
+  // parsed.updatedAt = teamPos.updatedAt
   return parsed
 }

@@ -26,7 +26,7 @@ async function getCurrentGrid(ctx) {
 async function getTeamPosition(ctx) {
   try {
     ctx.body = await new GetTeamPositionService().execute({
-      teamId: parseInt(ctx.request.query.teamId, 10),
+      teamId: parseInt(ctx.params.teamId, 10),
     })
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
