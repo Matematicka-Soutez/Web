@@ -2,42 +2,42 @@ const log = require('../utils/logger').logger
 const responseErrors = require('./../utils/errors/response')
 const { authorizeToken } = require('./../utils/authorize')
 
-function authenticateTokenJWT(ctx, next) {
+function authenticateTokenJWT(ctx) {
   if (!ctx) {
     throw new Error('Context is missing in authenticateToken function!')
   }
   const parsedAuthHeader = parseAuthHeader(ctx.header.authorization)
   if (!parsedAuthHeader || !parsedAuthHeader.value
     || !parsedAuthHeader.scheme || parsedAuthHeader.scheme.toLowerCase() !== 'jwt') {
+    return null
+  }
+  return authorizeToken(parsedAuthHeader.value, ctx)
+}
+
+async function authenticateTeacher(ctx, next) {
+  const data = await authenticateTokenJWT(ctx)
+  if (!data) {
     return next()
   }
-  return authorizeToken(parsedAuthHeader.value, ctx, next)
+  if (!data.teacher || !data.teacher.id) {
+    throw new responseErrors.UnauthorizedError()
+  }
+  ctx.state.teacher = data.teacher
+  return next()
 }
 
-function authenticateTeacher(ctx, next) {
-  authenticateTokenJWT(ctx, (err, data) => {
-    if (err) {
-      return next(err)
-    } else if (!data || !data.teacher || !data.teacher.id) {
-      throw new responseErrors.UnauthorizedError()
-    }
-    ctx.state.teacher = data.teacher
+async function authenticateOrganizer(ctx, next) {
+  const data = await authenticateTokenJWT(ctx)
+  if (!data) {
     return next()
-  })
-}
-
-function authenticateOrganizer(ctx, next) {
-  authenticateTokenJWT(ctx, (err, data) => {
-    if (err) {
-      return next(err)
-    } else if (!data || !data.organizer || !data.organizer.id || data.organizer.disabled) {
-      throw new responseErrors.UnauthorizedError()
-    }
-    log.info(`Organizer id: ${data.organizer.id}`)
-    log.info(`Organizer email: ${data.organizer.email}`)
-    ctx.state.organizer = data.organizer
-    return next()
-  })
+  }
+  if (!data.organizer || !data.organizer.id || data.organizer.disabled) {
+    throw new responseErrors.UnauthorizedError()
+  }
+  log.info(`Organizer id: ${data.organizer.id}`)
+  log.info(`Organizer email: ${data.organizer.email}`)
+  ctx.state.organizer = data.organizer
+  return next()
 }
 
 function parseAuthHeader(hdrValue) {

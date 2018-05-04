@@ -15,7 +15,7 @@ async function findCompetitionVenues(competitionId, dbTransaction) {
       model: db.Team,
       as: 'teams',
     }],
-    order: db.sequelize.literal('"CompetitionVenues->Venues"."name" ASC'),
+    order: db.sequelize.literal('"venue"."name" ASC'),
     transaction: dbTransaction,
   })
   return parsers.parseCompetitionVenues(venues)

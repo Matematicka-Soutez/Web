@@ -14,25 +14,39 @@ module.exports = {
 
 async function getGrid(competitionId, dbTransaction) {
   const query = `
-  SELECT 
-    COUNT("teamId") AS teamCount,
-    SUM("power") AS combinedPower,
-    "horizontal" AS horizontal,
-    "vertical" AS vertical,
-  FROM
-    (SELECT tp1.*
+  SELECT
+    COUNT(teamId)-1 AS "teamCount",
+    SUM(power) AS "combinedPower",
+    SUM(waterFlow) AS "waterFlow",
+    horizontal,
+    vertical
+  FROM (
+    SELECT
+      tp1."team_id" AS teamId,
+      0 AS waterFlow,
+      tp1."power" AS power,
+      tp1."horizontal" AS horizontal,
+      tp1."vertical" AS vertical
     FROM public."WatterBottlingTeamPositions" tp1 LEFT JOIN public."WatterBottlingTeamPositions" tp2
     ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
-    WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL) AS teamPositions
-  ORDER BY "vertical" ASC, "horizontal" ASC
-  GROUP BY "horizontal", "vertical"`
+    WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL
+  UNION
+    SELECT
+      0 AS teamId,
+      grid."water_flow" AS waterFlow,
+      0 AS power,
+      grid."horizontal" AS horizontal,
+      grid."vertical" AS vertical
+    FROM public."WatterBottlingGrid" grid
+  ) AS currentPositions
+  GROUP BY "horizontal", "vertical"
+  ORDER BY "vertical" DESC, "horizontal" ASC`
   const grid = await db.sequelize.query(query, {
     type: db.sequelize.QueryTypes.SELECT,
     replacements: { competitionId },
     raw: true,
     transaction: dbTransaction,
   })
-  console.log(grid)
   return parseGrid(grid)
 }
 
@@ -45,10 +59,7 @@ async function addTeamPosition(position, dbTransaction) {
 }
 
 async function createTeamPositions(positions, dbTransaction) {
-  const result = await db.WatterBottlingTeamPosition.bulkCreate(positions, {
-    transaction: dbTransaction,
-  })
-  console.log(result)
+  await db.WatterBottlingTeamPosition.bulkCreate(positions, { transaction: dbTransaction })
   return true
 }
 
@@ -75,8 +86,7 @@ function getTeamScore(competitionId, teamId, dbTransaction) {
 }
 
 async function createGrid(grid, dbTransaction) {
-  const result = await db.WatterBottlingGrid.bulkCreate(grid, { transaction: dbTransaction })
-  console.log(result)
+  await db.WatterBottlingGrid.bulkCreate(grid, { transaction: dbTransaction })
   return true
 }
 
@@ -91,7 +101,20 @@ function clearGameData(competitionId, dbTransaction) {
 
 /* PRIVATE PARSING METHODS */
 function parseGrid(grid) {
-  return grid
+  return grid ? _.map(grid, parseField) : []
+}
+
+function parseField(field) {
+  if (!field) {
+    return field
+  }
+  const parsed = {}
+  parsed.horizontal = field.horizontal
+  parsed.vertical = field.vertical
+  parsed.teamCount = field.teamCount
+  parsed.combinedPower = field.combinedPower
+  parsed.waterFlow = field.waterFlow
+  return parsed
 }
 
 function parseTeamPosition(teamPos) {

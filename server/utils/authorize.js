@@ -3,10 +3,10 @@ const responseErrors = require('./../utils/errors/response')
 const VerifyTokenPayloadService = require('./../services/VerifyTokenPayload')
 const appErrors = require('./../utils/errors/application')
 
-exports.authorizeToken = async (token, ctx, next) => {
+exports.authorizeToken = async (token, ctx) => {
   const jwtPayload = jwt.decode(token)
   if (!jwtPayload || !jwtPayload.exp || (Date.now() / 1000) >= jwtPayload.exp) {
-    return next()
+    return null
   }
   try {
     const data = await new VerifyTokenPayloadService()
@@ -20,7 +20,7 @@ exports.authorizeToken = async (token, ctx, next) => {
       ctx.setHeader('Login-timeout', data.loginTimeout)
       ctx.setHeader('Login-idle-timeout', data.loginIdleTimeout)
     }
-    return next(null, data)
+    return data
   } catch (err) {
     if (err instanceof appErrors.UnauthorizedError) {
       throw new responseErrors.UnauthorizedError()
@@ -37,6 +37,5 @@ exports.authorizeToken = async (token, ctx, next) => {
     if (err instanceof appErrors.TokenRevokedError) {
       throw new responseErrors.IdleTimeoutError()
     }
-    return next()
   }
 }

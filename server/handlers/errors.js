@@ -24,11 +24,8 @@ function handleNotFound() {
 
 async function handleErrors(ctx, next) {
   try {
-    console.log('AAAAAAAAAAAAAA')
-    await next()
-    return true
+    return await next()
   } catch (err) {
-    console.log('CCCCCCCCCCCCCCCC')
     let responseError = err
 
     // Handle ValidationErrors here, so we dont have to in every handler
