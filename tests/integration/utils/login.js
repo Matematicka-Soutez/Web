@@ -3,7 +3,7 @@ const app = require('../../../server/app')
 
 module.exports = {
   loginUser,
-  loginAdmin,
+  loginOrganizer,
 }
 
 async function loginUser(body) {
@@ -16,7 +16,7 @@ async function loginUser(body) {
   return response.body
 }
 
-async function loginAdmin(body) {
+async function loginOrganizer(body) {
   const response = await request(app)
     .post('/api/session/admin')
     .send(body)

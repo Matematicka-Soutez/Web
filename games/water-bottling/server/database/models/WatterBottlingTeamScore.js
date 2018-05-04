@@ -1,23 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-  const TeamScore = sequelize.define('TeamScore', {
+  const WatterBottlingTeamScore = sequelize.define('WatterBottlingTeamScore', {
     score: { type: DataTypes.INTEGER, allowNull: false, field: 'score' },
   }, {
-    tableName: 'TeamScores',
+    tableName: 'WatterBottlingTeamScores',
     timestamps: true,
   })
 
-  TeamScore.associate = models => {
-    TeamScore.belongsTo(models.Team, {
+  WatterBottlingTeamScore.associate = models => {
+    WatterBottlingTeamScore.belongsTo(models.Team, {
       as: 'team',
       foreignKey: { name: 'teamId', field: 'team_id' },
       onDelete: 'RESTRICT',
     })
-    TeamScore.belongsTo(models.Competition, {
+    WatterBottlingTeamScore.belongsTo(models.Competition, {
       as: 'competition',
       foreignKey: { name: 'competitionId', field: 'competition_id' },
       onDelete: 'RESTRICT',
     })
   }
 
-  return TeamScore
+  return WatterBottlingTeamScore
 }

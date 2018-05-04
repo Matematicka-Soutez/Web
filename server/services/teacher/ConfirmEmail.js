@@ -25,7 +25,7 @@ module.exports = class ConfirmEmailService extends TransactionalService {
       lastLoginAt: new Date().toISOString(),
     }
     await teacherRepository.update(teacher.id, updateValues, transaction)
-    const token = await crypto.generateUserAccessToken(teacher.id)
+    const token = await crypto.generateTeacherAccessToken(teacher.id)
     teacher.accessToken = token
     return teacher
   }

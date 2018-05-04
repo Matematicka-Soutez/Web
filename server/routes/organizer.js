@@ -8,7 +8,7 @@ const router = new Router()
 /**
  * @api {get} /api/admin/users Get list of filtered users
  * @apiName GetFilteredUsers
- * @apiGroup Admin
+ * @apiGroup Organizer
  *
  * @apiParam {String}            [id]                   Filter by id.
  * @apiParam {String}            [firstName]            First name.
@@ -25,7 +25,7 @@ const router = new Router()
 /**
  * @api {get} /api/admin/users/:userId              Get user detail
  * @apiName GetWholeUserDetail
- * @apiGroup Admin
+ * @apiGroup Organizer
  *
  * @apiParam {String}   [id]                   User id.
  *
@@ -37,7 +37,7 @@ const router = new Router()
 /**
  * @api {post} /api/admin/users/:userId/resend-confirmation-email Resend confirmation email
  * @apiName Resend confirmation email
- * @apiGroup Admin
+ * @apiGroup Organizer
  *
  * @apiHeader {String}       Authorization        Format: JWT ${access_token}
  * @apiParam {Number}        userId               User identification.
@@ -52,7 +52,7 @@ const router = new Router()
 /**
  * @api {put} /api/admin/users/:userId/personal-info          Updates users personal info
  * @apiName UpdatePersonalInfo
- * @apiGroup Admin
+ * @apiGroup Organizer
  *
  * @apiHeader {String}          Authorization           Format: JWT ${access_token} - ADMIN
  *
@@ -78,7 +78,7 @@ const router = new Router()
 /**
  * @api {PUT} /api/admin/users/:userId/email Should change email
  * @apiName ChangeUserEmail
- * @apiGroup Admin
+ * @apiGroup Organizer
  *
  * @apiHeader {String}       Authorization                  Format: JWT ${access_token}
  *

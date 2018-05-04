@@ -1,6 +1,6 @@
+const crypto = require('crypto')
 const Promise = require('bluebird')
 const bcrypt = require('bcrypt')
-const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const config = require('../../config')
 
@@ -8,13 +8,13 @@ const BEARER_PREFIX = 'Bearer '
 
 module.exports = {
 
-  generateUserAccessToken(userId) {
-    const payload = { userId }
+  generateTeacherAccessToken(teacherId) {
+    const payload = { teacherId }
     return jwt.sign(payload, config.auth.secret, config.auth.createOptions)
   },
 
-  generateAdminAccessToken(adminId) {
-    const payload = { adminId }
+  generateOrganizerAccessToken(organizerId) {
+    const payload = { organizerId }
     return jwt.sign(payload, config.auth.secret, config.auth.createOptions)
   },
 

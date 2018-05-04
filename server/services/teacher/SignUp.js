@@ -30,14 +30,14 @@ module.exports = class SignUpService extends TransactionalService {
     }
     newUser.publicToken = await crypto.generateRandomToken()
     newUser.lastLoginAt = new Date().toISOString()
-    const createdUser = await teacherRepository.create(newUser, transaction)
+    const createdTeacher = await teacherRepository.create(newUser, transaction)
     await mailer.sendInviteEmail({
-      toAddress: createdUser.email,
-      confirmToken: createdUser.publicToken,
-      fullName: `${createdUser.firstName} ${createdUser.lastName}`,
+      toAddress: createdTeacher.email,
+      confirmToken: createdTeacher.publicToken,
+      fullName: `${createdTeacher.firstName} ${createdTeacher.lastName}`,
     })
-    createdUser.accessToken = await crypto.generateUserAccessToken(createdUser.id)
-    return createdUser
+    createdTeacher.accessToken = await crypto.generateTeacherAccessToken(createdTeacher.id)
+    return createdTeacher
   }
 }
 

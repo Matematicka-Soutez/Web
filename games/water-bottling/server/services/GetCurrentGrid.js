@@ -1,6 +1,4 @@
-const gameConfig = require('../../config')
 const AbstractService = require('./../../../../server/services/AbstractService')
-const teamRepository = require('./../../../../server/repositories/team')
 const repository = require('./../repository')
 
 module.exports = class GetCurrentGridService extends AbstractService {
@@ -11,21 +9,7 @@ module.exports = class GetCurrentGridService extends AbstractService {
     }
   }
 
-  async run() {
-    const positions = await repository.findTeamPositions(this.competitionId)
-    const teams = await teamRepository.findTeams()
-    const grid = {
-      fields: getFields(teams, positions),
-      size: {
-        height: gameConfig.height,
-        width: gameConfig.width,
-      },
-    }
-    return grid
+  run() {
+    return repository.getGrid(this.competitionId)
   }
-}
-
-function getFields(teams, positions) {
-  console.log(positions)
-  return []
 }

@@ -9,14 +9,14 @@ module.exports = class LoginService extends AbstractService {
     return {
       type: 'Object',
       properties: {
-        username: validator.emailValidator({ required: true }),
+        email: validator.emailValidator({ required: true }),
         password: { type: 'string', minLength: 1, maxLength: 255 },
       },
     }
   }
 
   async run() {
-    const teacher = await teacherRepository.findByEmail(this.data.username.toLowerCase())
+    const teacher = await teacherRepository.findByEmail(this.data.email.toLowerCase())
     if (!teacher) {
       throw new appErrors.UnauthorizedError()
     }
@@ -27,7 +27,7 @@ module.exports = class LoginService extends AbstractService {
     if (!verified) {
       throw new appErrors.UnauthorizedError()
     }
-    teacher.accessToken = await crypto.generateUserAccessToken(teacher.id)
+    teacher.accessToken = await crypto.generateTeacherAccessToken(teacher.id)
     await teacherRepository.update(teacher.id, { lastLoginAt: new Date().toISOString() })
     return teacher
   }

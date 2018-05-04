@@ -1,24 +1,21 @@
-
-module.exports = {
-  parseUser,
-}
-
-function parseUser(user) {
-  if (!user) {
+function parseTeacher(teacher) {
+  if (!teacher) {
     throw new Error('User is empty in response parsing')
   }
-  const parsedUser = {}
-  parsedUser.id = user.id
-  parsedUser.email = user.email
-  parsedUser.confirmed = user.confirmed
-  parsedUser.accessToken = user.accessToken
-  parsedUser.registrationStepId = user.registrationStepId
+  const parsed = {}
+  parsed.id = teacher.id
+  parsed.title = teacher.title
+  parsed.firstName = teacher.firstName
+  parsed.lastName = teacher.lastName
+  parsed.email = teacher.email
+  parsed.phone = teacher.phone
+  parsed.allowNotifications = teacher.allowNotifications
+  parsed.confirmed = teacher.confirmed
+  parsed.accessToken = teacher.accessToken
 
-  if (user.registrationStepId > 2) {
-    parsedUser.firstName = user.firstName
-    parsedUser.lastName = user.lastName
-    parsedUser.dob = user.dob
-  }
+  return parsed
+}
 
-  return parsedUser
+module.exports = {
+  parseTeacher,
 }

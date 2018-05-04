@@ -4,15 +4,15 @@ const SignUpService = require('./../../services/teacher/SignUp')
 const ConfirmEmailService = require('./../../services/teacher/ConfirmEmail')
 const ResetPasswordService = require('./../../services/teacher/ResetPassword')
 const UpdatePasswordService = require('./../../services/teacher/UpdatePassword')
-const AdminLoginService = require('./../../services/organizer/Login')
+const OrganizerLoginService = require('./../../services/organizer/Login')
 const appErrors = require('./../../utils/errors/application')
 const responseErrors = require('./../../utils/errors/response')
 
 async function adminLogin(ctx) {
   try {
-    ctx.body = await new AdminLoginService()
+    ctx.body = await new OrganizerLoginService()
       .execute({
-        username: ctx.request.body.username,
+        email: ctx.request.body.username,
         password: ctx.request.body.password,
       })
   } catch (err) {
@@ -83,7 +83,7 @@ async function login(ctx) {
   try {
     ctx.body = await new LoginService()
       .execute({
-        username: ctx.request.body.username,
+        email: ctx.request.body.username,
         password: ctx.request.body.password,
       })
   } catch (err) {
@@ -99,19 +99,21 @@ async function login(ctx) {
 
 async function signUp(ctx) {
   try {
-    const user = await new SignUpService()
+    const teacher = await new SignUpService()
       .execute({
+        title: ctx.request.body.title,
+        firstName: ctx.request.body.firstName,
+        lastName: ctx.request.body.lastName,
         email: ctx.request.body.email,
-        // firstName: ctx.request.body.firstName,
-        // lastName: ctx.request.body.lastName,
-        // dob: ctx.request.body.dob,
+        phone: ctx.request.body.phone,
+        password: ctx.request.body.password,
       })
     ctx.status = 201
-    ctx.body = responseParsers.parseUser(user)
+    ctx.body = responseParsers.parseTeacher(teacher)
   } catch (err) {
-    // if (err instanceof appErrors.PasswordWrongFormat) {
-    //   throw new responseErrors.WrongPasswordFormat()
-    // }
+    if (err instanceof appErrors.PasswordWrongFormat) {
+      throw new responseErrors.WrongPasswordFormat()
+    }
     if (err instanceof appErrors.UserPotentiallyExistsError) {
       throw new responseErrors.ConflictError({
         duplicate: true,

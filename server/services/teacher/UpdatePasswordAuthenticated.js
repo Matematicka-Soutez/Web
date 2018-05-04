@@ -36,7 +36,7 @@ module.exports = class UpdatePasswordService extends AbstractService {
       fullName: `${teacher.firstName} ${teacher.lastName}`,
       toAddress: teacher.email,
     })
-    const accessToken = await crypto.generateUserAccessToken(teacher.id)
+    const accessToken = await crypto.generateTeacherAccessToken(teacher.id)
     return { accessToken }
   }
 }

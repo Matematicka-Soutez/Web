@@ -6,7 +6,7 @@ function authenticateTokenJWT(ctx, next) {
   if (!ctx) {
     throw new Error('Context is missing in authenticateToken function!')
   }
-  const parsedAuthHeader = parseAuthHeader(ctx.header('Authorization'))
+  const parsedAuthHeader = parseAuthHeader(ctx.header.authorization)
   if (!parsedAuthHeader || !parsedAuthHeader.value
     || !parsedAuthHeader.scheme || parsedAuthHeader.scheme.toLowerCase() !== 'jwt') {
     return next()
@@ -34,7 +34,7 @@ function authenticateOrganizer(ctx, next) {
       throw new responseErrors.UnauthorizedError()
     }
     log.info(`Organizer id: ${data.organizer.id}`)
-    log.info(`Organizer userName: ${data.organizer.userName}`)
+    log.info(`Organizer email: ${data.organizer.email}`)
     ctx.state.organizer = data.organizer
     return next()
   })

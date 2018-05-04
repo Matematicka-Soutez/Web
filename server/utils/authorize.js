@@ -1,7 +1,7 @@
+const jwt = require('jsonwebtoken')
 const responseErrors = require('./../utils/errors/response')
 const VerifyTokenPayloadService = require('./../services/VerifyTokenPayload')
 const appErrors = require('./../utils/errors/application')
-const jwt = require('jsonwebtoken')
 
 exports.authorizeToken = async (token, ctx, next) => {
   const jwtPayload = jwt.decode(token)
@@ -12,8 +12,8 @@ exports.authorizeToken = async (token, ctx, next) => {
     const data = await new VerifyTokenPayloadService()
       .execute({
         token,
-        userId: jwtPayload.userId ? jwtPayload.userId : undefined,
-        adminId: jwtPayload.adminId ? jwtPayload.adminId : undefined,
+        teacherId: jwtPayload.teacherId ? jwtPayload.teacherId : undefined,
+        organizerId: jwtPayload.organizerId ? jwtPayload.organizerId : undefined,
         tokenIssuedAt: jwtPayload.iat,
       })
     if (ctx.response && data.loginTimeout && data.loginIdleTimeout) {
@@ -22,10 +22,13 @@ exports.authorizeToken = async (token, ctx, next) => {
     }
     return next(null, data)
   } catch (err) {
+    if (err instanceof appErrors.UnauthorizedError) {
+      throw new responseErrors.UnauthorizedError()
+    }
     if (err instanceof appErrors.TokenIdleTimoutError) {
       throw new responseErrors.IdleTimeoutError()
     }
-    if (err instanceof appErrors.InvalidDataError) {
+    if (err instanceof appErrors.ValidationError) {
       throw new responseErrors.ConflictError({
         clientRefreshRequired: true,
         clientRefreshReasons: err.message,

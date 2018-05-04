@@ -14,6 +14,7 @@ const passportHandler = require('./../handlers/passport')
 
 const router = new Router()
 const apiRouter = new Router()
+router.use(errorsHandler.handleErrors)
 
 // Force redirect http requests to https
 if (config.env === 'production') {
@@ -28,17 +29,17 @@ if (config.env === 'production') {
 // Routes
 apiRouter.use(publicRoutes)
 apiRouter.use('/teacher', passportHandler.authenticateTeacher, teacherRoutes)
-// apiRouter.use('/org', passportHandler.authenticateOrganizer, organizerRoutes)
-apiRouter.use('/org', organizerRoutes)
+apiRouter.use('/org', passportHandler.authenticateOrganizer, organizerRoutes)
+// apiRouter.use('/org', organizerRoutes)
 
 // Game routes
 apiRouter.use('/game', publicGameRoutes)
 apiRouter.use('/org/game', passportHandler.authenticateOrganizer, organizerGameRoutes)
+// apiRouter.use('/org/game', organizerGameRoutes)
 
 apiRouter.use(errorsHandler.handleNotFound)
 
 // Higher level composition
-router.use(errorsHandler.handleErrors)
 router.use('/api', apiRouter.routes())
 // Serve documentation
 if (config.env !== 'production') {

@@ -513,7 +513,7 @@ describe('User API endpoints: /api/users', function userAPI() {
 
   //   it('should deny user with not valid credentials', function test() {
   //     const invalidCredentials = {
-  //       userName: 'invalidUsername@richuncles.com',
+  //       username: 'invalidUsername@maso.cz',
   //       password: 'invalid credentials',
   //     }
   //     return request(this.app)
@@ -525,7 +525,7 @@ describe('User API endpoints: /api/users', function userAPI() {
 
   //   it('should return invalid credetials when BAD_REQUEST', function test() {
   //     const invalidCredentials = {
-  //       userName: 'invalidUsername@richuncles.com',
+  //       username: 'invalidUsername@maso.cz',
   //       password: 'a',
   //     }
   //     return request(this.app)
@@ -652,7 +652,7 @@ describe('User API endpoints: /api/users', function userAPI() {
   //       .expect(200)
   //       .then(() => request(this.app)
   //         .post('/api/access-token/')
-  //         .send({ userName: userDb.users.confirmed.userName, password: 'newUserPassword123' })
+  //         .send({ username: userDb.users.confirmed.username, password: 'newUserPassword123' })
   //         .expect(200))
   //   })
 

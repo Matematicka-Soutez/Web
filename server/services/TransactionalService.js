@@ -66,13 +66,6 @@ module.exports = class TransactionalService extends AbstractService {
       })
   }
 
-  getExistingTransaction() {
-    if (!this.transaction) {
-      throw new Error('Method \'getExistingTransaction\' can be called only after \'createOrGetTransaction\'')
-    }
-    return this.transaction
-  }
-
   done() {
     return this.commit()
       .then(() => super.done())

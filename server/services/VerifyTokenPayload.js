@@ -1,9 +1,9 @@
 const Promise = require('bluebird')
+const configIdleTimeoutSec = require('../../config').auth.jwt.idleTimeoutSec
 const AbstractService = require('./AbstractService')
 const teacherRepository = require('./../repositories/teacher')
 const organizerRepository = require('./../repositories/organizer')
 const appErrors = require('./../utils/errors/application')
-const configIdleTimeoutSec = require('../../config').auth.jwt.idleTimeoutSec
 
 const configIdleTimeoutMs = configIdleTimeoutSec * 1000
 
@@ -13,35 +13,35 @@ module.exports = class VerifyTokenPayload extends AbstractService {
       type: 'Object',
       properties: {
         token: { type: 'string', required: true },
-        userId: { type: ['number'], required: false, minimum: 1 },
-        adminId: { type: ['number'], required: false, minimum: 1 },
+        teacherId: { type: ['number'], required: false, minimum: 1 },
+        organizerId: { type: ['number'], required: false, minimum: 1 },
         tokenIssuedAt: { type: 'number', required: true, minimum: 1 },
       },
       anyOf: [
-        { required: ['userId'] },
-        { required: ['adminId'] },
+        { required: ['teacherId'] },
+        { required: ['organizerId'] },
       ],
     }
   }
 
   run() {
     return Promise
-      .all([this.getOrganizer, this.getAndCheckTeacher])
-      .spread((admin, userData) => parseResponse(admin, userData))
+      .all([this.getOrganizer(), this.getAndCheckTeacher()])
+      .spread((organizer, teacherData) => parseResponse(organizer, teacherData))
   }
 
   getOrganizer() {
-    return this.data.adminId
-      ? organizerRepository.findById(this.data.adminId)
+    return this.data.organizerId
+      ? organizerRepository.findById(this.data.organizerId)
       : null
   }
 
   async getAndCheckTeacher() {
-    if (this.data.userId) {
+    if (this.data.teacherId) {
       // If admin is logged as user he is not using stored token in DB
-      const requiredToken = !this.data.adminId
+      const requiredToken = !this.data.organizerId
       const teacher = await teacherRepository.findByIdAndAccessToken(
-        this.data.userId,
+        this.data.teacherId,
         this.data.token,
         requiredToken,
       )

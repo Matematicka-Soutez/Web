@@ -1,109 +1,95 @@
 const Router = require('koa-router')
 const teachers = require('./../handlers/public/teachers')
+const organizers = require('./../handlers/public/organizers')
 // const optionalToken = require('./../handlers/passport').optionalToken
 
 const router = new Router()
 
 /**
- * @api {post} /api/contact-us Contact Us Form
- * @apiName ContactUs
- * @apiGroup Forms
+ * @api {post} /api/session/organizer Login admin
+ * @apiName LoginOrganizer
+ * @apiGroup Organizers
  *
- * @apiParam {String{1..130}}   firstName           User's first name.
- * @apiParam {String{1..130}}   lastName            User's last name.
- * @apiParam {String{1..256}}   email               User's email.
- * @apiParam {String{1..256}}   phone               User's phone.
- * @apiParam {String}           message             User's message.
- * @apiParam {String}           topic               User's topic.
+ * @apiParam {String{1..256}}   username            Organizer email to verify.
+ * @apiParam {String{1..256}}   password            Organizer password to verify.
  *
- */
-// TODO router.post('/contact-us', optionalToken, cases.contactUs)
-
-/**
- * @api {post} /api/session/admin Login admin
- * @apiName LoginAdmin
- * @apiGroup Admin
- *
- * @apiParam {String{1..256}}   username            Admin username to verify.
- * @apiParam {String{1..256}}   password            Admin password to verify.
- *
- * @apiSuccess {Number}         id                  Admin unique identifier.
+ * @apiSuccess {Number}         id                  Organizer unique identifier.
  * @apiSuccess {String}         accessToken         Server issued access token.
  *
  * @apiUse BadRequestError
  * @apiUse UnauthorizedError
  *
  */
-router.post('/session/admin', teachers.adminLogin)
+router.post('/session/organizer', organizers.login)
 
 /**
- * @api {post} /api/session/user Login user
- * @apiName LoginUser
- * @apiGroup Users
+ * @api {post} /api/session/teacher Login user
+ * @apiName LoginTeacher
+ * @apiGroup Teachers
  *
- * @apiParam {String{1..256}}   username            User username to verify.
- * @apiParam {String{1..256}}   password            User password to verify.
+ * @apiParam {String{1..256}}   username            Teacher email to verify.
+ * @apiParam {String{1..256}}   password            Teacher password to verify.
  *
- * @apiSuccess {Number}         id                  User unique identifier.
- * @apiSuccess {String}         firstName           User first name.
- * @apiSuccess {String}         lastName            User last name.
- * @apiSuccess {Boolean}        confirmed           User has confirmed email.
+ * @apiSuccess {Number}         id                  Teacher unique identifier.
+ * @apiSuccess {String}         firstName           Teacher first name.
+ * @apiSuccess {String}         lastName            Teacher last name.
+ * @apiSuccess {Boolean}        confirmed           Teacher has confirmed email.
  * @apiSuccess {String}         accessToken         Server issued access token.
  *
  * @apiUse BadRequestError
  * @apiUse UnauthorizedError
  *
  */
-router.post('/session/user', teachers.login)
+router.post('/session/teacher', teachers.login)
 
 /**
- * @api {POST} /api/users Sign Up
+ * @api {POST} /api/teachers Sign Up
  * @apiName SignUp
- * @apiGroup Users
+ * @apiGroup Teachers
  *
- * @apiParam {String{1..40}}                firstName           User first name.
- * @apiParam {String{1..80}}                lastName            User last name.
- * @apiParam {String{1..80}}                email               User email.
- * @apiParam {String{1..256}}               password            User password.
+ * @apiParam {String{1..40}}                firstName           Teacher first name.
+ * @apiParam {String{1..80}}                lastName            Teacher last name.
+ * @apiParam {String{1..80}}                email               Teacher email.
+ * @apiParam {String{1..256}}               password            Teacher password.
  *
- * @apiSuccess (Created 201) {Number}       id                  User unique identifier.
- * @apiSuccess (Created 201) {String}       username            User username.
- * @apiSuccess (Created 201) {String}       firstName           User first name.
- * @apiSuccess (Created 201) {String}       lastName            User last name.
- * @apiSuccess (Created 201) {String}       email               User email.
- * @apiSuccess (Created 201) {Boolean}      confirmed           User has confirmed email.
- * @apiSuccess (Created 201) {Date}         createdAt           User createdAt timestamp, format: ISO-8601.
- * @apiSuccess (Created 201) {Date}         updatedAt           User updatedAt timestamp, format: ISO-8601.
+ * @apiSuccess (Created 201) {Number}       id                  Teacher unique identifier.
+ * @apiSuccess (Created 201) {String}       username            Teacher username.
+ * @apiSuccess (Created 201) {String}       firstName           Teacher first name.
+ * @apiSuccess (Created 201) {String}       lastName            Teacher last name.
+ * @apiSuccess (Created 201) {String}       email               Teacher email.
+ * @apiSuccess (Created 201) {Boolean}      confirmed           Teacher has confirmed email.
+ * @apiSuccess (Created 201) {Date}         createdAt           Teacher createdAt timestamp, format: ISO-8601.
+ * @apiSuccess (Created 201) {Date}         updatedAt           Teacher updatedAt timestamp, format: ISO-8601.
  *
  * @apiUse BadRequestError
  * @apiUse WrongPasswordFormat
  * @apiUse ConflictError
  *
  */
-router.post('/users', teachers.signUp)
+router.post('/teachers', teachers.signUp)
 
 /**
- * @api {PUT} /api/users/confirm Confirm user email address
+ * @api {PUT} /api/teachers/confirm Confirm teacher email address
  * @apiName ConfirmEmailAddress
- * @apiGroup Users
+ * @apiGroup Teachers
  *
  * @apiParam {String{1..256}}   token               Received token in confirm email.
  *
- * @apiSuccess {Number}         id                  User unique identifier.
- * @apiSuccess {String}         firstName           User first name.
- * @apiSuccess {String}         lastName            User last name.
+ * @apiSuccess {Number}         id                  Teacher unique identifier.
+ * @apiSuccess {String}         firstName           Teacher first name.
+ * @apiSuccess {String}         lastName            Teacher last name.
  * @apiSuccess {String}         accessToken         Server issued access token.
  *
  * @apiUse BadRequestError
  * @apiUse ForbiddenError
  *
  */
-router.put('/users/confirm', teachers.confirmEmail)
+router.put('/teachers/confirm', teachers.confirmEmail)
 
 /**
- * @api {POST} /api/users/reset-password Initiates user password reset action
+ * @api {POST} /api/teachers/reset-password Initiates teacher password reset action
  * @apiName ResetPassword
- * @apiGroup Users
+ * @apiGroup Teachers
  *
  * @apiParam {String{1..80}}    email               Email address where to send reset password link.
  *
@@ -112,12 +98,12 @@ router.put('/users/confirm', teachers.confirmEmail)
  * @apiUse UnauthorizedError
  *
  */
-router.post('/users/reset-password', teachers.resetPassword)
+router.post('/teachers/reset-password', teachers.resetPassword)
 
 /**
- * @api {PUT} /api/users/reset-password Updates user password with new password
+ * @api {PUT} /api/teachers/reset-password Updates teachers password with new password
  * @apiName UpdatePassword
- * @apiGroup Users
+ * @apiGroup Teachers
  *
  * @apiParam {String{1..256}}               token               Received token in reset password email.
  * @apiParam {String{1..256}}               password            New password to update
@@ -128,6 +114,6 @@ router.post('/users/reset-password', teachers.resetPassword)
  * @apiUse UnauthorizedError
  *
  */
-router.put('/users/reset-password', teachers.updatePassword)
+router.put('/teachers/reset-password', teachers.updatePassword)
 
 module.exports = router.routes()

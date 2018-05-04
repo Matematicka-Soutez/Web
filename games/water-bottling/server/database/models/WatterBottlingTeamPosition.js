@@ -1,35 +1,35 @@
 module.exports = (sequelize, DataTypes) => {
-  const TeamPosition = sequelize.define('TeamPosition', {
+  const WatterBottlingTeamPosition = sequelize.define('WatterBottlingTeamPosition', {
     horizontal: { type: DataTypes.INTEGER, allowNull: false, field: 'horizontal' },
     vertical: { type: DataTypes.INTEGER, allowNull: false, field: 'vertical' },
     power: { type: DataTypes.INTEGER, allowNull: false, field: 'power' },
   }, {
-    tableName: 'TeamPositions',
+    tableName: 'WatterBottlingTeamPositions',
     timestamps: true,
   })
 
-  TeamPosition.associate = models => {
-    TeamPosition.belongsTo(models.Team, {
+  WatterBottlingTeamPosition.associate = models => {
+    WatterBottlingTeamPosition.belongsTo(models.Team, {
       as: 'team',
       foreignKey: { name: 'teamId', field: 'team_id' },
       onDelete: 'RESTRICT',
     })
-    TeamPosition.belongsTo(models.Competition, {
+    WatterBottlingTeamPosition.belongsTo(models.Competition, {
       as: 'competition',
       foreignKey: { name: 'competitionId', field: 'competition_id' },
       onDelete: 'RESTRICT',
     })
-    TeamPosition.belongsTo(models.Organizer, {
+    WatterBottlingTeamPosition.belongsTo(models.Organizer, {
       as: 'creator',
       foreignKey: { name: 'organizerId', field: 'organizer_id' },
       onDelete: 'RESTRICT',
     })
-    TeamPosition.hasOne(models.TeamPosition, {
+    WatterBottlingTeamPosition.hasOne(models.WatterBottlingTeamPosition, {
       as: 'previousPosition',
       foreignKey: { name: 'previousPositionId', field: 'previous_position_id' },
       onDelete: 'RESTRICT',
     })
   }
 
-  return TeamPosition
+  return WatterBottlingTeamPosition
 }

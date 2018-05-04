@@ -3,11 +3,13 @@ const responseErrors = require('../../../server/utils/errors/response')
 const GetCurrentGridService = require('./services/GetCurrentGrid')
 const GetTeamPositionService = require('./services/GetTeamPosition')
 const MoveTeamService = require('./services/MoveTeam')
+const InitGameService = require('./services/InitGame')
 
 module.exports = {
   getCurrentGrid,
   getTeamPosition,
   moveTeam,
+  initGame,
 }
 
 async function getCurrentGrid(ctx) {
@@ -43,6 +45,23 @@ async function moveTeam(ctx) {
     })
   } catch (err) {
     if (err instanceof appErrors.CannotBeDoneError) {
+      throw new responseErrors.BadRequestError(err.message)
+    }
+    if (err instanceof appErrors.NotFoundError) {
+      throw new responseErrors.UnauthorizedError('Invalid credentials.')
+    }
+    throw err
+  }
+}
+
+async function initGame(ctx) {
+  try {
+    console.log(ctx.state)
+    ctx.body = await new InitGameService().execute({
+      organizerId: ctx.state.organizer.id,
+    })
+  } catch (err) {
+    if (err instanceof appErrors.ValidationError) {
       throw new responseErrors.BadRequestError(err.message)
     }
     if (err instanceof appErrors.NotFoundError) {

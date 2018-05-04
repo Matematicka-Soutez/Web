@@ -22,7 +22,7 @@ module.exports = class LoginService extends AbstractService {
       throw new appErrors.UnauthorizedError()
     }
 
-    const accessToken = await crypto.generateAdminAccessToken(organizer.id)
+    const accessToken = await crypto.generateOrganizerAccessToken(organizer.id)
     return {
       id: organizer.id,
       email: organizer.email,
