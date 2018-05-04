@@ -56,7 +56,6 @@ async function moveTeam(ctx) {
 
 async function initGame(ctx) {
   try {
-    console.log(ctx.state)
     ctx.body = await new InitGameService().execute({
       organizerId: ctx.state.organizer.id,
     })

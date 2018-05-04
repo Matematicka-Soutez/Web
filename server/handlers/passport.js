@@ -16,10 +16,7 @@ function authenticateTokenJWT(ctx) {
 
 async function authenticateTeacher(ctx, next) {
   const data = await authenticateTokenJWT(ctx)
-  if (!data) {
-    return next()
-  }
-  if (!data.teacher || !data.teacher.id) {
+  if (!data || !data.teacher || !data.teacher.id) {
     throw new responseErrors.UnauthorizedError()
   }
   ctx.state.teacher = data.teacher
@@ -28,10 +25,7 @@ async function authenticateTeacher(ctx, next) {
 
 async function authenticateOrganizer(ctx, next) {
   const data = await authenticateTokenJWT(ctx)
-  if (!data) {
-    return next()
-  }
-  if (!data.organizer || !data.organizer.id || data.organizer.disabled) {
+  if (!data || !data.organizer || !data.organizer.id || data.organizer.disabled) {
     throw new responseErrors.UnauthorizedError()
   }
   log.info(`Organizer id: ${data.organizer.id}`)
