@@ -9,7 +9,7 @@ const gameConfig = require('./../../config.json')
 const WATER_FLOWS = gameConfig.game.grid.waterFlows
 const GRID_WIDTH = gameConfig.game.grid.width
 const GRID_HEIGHT = gameConfig.game.grid.height
-const START_POSITION = gameConfig.game.grid.start
+const START_POSITION = gameConfig.game.grid.startPosition
 
 module.exports = class InitGameService extends TransactionalService {
   schema() {

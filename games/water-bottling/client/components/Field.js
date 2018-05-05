@@ -3,12 +3,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function Field({ field }) {
-  // const light = 100 - (Math.abs(field.waterFlow - 10) * 5)
-  const light = 100 - (Math.abs(5 - field.waterFlow) * 5)
-  // const hue = field.waterFlow > 10 ? 240 : 360
-  const hue = 240
+  const frequency = 0.18
+  const center = 192
+  const width = 63
+  const i = (25 - field.waterFlow) + 25
+  const red = (Math.sin(frequency * i) * width) + center
+  const green = (Math.sin((frequency * i) + 1) * width) + center
+  const blue = (Math.sin((frequency * i) + 2) * width) + center
   const tdStyle = {
-    backgroundColor: `hsl(${hue},80%,${light}%)`,
+    backgroundColor: `rgb(${red},${green},${blue})`,
   }
   return (
     <td className="field" style={tdStyle}>
