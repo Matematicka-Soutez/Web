@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const WatterBottlingTeamScore = sequelize.define('WatterBottlingTeamScore', {
-    score: { type: DataTypes.INTEGER, allowNull: false, field: 'score' },
+    score: { type: DataTypes.DOUBLE, allowNull: false, field: 'score' },
   }, {
     tableName: 'WatterBottlingTeamScores',
     timestamps: true,

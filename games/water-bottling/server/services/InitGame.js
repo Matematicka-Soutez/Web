@@ -25,7 +25,10 @@ module.exports = class InitGameService extends TransactionalService {
     const dbTransaction = await this.createOrGetTransaction()
     const grid = generateGridFromConfig(this.competitionId)
     const venues = await venueRepository.findCompetitionVenues(this.competitionId, dbTransaction)
-    const teams = _.filter(_.flatten(_.map(venues, 'teams')), ['arrived', config.env === 'production'])
+    const teams = _.filter(
+      _.flatten(_.map(venues, 'teams')),
+      ['arrived', config.env === 'production'],
+    )
     const initialPositions = generatePositionsFromConfig(
       this.competitionId,
       teams,

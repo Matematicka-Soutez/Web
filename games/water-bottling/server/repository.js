@@ -2,17 +2,6 @@ const _ = require('lodash')
 const db = require('../../../server/database')
 const appErrors = require('../../../server/utils/errors/application')
 
-module.exports = {
-  getGrid,
-  createGrid,
-  clearGameData,
-  findTeamPosition,
-  addTeamPosition,
-  createTeamPositions,
-  createTeamScores,
-  getTeamScore,
-}
-
 async function getGrid(competitionId, dbTransaction) {
   const query = `
   SELECT
@@ -49,6 +38,39 @@ async function getGrid(competitionId, dbTransaction) {
     transaction: dbTransaction,
   })
   return parseGrid(grid)
+}
+
+async function getCurrentTeamPositions(competitionId, dbTransaction) {
+  const query = `
+  SELECT
+    currentPositions."teamId"     AS "teamId",
+    currentPositions."power"      AS "power",
+    grid."water_flow"             AS "waterFlow",
+    currentPositions."horizontal" AS "horizontal",
+    currentPositions."vertical"   AS "vertical"
+  FROM (
+        SELECT
+          tp1."team_id"    AS "teamId",
+          tp1."power"      AS "power",
+          tp1."horizontal" AS "horizontal",
+          tp1."vertical"   AS "vertical"
+        FROM public."WatterBottlingTeamPositions" tp1 LEFT JOIN public."WatterBottlingTeamPositions" tp2
+            ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
+        WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL
+      ) AS currentPositions
+    INNER JOIN public."WatterBottlingGrid" AS grid
+      ON currentPositions."horizontal" = grid."horizontal"
+        AND currentPositions."vertical" = grid."vertical"
+  ORDER BY
+    currentPositions."vertical" DESC,
+    currentPositions."horizontal" ASC`
+  const positions = await db.sequelize.query(query, {
+    type: db.sequelize.QueryTypes.SELECT,
+    replacements: { competitionId },
+    raw: true,
+    transaction: dbTransaction,
+  })
+  return parseCurrentTemPositions(positions)
 }
 
 async function addTeamPosition(position, dbTransaction) {
@@ -140,4 +162,38 @@ function parseTeamPosition(teamPos) {
   parsed.createdAt = teamPos.createdAt
   parsed.updatedAt = teamPos.updatedAt
   return parsed
+}
+
+function parseCurrentTemPositions(positions) {
+  const rows = _.groupBy(positions, 'vertical')
+  const fields = []
+  _.forOwn(rows, (row, vertical) => {
+    const rowFields = _.groupBy(row, 'horizontal')
+    _.forOwn(rowFields, (fieldContent, horizontal) => {
+      const teams = fieldContent.map(team => ({
+        id: team.teamId,
+        power: team.power,
+      }))
+      fields.push({
+        vertical,
+        horizontal,
+        waterFlow: fieldContent[0].waterFlow,
+        teams,
+      })
+    })
+  })
+  return fields
+}
+
+
+module.exports = {
+  getGrid,
+  createGrid,
+  clearGameData,
+  findTeamPosition,
+  addTeamPosition,
+  createTeamPositions,
+  createTeamScores,
+  getTeamScore,
+  getCurrentTeamPositions,
 }
