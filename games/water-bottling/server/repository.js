@@ -134,10 +134,10 @@ function parseTeamPosition(teamPos) {
   parsed.vertical = teamPos.vertical
   parsed.power = teamPos.power
   parsed.teamId = teamPos.teamId
-  // parsed.competitionId = teamPos.competitionId
-  // parsed.organizerId = teamPos.organizerId
-  // parsed.previousPositionId = teamPos.previousPositionId
-  // parsed.createdAt = teamPos.createdAt
-  // parsed.updatedAt = teamPos.updatedAt
+  parsed.competitionId = teamPos.competitionId
+  parsed.organizerId = teamPos.organizerId
+  parsed.previousPositionId = teamPos.previousPositionId
+  parsed.createdAt = teamPos.createdAt
+  parsed.updatedAt = teamPos.updatedAt
   return parsed
 }

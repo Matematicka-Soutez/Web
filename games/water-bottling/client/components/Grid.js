@@ -10,9 +10,9 @@ function Grid({ size, fields }) {
       const index = (rowIndex * size.width) + collIndex
       row.push(<Field key={index} field={fields[index]} />)
     }
-    rows.push(<div className="grid-row">{row}</div>)
+    rows.push(<tr>{row}</tr>)
   }
-  return <div className="grid">{rows}</div>
+  return <table className="grid"><tbody>{rows}</tbody></table>
 }
 
 Grid.propTypes = {

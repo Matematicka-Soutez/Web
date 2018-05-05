@@ -25,8 +25,8 @@ class Game extends Component {
   async componentWillMount() {
     try {
       const res = await fetch('/api/game/grid')
-      console.log(res)
       const grid = await res.json()
+      console.log(grid)
       this.setState(grid)
     } catch (err) {
       console.log(err)
