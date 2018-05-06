@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react'
-// import { subscribeToGridChange } from './sockets'
+import PropTypes from 'prop-types'
 import Grid from './components/Grid'
 
 class Game extends Component {
@@ -10,26 +10,40 @@ class Game extends Component {
       fields: [],
       size: { height: 0, width: 0 },
     }
-    // subscribeToGridChange(this.handleGridChange)
-  }
-
-  handleGridChange(err, grid) {
-    if (err) {
-      console.log(err)
-    }
-    if (grid) {
-      this.setState(grid)
-    }
   }
 
   async componentWillMount() {
     try {
       const res = await fetch('/api/game/grid')
       const grid = await res.json()
-      console.log(grid)
       this.setState(grid)
     } catch (err) {
       console.log(err)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.displayChange) {
+      const change = nextProps.displayChange
+      const grid = { ...this.state }
+      grid.fields = grid.fields.map(field => {
+        if (
+          field.horizontal === change.from.horizontal
+          && field.vertical === change.from.vertical
+        ) {
+          field.teamCount--
+          field.combinedPower -= change.from.power
+        }
+        if (
+          field.horizontal === change.to.horizontal
+          && field.vertical === change.to.vertical
+        ) {
+          field.teamCount++
+          field.combinedPower += change.to.power
+        }
+        return field
+      })
+      this.setState(grid)
     }
   }
 
@@ -43,6 +57,10 @@ class Game extends Component {
       </div>
     )
   }
+}
+
+Game.propTypes = {
+  displayChange: PropTypes.objectOf(PropTypes.objectOf(PropTypes.number)).isRequired,
 }
 
 export default Game

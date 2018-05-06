@@ -11,7 +11,7 @@
     "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom --watchAll && mocha --opts tests/mocha.opts tests && snyk auth $SNYK_TOKEN && snyk test",
     "server": "node .",
     "dev-server": "nodemon .",
-    "dev": "NODE_ENV=local node scripts/dbimport.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
+    "dev": "docker-compose up -d --force-recreate && NODE_ENV=local node scripts/dbimport.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -63,10 +63,13 @@
     "react-dev-utils": "^6.0.0-next.b2fd8db8",
     "react-dom": "^16.3.1",
     "react-router-dom": "^4.2.2",
+    "redis": "^2.8.0",
     "resolve": "1.6.0",
     "sequelize": "^4.37.5",
     "shortid": "^2.2.8",
+    "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0",
+    "socket.io-redis": "^5.2.0",
     "style-loader": "0.19.0",
     "traverse": "^0.6.6",
     "uuid": "^3.2.1",

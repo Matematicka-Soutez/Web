@@ -1,5 +1,6 @@
 const cluster = require('cluster')
 const path = require('path')
+const http = require('http')
 const Koa = require('koa')
 const koaBody = require('koa-body')
 const koaCompress = require('koa-compress')
@@ -8,8 +9,11 @@ const config = require('../config')
 const log = require('./utils/logger').logger
 const routes = require('./routes')
 const db = require('./database')
+const { socketInit } = require('./sockets/socketServer')
+const { initPublish } = require('./sockets/publish')
 
 const app = new Koa()
+app.server = http.createServer(app.callback())
 
 // Setup middleware
 app.use(koaCompress())
@@ -23,8 +27,11 @@ app.use(routes)
 
 // Start method
 app.start = () => {
+  app.socketApp = socketInit(app.server)
+  initPublish(app.socketApp)
+
   log.info('Starting server ...')
-  app.server = app.listen(config.server.port, () => {
+  app.server.listen(config.server.port, () => {
     log.info(`==> 🌎  Server listening on port ${config.server.port}.`)
   })
 }

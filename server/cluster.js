@@ -1,6 +1,6 @@
 const cluster = require('cluster')
-const log = require('./utils/logger').logger
 const config = require('../config')
+const log = require('./utils/logger').logger
 
 /**
  * Starts the master process (it will be called only once).

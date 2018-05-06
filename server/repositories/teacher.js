@@ -124,13 +124,13 @@ async function findAllWithFilter(filter, offset, limit) {
   }
   const userWhere = {}
   if (filter.user.firstName) {
-    userWhere.firstName = { $ilike: `%${filter.user.firstName}%` }
+    userWhere.firstName = { [db.sequelize.Op.iLike]: `%${filter.user.firstName}%` }
   }
   if (filter.user.lastName) {
-    userWhere.lastName = { $ilike: `%${filter.user.lastName}%` }
+    userWhere.lastName = { [db.sequelize.Op.iLike]: `%${filter.user.lastName}%` }
   }
   if (filter.user.email) {
-    userWhere.email = { $ilike: `%${filter.user.email}%` }
+    userWhere.email = { [db.sequelize.Op.iLike]: `%${filter.user.email}%` }
   }
   if (filter.user.id) {
     userWhere.id = filter.user.id

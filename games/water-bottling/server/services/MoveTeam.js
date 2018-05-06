@@ -1,11 +1,8 @@
-const appErrors = require('../../../../server/utils/errors/application')
+const utils = require('../utils')
 const TransactionalService = require('./../../../../server/services/TransactionalService')
+const socket = require('./../../../../server/sockets/publish')
 const repository = require('./../repository')
 const gameEnums = require('./../../enums')
-const gameConfig = require('./../../config.json')
-
-const GRID_WIDTH = gameConfig.game.grid.width
-const GRID_HEIGHT = gameConfig.game.grid.height
 
 module.exports = class MoveTeamService extends TransactionalService {
   schema() {
@@ -27,8 +24,26 @@ module.exports = class MoveTeamService extends TransactionalService {
       dbTransaction,
     )
     const newPosition = move(this.data.directionId, currentPosition, this.data.organizerId)
-    validate(newPosition)
-    return repository.addTeamPosition(newPosition, dbTransaction)
+    utils.validatePosition(newPosition)
+    const position = await repository.addTeamPosition(newPosition, dbTransaction)
+    await socket.publishDisplayChange({
+      from: {
+        vertical: currentPosition.vertical,
+        horizontal: currentPosition.horizontal,
+        power: currentPosition.power,
+      },
+      to: {
+        vertical: position.vertical,
+        horizontal: position.horizontal,
+        power: position.power,
+      },
+    })
+    return {
+      horizontal: position.horizontal,
+      vertical: position.vertical,
+      power: position.power,
+      possibleMoves: utils.getPossibleMoves(position),
+    }
   }
 }
 
@@ -42,17 +57,5 @@ function move(directionId, curPos, organizerId) {
     competitionId: curPos.competitionId,
     previousPositionId: curPos.id,
     organizerId,
-  }
-}
-
-function validate(newPosition) {
-  if (newPosition.horizontal < 1 || newPosition.horizontal > GRID_WIDTH) {
-    throw new appErrors.CannotBeDoneError('Team can\'t move outside of the grid.')
-  }
-  if (newPosition.vertical < 1 || newPosition.vertical > GRID_HEIGHT) {
-    throw new appErrors.CannotBeDoneError('Team can\'t move outside of the grid.')
-  }
-  if (newPosition.power === Number.MAX_SAFE_INTEGER) {
-    throw new appErrors.CannotBeDoneError('Team reached power limit.')
   }
 }
