@@ -14,7 +14,7 @@ function Grid({ size, fields }) {
       const index = (rowIndex * size.width) + collIndex
       row.push(<Field key={index} field={fields[index]} />)
     }
-    rows.push(<tr key={rowIndex}><td>{getColumnLetter(rowIndex + 1)}&nbsp;</td>{row}</tr>)
+    rows.push(<tr key={rowIndex}><td>{getColumnLetter(rowIndex + 1)}&nbsp;&nbsp;</td>{row}</tr>)
   }
   const colNumbers = [<td key={0}></td>]
   for (let i = 1; i <= size.width; i++) {

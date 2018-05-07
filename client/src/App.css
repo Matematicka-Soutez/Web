@@ -1,32 +1,29 @@
-.App {
-  text-align: center;
-}
-
 .App-logo img {
   /* animation: App-logo-spin infinite 20s linear; */
-  height: 80px;
-  width: 80px;
+  height: 60px;
+  width: 60px;
+  padding-left: 1px;
+  padding-right: 10px;
   float: left;
+  display: none;
 }
 
 .App-header {
-  background-color: #222;
-  height: 80px;
-  padding: 10px;
-  color: white;
+  height: 40px;
+  padding: 5px 5px 0 5px;
+  margin: 0;
 }
 
-.App-title {
-  font-size: 1em;
-}
-
-.App-intro {
-  font-size: large;
+.fullHeightCapture {
+  text-align: center;
+  font-size: 2em;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
 }
 
 .field {
-  width: 80px;
-  height: 70px;
+  width: 78px;
+  height: 68px;
   border: #222 1px solid;
 }
 .field table {
@@ -34,22 +31,24 @@
   height: 100%;
 }
 .field .capture {
-  width: 80%;
+  width: 100%;
   font-size: 1.6em;
 }
 .field .teamCount {
   font-weight: bold;
 }
 .field .material-icons {
-  width: 20%;
   font-size: 1.2em;
+  text-align: left;
+  padding: 6px 1px 0 3px;
 }
 
 .grid {
   position: relative;
-  margin: 10px auto;
+  margin: 5px auto 0;
   border-collapse: separate;
   border-spacing: 1px;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
