@@ -49,6 +49,26 @@ function parseTeamMember(member) {
   return parsed
 }
 
+function parseCompetition(competition) {
+  if (!competition) {
+    return competition
+  }
+  const parsed = {}
+  parsed.id = competition.id
+  parsed.name = competition.name
+  parsed.date = competition.date
+  parsed.start = competition.start
+  parsed.end = competition.end
+  parsed.registrationRound1 = competition.registrationRound1
+  parsed.registrationRound2 = competition.registrationRound2
+  parsed.registrationRound3 = competition.registrationRound3
+  parsed.registrationEnd = competition.registrationEnd
+  parsed.isPublic = competition.isPublic
+  parsed.invitationEmailSent = competition.invitationEmailSent
+
+  return parsed
+}
+
 function parseCompetitionVenues(competitionVenues) {
   return competitionVenues ? _.map(competitionVenues, parseCompetitionVenue) : competitionVenues
 }
@@ -234,6 +254,7 @@ module.exports = {
   parseTeam,
   parseTeamMembers,
   parseTeamMember,
+  parseCompetition,
   parseCompetitionVenues,
   parseCompetitionVenue,
   parseCompetitionVenueRooms,

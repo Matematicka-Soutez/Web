@@ -2,6 +2,8 @@ module.exports = (sequelize, DataTypes) => {
   const Competition = sequelize.define('Competition', {
     name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
     date: { type: DataTypes.DATE, allowNull: false, field: 'date' },
+    start: { type: DataTypes.DATE, allowNull: false, field: 'start' },
+    end: { type: DataTypes.DATE, allowNull: false, field: 'end' },
     registrationRound1: { type: DataTypes.DATE, allowNull: false, field: 'registration_round1' },
     registrationRound2: { type: DataTypes.DATE, allowNull: false, field: 'registration_round2' },
     registrationRound3: { type: DataTypes.DATE, allowNull: false, field: 'registration_round3' },

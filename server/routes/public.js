@@ -1,6 +1,7 @@
 const Router = require('koa-router')
 const teachers = require('./../handlers/public/teachers')
 const organizers = require('./../handlers/public/organizers')
+const competitions = require('./../handlers/public/competitions')
 // const optionalToken = require('./../handlers/passport').optionalToken
 
 const router = new Router()
@@ -115,5 +116,7 @@ router.post('/teachers/reset-password', teachers.resetPassword)
  *
  */
 router.put('/teachers/reset-password', teachers.updatePassword)
+
+router.get('/competitions/current/timer', competitions.getTimer)
 
 module.exports = router.routes()

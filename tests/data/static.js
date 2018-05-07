@@ -82,7 +82,9 @@ function initGames() {
 function initCompetitions(games) {
   const competitions = [{
     name: 'Jarní MaSo 2018',
-    date: new Date('2018-05-16T10:00:00.000Z'),
+    date: new Date('2018-05-16T08:30:00.000Z'),
+    start: new Date('2018-05-16T10:00:00.000Z'),
+    end: new Date('2018-05-16T11:30:00.000Z'),
     registrationRound1: new Date('2018-04-11T07:30:00.000Z'),
     registrationRound2: new Date('2018-04-25T07:30:00.000Z'),
     registrationRound3: new Date('2018-05-02T07:30:00.000Z'),

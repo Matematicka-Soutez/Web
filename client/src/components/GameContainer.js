@@ -10,8 +10,8 @@ class GameContainer extends Component {
     super(props)
     this.state = {
       timer: {
-        start: new Date('2018-04-05T16:00:00.000Z'),
-        end: new Date('2018-04-05T17:30:00.000Z'),
+        start: 1000 * 60 * 60 * 24,
+        end: (1000 * 60 * 60 * 24) + (90 * 60),
       },
       displayChange: {},
     }
@@ -19,13 +19,26 @@ class GameContainer extends Component {
       if (err) {
         return
       }
-      if (displayChangeData) {
+      if (displayChangeData && displayChangeData !== {}) {
         this.setState({
           displayChange: displayChangeData,
           timer: this.state.timer,
         })
       }
     })
+  }
+
+  async componentWillMount() {
+    try {
+      const res = await fetch('/api/competitions/current/timer')
+      const timer = await res.json()
+      this.setState({
+        timer,
+        displayChange: this.state.displayChange,
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   render() {

@@ -24,8 +24,8 @@ class Timer extends Component {
 
   tick() {
     this.setState({
-      start: this.state.start,
-      end: this.state.end,
+      start: this.state.start - 1000,
+      end: this.state.end - 1000,
       phase: getPhase(this.state.start, this.state.end),
     })
   }
@@ -56,22 +56,17 @@ class Timer extends Component {
         {this.state.phase === 'COMMENCING'
         && <div>
           <div className="capture">Hra začne za</div>
-          <div className="value">{formattedMS(getMSUntil(this.state.start))}</div>
+          <div className="value">{formattedMS(this.state.start)}</div>
         </div>}
 
         {this.state.phase === 'RUNNING'
         && <div>
           <div className="capture">Hra skončí za</div>
-          <div className="value">{formattedMS(getMSUntil(this.state.end))}</div>
+          <div className="value">{formattedMS(this.state.end)}</div>
         </div>}
       </div>
     )
   }
-}
-
-Timer.propTypes = {
-  end: PropTypes.instanceOf(Date).isRequired,
-  start: PropTypes.instanceOf(Date).isRequired,
 }
 
 function formattedMS(ms) {
@@ -87,26 +82,21 @@ function formattedMS(ms) {
 }
 
 function getPhase(start, end) {
-  const startMs = start.getTime()
-  const endMs = end.getTime()
-  const nowMs = new Date().getTime()
-  if (nowMs < startMs - commencingLength) {
+  if (start - commencingLength > 0) {
     return 'BEFORE'
   }
-  if (nowMs < startMs) {
+  if (start > 0) {
     return 'COMMENCING'
   }
-  if (nowMs < endMs) {
+  if (end > 0) {
     return 'RUNNING'
   }
   return 'AFTER'
 }
 
-function getMSUntil(time) {
-  const timeMs = time.getTime()
-  const nowMs = new Date().getTime()
-  const difference = Math.round(timeMs - nowMs)
-  return difference > 0 ? difference : 0
+Timer.propTypes = {
+  end: PropTypes.number.isRequired,
+  start: PropTypes.number.isRequired,
 }
 
 export default Timer
