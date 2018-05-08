@@ -37,7 +37,8 @@ class GameContainer extends Component {
         displayChange: this.state.displayChange,
       })
     } catch (err) {
-      console.log(err)
+      // TODO: proper logging
+      console.log(err) // eslint-disable-line no-console
     }
   }
 

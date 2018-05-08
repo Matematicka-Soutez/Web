@@ -51,10 +51,16 @@ class Timer extends Component {
         && <div className="fullHeightCapture" style={{ color: 'red' }}>Hra skončila</div>}
 
         {this.state.phase === 'COMMENCING'
-        && <div className="fullHeightCapture"><span style={{ color: 'gray', fontWeight: 400 }}>Čas do začátku:</span> {formattedMS(this.state.start)}</div>}
+        && <div className="fullHeightCapture">
+          <span style={{ color: 'gray', fontWeight: 400 }}>Čas do začátku:</span>
+          &nbsp;{formattedMS(this.state.start)}
+        </div>}
 
         {this.state.phase === 'RUNNING'
-        && <div className="fullHeightCapture"><span style={{ color: 'gray', fontWeight: 400 }}>Čas do konce:</span> {formattedMS(this.state.end)}</div>}
+        && <div className="fullHeightCapture">
+          <span style={{ color: 'gray', fontWeight: 400 }}>Čas do konce:</span>
+          &nbsp;{formattedMS(this.state.end)}
+        </div>}
       </div>
     )
   }
