@@ -50,6 +50,16 @@ async function createCompetitionVenue(defaults) {
   return _.assign({}, competitionVenue, { id: created.id })
 }
 
+async function createCompetitionVenueRoom(defaults) {
+  const competitionVenueRoom = _.assign({}, {
+    capacity: chance.integer({ min: 10, max: 30 }),
+    competitionVenueId: 1,
+    roomId: 1,
+  }, defaults)
+  const created = await db.CompetitionVenueRoom.create(competitionVenueRoom)
+  return _.assign({}, competitionVenueRoom, { id: created.id })
+}
+
 async function createRoom(defaults) {
   const room = _.assign({}, {
     name: `${chance.letter({ casing: 'upper' })}${chance.integer({ min: 1, max: 9 })}`,
@@ -167,6 +177,7 @@ module.exports = {
   createCompetition,
   createVenue,
   createCompetitionVenue,
+  createCompetitionVenueRoom,
   createRoom,
   createGame,
   createOrganizer,

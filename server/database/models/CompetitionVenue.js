@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
   const CompetitionVenue = sequelize.define('CompetitionVenue', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true }, 
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     capacity: { type: DataTypes.INTEGER, allowNull: false, field: 'capacity' },
   }, {
     tableName: 'CompetitionVenues',
@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
     CompetitionVenue.belongsToMany(models.Room, {
       as: 'rooms',
       through: models.CompetitionVenueRoom,
+      foreignKey: { name: 'competitionVenueId', field: 'competition_venue_id' },
+      onDelete: 'RESTRICT',
+    })
+    CompetitionVenue.hasMany(models.CompetitionVenueRoom, {
+      as: 'cvrooms',
       foreignKey: { name: 'competitionVenueId', field: 'competition_venue_id' },
       onDelete: 'RESTRICT',
     })

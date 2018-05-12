@@ -7,6 +7,7 @@ const {
   createGame,
   createCompetition,
   createCompetitionVenue,
+  createCompetitionVenueRoom,
 } = require('./generators')
 
 async function initStatic() {
@@ -14,7 +15,8 @@ async function initStatic() {
   const venues = await initVenues()
   const rooms = await initRooms(venues)
   const competitions = await initCompetitions(games)
-  await initCompetitionVenues(competitions, venues)
+  const competitionVenues = await initCompetitionVenues(competitions, venues)
+  await initCompetitionVenueRooms(competitionVenues, rooms)
   return { games, rooms, venues, competitions }
 }
 
@@ -110,6 +112,34 @@ async function initCompetitionVenues(competitions, venues) {
     ),
   )
   return _.flatten(competitionVenues)
+}
+
+function initCompetitionVenueRooms(competitionVenues, rooms) {
+  const competitionVenueRooms = [{
+    competitionVenueId: competitionVenues[0].id,
+    roomId: rooms[0].id,
+    capacity: rooms[0].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[0].id,
+    roomId: rooms[1].id,
+    capacity: rooms[1].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[0].id,
+    roomId: rooms[2].id,
+    capacity: rooms[2].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[0].id,
+    roomId: rooms[3].id,
+    capacity: rooms[3].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[1].id,
+    roomId: rooms[4].id,
+    capacity: rooms[4].defaultCapacity,
+  }]
+  return Promise.map(
+    competitionVenueRooms,
+    competitionVenueRoom => createCompetitionVenueRoom(competitionVenueRoom),
+  )
 }
 
 module.exports = initStatic

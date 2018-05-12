@@ -1,10 +1,13 @@
+const Promise = require('bluebird')
 const db = require('./../database')
 const appErrors = require('./../utils/errors/application')
 const parsers = require('./repositoryParsers')
 
+
 module.exports = {
   findById,
   findByName,
+  bulkUpdate,
 }
 
 async function findById(id, dbTransaction) {
@@ -24,4 +27,15 @@ async function findByName(name, dbTransaction) {
     throw new appErrors.NotFoundError()
   }
   return parsers.parseTeam(team)
+}
+
+function bulkUpdate(updates, dbTrannsaction) {
+  const requests = updates.map(update => db.Team.update(
+    update,
+    {
+      where: { id: update.id },
+      transaction: dbTrannsaction,
+    },
+  ))
+  return Promise.all(requests)
 }

@@ -17,8 +17,8 @@ module.exports = class GetAllByCompetitionVenueService extends AbstractService {
       this.data.venueId,
     )
     return cvrooms.map(cvroom => ({
-      id: cvroom.room.id,
-      name: cvroom.room.name,
+      ...cvroom.room,
+      capacity: cvroom.capacity,
       teams: cvroom.teams,
     }))
   }

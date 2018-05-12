@@ -1,6 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Team = sequelize.define('Team', {
     name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
+    number: { type: DataTypes.INTEGER, allowNull: true, field: 'number' },
+    DR_ID: { type: DataTypes.INTEGER, allowNull: true, field: 'DR_ID' },
     arrived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'arrived' },
   }, {
     tableName: 'Teams',

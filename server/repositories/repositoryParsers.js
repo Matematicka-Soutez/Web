@@ -11,7 +11,10 @@ function parseTeam(team) {
   const parsed = {}
   parsed.id = team.id
   parsed.name = team.name
+  parsed.number = team.number
+  parsed.DR_ID = team.DR_ID
   parsed.arrived = team.arrived
+  parsed.schoolId = team.schoolId
   parsed.createdAt = team.createdAt
   parsed.updatedAt = team.updatedAt
 
@@ -88,6 +91,9 @@ function parseCompetitionVenue(competitionVenue) {
   }
   if (competitionVenue.venue) {
     parsed.venue = parseVenue(competitionVenue.venue)
+  }
+  if (competitionVenue.cvrooms) {
+    parsed.cvrooms = parseCompetitionVenueRooms(competitionVenue.cvrooms)
   }
 
   return parsed

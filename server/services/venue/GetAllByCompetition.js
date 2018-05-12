@@ -5,9 +5,7 @@ module.exports = class GetAllByCompetitionService extends AbstractService {
   schema() {
     return {
       type: 'Object',
-      properties: {
-        venueId: { type: 'integer', required: true, minimum: 1 },
-      },
+      properties: {},
     }
   }
 
@@ -17,7 +15,11 @@ module.exports = class GetAllByCompetitionService extends AbstractService {
       id: compVenue.venue.id,
       name: compVenue.venue.name,
       capacity: compVenue.capacity,
-      teams: compVenue.teams,
+      rooms: compVenue.cvrooms.map(cvroom => ({
+        ...cvroom.room,
+        capacity: cvroom.capacity,
+        teams: cvroom.teams,
+      })),
     }))
   }
 }

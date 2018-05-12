@@ -99,6 +99,7 @@ function importTeams(schools) {
     const school = schools.find(item => item.SKOLA_ID === team.SKOLA_ID)
     const created = await db.Team.create({
       name: team.DR_NAZOV.trim(),
+      DR_ID: team.DR_ID,
       teacherId: school.teacher.id,
       schoolId: school.id,
       competitionVenueId: team.site.trim().toLowerCase() === 'praha' ? 1 : 2,
