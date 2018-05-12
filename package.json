@@ -11,7 +11,7 @@
     "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom --watchAll && mocha --opts tests/mocha.opts tests && snyk auth $SNYK_TOKEN && snyk test",
     "server": "node .",
     "dev-server": "nodemon .",
-    "dev": "docker-compose up -d --force-recreate && NODE_ENV=local node scripts/dbimport.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
+    "dev": "docker-compose up -d --force-recreate && sleep 5s && NODE_ENV=local node scripts/dbimport.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
