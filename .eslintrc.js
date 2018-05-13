@@ -15,6 +15,7 @@ module.exports = {
   // Per-project rules take precedence over rules defined via included
   // configurations.
   rules: {
+    'no-warning-comments': 0,
     'valid-jsdoc': 2,
     'padded-blocks': 0,
     'id-length': [1, {

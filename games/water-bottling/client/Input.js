@@ -6,7 +6,7 @@ import InputControls from './components/InputControls'
 import SimpleGrid from './components/SimpleGrid'
 import TeamSummary from './components/TeamSummary'
 
-const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MjA1Mjg2LCJleHAiOjE1MjYyMTI0ODYsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.6RcI-GljUWGoPzgvneoTvUzdadwjdf6IQ-avxbFva7M' }
+const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MjA1Mjg2LCJleHAiOjE1MjYyMTI0ODYsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.6RcI-GljUWGoPzgvneoTvUzdadwjdf6IQ-avxbFva7M' } // eslint-disable-line max-len
 
 class Input extends Component {
   constructor(props) {

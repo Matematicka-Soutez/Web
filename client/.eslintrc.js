@@ -18,6 +18,7 @@ module.exports = {
   // configurations.
   rules: {
     'valid-jsdoc': 2,
+    'no-warning-comments': 0,
     'padded-blocks': 0,
     'id-length': [1, {
       min: 2,
