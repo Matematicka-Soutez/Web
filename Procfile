@@ -1,1 +1,1 @@
-web: node server/src/cluster.js
+web: node server/cluster.js
