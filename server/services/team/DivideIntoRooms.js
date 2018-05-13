@@ -8,6 +8,16 @@ const EXCEPTIONS = [{
   roomId: 2,
   DR_ID: 1136,
   number: 15,
+}, {
+  venueId: 1,
+  roomId: 1,
+  DR_ID: 1245,
+  number: 1,
+}, {
+  venueId: 1,
+  roomId: 1,
+  DR_ID: 0,
+  number: 2,
 }]
 
 module.exports = class DivideIntoRoomsService extends TransactionalService {
@@ -89,6 +99,10 @@ module.exports = class DivideIntoRoomsService extends TransactionalService {
         const cvroom = cvenue.cvrooms.find(cvr => cvr.room.id === exception.roomId)
         if (!cvroom) {
           throw new Error(`Invalid exception declared, room not found: ${exception}`)
+        }
+        if (exception.DR_ID === 0) {
+          cvroom.teams.push({ id: 0, DR_ID: 0, number: exception.number })
+          return
         }
         const team = cvenue.teams.find(tm => tm.DR_ID === exception.DR_ID)
         if (!team) {

@@ -1,10 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { getRowLetter } from '../utils/position'
 import Field from './Field'
-
-function getColumnLetter(index) {
-  return String.fromCharCode(64 + index)
-}
 
 function Grid({ size, fields }) {
   const rows = []
@@ -14,7 +11,7 @@ function Grid({ size, fields }) {
       const index = (rowIndex * size.width) + collIndex
       row.push(<Field key={index} field={fields[index]} />)
     }
-    rows.push(<tr key={rowIndex}><td>{getColumnLetter(rowIndex + 1)}&nbsp;&nbsp;</td>{row}</tr>)
+    rows.push(<tr key={rowIndex}><td>{getRowLetter(rowIndex + 1)}&nbsp;&nbsp;</td>{row}</tr>)
   }
   const colNumbers = [<td key={0}></td>]
   for (let i = 1; i <= size.width; i++) {

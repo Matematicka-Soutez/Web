@@ -38,10 +38,13 @@ async function getTeamPosition(ctx) {
 
 async function moveTeam(ctx) {
   try {
-    ctx.body = await new MoveTeamService().execute({
+    await new MoveTeamService().execute({
       teamId: parseInt(ctx.request.body.teamId, 10),
       directionId: parseInt(ctx.request.body.directionId, 10),
       organizerId: ctx.state.organizer.id,
+    })
+    ctx.body = await new GetTeamPositionService().execute({
+      teamId: parseInt(ctx.request.body.teamId, 10),
     })
   } catch (err) {
     if (err instanceof appErrors.CannotBeDoneError) {

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import AppBar from 'material-ui/AppBar'
+import Grid from 'material-ui/Grid'
 import Tabs, { Tab } from 'material-ui/Tabs'
+import { FormControlLabel } from 'material-ui/Form'
+import Switch from 'material-ui/Switch'
 import RoomInputContainer from './RoomInputContainer'
 
 class InputContainer extends Component {
@@ -8,18 +11,19 @@ class InputContainer extends Component {
     super(props)
     this.state = {
       value: 0,
+      evenRooms: true,
       venues: [{ rooms: [{ teams: [{}] }] }],
     }
   }
 
   async componentWillMount() {
     try {
-      const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI1Nzg3ODIzLCJleHAiOjE1MjU3OTUwMjMsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.vkFxbj_jP_gFiIzUJtZq2HAArhKFPiPKFDxVAFN-DV8' }
+      const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MjA1Mjg2LCJleHAiOjE1MjYyMTI0ODYsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.6RcI-GljUWGoPzgvneoTvUzdadwjdf6IQ-avxbFva7M' }
       const res = await fetch('/api/org/venues', { headers })
       const venues = await res.json()
-      console.log(venues)
       this.setState({
-        value: 0,
+        value: 1,
+        evenRooms: true,
         venues,
       })
     } catch (err) {
@@ -30,7 +34,11 @@ class InputContainer extends Component {
 
   handleChange = (event, value) => {
     this.setState({ value, venues: this.state.venues })
-  };
+  }
+
+  handleSwitch = event => {
+    this.setState({ ...this.state, evenRooms: event.target.checked })
+  }
 
   render() {
     const { value, venues } = this.state
@@ -38,6 +46,7 @@ class InputContainer extends Component {
     const tabs = []
     venues.forEach(venue => {
       tabs.push(<Tab label={`${venue.name}:`} key={venue.name} disabled />)
+      rooms.push({ teams: [{}] })
       venue.rooms.forEach(room => {
         rooms.push(room)
         tabs.push(<Tab label={room.name} key={venue.name + room.id} />)
@@ -45,12 +54,29 @@ class InputContainer extends Component {
     })
     return (
       <div className="venueSelect">
-        <AppBar position="static" color="default">
-          <Tabs value={value} onChange={this.handleChange}>
-            {tabs}
-          </Tabs>
-        </AppBar>
-        <RoomInputContainer teams={rooms[value].teams} />
+        <Grid container spacing={24}>
+          <Grid item xs={10} sm={11}>
+            <AppBar position="static">
+              <Tabs value={value} onChange={this.handleChange}>
+                {tabs}
+              </Tabs>
+            </AppBar>
+          </Grid>
+          <Grid item xs={2} sm={1}>
+            <FormControlLabel
+              control={<Switch
+                checked={this.state.evenRooms}
+                onChange={this.handleSwitch}
+                value="evenRooms"
+                color="primary"
+              />}
+              label="Sudé" />
+          </Grid>
+        </Grid>
+        <RoomInputContainer
+          teams={rooms[value].teams
+            .filter(team => (team.number % 2 === 0) === this.state.evenRooms)
+          } />
       </div>
     )
   }

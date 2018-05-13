@@ -2,6 +2,7 @@ const utils = require('../utils')
 const AbstractService = require('./../../../../server/services/AbstractService')
 const teamRepository = require('./../../../../server/repositories/team')
 const repository = require('./../repository')
+const gameConfig = require('./../../config.json')
 
 module.exports = class GetTeamPositionService extends AbstractService {
   schema() {
@@ -24,6 +25,7 @@ module.exports = class GetTeamPositionService extends AbstractService {
       vertical: position.vertical,
       power: position.power,
       possibleMoves: utils.getPossibleMoves(position),
+      grid: gameConfig.game.grid,
     }
   }
 }

@@ -29,7 +29,10 @@ async function findCompetitionVenues(competitionId, dbTransaction) {
       as: 'teams',
       required: false,
     }],
-    order: db.sequelize.literal('"venue"."name" DESC'),
+    order: [
+      db.sequelize.literal('"venue"."name" DESC'),
+      db.sequelize.literal('"cvrooms->teams"."number" ASC'),
+    ],
     transaction: dbTransaction,
   })
   return parsers.parseCompetitionVenues(venues)

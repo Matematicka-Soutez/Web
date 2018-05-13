@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 import AppBar from 'material-ui/AppBar'
 import Tabs, { Tab } from 'material-ui/Tabs'
 import Input from '../../../../games/water-bottling/client/Input'
+
+const styles = theme => ({
+  tabRoot: {
+    marginRight: theme.spacing.unit,
+  },
+  typography: {
+    padding: Number(theme.spacing.unit),
+  },
+})
 
 class RoomInputContainer extends Component {
   constructor(props) {
@@ -28,15 +38,17 @@ class RoomInputContainer extends Component {
 
   render() {
     const { value, teams } = this.state
-    const tabs = teams.map(team => <Tab label={team.name} key={team.id} />)
+    const tabs = teams.map(team => <Tab label={team.number} key={team.id} style={{ minWidth: 90 }} />) // eslint-disable-line max-len
     return (
       <div className="teamSelect">
-        <AppBar position="static">
-          <Tabs value={value} onChange={this.handleChange}>
+        <AppBar position="static" color="default">
+          <Tabs
+            value={value}
+            onChange={this.handleChange}>
             {tabs}
           </Tabs>
         </AppBar>
-        <Input teamId={teams[value].id} />
+        <Input teamId={teams[value].id} key={teams[value].id} />
       </div>
     )
   }
@@ -46,4 +58,4 @@ RoomInputContainer.propTypes = {
   teams: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-export default RoomInputContainer
+export default withStyles(styles)(RoomInputContainer)

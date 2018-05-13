@@ -38,12 +38,6 @@ module.exports = class MoveTeamService extends TransactionalService {
         power: position.power,
       },
     })
-    return {
-      horizontal: position.horizontal,
-      vertical: position.vertical,
-      power: position.power,
-      possibleMoves: utils.getPossibleMoves(position),
-    }
   }
 }
 
