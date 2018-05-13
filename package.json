@@ -8,6 +8,7 @@
     "client": "cd client && node scripts/start.js",
     "build": "cd client && node scripts/build.js",
     "postinstall": "cp scripts/ModuleScopePlugin.js node_modules/react-dev-utils/ModuleScopePlugin.js && npm run build",
+    "heroku-postbuild": "npm run build",
     "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom --watchAll && mocha --opts tests/mocha.opts tests",
     "eslint": "node_modules/.bin/eslint ./",
     "eslint-fix": "node_modules/.bin/eslint ./ --fix",
