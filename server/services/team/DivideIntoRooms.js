@@ -7,7 +7,7 @@ const EXCEPTIONS = [{
   venueId: 1,
   roomId: 2,
   DR_ID: 1136,
-  number: 15,
+  number: 25,
 }, {
   venueId: 1,
   roomId: 1,

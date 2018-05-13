@@ -50,11 +50,11 @@ function initVenues() {
 function initRooms(venues) {
   const rooms = [{
     name: 'S3',
-    defaultCapacity: 14,
+    defaultCapacity: 24,
     venueId: venues[0].id,
   }, {
     name: 'S4',
-    defaultCapacity: 24,
+    defaultCapacity: 14,
     venueId: venues[0].id,
   }, {
     name: 'S5',
