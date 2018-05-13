@@ -6,7 +6,10 @@ const db = require('./../database')
 module.exports = class TransactionalService extends AbstractService {
   constructor(options) {
     super(options)
-    if ((options instanceof TransactionalService || options instanceof Object) && options.transaction) {
+    if (
+      (options instanceof TransactionalService || options instanceof Object)
+      && options.transaction
+    ) {
       this.setTransactionOwnerToParentService(options)
     } else {
       this.setTransactionOwnerToThisService()

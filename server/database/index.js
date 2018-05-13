@@ -2,19 +2,20 @@ const fs = require('fs')
 const path = require('path')
 const util = require('util')
 const Sequelize = require('sequelize')
-const config = require('../../config')
 const { pgSetTypeParsers } = require('pg-safe-numbers')
+const log = require('../utils/logger').logger
+const config = require('../../config')
 
 // Setup parsers for unsafe numbers.
 pgSetTypeParsers({
   // Handle unsafe integers, ie. >= Math.pow(2, 53)
   unsafeInt(parsed, text) {
-    console.error(`Unsafe int ${util.inspect(text)}) parse to ${util.inspect(parsed)}.\n${new Error().stack}`)
+    log.error(`Unsafe int ${util.inspect(text)}) parse to ${util.inspect(parsed)}.\n${new Error().stack}`) // eslint-disable-line max-len
     return parsed
   },
   // Handle unsafe floats.
   unsafeFloat(parsed, text) {
-    console.error(`Unsafe float ${util.inspect(text)}) parse to ${util.inspect(parsed)}.\n${new Error().stack}`)
+    log.error(`Unsafe float ${util.inspect(text)}) parse to ${util.inspect(parsed)}.\n${new Error().stack}`) // eslint-disable-line max-len
     return parsed
   },
 })

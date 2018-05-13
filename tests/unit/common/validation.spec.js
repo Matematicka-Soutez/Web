@@ -133,8 +133,8 @@ describe('Common FE/BE Validation', () => {
     before(function() {
       this.schema = {
         type: 'Object',
-required: true,
-additionalProperties: false,
+        required: true,
+        additionalProperties: false,
         properties: {
           value: { type: 'string', required: true, format: 'latinString' },
         },

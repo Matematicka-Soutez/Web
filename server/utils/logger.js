@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 
-const bunyan = require('bunyan')
 const cluster = require('cluster')
+const bunyan = require('bunyan')
 const config = require('../../config')
 
 const suffix = cluster.isMaster ? 'master' : 'worker'

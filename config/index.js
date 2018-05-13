@@ -17,4 +17,5 @@ const defaultConfig = require('./default')(env)
 
 // Override default values with values from environment config
 const resultConfig = _.merge({}, defaultConfig, envConfig)
+
 module.exports = resultConfig

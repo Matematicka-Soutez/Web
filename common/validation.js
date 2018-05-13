@@ -1,7 +1,7 @@
 const _ = require('lodash')
 
 function isLatinString(str) {
-  return (_.isString(str) && /^([\u0000-\u024F]|[\u2000-\u206F])*$/.test(str)) || _.isNil(str)
+  return (_.isString(str) && /^([\u0000-\u024F]|[\u2000-\u206F])*$/.test(str)) || _.isNil(str) // eslint-disable-line no-control-regex, max-len
     ? { valid: true }
     : { valid: false, message: 'api.errors.notALatinString' }
 }

@@ -3,7 +3,7 @@ const responseErrors = require('./../utils/errors/response')
 const VerifyTokenPayloadService = require('./../services/VerifyTokenPayload')
 const appErrors = require('./../utils/errors/application')
 
-exports.authorizeToken = async (token, ctx) => {
+exports.authorizeToken = async (token, ctx) => { // eslint-disable-line consistent-return
   const jwtPayload = jwt.decode(token)
   if (!jwtPayload || !jwtPayload.exp || (Date.now() / 1000) >= jwtPayload.exp) {
     return null
@@ -12,8 +12,8 @@ exports.authorizeToken = async (token, ctx) => {
     const data = await new VerifyTokenPayloadService()
       .execute({
         token,
-        teacherId: jwtPayload.teacherId ? jwtPayload.teacherId : undefined,
-        organizerId: jwtPayload.organizerId ? jwtPayload.organizerId : undefined,
+        teacherId: jwtPayload.teacherId ? jwtPayload.teacherId : undefined, // eslint-disable-line no-undefined, max-len
+        organizerId: jwtPayload.organizerId ? jwtPayload.organizerId : undefined, // eslint-disable-line no-undefined, max-len
         tokenIssuedAt: jwtPayload.iat,
       })
     if (ctx.response && data.loginTimeout && data.loginIdleTimeout) {

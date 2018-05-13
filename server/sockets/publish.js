@@ -21,7 +21,11 @@ const initPublish = server => {
     client.on('authentication', data => {
       authorizeToken(data.accessToken, null, (err, tokenData) => {
         if (err || !tokenData || (tokenData && (!tokenData.organizer || !tokenData.organizer.id))) {
-          return publishToClient(client, events.SOCKET_NOTIFICATION_MESSAGE_TYPE.AUTHENTICATED_ERROR.type, err)
+          return publishToClient(
+            client,
+            events.SOCKET_NOTIFICATION_MESSAGE_TYPE.AUTHENTICATED_ERROR.type,
+            err,
+          )
         }
         publishToClient(client, events.SOCKET_NOTIFICATION_MESSAGE_TYPE.AUTHENTICATED.type)
         const roomId = getOrganizerRoomId(tokenData.organizer.id)

@@ -3,7 +3,7 @@ const traverse = require('traverse')
 const nock = require('nock')
 const Promise = require('bluebird')
 
-exports.removeCreatedAndUpdatedAt = object => {
+const removeCreatedAndUpdatedAt = object => {
   if (!object) {
     throw new Error('Parameter \'object\' is mandatory')
   }
@@ -16,7 +16,8 @@ exports.removeCreatedAndUpdatedAt = object => {
       }
     })
 }
-exports.removeStatusUpdatedAt = object => {
+
+const removeStatusUpdatedAt = object => {
   if (!object) {
     throw new Error('Parameter \'object\' is mandatory')
   }
@@ -29,7 +30,8 @@ exports.removeStatusUpdatedAt = object => {
       }
     })
 }
-exports.checkDateRangeValidity = (date, confidence) => {
+
+const checkDateRangeValidity = (date, confidence) => {
   if (!date) {
     throw new Error('Parameter \'date\' is mandatory')
   }
@@ -42,20 +44,41 @@ exports.checkDateRangeValidity = (date, confidence) => {
   dateInMilliseconds.should.to.be.below(now + 1)
   dateInMilliseconds.should.to.be.above(now - defConfidence)
 }
-exports.nockPostAndExpectEmail = (action, expectations) => {
+
+const nockPostAndExpectEmail = (action, expectations) => {
   this.nockPostAndExpect('https://api.sendgrid.com', '/v3/mail/send', true, requestBody => {
     expectations(requestBody)
   }, [], 1)
   return action()
 }
-exports.cleanAllNocks = () => nock.cleanAll()
 
-exports.addNulls = (target, properties) => {
+const cleanAllNocks = () => nock.cleanAll()
+
+const addNulls = (target, properties) => {
   properties.forEach(property => {
     target[property] = null
   })
   return target
 }
 
-exports.testLatinStringValidation = (test, attributes) => Promise.each(attributes, attribute => test(attribute))
-exports.getLatinStringValidationError = () => ({ type: 'BAD_REQUEST', message: 'String must only contain latin characters and possibly basic punctuation.' })
+function testLatinStringValidation(test, attributes) {
+  return Promise.each(attributes, attribute => test(attribute))
+}
+
+function getLatinStringValidationError() {
+  return {
+    type: 'BAD_REQUEST',
+    message: 'String must only contain latin characters and possibly basic punctuation.',
+  }
+}
+
+module.exports = {
+  removeCreatedAndUpdatedAt,
+  removeStatusUpdatedAt,
+  checkDateRangeValidity,
+  nockPostAndExpectEmail,
+  cleanAllNocks,
+  addNulls,
+  testLatinStringValidation,
+  getLatinStringValidationError,
+}

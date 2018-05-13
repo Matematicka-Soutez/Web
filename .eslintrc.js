@@ -40,14 +40,21 @@ module.exports = {
       ]
     },
     rules: {
+      'max-len': 0,
       'prefer-arrow-callback': 0,
     }
   }, {
-    // Little different rules for tests
+    // Little different rules for database models
     files: ['server/database/models/*'],
     rules: {
       'max-len': 0,
       'new-cap': 0,
+    }
+  }, {
+    // Little different rules for scripts
+    files: ['scripts/*'],
+    rules: {
+      'no-console': 0,
     }
   }]
 }

@@ -1,7 +1,7 @@
+const config = require('../../config')
 const responseErrors = require('./../utils/errors/response')
 const appErrors = require('./../utils/errors/application')
 const errorLogger = require('./../utils/logger').errorLogger
-const config = require('../../config')
 
 module.exports = {
   handleNotFound,
@@ -28,13 +28,11 @@ async function handleErrors(ctx, next) {
   } catch (err) {
     let responseError = err
 
-    // Handle ValidationErrors here, so we dont have to in every handler
     if (err instanceof appErrors.ValidationError) {
+      // Handle ValidationErrors here, so we dont have to in every handler
       responseError = new responseErrors.BadRequestError(err.message)
-    }
-
-    // This should never happen, log appropriatelly
-    else if (!(err instanceof responseErrors.ResponseError)) {
+    } else if (!(err instanceof responseErrors.ResponseError)) {
+      // This should never happen, log appropriatelly
       errorLogger.error(err)
       responseError = new responseErrors.InternalServerError()
     }
@@ -43,7 +41,7 @@ async function handleErrors(ctx, next) {
     ctx.body = {
       type: responseError.type,
       message: responseError.message,
-      stack: config.env === 'development' && responseError.stack ? responseError.stack : undefined, // eslint-disable-line no-undefined
+      stack: config.env === 'development' && responseError.stack ? responseError.stack : undefined, // eslint-disable-line no-undefined, max-len
     }
     return true
   }

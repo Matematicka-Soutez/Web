@@ -1,13 +1,13 @@
-const should = require('chai').should()
+// const should = require('chai').should()
 const request = require('supertest')
+// const moment = require('moment')
+const _ = require('lodash')
 const initDb = require('../data/init')
 const db = require('./../../server/database')
-const login = require('./utils/login').loginUser
-const enums = require('./../../common/enums')
-const crypto = require('./../../server/utils/crypto')
+// const login = require('./utils/login').loginUser
+// const enums = require('./../../common/enums')
+// const crypto = require('./../../server/utils/crypto')
 const helpers = require('./utils/helpers')
-const moment = require('moment')
-const _ = require('lodash')
 
 describe('User API endpoints: /api/users', function userAPI() {
   before(function before() {

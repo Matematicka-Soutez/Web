@@ -47,10 +47,14 @@ module.exports = class VerifyTokenPayload extends AbstractService {
       )
 
       // Important 5 second tolerance to iat (token issued at)
-      if (this.data.tokenIssuedAt + 5 < Math.floor(teacher.passwordLastUpdatedAt.getTime() / 1000)) {
+      const lastUpdate = Math.floor(teacher.passwordLastUpdatedAt.getTime() / 1000)
+      if (this.data.tokenIssuedAt + 5 < lastUpdate) {
         throw new appErrors.TokenRevokedError()
       }
-      if (teacher && teacher.lastActivityAt && ((teacher.lastActivityAt.getTime() + configIdleTimeoutMs) < Date.now())) {
+      if (
+        teacher && teacher.lastActivityAt
+        && ((teacher.lastActivityAt.getTime() + configIdleTimeoutMs) < Date.now())
+      ) {
         throw new appErrors.TokenIdleTimoutError()
       }
 

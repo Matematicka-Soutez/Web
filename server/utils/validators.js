@@ -1,8 +1,8 @@
 const jsonschema = require('jsonschema')
 const moment = require('moment')
 const _ = require('lodash')
-const appErrors = require('./errors/application')
 const validationUtils = require('../../common/validation')
+const appErrors = require('./errors/application')
 
 
 jsonschema.Validator.prototype.customFormats.latinString = input => validateLatinString(input)
@@ -28,7 +28,7 @@ function emailValidator(options) {
   }
   options.minLength = 1
   options.maxLength = 80
-  options.pattern = /^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+  options.pattern = /^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i // eslint-disable-line max-len
   return options
 }
 
@@ -67,8 +67,8 @@ const addressProperties = {
 const requiredAddressSchema = {
   id: '/requiredAddress',
   type: 'Object',
-required: true,
-additionalProperties: false,
+  required: true,
+  additionalProperties: false,
   not: { type: 'null' },
   properties: addressProperties,
 }
@@ -76,8 +76,8 @@ additionalProperties: false,
 const optionalAddressSchema = {
   id: '/optionalAddress',
   type: 'Object',
-required: false,
-additionalProperties: false,
+  required: false,
+  additionalProperties: false,
   properties: addressProperties,
 }
 
@@ -93,7 +93,10 @@ function formatName(originalName) {
     throw new Error('Function expects string parameter name')
   }
   const trimmed = originalName.trim()
-  if (!validationUtils.allLowercase(trimmed).valid || !validationUtils.allUppercase(trimmed).valid) {
+  if (
+    !validationUtils.allLowercase(trimmed).valid
+    || !validationUtils.allUppercase(trimmed).valid
+  ) {
     return trimmed.split(' ').map(part => _.capitalize(part)).join(' ')
   }
   return trimmed

@@ -1,7 +1,7 @@
+const path = require('path')
 const compose = require('koa-compose')
 const koaStatic = require('koa-static2')
 const Router = require('koa-router')
-const path = require('path')
 
 module.exports = compose([
 

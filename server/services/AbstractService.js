@@ -1,8 +1,8 @@
 const shortId = require('shortid')
-const appErrors = require('../utils/errors/application')
-const logger = require('../utils/logger').serviceLogger
 const traverse = require('traverse')
 const _ = require('lodash')
+const appErrors = require('../utils/errors/application')
+const logger = require('../utils/logger').serviceLogger
 const config = require('../../config')
 const validators = require('./../utils/validators')
 

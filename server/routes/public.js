@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const Router = require('koa-router')
 const teachers = require('./../handlers/public/teachers')
 const organizers = require('./../handlers/public/organizers')

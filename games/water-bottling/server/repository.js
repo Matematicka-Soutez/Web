@@ -54,7 +54,8 @@ async function getCurrentTeamPositions(competitionId, dbTransaction) {
           tp1."power"      AS "power",
           tp1."horizontal" AS "horizontal",
           tp1."vertical"   AS "vertical"
-        FROM public."WatterBottlingTeamPositions" tp1 LEFT JOIN public."WatterBottlingTeamPositions" tp2
+        FROM public."WatterBottlingTeamPositions" tp1
+          LEFT JOIN public."WatterBottlingTeamPositions" tp2
             ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
         WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL
       ) AS currentPositions

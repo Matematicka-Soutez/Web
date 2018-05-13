@@ -1,4 +1,4 @@
-const UpdatePasswordAuthenticatedService = require('./../../services/teacher/UpdatePasswordAuthenticated')
+const UpdatePasswordAuthenticatedService = require('./../../services/teacher/UpdatePasswordAuthenticated') // eslint-disable-line max-len
 // const UpdatePersonalInfoService = require('./../../services/teacher/UpdatePersonalInfo')
 const ResendConfirmEmailService = require('./../../services/teacher/ResendConfirmEmail')
 // const GetUsersPersonalInfo = require('./../../services/teacher/GetUsersPersonalInfo')

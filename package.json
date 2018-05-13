@@ -9,6 +9,8 @@
     "build": "cd client && node scripts/build.js",
     "postinstall": "cp scripts/ModuleScopePlugin.js node_modules/react-dev-utils/ModuleScopePlugin.js && npm run build",
     "test": "NODE_ENV=test node client/scripts/test.js --env=jsdom --watchAll && mocha --opts tests/mocha.opts tests && snyk auth $SNYK_TOKEN && snyk test",
+    "eslint": "node_modules/.bin/eslint ./",
+    "eslint-fix": "node_modules/.bin/eslint ./ --fix",
     "server": "node .",
     "dev-server": "nodemon .",
     "dev": "docker-compose up -d --force-recreate && sleep 5s && NODE_ENV=local node scripts/dbimport.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
