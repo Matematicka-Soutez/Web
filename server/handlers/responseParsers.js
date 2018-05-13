@@ -1,6 +1,6 @@
 function parseTeacher(teacher) {
   if (!teacher) {
-    throw new Error('User is empty in response parsing')
+    throw new Error('Teacher is empty in response parsing')
   }
   const parsed = {}
   parsed.id = teacher.id
@@ -16,6 +16,22 @@ function parseTeacher(teacher) {
   return parsed
 }
 
+function parseOrganizer(organizer) {
+  if (!organizer) {
+    throw new Error('Organizer is empty in response parsing')
+  }
+  const parsed = {}
+  parsed.id = organizer.id
+  parsed.firstName = organizer.firstName
+  parsed.lastName = organizer.lastName
+  parsed.email = organizer.email
+  parsed.confirmed = organizer.confirmed
+  parsed.accessToken = organizer.accessToken
+
+  return parsed
+}
+
 module.exports = {
   parseTeacher,
+  parseOrganizer,
 }

@@ -71,6 +71,31 @@ router.post('/session/teacher', teachers.login)
 router.post('/teachers', teachers.signUp)
 
 /**
+ * @api {POST} /api/teachers Sign Up
+ * @apiName SignUp
+ * @apiGroup Organizers
+ *
+ * @apiParam {String{1..40}}                firstName           Organizer first name.
+ * @apiParam {String{1..80}}                lastName            Organizer last name.
+ * @apiParam {String{1..80}}                email               Organizer email.
+ * @apiParam {String{1..256}}               password            Organizer password.
+ *
+ * @apiSuccess (Created 201) {Number}       id                  Organizer unique identifier.
+ * @apiSuccess (Created 201) {String}       firstName           Organizer first name.
+ * @apiSuccess (Created 201) {String}       lastName            Organizer last name.
+ * @apiSuccess (Created 201) {String}       email               Organizer email.
+ * @apiSuccess (Created 201) {Boolean}      confirmed           Organizer has confirmed email.
+ * @apiSuccess (Created 201) {Date}         createdAt           Organizer createdAt timestamp, format: ISO-8601.
+ * @apiSuccess (Created 201) {Date}         updatedAt           Organizer updatedAt timestamp, format: ISO-8601.
+ *
+ * @apiUse BadRequestError
+ * @apiUse WrongPasswordFormat
+ * @apiUse ConflictError
+ *
+ */
+router.post('/organizers', organizers.signUp)
+
+/**
  * @api {PUT} /api/teachers/confirm Confirm teacher email address
  * @apiName ConfirmEmailAddress
  * @apiGroup Teachers
