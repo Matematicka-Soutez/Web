@@ -15,16 +15,21 @@ class GameContainer extends Component {
       },
       displayChange: {},
     }
-    subscribeToDisplayChange((err, displayChangeData) => {
+    this.updateState.bind(this)
+    subscribeToDisplayChange(function subscribe(err, displayChangeData) {
       if (err) {
         return
       }
       if (displayChangeData && displayChangeData !== {}) {
-        this.setState({
-          displayChange: displayChangeData,
-          timer: this.state.timer,
-        })
+        this.updateState(displayChangeData)
       }
+    })
+  }
+
+  updateState(displayChangeData) {
+    this.setState({
+      displayChange: displayChangeData,
+      timer: this.state.timer,
     })
   }
 
