@@ -46,6 +46,8 @@ app.stop = () => {
   log.info('Closing database connections.')
   db.sequelize.close()
 
+  app.socketApp.close()
+
   log.info('Stopping server ...')
   app.server.close(() => {
     log.info('Server stopped.')
