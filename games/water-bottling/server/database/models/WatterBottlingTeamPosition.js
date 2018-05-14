@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     horizontal: { type: DataTypes.INTEGER, allowNull: false, field: 'horizontal' },
     vertical: { type: DataTypes.INTEGER, allowNull: false, field: 'vertical' },
     power: { type: DataTypes.INTEGER, allowNull: false, field: 'power' },
+    reverted: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'reverted' },
   }, {
     tableName: 'WatterBottlingTeamPositions',
     timestamps: true,
@@ -22,6 +23,11 @@ module.exports = (sequelize, DataTypes) => {
     WatterBottlingTeamPosition.belongsTo(models.Organizer, {
       as: 'creator',
       foreignKey: { name: 'organizerId', field: 'organizer_id' },
+      onDelete: 'RESTRICT',
+    })
+    WatterBottlingTeamPosition.belongsTo(models.Organizer, {
+      as: 'revertedBy',
+      foreignKey: { name: 'revertedById', field: 'reverted_by_id' },
       onDelete: 'RESTRICT',
     })
     WatterBottlingTeamPosition.hasOne(models.WatterBottlingTeamPosition, {

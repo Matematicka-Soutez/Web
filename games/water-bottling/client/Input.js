@@ -2,11 +2,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Grid from 'material-ui/Grid'
+import Button from 'material-ui/Button'
 import InputControls from './components/InputControls'
 import SimpleGrid from './components/SimpleGrid'
 import TeamSummary from './components/TeamSummary'
 
-const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MSwiaWF0IjoxNTI2Mjk3NzQ4LCJleHAiOjE1MjYzMDQ5NDgsImlzcyI6ImN6LmN1bmkubWZmLm1hc28uc3RhZ2luZyJ9.oQ6iZeBgPgmcUJp49VGLmAt5-V4tHKuJvT0fk7b5z_E' } // eslint-disable-line max-len
+const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MzM0NTIyLCJleHAiOjE1MjYzNDE3MjIsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.rBCM0Cq1Fx7ssRqe7l0Jjp3s_t646pH61sNAEOd763Q' } // eslint-disable-line max-len
 
 class Input extends Component {
   constructor(props) {
@@ -62,6 +63,9 @@ class Input extends Component {
               <h1 style={{ marginBottom: 10 }}>
                 {this.state.team.number} - {this.state.team.name}
               </h1>
+              <Button color="secondary">
+                Vrátit pohyb
+              </Button>
             </Grid>
             <Grid item container xs={12} sm={3}>
               <Grid item>

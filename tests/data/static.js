@@ -49,22 +49,27 @@ function initVenues() {
 
 function initRooms(venues) {
   const rooms = [{
+    id: 1,
     name: 'S3',
     defaultCapacity: 24,
     venueId: venues[0].id,
   }, {
+    id: 2,
     name: 'S4',
     defaultCapacity: 14,
     venueId: venues[0].id,
   }, {
+    id: 3,
     name: 'S5',
     defaultCapacity: 24,
     venueId: venues[0].id,
   }, {
+    id: 4,
     name: 'S9',
     defaultCapacity: 24,
     venueId: venues[0].id,
   }, {
+    id: 5,
     name: 'MUNI',
     defaultCapacity: 30,
     venueId: venues[1].id,

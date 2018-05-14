@@ -19,7 +19,7 @@ async function getGrid(competitionId, dbTransaction) {
       tp1."vertical" AS vertical
     FROM public."WatterBottlingTeamPositions" tp1 LEFT JOIN public."WatterBottlingTeamPositions" tp2
     ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
-    WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL
+    WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL AND tp1.reverted = FALSE
   UNION
     SELECT
       0 AS teamId,
@@ -57,7 +57,7 @@ async function getCurrentTeamPositions(competitionId, dbTransaction) {
         FROM public."WatterBottlingTeamPositions" tp1
           LEFT JOIN public."WatterBottlingTeamPositions" tp2
             ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
-        WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL
+        WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL AND tp1.reverted = FALSE
       ) AS currentPositions
     INNER JOIN public."WatterBottlingGrid" AS grid
       ON currentPositions."horizontal" = grid."horizontal"
@@ -94,7 +94,7 @@ async function createTeamScores(scores, dbTransaction) {
 
 async function findTeamPosition(competitionId, teamId, dbTransaction) {
   const position = await db.WatterBottlingTeamPosition.findOne({
-    where: { competitionId, teamId },
+    where: { competitionId, teamId, reverted: false },
     order: [['createdAt', 'DESC']],
     transaction: dbTransaction,
   })
@@ -102,6 +102,32 @@ async function findTeamPosition(competitionId, teamId, dbTransaction) {
     throw new appErrors.NotFoundError()
   }
   return parseTeamPosition(position)
+}
+
+async function findTeamPositionById(possitionId, dbTransaction) {
+  const position = await db.WatterBottlingTeamPosition.findById(
+    possitionId,
+    { transaction: dbTransaction },
+  )
+  if (!position) {
+    throw new appErrors.NotFoundError()
+  }
+  return parseTeamPosition(position)
+}
+
+function revertTeamPositionById(possitionId, organizerId, dbTransaction) {
+  return db.WatterBottlingTeamPosition.update(
+    {
+      reverted: true,
+      revertedById: organizerId,
+    },
+    {
+      where: {
+        id: possitionId,
+      },
+      transaction: dbTransaction,
+    },
+  )
 }
 
 async function getTeamScore(competitionId, teamId, dbTransaction) {
@@ -192,6 +218,8 @@ module.exports = {
   createGrid,
   clearGameData,
   findTeamPosition,
+  findTeamPositionById,
+  revertTeamPositionById,
   addTeamPosition,
   createTeamPositions,
   createTeamScores,

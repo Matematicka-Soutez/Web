@@ -38,7 +38,6 @@ async function importOldDb() {
   const schools = await importSchools()
   await importTeachers(schools)
   await importTeams(schools)
-  console.log(schools)
 }
 
 function importSchools() {
