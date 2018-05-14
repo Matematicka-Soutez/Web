@@ -30,16 +30,6 @@ class Timer extends Component {
     })
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.start && nextProps.end) {
-      this.setState({
-        phase: getPhase(nextProps.start, nextProps.end),
-        start: nextProps.start,
-        end: nextProps.end,
-      })
-    }
-  }
-
   render() {
     return (
       <div className="App-timer">

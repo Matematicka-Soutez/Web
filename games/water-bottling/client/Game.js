@@ -60,7 +60,10 @@ class Game extends Component {
 }
 
 Game.propTypes = {
-  displayChange: PropTypes.objectOf(PropTypes.objectOf(PropTypes.number)).isRequired,
+  displayChange: PropTypes.objectOf(PropTypes.objectOf(PropTypes.number)),
+}
+Game.defaultProps = {
+  displayChange: null,
 }
 
 export default Game

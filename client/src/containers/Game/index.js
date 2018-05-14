@@ -8,28 +8,16 @@ import Timer from './Timer'
 class GameContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      timer: {
-        start: 1000 * 60 * 60 * 24,
-        end: (1000 * 60 * 60 * 24) + (90 * 60),
-      },
-      displayChange: {},
-    }
-    this.updateState.bind(this)
+    this.state = { loaded: false }
     subscribeToDisplayChange((err, displayChangeData) => {
       if (err) {
         return
       }
       if (displayChangeData && displayChangeData !== {}) {
-        this.updateState(displayChangeData)
+        this.setState({
+          displayChange: displayChangeData,
+        })
       }
-    })
-  }
-
-  updateState(displayChangeData) {
-    this.setState({
-      displayChange: displayChangeData,
-      timer: this.state.timer,
     })
   }
 
@@ -38,6 +26,7 @@ class GameContainer extends Component {
       const res = await fetch('/api/competitions/current/timer')
       const timer = await res.json()
       this.setState({
+        loaded: true,
         timer,
         displayChange: this.state.displayChange,
       })
@@ -48,9 +37,11 @@ class GameContainer extends Component {
   }
 
   render() {
+    if (!this.state.loaded) {
+      return <div>Loading ...</div>
+    }
     return (
       <Fragment>
-
         <header className="App-header">
           <div className="App-logo">
             <Link to="/input">
@@ -65,7 +56,6 @@ class GameContainer extends Component {
         <main>
           <Game displayChange={this.state.displayChange} />
         </main>
-
       </Fragment>
     )
   }
