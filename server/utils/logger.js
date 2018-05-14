@@ -16,6 +16,11 @@ const serviceLogger = bunyan.createLogger({
   streams: getStreamsByEnvironment(),
 })
 
+const workerLogger = bunyan.createLogger({
+  name: `Workers.${suffix}`,
+  streams: getStreamsByEnvironment(),
+})
+
 const errorLogger = bunyan.createLogger({
   name: `Errors.${suffix}`,
   streams: getStreamsByEnvironment(),
@@ -52,5 +57,6 @@ function getStreamsByEnvironment() {
 module.exports = {
   logger,
   serviceLogger,
+  workerLogger,
   errorLogger,
 }

@@ -69,6 +69,24 @@ function parseCompetition(competition) {
   parsed.isPublic = competition.isPublic
   parsed.invitationEmailSent = competition.invitationEmailSent
 
+  if (competition.game) {
+    parsed.game = parseGame(competition.game)
+  }
+
+  return parsed
+}
+
+function parseGame(game) {
+  if (!game) {
+    return null
+  }
+  const parsed = {}
+  parsed.id = game.id
+  parsed.name = game.name
+  parsed.description = game.description
+  parsed.folder = game.folder
+  parsed.createdAt = game.createdAt
+  parsed.updatedAt = game.updatedAt
   return parsed
 }
 
@@ -265,6 +283,7 @@ module.exports = {
   parseCompetitionVenue,
   parseCompetitionVenueRooms,
   parseCompetitionVenueRoom,
+  parseGame,
   parseSchool,
   parseAddress,
   parseCountry,

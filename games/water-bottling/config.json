@@ -18,7 +18,8 @@
         "vertical": 4,
         "power": 1
       }
-    }
+    },
+    "afterEndRunTime": 600
   },
   "common": {
     "name": "Lahvování vody",

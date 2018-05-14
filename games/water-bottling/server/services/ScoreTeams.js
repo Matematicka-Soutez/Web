@@ -6,13 +6,18 @@ module.exports = class ScoreTeamsService extends TransactionalService {
   schema() {
     return {
       type: 'Object',
-      properties: {},
+      properties: {
+        competitionId: { type: 'integer', required: true, min: 1 },
+      },
     }
   }
 
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
-    const positions = await repository.getCurrentTeamPositions(this.competitionId, dbTransaction)
+    const positions = await repository.getCurrentTeamPositions(
+      this.data.competitionId,
+      dbTransaction,
+    )
     const scores = []
     let totalTeamsScored = 0
     positions.forEach(position => {
@@ -20,7 +25,7 @@ module.exports = class ScoreTeamsService extends TransactionalService {
       profits.forEach(profit => scores.push({
         score: profit.score,
         teamId: profit.teamId,
-        competitionId: this.competitionId,
+        competitionId: this.data.competitionId,
       }))
       totalTeamsScored += position.teams.length
     })
