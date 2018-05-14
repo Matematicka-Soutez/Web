@@ -114,6 +114,7 @@
     "nock": "^9.2.3",
     "nodemon": "^1.17.3",
     "nyc": "^11.6.0",
+    "request": "^2.85.0",
     "sequelize-cli": "^4.0.0",
     "snyk": "^1.71.0",
     "supertest": "^3.0.0",
