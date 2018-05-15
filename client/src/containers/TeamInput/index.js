@@ -18,7 +18,7 @@ class InputContainer extends Component {
 
   async componentWillMount() {
     try {
-      const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MzM0NTIyLCJleHAiOjE1MjYzNDE3MjIsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.rBCM0Cq1Fx7ssRqe7l0Jjp3s_t646pH61sNAEOd763Q' } // eslint-disable-line max-len
+      const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MzcxMTg4LCJleHAiOjE1MjYzNzgzODgsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.nO8K-lY9iLauy6o1R956fPvoZ7GS5IU5XlR34b6dsr8' } // eslint-disable-line max-len
       const res = await fetch('/api/org/venues', { headers })
       const venues = await res.json()
       this.setState({

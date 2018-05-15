@@ -40,13 +40,14 @@ async function getTeamPosition(ctx) {
 
 async function moveTeam(ctx) {
   try {
+    const teamId = parseInt(ctx.request.body.teamId, 10)
     await new MoveTeamService().execute({
-      teamId: parseInt(ctx.request.body.teamId, 10),
+      teamId,
       directionId: parseInt(ctx.request.body.directionId, 10),
       organizerId: ctx.state.organizer.id,
     })
     ctx.body = await new GetTeamPositionService().execute({
-      teamId: parseInt(ctx.request.body.teamId, 10),
+      teamId,
     })
   } catch (err) {
     if (err instanceof appErrors.CannotBeDoneError) {
@@ -61,12 +62,13 @@ async function moveTeam(ctx) {
 
 async function revertMove(ctx) {
   try {
+    const teamId = parseInt(ctx.request.body.teamId, 10)
     await new RevertMoveService().execute({
-      teamId: parseInt(ctx.request.body.teamId, 10),
+      teamId,
       organizerId: ctx.state.organizer.id,
     })
     ctx.body = await new GetTeamPositionService().execute({
-      teamId: parseInt(ctx.request.body.teamId, 10),
+      teamId,
     })
   } catch (err) {
     if (err instanceof appErrors.CannotBeDoneError) {

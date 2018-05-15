@@ -7,13 +7,14 @@ import InputControls from './components/InputControls'
 import SimpleGrid from './components/SimpleGrid'
 import TeamSummary from './components/TeamSummary'
 
-const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MzM0NTIyLCJleHAiOjE1MjYzNDE3MjIsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.rBCM0Cq1Fx7ssRqe7l0Jjp3s_t646pH61sNAEOd763Q' } // eslint-disable-line max-len
+const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MzcxMTg4LCJleHAiOjE1MjYzNzgzODgsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.nO8K-lY9iLauy6o1R956fPvoZ7GS5IU5XlR34b6dsr8' } // eslint-disable-line max-len
 
 class Input extends Component {
   constructor(props) {
     super(props)
     this.state = {}
     this.moveTeam = this.moveTeam.bind(this)
+    this.revertMove = this.revertMove.bind(this)
   }
 
   async componentWillMount() {
@@ -54,6 +55,29 @@ class Input extends Component {
     return true
   }
 
+  async revertMove() {
+    try {
+      const res = await fetch('/api/org/game/revert-move', {
+        headers: {
+          ...headers,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        method: 'PUT',
+        body: JSON.stringify({ teamId: this.state.team.id }),
+      })
+      if (!res.ok) {
+        const err = await res.json()
+        return alert(err.message) // eslint-disable-line no-alert
+      }
+      const position = await res.json()
+      this.setState(position)
+    } catch (err) {
+      console.log(err)
+    }
+    return true
+  }
+
   render() {
     if (this.state.team) {
       return (
@@ -63,9 +87,6 @@ class Input extends Component {
               <h1 style={{ marginBottom: 10 }}>
                 {this.state.team.number} - {this.state.team.name}
               </h1>
-              <Button color="secondary">
-                Vrátit pohyb
-              </Button>
             </Grid>
             <Grid item container xs={12} sm={3}>
               <Grid item>
@@ -76,6 +97,11 @@ class Input extends Component {
               </Grid>
               <Grid item>
                 <TeamSummary position={this.state} />
+              </Grid>
+              <Grid item>
+                <Button variant="raised" color="secondary" onClick={this.revertMove}>
+                Vrátit změnu
+                </Button>
               </Grid>
             </Grid>
             <Grid item xs={12} sm={9}>

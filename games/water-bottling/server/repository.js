@@ -5,32 +5,25 @@ const appErrors = require('../../../server/utils/errors/application')
 async function getGrid(competitionId, dbTransaction) {
   const query = `
   SELECT
-    COUNT(teamId)-1 AS "teamCount",
-    SUM(power) AS "combinedPower",
-    SUM(waterFlow) AS "waterFlow",
-    horizontal,
-    vertical
-  FROM (
-    SELECT
-      tp1."team_id" AS teamId,
-      0 AS waterFlow,
-      tp1."power" AS power,
-      tp1."horizontal" AS horizontal,
-      tp1."vertical" AS vertical
-    FROM public."WatterBottlingTeamPositions" tp1 LEFT JOIN public."WatterBottlingTeamPositions" tp2
-    ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
-    WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL AND tp1.reverted = FALSE
-  UNION
-    SELECT
-      0 AS teamId,
-      grid."water_flow" AS waterFlow,
-      0 AS power,
-      grid."horizontal" AS horizontal,
-      grid."vertical" AS vertical
-    FROM public."WatterBottlingGrid" grid
-  ) AS currentPositions
-  GROUP BY "horizontal", "vertical"
-  ORDER BY "vertical" DESC, "horizontal" ASC`
+     COUNT(team_id)-1 AS "teamCount",
+     SUM(power) AS "combinedPower",
+     SUM(water_flow) AS "waterFlow",
+     horizontal,
+     vertical
+   FROM (
+     SELECT *
+     FROM public."WatterBottlingCurrentTeamPositions" positions
+   UNION
+     SELECT
+       0 AS team_id,
+       grid."water_flow" AS water_flow,
+       0 AS power,
+       grid."horizontal" AS horizontal,
+       grid."vertical" AS vertical
+     FROM public."WatterBottlingGrid" grid
+   ) AS currentPositions
+   GROUP BY "horizontal", "vertical"
+   ORDER BY "vertical" DESC, "horizontal" ASC`
   const grid = await db.sequelize.query(query, {
     type: db.sequelize.QueryTypes.SELECT,
     replacements: { competitionId },
@@ -43,22 +36,13 @@ async function getGrid(competitionId, dbTransaction) {
 async function getCurrentTeamPositions(competitionId, dbTransaction) {
   const query = `
   SELECT
-    currentPositions."teamId"     AS "teamId",
+    currentPositions."team_id"    AS "teamId",
     currentPositions."power"      AS "power",
     grid."water_flow"             AS "waterFlow",
     currentPositions."horizontal" AS "horizontal",
     currentPositions."vertical"   AS "vertical"
-  FROM (
-        SELECT
-          tp1."team_id"    AS "teamId",
-          tp1."power"      AS "power",
-          tp1."horizontal" AS "horizontal",
-          tp1."vertical"   AS "vertical"
-        FROM public."WatterBottlingTeamPositions" tp1
-          LEFT JOIN public."WatterBottlingTeamPositions" tp2
-            ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
-        WHERE tp1.competition_id = :competitionId AND tp2.id IS NULL AND tp1.reverted = FALSE
-      ) AS currentPositions
+  FROM
+    public."WatterBottlingCurrentTeamPositions" AS currentPositions
     INNER JOIN public."WatterBottlingGrid" AS grid
       ON currentPositions."horizontal" = grid."horizontal"
         AND currentPositions."vertical" = grid."vertical"

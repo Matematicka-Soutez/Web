@@ -14,7 +14,7 @@
     "snyk": "snyk auth $SNYK_TOKEN && snyk test",
     "start": "node .",
     "dev-server": "nodemon .",
-    "dev": "docker-compose up -d --force-recreate && sleep 5s && NODE_ENV=local node scripts/dbimport.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
+    "dev": "docker-compose up -d --force-recreate && sleep 5s && NODE_ENV=local node scripts/dbimport.js && NODE_ENV=local node scripts/divideTeams.js && concurrently --kill-others-on-fail \"npm run dev-server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
