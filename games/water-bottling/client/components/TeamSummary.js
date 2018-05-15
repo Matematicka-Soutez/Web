@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Paper from 'material-ui/Paper'
 import Typography from 'material-ui/Typography'
-import Table, { TableBody, TableCell, TableRow } from 'material-ui/Table'
+import Table, { TableHead, TableBody, TableCell, TableRow } from 'material-ui/Table'
 import { withStyles } from 'material-ui/styles'
 import { getPosition } from '../utils/position'
 
@@ -30,18 +30,6 @@ class TeamSummary extends Component {
 
   render() {
     const { classes } = this.props
-    let id = 0
-
-    function createData(property, value) {
-      id += 1
-      return { id, property, value }
-    }
-
-    const data = [
-      createData('Pozice', getPosition(this.state.position)),
-      createData('Síla', this.state.position.power),
-      createData('Skóre', this.state.position.score),
-    ]
     return (
       <div className="inputControls">
         <Paper className={classes.root} elevation={2}>
@@ -49,15 +37,33 @@ class TeamSummary extends Component {
           Informace
           </Typography>
           <Table className={classes.table}>
+            <TableHead>
+              <TableRow style={{ fontSize: 20, fontWeight: 'bold' }}>
+                <TableCell numeric>Síla</TableCell>
+                <TableCell numeric>Pozice</TableCell>
+                <TableCell numeric>Body</TableCell>
+              </TableRow>
+            </TableHead>
             <TableBody>
-              {data.map(row => (
-                <TableRow key={row.id}>
-                  <TableCell component="th" scope="row">
-                    {row.property}
-                  </TableCell>
-                  <TableCell numeric>{row.value}</TableCell>
-                </TableRow>
-              ))}
+              <TableRow>
+                <TableCell
+                  numeric
+                  component="th"
+                  scope="row"
+                  style={{ fontSize: 25, fontWeight: 'bold' }}>
+                  {this.state.position.power}
+                </TableCell>
+                <TableCell
+                  numeric
+                  style={{ fontSize: 25, fontWeight: 'bold' }}>
+                  {getPosition(this.state.position)}
+                </TableCell>
+                <TableCell
+                  numeric
+                  style={{ fontSize: 25, fontWeight: 'bold' }}>
+                  {Math.round(Number(this.state.position.score))}
+                </TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </Paper>
