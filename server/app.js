@@ -37,21 +37,22 @@ app.start = () => {
 }
 
 // Stop method
-app.stop = () => {
+app.stop = async () => {
   if (!app.server) {
     log.warn('Server not initialized yet.')
     return
   }
 
   log.info('Closing database connections.')
-  db.sequelize.close()
+  await db.sequelize.close()
 
-  app.socketApp.close()
+  await app.socketApp.close()
 
   log.info('Stopping server ...')
-  app.server.close(() => {
-    log.info('Server stopped.')
-  })
+  await app.server.close()
+  log.info('Server stopped.')
+
+  process.exit(0) // eslint-disable-line no-process-exit
 }
 
 // Something can happen outside the error handling middleware, keep track of that
