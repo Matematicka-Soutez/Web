@@ -10,11 +10,10 @@ import {
 } from '@material-ui/core'
 
 const rootStyle = {
-  width: '100%',
-  marginTop: 8 * 3,
-  overflowX: 'auto',
+  margin: '16px 8px 8px 8px',
+  overflowX: 'none',
   paddingTop: 16,
-  paddingBottom: 16,
+  paddingBottom: 0,
 }
 
 const smallColumnWidth = {
@@ -64,41 +63,54 @@ class ResultsContainer extends Component {
     return (
       <div className="results">
         <Paper style={rootStyle}>
-          <Typography variant="headline" component="h2">
-          Výsledky jarního MaSa 2018
+          <Typography
+            variant="headline"
+            component="h2"
+            style={{ textAlign: 'center', marginBottom: 16 }}>
+            Výsledky jarního MaSa 2018
           </Typography>
           <Typography component="div">
-            <Table style={{ minWidth: 700 }}>
+            <Table style={{ minWidth: 780 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell style={smallColumnWidth}>Pořadí</TableCell>
+                  <TableCell numeric style={smallColumnWidth}>Pořadí</TableCell>
                   <TableCell numeric style={smallColumnWidth}>Číslo týmu</TableCell>
                   <TableCell style={smallPadding}>Název týmu</TableCell>
                   <TableCell style={smallPadding}>Škola</TableCell>
                   <TableCell style={smallPadding}>Soutěžící</TableCell>
                   <TableCell style={smallColumnWidth}>Místnost</TableCell>
-                  <TableCell numeric style={smallPadding}>Body ve hře</TableCell>
+                  <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
+                  Body ve hře
+                  </TableCell>
                   <TableCell numeric style={smallColumnWidth}>Body za příklady</TableCell>
-                  <TableCell numeric style={smallPadding}>Body celkem</TableCell>
+                  <TableCell numeric style={{ ...smallPadding, minWidth: 55 }}>
+                  Body celkem
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {data.map(row => (
                   <TableRow key={row.id}>
-                    <TableCell component="th" scope="row" style={smallColumnWidth}>
+                    <TableCell numeric component="th" scope="row" style={smallColumnWidth}>
                       {row.place}
                     </TableCell>
                     <TableCell numeric style={smallColumnWidth}>{row.teamNumber}</TableCell>
-                    <TableCell style={smallPadding}>{row.teamName}</TableCell>
+                    <TableCell style={{ ...smallPadding, fontWeight: 'bold' }}>
+                      {row.teamName}
+                    </TableCell>
                     <TableCell style={smallPadding}>{row.school}</TableCell>
                     <TableCell style={smallPadding}>
                       {row.teamMembers.map(member =>
                         <span key={member.id}>{member.name}<br /></span>)}
                     </TableCell>
                     <TableCell style={smallColumnWidth}>{row.room}</TableCell>
-                    <TableCell numeric style={smallPadding}>{row.gameScore}</TableCell>
+                    <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
+                      {row.gameScore}
+                    </TableCell>
                     <TableCell numeric style={smallColumnWidth}>{row.problemScore}</TableCell>
-                    <TableCell numeric style={smallPadding}>{row.totalScore}</TableCell>
+                    <TableCell numeric style={{ smallPadding, fontWeight: 'bold', minWidth: 55 }}>
+                      {row.totalScore}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

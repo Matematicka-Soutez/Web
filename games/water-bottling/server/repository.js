@@ -268,11 +268,19 @@ function parseResult(result) {
   parsed.school = result.team.school.shortName
   parsed.teamMembers = parseTeamMembers(result.team.members)
   parsed.room = result.team.competitionVenueRoom.room.name
-  parsed.gameScore = _.round(result.gameScore, 2)
+  parsed.gameScore = parseScore(result.gameScore)
   parsed.problemScore = result.team.dataValues.problemScore
-  parsed.totalScore = _.round(result.dataValues.totalScore, 2)
+  parsed.totalScore = parseScore(result.dataValues.totalScore)
   parsed.totalScoreRaw = result.dataValues.totalScore
   return parsed
+}
+
+function parseScore(number) {
+  const str = number.toFixed(2).replace('.', ',')
+  if (str.length > 6) {
+    return `${str.substr(0, str.length - 6)} ${str.substr(-6)}`
+  }
+  return str
 }
 
 function parseTeamMembers(members) {
