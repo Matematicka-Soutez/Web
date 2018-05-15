@@ -61,7 +61,7 @@ class TeamSummary extends Component {
                 <TableCell
                   numeric
                   style={{ fontSize: 25, fontWeight: 'bold' }}>
-                  {Math.round(Number(this.state.position.score))}
+                  {Math.floor(Number(this.state.position.score))}
                 </TableCell>
               </TableRow>
             </TableBody>
