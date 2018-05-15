@@ -3,6 +3,7 @@ const handlers = require('./handlers')
 
 const publicRouter = new Router()
 publicRouter.get('/grid', handlers.getCurrentGrid)
+publicRouter.get('/results', handlers.getResults)
 
 const organizerRouter = new Router()
 organizerRouter.put('/init', handlers.initGame)

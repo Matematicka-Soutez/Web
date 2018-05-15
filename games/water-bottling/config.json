@@ -19,7 +19,8 @@
         "power": 1
       }
     },
-    "afterEndRunTime": 600
+    "afterEndRunTime": 600,
+    "problemPointValue": 10
   },
   "common": {
     "name": "Lahvování vody",

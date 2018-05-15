@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     number: { type: DataTypes.INTEGER, allowNull: true, field: 'number' },
     DR_ID: { type: DataTypes.INTEGER, allowNull: true, field: 'DR_ID' },
     arrived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'arrived' },
+    solvedProblems: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0, field: 'solved_problems' },
   }, {
     tableName: 'Teams',
     timestamps: true,

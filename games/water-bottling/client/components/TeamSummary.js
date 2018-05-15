@@ -1,10 +1,16 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Paper from 'material-ui/Paper'
-import Typography from 'material-ui/Typography'
-import Table, { TableHead, TableBody, TableCell, TableRow } from 'material-ui/Table'
-import { withStyles } from 'material-ui/styles'
+import {
+  Paper,
+  Typography,
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
 import { getPosition } from '../utils/position'
 
 const styles = theme => ({

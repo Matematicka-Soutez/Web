@@ -1,13 +1,12 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Grid from 'material-ui/Grid'
-import Button from 'material-ui/Button'
+import { Grid, Button } from '@material-ui/core'
 import InputControls from './components/InputControls'
 import SimpleGrid from './components/SimpleGrid'
 import TeamSummary from './components/TeamSummary'
 
-const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MzcxMTg4LCJleHAiOjE1MjYzNzgzODgsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.nO8K-lY9iLauy6o1R956fPvoZ7GS5IU5XlR34b6dsr8' } // eslint-disable-line max-len
+const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2Mzg5MDQwLCJleHAiOjE1MjYzOTYyNDAsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.aTeB9x2fxxJZ7vS4LTX8hSvT6c0sKRI4nhGTU_fYtxQ' } // eslint-disable-line max-len
 
 class Input extends Component {
   constructor(props) {

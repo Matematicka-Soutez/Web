@@ -1,6 +1,9 @@
 const _ = require('lodash')
 const db = require('../../../server/database')
 const appErrors = require('../../../server/utils/errors/application')
+const gameConfig = require('../config.json')
+
+const PROBLEM_POINT_VALUE = gameConfig.game.problemPointValue
 
 async function getGrid(competitionId, dbTransaction) {
   const query = `
@@ -56,6 +59,49 @@ async function getCurrentTeamPositions(competitionId, dbTransaction) {
     transaction: dbTransaction,
   })
   return parseCurrentTemPositions(positions)
+}
+
+async function getResults(competitionId, dbTransaction) {
+  const results = await db.WatterBottlingCurrentTeamScore.findAll({
+    where: { competitionId },
+    attributes: [
+      'teamId',
+      'gameScore',
+      [db.sequelize.literal(`"game_score" + ("solved_problems" * ${PROBLEM_POINT_VALUE})`), 'totalScore'], // eslint-disable-line max-len
+      [db.sequelize.literal(`row_number() OVER (ORDER BY "game_score" + ("solved_problems" * ${PROBLEM_POINT_VALUE}))`), 'place'], // eslint-disable-line max-len
+    ],
+    include: [{
+      attributes: [
+        'name',
+        'number',
+        [db.sequelize.literal(`("solved_problems" * ${PROBLEM_POINT_VALUE})`), 'problemScore'],
+        'solvedProblems',
+      ],
+      model: db.Team,
+      as: 'team',
+      include: [{
+        attributes: ['shortName'],
+        model: db.School,
+        as: 'school',
+      }, {
+        attributes: ['id', 'firstName', 'lastName'],
+        model: db.TeamMember,
+        as: 'members',
+      }, {
+        attributes: ['roomId'],
+        model: db.CompetitionVenueRoom,
+        as: 'competitionVenueRoom',
+        include: [{
+          attributes: ['name'],
+          model: db.Room,
+          as: 'room',
+        }],
+      }],
+    }],
+    order: [[db.sequelize.literal('"totalScore"'), 'DESC']],
+    transaction: dbTransaction,
+  })
+  return parseResults(results)
 }
 
 async function addTeamPosition(position, dbTransaction) {
@@ -196,9 +242,51 @@ function parseCurrentTemPositions(positions) {
   return fields
 }
 
+function parseResults(results) {
+  if (!results) {
+    return results
+  }
+  let place = 1
+  let lastScore = -1
+  const parsed = []
+  results.forEach(result => {
+    const res = parseResult(result)
+    if (lastScore !== res.totalScoreRaw) {
+      res.place = `${place}.`
+      lastScore = res.totalScoreRaw
+    }
+    parsed.push(res)
+    place++
+  })
+  return parsed
+}
+
+function parseResult(result) {
+  const parsed = {}
+  parsed.teamName = result.team.name
+  parsed.teamNumber = result.team.number
+  parsed.school = result.team.school.shortName
+  parsed.teamMembers = parseTeamMembers(result.team.members)
+  parsed.room = result.team.competitionVenueRoom.room.name
+  parsed.gameScore = _.round(result.gameScore, 2)
+  parsed.problemScore = result.team.dataValues.problemScore
+  parsed.totalScore = _.round(result.dataValues.totalScore, 2)
+  parsed.totalScoreRaw = result.dataValues.totalScore
+  return parsed
+}
+
+function parseTeamMembers(members) {
+  return members
+    .map(member => ({
+      id: member.id,
+      name: `${member.firstName} ${member.lastName}`,
+    }))
+}
+
 
 module.exports = {
   getGrid,
+  getResults,
   createGrid,
   clearGameData,
   findTeamPosition,

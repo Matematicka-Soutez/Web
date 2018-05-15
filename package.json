@@ -33,7 +33,8 @@
     "npm": "~5.6.0"
   },
   "dependencies": {
-    "@material-ui/icons": "^1.0.0-beta.43",
+    "@material-ui/core": "^1.0.0-rc.0",
+    "@material-ui/icons": "^1.0.0-rc.0",
     "@sendgrid/mail": "^6.2.1",
     "autoprefixer": "7.1.6",
     "bcrypt": "^1.0.3",
@@ -52,7 +53,6 @@
     "koa-router": "^7.4.0",
     "koa-static": "^4.0.2",
     "lodash": "^4.17.10",
-    "material-ui": "^1.0.0-beta.42",
     "moment": "^2.22.0",
     "newrelic": "^4.1.0",
     "node-schedule": "^1.3.0",

@@ -81,7 +81,7 @@ function initGames() {
   const games = [{
     name: 'Lahvování vody',
     description: 'TBA',
-    folder: 'watter-bottling',
+    folder: 'water-bottling',
   }]
   return Promise.map(games, game => createGame(game))
 }

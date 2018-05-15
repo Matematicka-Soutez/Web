@@ -1,16 +1,20 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import LeftIcon from '@material-ui/icons/KeyboardArrowLeft'
-import RightIcon from '@material-ui/icons/KeyboardArrowRight'
-import UpIcon from '@material-ui/icons/KeyboardArrowUp'
-import DownIcon from '@material-ui/icons/KeyboardArrowDown'
-import FlashOnIcon from '@material-ui/icons/FlashOn'
-import Button from 'material-ui/Button'
-import Paper from 'material-ui/Paper'
-import Typography from 'material-ui/Typography'
-import Grid from 'material-ui/Grid'
-import { withStyles } from 'material-ui/styles'
+import {
+  KeyboardArrowLeft,
+  KeyboardArrowRight,
+  KeyboardArrowUp,
+  KeyboardArrowDown,
+  FlashOn,
+} from '@material-ui/icons'
+import {
+  Button,
+  Paper,
+  Typography,
+  Grid,
+} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -56,7 +60,7 @@ class InputControls extends Component {
                 disabled={!this.state.possibleMoves.includes(1)}
                 onClick={this.onClick}
                 value={1}>
-                <UpIcon />
+                <KeyboardArrowUp />
               </Button>
             </Grid>
           </Grid>
@@ -69,7 +73,7 @@ class InputControls extends Component {
                 disabled={!this.state.possibleMoves.includes(4)}
                 onClick={this.onClick}
                 value={4}>
-                <LeftIcon />
+                <KeyboardArrowLeft />
               </Button>
             </Grid>
             <Grid item container xs={4} justify="center">
@@ -81,7 +85,7 @@ class InputControls extends Component {
                   disabled={!this.state.possibleMoves.includes(5)}
                   onClick={this.onClick}
                   value={5}>
-                  <FlashOnIcon />
+                  <FlashOn />
                 </Button>
               </Grid>
             </Grid>
@@ -94,7 +98,7 @@ class InputControls extends Component {
                   disabled={!this.state.possibleMoves.includes(3)}
                   onClick={this.onClick}
                   value={3}>
-                  <RightIcon />
+                  <KeyboardArrowRight />
                 </Button>
               </Grid>
             </Grid>
@@ -108,7 +112,7 @@ class InputControls extends Component {
                 disabled={!this.state.possibleMoves.includes(2)}
                 onClick={this.onClick}
                 value={2}>
-                <DownIcon />
+                <KeyboardArrowDown />
               </Button>
             </Grid>
           </Grid>

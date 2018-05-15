@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import AppBar from 'material-ui/AppBar'
-import Grid from 'material-ui/Grid'
-import Tabs, { Tab } from 'material-ui/Tabs'
-import { FormControlLabel } from 'material-ui/Form'
-import Switch from 'material-ui/Switch'
+import {
+  AppBar,
+  Grid,
+  Tabs,
+  Tab,
+  FormControlLabel,
+  Switch,
+} from '@material-ui/core'
 import RoomInputContainer from './RoomInputContainer'
 
 class InputContainer extends Component {
@@ -18,7 +21,7 @@ class InputContainer extends Component {
 
   async componentWillMount() {
     try {
-      const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2MzcxMTg4LCJleHAiOjE1MjYzNzgzODgsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.nO8K-lY9iLauy6o1R956fPvoZ7GS5IU5XlR34b6dsr8' } // eslint-disable-line max-len
+      const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2Mzg5MDQwLCJleHAiOjE1MjYzOTYyNDAsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.aTeB9x2fxxJZ7vS4LTX8hSvT6c0sKRI4nhGTU_fYtxQ' } // eslint-disable-line max-len
       const res = await fetch('/api/org/venues', { headers })
       const venues = await res.json()
       this.setState({

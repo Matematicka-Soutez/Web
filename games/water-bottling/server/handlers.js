@@ -1,6 +1,7 @@
 const appErrors = require('../../../server/utils/errors/application')
 const responseErrors = require('../../../server/utils/errors/response')
 const GetCurrentGridService = require('./services/GetCurrentGrid')
+const GetResultsService = require('./services/GetResults')
 const GetTeamPositionService = require('./services/GetTeamPosition')
 const MoveTeamService = require('./services/MoveTeam')
 const RevertMoveService = require('./services/RevertMove')
@@ -8,6 +9,7 @@ const InitGameService = require('./services/InitGame')
 
 module.exports = {
   getCurrentGrid,
+  getResults,
   getTeamPosition,
   moveTeam,
   revertMove,
@@ -17,6 +19,17 @@ module.exports = {
 async function getCurrentGrid(ctx) {
   try {
     ctx.body = await new GetCurrentGridService().execute({})
+  } catch (err) {
+    if (err instanceof appErrors.NotFoundError) {
+      throw new responseErrors.UnauthorizedError('Invalid credentials.')
+    }
+    throw err
+  }
+}
+
+async function getResults(ctx) {
+  try {
+    ctx.body = await new GetResultsService().execute({})
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
       throw new responseErrors.UnauthorizedError('Invalid credentials.')
