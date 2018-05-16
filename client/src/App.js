@@ -12,8 +12,8 @@ function App() {
       <div className="App">
         <Switch>
           <Route exact path="/" component={GameContainer} />
-          <Route exact path="/input" component={TeamInputContainer} />
           <Route exact path="/results" component={ResultsContainer} />
+          <Route path="/input/:jwtToken" component={TeamInputContainer} />
         </Switch>
       </div>
     </Router>

@@ -38,8 +38,8 @@ module.exports = env => ({
     saltRounds: 10,
     resetPasswordTokenLength: 20,
     createOptions: {
-      // expires in 2h
-      expiresIn: 2 * 60 * 60,
+      // expires in 5h - extended for competition workaround
+      expiresIn: 5 * 60 * 60,
       algorithm: 'HS256',
       issuer: `cz.cuni.mff.maso.${env}`,
     },

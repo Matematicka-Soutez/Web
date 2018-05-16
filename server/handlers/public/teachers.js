@@ -4,24 +4,8 @@ const SignUpService = require('./../../services/teacher/SignUp')
 const ConfirmEmailService = require('./../../services/teacher/ConfirmEmail')
 const ResetPasswordService = require('./../../services/teacher/ResetPassword')
 const UpdatePasswordService = require('./../../services/teacher/UpdatePassword')
-const OrganizerLoginService = require('./../../services/organizer/Login')
 const appErrors = require('./../../utils/errors/application')
 const responseErrors = require('./../../utils/errors/response')
-
-async function adminLogin(ctx) {
-  try {
-    ctx.body = await new OrganizerLoginService()
-      .execute({
-        email: ctx.request.body.username,
-        password: ctx.request.body.password,
-      })
-  } catch (err) {
-    if (err instanceof appErrors.UnauthorizedError || err instanceof appErrors.NotFoundError) {
-      throw new responseErrors.UnauthorizedError('Invalid credentials.')
-    }
-    throw err
-  }
-}
 
 async function updatePassword(ctx) {
   try {
@@ -127,7 +111,6 @@ async function signUp(ctx) {
 
 module.exports = {
   login,
-  adminLogin,
   signUp,
   confirmEmail,
   resetPassword,

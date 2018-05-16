@@ -51,13 +51,14 @@ class RoomInputContainer extends Component {
             {tabs}
           </Tabs>
         </AppBar>
-        <Input teamId={teams[value].id} key={teams[value].id} />
+        <Input teamId={teams[value].id} key={teams[value].id} jwtToken={this.props.jwtToken} />
       </div>
     )
   }
 }
 
 RoomInputContainer.propTypes = {
+  jwtToken: PropTypes.string.isRequired,
   teams: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 

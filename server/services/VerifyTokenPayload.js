@@ -26,14 +26,19 @@ module.exports = class VerifyTokenPayload extends AbstractService {
 
   run() {
     return Promise
-      .all([this.getOrganizer(), this.getAndCheckTeacher()])
+      .all([this.getAndCheckOrganizer(), this.getAndCheckTeacher()])
       .spread((organizer, teacherData) => parseResponse(organizer, teacherData))
   }
 
-  getOrganizer() {
-    return this.data.organizerId
-      ? organizerRepository.findById(this.data.organizerId)
-      : null
+  getAndCheckOrganizer() {
+    if (!this.data.organizerId) {
+      return null
+    }
+    const organizer = organizerRepository.findById(this.data.organizerId)
+    if (organizer.disabled) {
+      throw new appErrors.UnauthorizedError('Organizer account was disabled.')
+    }
+    return organizer
   }
 
   async getAndCheckTeacher() {

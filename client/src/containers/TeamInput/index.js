@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   AppBar,
   Grid,
@@ -12,7 +13,9 @@ import RoomInputContainer from './RoomInputContainer'
 class InputContainer extends Component {
   constructor(props) {
     super(props)
+    const { match: { params } } = this.props
     this.state = {
+      jwtToken: params.jwtToken,
       value: 0,
       evenRooms: true,
       venues: [{ rooms: [{ teams: [{}] }] }],
@@ -21,10 +24,11 @@ class InputContainer extends Component {
 
   async componentWillMount() {
     try {
-      const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2Mzg5MDQwLCJleHAiOjE1MjYzOTYyNDAsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.aTeB9x2fxxJZ7vS4LTX8hSvT6c0sKRI4nhGTU_fYtxQ' } // eslint-disable-line max-len
+      const headers = { Authorization: `JWT ${this.state.jwtToken}` }
       const res = await fetch('/api/org/venues', { headers })
       const venues = await res.json()
       this.setState({
+        jwtToken: this.state.jwtToken,
         value: 1,
         evenRooms: true,
         venues,
@@ -36,7 +40,7 @@ class InputContainer extends Component {
   }
 
   handleChange = (event, value) => {
-    this.setState({ value, venues: this.state.venues })
+    this.setState({ ...this.state, value })
   }
 
   handleSwitch = event => {
@@ -79,10 +83,20 @@ class InputContainer extends Component {
         <RoomInputContainer
           teams={rooms[value].teams
             .filter(team => (team.number % 2 === 0) === this.state.evenRooms)
-          } />
+          }
+          jwtToken={this.state.jwtToken} />
       </div>
     )
   }
 }
+
+InputContainer.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      jwtToken: PropTypes.string,
+    }),
+  }).isRequired,
+}
+
 
 export default InputContainer

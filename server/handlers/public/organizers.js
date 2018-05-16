@@ -12,6 +12,9 @@ async function login(ctx) {
         password: ctx.request.body.password,
       })
   } catch (err) {
+    if (err instanceof appErrors.NotConfirmedError) {
+      throw new responseErrors.UnauthorizedError('Email address is not verified.')
+    }
     if (err instanceof appErrors.UnauthorizedError || err instanceof appErrors.NotFoundError) {
       throw new responseErrors.UnauthorizedError('Invalid credentials.')
     }

@@ -15,9 +15,12 @@ module.exports = class LoginService extends AbstractService {
   }
 
   async run() {
-    const organizer = await organizerRepository.findByEmail(this.data.email)
+    const organizer = await organizerRepository.findByEmail(this.data.email.toLowerCase())
     if (!organizer) {
       throw new appErrors.UnauthorizedError()
+    }
+    if (!organizer.confirmed) {
+      throw new appErrors.NotConfirmedError()
     }
     const verified = await crypto.comparePasswords(this.data.password, organizer.password)
 

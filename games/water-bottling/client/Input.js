@@ -6,8 +6,6 @@ import InputControls from './components/InputControls'
 import SimpleGrid from './components/SimpleGrid'
 import TeamSummary from './components/TeamSummary'
 
-const headers = { Authorization: 'JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6ZXJJZCI6MywiaWF0IjoxNTI2Mzg5MDQwLCJleHAiOjE1MjYzOTYyNDAsImlzcyI6ImN6LmN1bmkubWZmLm1hc28ubG9jYWwifQ.aTeB9x2fxxJZ7vS4LTX8hSvT6c0sKRI4nhGTU_fYtxQ' } // eslint-disable-line max-len
-
 class Input extends Component {
   constructor(props) {
     super(props)
@@ -19,7 +17,10 @@ class Input extends Component {
   async componentWillMount() {
     try {
       if (this.props.teamId) {
-        const res = await fetch(`/api/org/game/teams/${this.props.teamId}/position`, { headers })
+        const res = await fetch(
+          `/api/org/game/teams/${this.props.teamId}/position`,
+          { headers: { Authorization: `JWT ${this.props.jwtToken}` } },
+        )
         const position = await res.json()
         this.setState(position)
       }
@@ -32,7 +33,7 @@ class Input extends Component {
     try {
       const res = await fetch('/api/org/game/move', {
         headers: {
-          ...headers,
+          Authorization: `JWT ${this.props.jwtToken}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -58,7 +59,7 @@ class Input extends Component {
     try {
       const res = await fetch('/api/org/game/revert-move', {
         headers: {
-          ...headers,
+          Authorization: `JWT ${this.props.jwtToken}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
@@ -117,6 +118,7 @@ class Input extends Component {
 }
 
 Input.propTypes = {
+  jwtToken: PropTypes.string.isRequired,
   teamId: PropTypes.number.isRequired,
 }
 
