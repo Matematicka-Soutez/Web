@@ -83,6 +83,7 @@ class InputContainer extends Component {
         <RoomInputContainer
           teams={rooms[value].teams
             .filter(team => (team.number % 2 === 0) === this.state.evenRooms)
+            .filter(team => team.arrived)
           }
           jwtToken={this.state.jwtToken} />
       </div>
