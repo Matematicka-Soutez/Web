@@ -1,5 +1,4 @@
 const _ = require('lodash')
-const config = require('../../../../config')
 const appErrors = require('../../../../server/utils/errors/application')
 const TransactionalService = require('./../../../../server/services/TransactionalService')
 const venueRepository = require('./../../../../server/repositories/venue')
@@ -27,7 +26,7 @@ module.exports = class InitGameService extends TransactionalService {
     const venues = await venueRepository.findCompetitionVenues(this.competitionId, dbTransaction)
     const teams = _.filter(
       _.flatten(_.map(venues, 'teams')),
-      ['arrived', config.env === 'production'],
+      ['arrived', true],
     )
     const initialPositions = generatePositionsFromConfig(
       this.competitionId,
