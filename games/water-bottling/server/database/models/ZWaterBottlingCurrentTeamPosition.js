@@ -15,11 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       return sequelize.query(`
         CREATE VIEW "WatterBottlingCurrentTeamPositions" AS
           SELECT
-            tp1."team_id"    AS team_id,
-            0                AS water_flow,
-            tp1."power"      AS power,
-            tp1."horizontal" AS horizontal,
-            tp1."vertical"   AS vertical
+            tp1."team_id"         AS team_id,
+            0                     AS water_flow,
+            tp1."power"           AS power,
+            tp1."horizontal"      AS horizontal,
+            tp1."vertical"        AS vertical,
+            tp1."competition_id"  AS competition_id
           FROM (SELECT *
                 FROM public."WatterBottlingTeamPositions"
                 WHERE NOT reverted) as tp1
@@ -27,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
                       FROM public."WatterBottlingTeamPositions"
                       WHERE NOT reverted) as tp2
               ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
-          WHERE tp1.competition_id = 1 AND tp2.id IS NULL;
+          WHERE tp1.competition_id = tp2.competition_id AND tp2.id IS NULL;
         `, { logging: options.logging })
     }
     return true

@@ -16,6 +16,7 @@ async function getGrid(competitionId, dbTransaction) {
    FROM (
      SELECT *
      FROM public."WatterBottlingCurrentTeamPositions" positions
+     WHERE "competition_id" = :competitionId
    UNION
      SELECT
        0 AS team_id,
@@ -23,7 +24,9 @@ async function getGrid(competitionId, dbTransaction) {
        0 AS power,
        grid."horizontal" AS horizontal,
        grid."vertical" AS vertical
+       grid."competition_id" AS competition_id
      FROM public."WatterBottlingGrid" grid
+     WHERE "competition_id" = :competitionId
    ) AS currentPositions
    GROUP BY "horizontal", "vertical"
    ORDER BY "vertical" DESC, "horizontal" ASC`
@@ -47,8 +50,10 @@ async function getCurrentTeamPositions(competitionId, dbTransaction) {
   FROM
     public."WatterBottlingCurrentTeamPositions" AS currentPositions
     INNER JOIN public."WatterBottlingGrid" AS grid
-      ON currentPositions."horizontal" = grid."horizontal"
-        AND currentPositions."vertical" = grid."vertical"
+      ON currentPositions."competition_id" = :competitionId
+        AND grid."competition_id" = :competitionId
+        AND currentPositions."horizontal" = grid."horizontal"
+        AND currentPositions."vertical" = grid."vertical" 
   ORDER BY
     currentPositions."vertical" DESC,
     currentPositions."horizontal" ASC`
