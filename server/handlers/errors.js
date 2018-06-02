@@ -32,7 +32,7 @@ async function handleErrors(ctx, next) {
       // Handle ValidationErrors here, so we dont have to in every handler
       responseError = new responseErrors.BadRequestError(err.message)
     } else if (!(err instanceof responseErrors.ResponseError)) {
-      // This should never happen, log appropriatelly
+      // This should never happen, log appropriately
       errorLogger.error(err)
       responseError = new responseErrors.InternalServerError()
     }
