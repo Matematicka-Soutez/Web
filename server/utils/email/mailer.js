@@ -19,7 +19,7 @@ function sendResetPasswordEmail(options) {
     to: options.toAddress,
     from: config.sendgrid.fromAddress,
     subject: 'Reset password',
-    text: `Hi ${options.fullName}.\n You can reset your password here: ${config.hostname}auth/reset-password/${options.resetPasswordToken} If you haven't requested password change, please ignore this message.`,
+    text: `Hi ${options.fullName}.\n You can reset your password here: ${config.hostname}/auth/reset-password/${options.resetPasswordToken} If you haven't requested password change, please ignore this message.`,
   }
   sgMail.send(msg)
 }
@@ -32,7 +32,7 @@ function sendInviteEmail(options) {
     to: options.toAddress,
     from: config.sendgrid.fromAddress,
     subject: 'Welcome to MaSo!',
-    text: `Hi ${options.fullName}.\n Welcome to MaSo. Please confirm your email here: ${config.hostname}auth/confirm-registration/${options.confirmToken}`,
+    text: `Hi ${options.fullName}.\n Welcome to MaSo. Please confirm your email here: ${config.hostname}/auth/confirm-registration/${options.confirmToken}`,
   }
   sgMail.send(msg)
 }

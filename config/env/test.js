@@ -1,7 +1,7 @@
 /* eslint-disable no-process-env */
 
 module.exports = {
-  hostname: 'http://localhost:3000/',
+  hostname: 'http://localhost:3000',
   logger: {
     stdout: true,
     minLevel: 'debug',

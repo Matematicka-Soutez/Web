@@ -1,7 +1,7 @@
 const request = require('request-promise')
 const Promise = require('bluebird')
+const config = require('../../../config')
 
-const SERVER = 'https://maso23.herokuapp.com'
 const AUTH = 'JWT TOKEN' // eslint-disable-line max-len
 
 async function runSimulation() {
@@ -14,7 +14,7 @@ async function runSimulation() {
     }
     await request({ // eslint-disable-line no-await-in-loop
       method: 'PUT',
-      uri: `${SERVER}/api/org/game/move`,
+      uri: `${config.hostname}/api/org/game/move`,
       headers: {
         Authorization: AUTH,
         'Content-Type': 'application/json',

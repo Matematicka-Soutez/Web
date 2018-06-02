@@ -1,4 +1,4 @@
 
 module.exports = {
-  hostname: 'https://maso-development.herokuapp.com/',
+  hostname: 'https://maso-development.herokuapp.com',
 }
