@@ -24,7 +24,7 @@
   },
   "common": {
     "name": "Lahvování vody",
-    "routes": "/server/routes",
-    "databaseModels": "/server/database/models/"
+    "routes": "/api/src/routes",
+    "databaseModels": "/api/src/database/models/"
   }
 }

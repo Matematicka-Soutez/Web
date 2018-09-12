@@ -36,7 +36,7 @@ module.exports = {
     settings: {
       // import/name rule does not recognize named exports from chai module (rule is disabled for chai file only)
       'import/ignore': [
-        './common/chai'
+        './core/chai'
       ]
     },
     rules: {
@@ -45,7 +45,7 @@ module.exports = {
     }
   }, {
     // Little different rules for database models
-    files: ['server/database/models/*'],
+    files: ['api/src/database/models/*'],
     rules: {
       'max-len': 0,
       'new-cap': 0,
