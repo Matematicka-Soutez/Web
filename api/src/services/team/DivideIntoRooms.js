@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const TransactionalService = require('./../TransactionalService')
+const TransactionalService = require('./../../../../core/services/TransactionalService')
 const venueRepository = require('./../../repositories/venue')
 const teamRepository = require('./../../repositories/team')
 
