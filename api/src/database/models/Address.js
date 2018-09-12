@@ -10,11 +10,6 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Address.associate = models => {
-    Address.hasOne(models.School, {
-      as: 'school',
-      foreignKey: { name: 'addressId', field: 'address_id' },
-      onDelete: 'RESTRICT',
-    })
     Address.hasOne(models.Venue, {
       as: 'venue',
       foreignKey: { name: 'addressId', field: 'address_id' },

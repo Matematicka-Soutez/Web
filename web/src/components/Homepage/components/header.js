@@ -10,7 +10,7 @@ const Header = () => (
       </h3>
       <a className="btn btn-primary btn-xl js-scroll-trigger" href="#about">O soutěži</a>
       &nbsp;&nbsp;
-      <a className="btn btn-primary btn-xl js-scroll-trigger" href="#registrace">Registrace</a>
+      <a className="btn btn-primary btn-xl js-scroll-trigger" href="/results">Výsledky</a>
     </div>
     <div className="overlay"></div>
   </header>
