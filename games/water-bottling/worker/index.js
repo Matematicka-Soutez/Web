@@ -1,7 +1,7 @@
 const schedule = require('node-schedule')
 const moment = require('moment')
 const gameConfig = require('../config.json')
-const log = require('../../../api/src/utils/logger').workerLogger
+const log = require('../../../core/logger').workerLogger
 const ScoreTeamsService = require('../api/src/services/ScoreTeams')
 
 function init(competition) {

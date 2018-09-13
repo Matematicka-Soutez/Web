@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
-import Table, { TableHead, TableBody, TableRow, TableCell } from '@material-ui/core/Table'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableBody from '@material-ui/core/TableBody'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
 
 const rootStyle = {
   margin: '16px 8px 8px 8px',
