@@ -28,8 +28,12 @@ module.exports = (sequelize, DataTypes) => {
             LEFT JOIN (SELECT *
                       FROM public."WatterBottlingTeamPositions"
                       WHERE NOT reverted) as tp2
-              ON (tp1.team_id = tp2.team_id AND tp1."createdAt" < tp2."createdAt")
-          WHERE tp1.competition_id = tp2.competition_id AND tp2.id IS NULL;
+            ON (
+              tp1.team_id = tp2.team_id
+              AND tp1.competition_id = tp2.competition_id
+              AND tp1."createdAt" < tp2."createdAt"
+            )
+          WHERE tp2.id IS NULL;
         `, { logging: options.logging })
     }
     return true

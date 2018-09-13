@@ -1,8 +1,8 @@
 const fs = require('fs')
 const path = require('path')
-const log = require('../api/src/utils/logger').workerLogger
+const log = require('../core/logger').workerLogger
 const competitionRepository = require('../api/src/repositories/competition')
-const appErrors = require('../api/src/utils/errors/application')
+const appErrors = require('../core/errors/application')
 
 
 function initApplicationWide() {
@@ -14,7 +14,7 @@ function initApplicationWide() {
 async function initGameSpecific() {
   try {
     const competition = await competitionRepository.findCurrentCompetition()
-    const gameWorkerPath = path.normalize(`${__dirname}/../../games/${competition.game.folder}/server/worker/index.js`) // eslint-disable-line max-len
+    const gameWorkerPath = path.normalize(`${__dirname}/../games/${competition.game.folder}/worker/index.js`) // eslint-disable-line max-len
     if (fs.existsSync(gameWorkerPath)) { // eslint-disable-line no-sync
       const gameWorker = require(gameWorkerPath) // eslint-disable-line global-require
 
