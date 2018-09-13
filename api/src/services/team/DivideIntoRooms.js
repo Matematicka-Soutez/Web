@@ -3,22 +3,7 @@ const TransactionalService = require('./../../../../core/services/TransactionalS
 const venueRepository = require('./../../repositories/venue')
 const teamRepository = require('./../../repositories/team')
 
-const EXCEPTIONS = [{
-  venueId: 1,
-  roomId: 2,
-  DR_ID: 1136,
-  number: 25,
-}, {
-  venueId: 1,
-  roomId: 1,
-  DR_ID: 1245,
-  number: 1,
-}, {
-  venueId: 1,
-  roomId: 1,
-  DR_ID: 0,
-  number: 2,
-}]
+const EXCEPTIONS = []
 
 module.exports = class DivideIntoRoomsService extends TransactionalService {
   schema() {

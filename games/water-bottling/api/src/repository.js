@@ -78,16 +78,13 @@ async function getResults(competitionId, dbTransaction) {
       attributes: [
         'name',
         'number',
+        'school',
         [db.sequelize.literal(`("solved_problems" * ${PROBLEM_POINT_VALUE})`), 'problemScore'],
         'solvedProblems',
       ],
       model: db.Team,
       as: 'team',
       include: [{
-        attributes: ['shortName'],
-        model: db.School,
-        as: 'school',
-      }, {
         attributes: ['id', 'firstName', 'lastName'],
         model: db.TeamMember,
         as: 'members',
@@ -269,7 +266,7 @@ function parseResult(result) {
   const parsed = {}
   parsed.teamName = result.team.name
   parsed.teamNumber = result.team.number
-  parsed.school = result.team.school.shortName
+  parsed.school = result.team.school
   parsed.teamMembers = parseTeamMembers(result.team.members)
   parsed.room = result.team.competitionVenueRoom.room.name
   parsed.gameScore = parseScore(result.gameScore)

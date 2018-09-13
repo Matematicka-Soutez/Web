@@ -86,27 +86,30 @@ class Input extends Component {
           <Grid container spacing={24}>
             <Grid item xs={12}>
               <h1 style={{ marginBottom: 10 }}>
+                <br />
                 {this.state.team.number} - {this.state.team.name}
               </h1>
             </Grid>
-            <Grid item container xs={12} sm={3}>
+            <Grid item container xs={12} sm={6}>
               <Grid item>
                 <InputControls
                   onMove={this.moveTeam}
                   teamId={this.state.team.id}
                   possibleMoves={this.state.possibleMoves} />
+                <br />
               </Grid>
               <Grid item>
                 <TeamSummary position={this.state} />
               </Grid>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <SimpleGrid grid={this.state.grid} position={this.state} />
+              <br />
               <Grid item>
                 <Button variant="raised" color="secondary" onClick={this.revertMove}>
                 Vrátit změnu
                 </Button>
               </Grid>
-            </Grid>
-            <Grid item xs={12} sm={9}>
-              <SimpleGrid grid={this.state.grid} position={this.state} />
             </Grid>
           </Grid>
         </div>

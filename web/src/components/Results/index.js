@@ -61,7 +61,7 @@ class ResultsContainer extends Component {
             variant="headline"
             component="h2"
             style={{ textAlign: 'center', marginBottom: 16 }}>
-            Výsledky jarního MaSa 2018
+            Výsledky DěMaKu
           </Typography>
           <Typography component="div">
             <Table style={{ minWidth: 780 }}>
@@ -72,7 +72,6 @@ class ResultsContainer extends Component {
                   <TableCell style={smallPadding}>Název týmu</TableCell>
                   <TableCell style={smallPadding}>Škola</TableCell>
                   <TableCell style={smallPadding}>Soutěžící</TableCell>
-                  <TableCell style={smallColumnWidth}>Místnost</TableCell>
                   <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
                   Body ve hře
                   </TableCell>
@@ -97,7 +96,6 @@ class ResultsContainer extends Component {
                       {row.teamMembers.map(member =>
                         <span key={member.id}>{member.name}<br /></span>)}
                     </TableCell>
-                    <TableCell style={smallColumnWidth}>{row.room}</TableCell>
                     <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
                       {row.gameScore}
                     </TableCell>

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
 import Grid from '@material-ui/core/Grid'
 import Tabs, { Tab } from '@material-ui/core/Tabs'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import Switch from '@material-ui/core/Switch'
 import RoomInputContainer from './RoomInputContainer'
 
 class InputContainer extends Component {
@@ -14,7 +12,6 @@ class InputContainer extends Component {
     this.state = {
       jwtToken: params.jwtToken,
       value: 0,
-      evenRooms: true,
       venues: [{ rooms: [{ teams: [{}] }] }],
     }
   }
@@ -27,7 +24,6 @@ class InputContainer extends Component {
       this.setState({
         jwtToken: this.state.jwtToken,
         value: 1,
-        evenRooms: true,
         venues,
       })
     } catch (err) {
@@ -59,29 +55,16 @@ class InputContainer extends Component {
     return (
       <div className="venueSelect">
         <Grid container spacing={24}>
-          <Grid item xs={10} sm={11}>
+          <Grid item xs={12} sm={12}>
             <AppBar position="static">
               <Tabs value={value} onChange={this.handleChange}>
                 {tabs}
               </Tabs>
             </AppBar>
           </Grid>
-          <Grid item xs={2} sm={1}>
-            <FormControlLabel
-              control={<Switch
-                checked={this.state.evenRooms}
-                onChange={this.handleSwitch}
-                value="evenRooms"
-                color="primary"
-              />}
-              label="Sudé" />
-          </Grid>
         </Grid>
         <RoomInputContainer
-          teams={rooms[value].teams
-            .filter(team => (team.number % 2 === 0) === this.state.evenRooms)
-            .filter(team => team.arrived)
-          }
+          teams={rooms[value].teams.filter(team => team.arrived)}
           jwtToken={this.state.jwtToken} />
       </div>
     )
