@@ -12,7 +12,7 @@ const AboutSection = () => (
             <h2 className="mb-5">O soutěži</h2>
           </div>
           <p className="lead">
-            MaSo je <strong>týmová matematická soutěž pro žáky šestých až devátých tříd</strong>
+            MaSo je týmová matematická soutěž pro žáky šestých až devátých tříd
             {' '}základních škol a odpovídajících ročníků víceletých gymnázií, která se koná{' '}
             <strong>dvakrát ročně</strong>.
             Nejde tu ovšem jen o <strong>počítání příkladů</strong>.
@@ -25,8 +25,10 @@ const AboutSection = () => (
           <p className="lead">
             Týmy jsou 3 - 4 členné, součet ročníků jednotlivých žáků v jednom z nich může
             být nejvýše 32. Například v jednom družstvu mohou být jeden žák sedmé třídy,
-            dva žáci osmých tříd a jeden žák deváté třídy, protože 7 + 8 + 8 + 9 = 32.
-            Týmu je nutno zajistit doprovod, který za něj bude zodpovídat v době mimo soutěž.
+            dva žáci osmých tříd a jeden žák deváté třídy, protože 7 + 8 + 8 + 9 = 32.{' '}
+            <strong>
+              Týmu je nutno zajistit doprovod, který za něj bude zodpovídat v době mimo soutěž.
+            </strong>
           </p>
           <br />
           <h2>Průběh soutěže</h2>
@@ -34,11 +36,11 @@ const AboutSection = () => (
             Žáci počítají matematické příklady a řeší různé logické úlohy.
             Za jejich vyřešení pak mohou odehrávat tahy ve hře.
             Kromě samostatné činnosti je důležitá i koordinace a vzájemná spolupráce.
-            Umístnění týmu na stupních vítězů pak záleží nejen na tom,
-            kolik správně vyřeší příkladů, ale také na jeho strategii ve hře.
-            Během hry je povoleno používat papíry a tužky,
+            Umístnění týmu na stupních vítězů záleží nejen na tom,
+            kolik správně vyřeší příkladů, ale také na strategii ve hře.
+            Během hry je povoleno používat papír a tužku,
             ostatní pomůcky jako tabulky (a další literatura), kalkulačky, rýsovací pomůcky,
-            elektronická zařízení je používat zakázáno.
+            elektronická zařízení jsou zakázány.
             Hry a příklady, které se již na MaSu objevily, najdete v Archivu.
           </p>
           <br />
