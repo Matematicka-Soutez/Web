@@ -31,8 +31,8 @@ function CurrentEditionSection() {
                     <Typography gutterBottom variant="headline" component="h2">
                       Praha
                     </Typography>
-                    <Typography component="p" style={{ fontStyle: 'italic' }}>
-                      Budova MFF UK,<br />
+                    <Typography component="p" variant="caption">
+                      Matematicko-fyzikální fakulta UK,<br />
                       Malostranské náměstí 25,<br />
                       Praha 1, 110 00<br />
                     </Typography>
@@ -50,8 +50,8 @@ function CurrentEditionSection() {
                     <Typography gutterBottom variant="headline" component="h2">
                       Brno
                     </Typography>
-                    <Typography component="p" style={{ fontStyle: 'italic' }}>
-                      Budova Gymnázia Matyáše Lercha,<br />
+                    <Typography component="p" variant="caption">
+                      Gymnázium Matyáše Lercha,<br />
                       Žižkova ulice 980/55,<br />
                       Brno - Veveří, 616 00<br />
                     </Typography>
