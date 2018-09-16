@@ -11,7 +11,7 @@ section.timeline-outer {
 
 .timeline {
   background-color: white;
-  border-left: 8px solid #42A5F5;
+  border-left: 8px solid #aaa;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 2px;
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -63,9 +63,9 @@ section.timeline-outer {
 }
 
 .timeline .event:after {
-  box-shadow: 0 0 0 8px #42A5F5;
+  box-shadow: 0 0 0 8px #aaa;
   left: -30px;
-  background: #212121;
+  background: #ffd42d;
   border-radius: 50%;
   height: 11px;
   width: 11px;

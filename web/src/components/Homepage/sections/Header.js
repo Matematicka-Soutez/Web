@@ -13,16 +13,17 @@ const Header = () => (
         <Button
           className="js-scroll-trigger"
           variant="contained"
-          color="primary"
+          color="default"
           size="large"
-          href="#registrace">
+          href="#registrace"
+          style={{ backgroundColor: '#333', color: '#eee' }}>
           Registrace
         </Button>
         &nbsp;&nbsp;
         <Button
           className="js-scroll-trigger"
           variant="outlined"
-          color="primary"
+          color="default"
           size="large"
           href="#o-soutezi">
           O soutěži
