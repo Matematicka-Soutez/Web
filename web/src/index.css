@@ -1,5 +1,121 @@
-body {
+body,
+html {
+  width: 100%;
+  height: 100%;
   margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  font-size: 15pt;
+}
+
+body {
+  font-family: "Roboto";
+  color: #212121;
+}
+
+p {
+  line-height: 1.6rem;
+}
+
+.content-section {
+  padding-top: 3rem;
+  padding-bottom: 5rem; }
+
+.content-section-heading h2 {
+  font-size: 2rem; }
+
+.content-section-heading h3 {
+  font-size: 1.2rem;
+  text-transform: uppercase; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Vollkorn";
+  font-weight: 400; }
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.scroll-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  opacity: 0;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  color: white;
+  background: rgba(52, 58, 64, 0.5);
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  line-height: 45px; }
+.scroll-to-top:focus, .scroll-to-top:hover {
+  color: white; }
+.scroll-to-top:hover {
+  background: #343a40; }
+.scroll-to-top {
+  font-weight: 800; }
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn; }
+
+.masthead {
+  text-align: center;
+  min-height: 30rem;
+  position: relative;
+  display: table;
+  width: 100%;
+  height: auto;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover; }
+.masthead h1 {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0; }
+.masthead h1::-moz-selection {
+  background:#212121;
+  color:#ffd42d;
+}
+.masthead h1::selection {
+  background:#212121;
+  color:#ffd42d;
+}
+.masthead img {
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 992px) {
+  .masthead {
+    height: 100vh; }
+  .masthead h1 {
+    font-size: 2.1rem; } }
+
+.current-edition, .footer {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), #2196f3;
+  color: white;
+}
+
+.timeplan, .masthead {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), #ffd42d;
 }
