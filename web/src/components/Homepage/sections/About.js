@@ -26,6 +26,7 @@ const AboutSection = () => (
             Týmy jsou 3 - 4 členné, součet ročníků jednotlivých žáků v jednom z nich může
             být nejvýše 32. Například v jednom družstvu mohou být jeden žák sedmé třídy,
             dva žáci osmých tříd a jeden žák deváté třídy, protože 7 + 8 + 8 + 9 = 32.
+            Týmu je nutno zajistit doprovod, který za něj bude zodpovídat v době mimo soutěž.
           </p>
           <br />
           <h2>Průběh soutěže</h2>

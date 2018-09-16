@@ -25,9 +25,7 @@ const TimeplanSection = () => (
                 <h3>Zahájení soutěže</h3>
                 <p>
                   Organizační pokyny, vysvětlení pravidel a příprava na hru.
-                  K družstvu je nutno zajistit doprovod,
-                  který bude za členy družstva zodpovídat v době mimo soutěž.
-                  V čase soutěže bude pro učitele v Praze připravena přednáška.
+                  V čase soutěže bude pro doprovázející učitele připravena přednáška.
                 </p>
               </li>
               <li className="event" data-date="9:50 – 11:45">
