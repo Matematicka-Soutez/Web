@@ -20,7 +20,7 @@ app.use(koaCompress())
 app.use(koaBody(config.server.bodyParser))
 
 // Serve static files from the React app
-app.use(koaStatic(path.join(__dirname, '../web/build')))
+app.use(koaStatic(path.join(__dirname, '../../web/build')))
 
 // Setup routes
 app.use(routes)
