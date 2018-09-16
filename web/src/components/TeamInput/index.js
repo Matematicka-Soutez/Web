@@ -37,11 +37,11 @@ class InputContainer extends Component {
     }
   }
 
-  handleChange = (event, value) => {
+  handleChange = (event, value) => { // eslint-disable-line no-shadow
     this.setState({ ...this.state, value })
   }
 
-  handleSwitch = event => {
+  handleSwitch = event => { // eslint-disable-line no-shadow
     this.setState({ ...this.state, evenRooms: event.target.checked })
   }
 

@@ -38,7 +38,7 @@ class InputControls extends Component {
     }
   }
 
-  onClick(event) {
+  onClick(event) { // eslint-disable-line no-shadow
     const direction = event.currentTarget.getAttribute('value')
     this.props.onMove(direction)
   }

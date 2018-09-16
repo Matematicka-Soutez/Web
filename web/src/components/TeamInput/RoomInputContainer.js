@@ -33,7 +33,7 @@ class RoomInputContainer extends Component {
     }
   }
 
-  handleChange = (event, value) => {
+  handleChange = (event, value) => { // eslint-disable-line no-shadow
     this.setState({ value, teams: this.state.teams })
   };
 
