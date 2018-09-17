@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const Permission = sequelize.define('Permission', {
     organizerCreate: { type: DataTypes.BOOLEAN, field: 'organizer_create', allowNull: false, defaultValue: false },

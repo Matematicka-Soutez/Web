@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+'use strict'
 
 module.exports = (sequelize, DataTypes) => {
   const Organizer = sequelize.define('Organizer', {

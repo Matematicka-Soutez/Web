@@ -1,3 +1,5 @@
+'use strict'
+
 const appErrors = require('../../../../core/errors/application')
 const responseErrors = require('../../../../core/errors/response')
 const GetCurrentGridService = require('./services/GetCurrentGrid')

@@ -1,3 +1,5 @@
+'use strict'
+
 const cluster = require('cluster')
 const config = require('../../config/index')
 const log = require('../../core/logger').logger

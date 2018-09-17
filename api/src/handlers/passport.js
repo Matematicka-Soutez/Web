@@ -1,3 +1,5 @@
+'use strict'
+
 const log = require('../../../core/logger').logger
 const responseErrors = require('../../../core/errors/response')
 const { authorizeToken } = require('../utils/authorize')
@@ -35,7 +37,7 @@ async function authenticateOrganizer(ctx, next) {
 }
 
 function parseAuthHeader(hdrValue) {
-  const re = /(\S+)\s+(\S+)/
+  const re = /(\S+)\s+(\S+)/u
   if (!hdrValue || typeof hdrValue !== 'string') {
     return null
   }

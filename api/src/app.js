@@ -1,3 +1,5 @@
+'use strict'
+
 const cluster = require('cluster')
 const path = require('path')
 const http = require('http')
@@ -26,14 +28,18 @@ app.use(koaStatic(path.join(__dirname, '../../web/build')))
 app.use(routes)
 
 // Start method
-app.start = () => {
+app.start = async () => {
   app.socketApp = socketInit(app.server)
   initPublish(app.socketApp)
 
+  log.info('Preparing database ...')
+  await db.sequelize.sync()
+
   log.info('Starting server ...')
-  app.server.listen(config.server.port, () => {
-    log.info(`==> 🌎  Server listening on port ${config.server.port}.`)
+  await new Promise((resolve, reject) => {
+    const listen = app.server.listen(config.server.port, err => err ? reject(err) : resolve(listen))
   })
+  log.info(`==> 🌎  Server listening on port ${config.server.port}.`)
 }
 
 // Stop method

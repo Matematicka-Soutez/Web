@@ -1,3 +1,5 @@
+'use strict'
+
 const utils = require('../utils')
 const repository = require('../repository')
 const gameConfig = require('../../../config.json')

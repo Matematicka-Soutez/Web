@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const School = sequelize.define('School', {
     shortName: { type: DataTypes.STRING, allowNull: false, field: 'short_name' },

@@ -1,3 +1,5 @@
+'use strict'
+
 const enums = require('../../../core/enums')
 const { createOrganizer, createTeacher } = require('./generators')
 
@@ -9,6 +11,13 @@ async function initUsers() {
     phone: '+420 722 959 878',
     password: 'Password123!',
     schooldId: 1,
+  }
+
+  const newcomer = {
+    firstName: 'František',
+    lastName: 'Nový',
+    email: 'novy@sink.sendgrid.net',
+    password: 'Password123!',
   }
 
   const unconfirmed = {
@@ -39,7 +48,8 @@ async function initUsers() {
 
   return {
     teacher: await createTeacher(teacher),
-    organizer: {
+    organizers: {
+      newcomer,
       unconfirmed: await createOrganizer(unconfirmed),
       draftsman: await createOrganizer(draftsman),
       admin: await createOrganizer(admin),

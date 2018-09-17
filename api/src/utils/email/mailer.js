@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+'use strict'
 
 const sgMail = require('@sendgrid/mail')
 const config = require('../../../../config')

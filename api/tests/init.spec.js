@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
+'use strict'
 
 const nock = require('nock')
-const config = require('../config')
-const app = require('../api/app')
-const log = require('../api/utils/logger').logger
+const config = require('../../config')
+const app = require('../src/app')
+const log = require('../../core/logger').logger
 
 const nockSendGrid = () => {
   nock('https://api.sendgrid.com')
@@ -16,7 +17,7 @@ beforeEach(() => {
   nockSendGrid()
 })
 
-before(async function before() {
+before(async function() {
   if (config.database.connectionString.indexOf('localhost') < 0 && !config.server.isTravis) {
     log.warn('!!WARNING: You are trying to RUN tests on external database. Please use local database instead :WARNING!!')
     process.exit(129) // eslint-disable-line no-process-exit
@@ -25,8 +26,9 @@ before(async function before() {
   this.app = app
   this.server = app.server
   log.info('==> In test mode.')
+  return true
 })
 
-after(async function after() {
-  await this.app.stop()
+after(function() {
+  return this.app.stop()
 })

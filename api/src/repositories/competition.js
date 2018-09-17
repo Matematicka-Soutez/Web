@@ -1,3 +1,5 @@
+'use strict'
+
 const moment = require('moment')
 const appErrors = require('../../../core/errors/application')
 const db = require('./../database')

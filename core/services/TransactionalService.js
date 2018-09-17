@@ -1,4 +1,6 @@
-const Promise = require('bluebird')
+'use strict'
+
+Promise = require('bluebird')
 const logger = require('../logger').serviceLogger
 const db = require('../../api/src/database')
 const AbstractService = require('./AbstractService')

@@ -1,5 +1,7 @@
+'use strict'
+
+Promise = require('bluebird')
 const Chance = require('chance')
-const Promise = require('bluebird')
 const _ = require('lodash')
 const crypto = require('../../src/utils/crypto')
 const db = require('../../src/database')
@@ -91,7 +93,7 @@ async function createOrganizer(defaults) {
     roleId: chance.pickone(enums.ROLES.ids),
   }, defaults)
   const password = organizer.password
-  organizer.password = await crypto.hashPassword(organizer.password)
+  organizer.password = await crypto.hashPassword(organizer.password) // eslint-disable-line require-atomic-updates, max-len
   const created = await db.Organizer.create(organizer)
   return _.assign({}, organizer, { id: created.id, password })
 }
@@ -107,7 +109,7 @@ async function createTeacher(defaults = {}) {
     schoolId: 1,
   }, defaults)
   const password = teacher.password
-  teacher.password = await crypto.hashPassword(teacher.password)
+  teacher.password = await crypto.hashPassword(teacher.password) // eslint-disable-line require-atomic-updates, max-len
   const created = await db.Teacher.create(teacher)
   return _.assign({}, teacher, { id: created.id, password })
 }

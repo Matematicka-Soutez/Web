@@ -1,3 +1,5 @@
+'use strict'
+
 const schedule = require('node-schedule')
 const moment = require('moment')
 const gameConfig = require('../config.json')

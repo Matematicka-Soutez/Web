@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const Teacher = sequelize.define('Teacher', {
     /* COMMON PROPERTIES */

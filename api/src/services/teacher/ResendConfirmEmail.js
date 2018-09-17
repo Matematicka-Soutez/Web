@@ -1,3 +1,5 @@
+'use strict'
+
 const validators = require('../../utils/validators')
 const TransactionalService = require('../../../../core/services/TransactionalService')
 const crypto = require('../../utils/crypto')

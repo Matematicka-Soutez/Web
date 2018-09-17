@@ -1,3 +1,5 @@
+'use strict'
+
 function parseTeacher(teacher) {
   if (!teacher) {
     throw new Error('Teacher is empty in response parsing')

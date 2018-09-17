@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const WatterBottlingCurrentTeamPosition = sequelize.define('WatterBottlingCurrentTeamPosition', {
     horizontal: { type: DataTypes.INTEGER, allowNull: false, field: 'horizontal' },

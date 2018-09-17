@@ -1,3 +1,5 @@
+'use strict'
+
 const jwt = require('jsonwebtoken')
 const responseErrors = require('../../../core/errors/response')
 const VerifyTokenPayloadService = require('../services/VerifyTokenPayload')

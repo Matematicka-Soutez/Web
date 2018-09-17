@@ -1,4 +1,5 @@
-/* eslint-disable max-len */
+/* eslint-disable max-classes-per-file, max-len */
+'use strict'
 
 const logger = require('../logger').errorLogger
 

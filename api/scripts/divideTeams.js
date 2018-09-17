@@ -1,3 +1,5 @@
+'use strict'
+
 const config = require('../../config/index')
 const DivideIntoRoomsService = require('../src/services/team/DivideIntoRooms')
 const db = require('../src/database/index')
@@ -9,9 +11,9 @@ async function divideTeams() {
     }
     await new DivideIntoRoomsService().execute({})
     await db.sequelize.close()
-    console.log('Teams divided.')
+    console.log('Teams divided.') // eslint-disable-line no-console
   } catch (err) {
-    console.error(err)
+    console.error(err) // eslint-disable-line no-console
     throw new Error('Team shuffling failed')
   }
   return true

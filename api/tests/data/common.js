@@ -1,4 +1,6 @@
-const Promise = require('bluebird')
+'use strict'
+
+Promise = require('bluebird')
 const Chance = require('chance')
 const _ = require('lodash')
 const { createSchool, createTeam, createN } = require('./generators')

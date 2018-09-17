@@ -1,3 +1,5 @@
+'use strict'
+
 const repository = require('../repository')
 const AbstractService = require('./../../../../../core/services/AbstractService')
 

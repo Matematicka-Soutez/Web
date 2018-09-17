@@ -1,3 +1,5 @@
+'use strict'
+
 const repository = require('../repository')
 const appErrors = require('../../../../../core/errors/application')
 const TransactionalService = require('./../../../../../core/services/TransactionalService')

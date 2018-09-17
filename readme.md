@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/snEk42/MaSo.svg?branch=master)](https://travis-ci.org/snEk42/MaSo)
 
 ## What's included
+
 - Koa 2
 - Mocha tests with Instanbul (Nyc) code coverage
 - ESlint with STRV JavaScript rules
@@ -15,10 +16,12 @@
 ## Running the project
 
 ### Prerequisites
+
 - install Node.js current release (<https://nodejs.org/en/>)
 - instal Docker (<https://docs.docker.com/engine/installation/mac/>)
 
 ### Run
+
 1. `npm i` - to install Node.js packages
 2. start Docker
 3. `make infra` - to initialize project services (starts the Postgres database)
@@ -28,40 +31,46 @@
 7. open <http://localhost:3000>
 
 ### Documentation
+
 - run the project and open `http://localhost:3000/docs`
 
 ## Available commands
 
 > To turn on make autocomplete put the code below into your `.bash_profile`
-```
+
+```bash
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
 ```
 
-### Infrastructure:
+### Infrastructure
+
 - `make infra-restart` - restarts all project services
 - `make infra-start` - starts all project services
 - `make infra-stop` - stops all project services
 
-### Code QA:
+### Code QA
+
 - `make lint` - runs ESlint
 - `make test` - runs Mocha tests
 - `make coverage` - generates Istanbul coverage
 - `make clean` - removes generated files
 - `make security-test` - runs security test
 
-### Database:
+### Database
+
 - `make db-migrate` - runs sequelize database migrations (dev database)
 - `make db-migrate-test` - the same as above for test database
 - `make db-reset` - resets database into initial state (reverts all migrations, seeds the database and migrates to the latest version)
 - `make db-reset-test` - the same as above for test database
 
-### Server start:
+### Server start
+
 - `make run` - runs the API server
 - `make debug` - runs code in debug mode
 - `make watch` - runs server in the watch mode (autorestarts when change is made)
 
-
 ## Integrations
+
 Sendgrid (email service, email campaigns)
 New Relic (monitoring)
 Logentries (serchable logs)

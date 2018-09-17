@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const CompetitionVenue = sequelize.define('CompetitionVenue', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },

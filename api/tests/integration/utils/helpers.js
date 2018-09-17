@@ -1,7 +1,9 @@
+'use strict'
+
 require('chai').should()
+Promise = require('bluebird')
 const traverse = require('traverse')
 const nock = require('nock')
-const Promise = require('bluebird')
 
 const removeCreatedAndUpdatedAt = object => {
   if (!object) {

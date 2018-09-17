@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const WatterBottlingTeamScore = sequelize.define('WatterBottlingTeamScore', {
     score: { type: DataTypes.DOUBLE, allowNull: false, field: 'score' },

@@ -1,5 +1,7 @@
+'use strict'
+
+Promise = require('bluebird')
 const crypto = require('crypto')
-const Promise = require('bluebird')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const config = require('../../../config')

@@ -1,3 +1,5 @@
+'use strict'
+
 const appErrors = require('../../../core/errors/application')
 const db = require('./../database')
 const parsers = require('./repositoryParsers')

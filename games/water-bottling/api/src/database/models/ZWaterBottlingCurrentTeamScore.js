@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const WatterBottlingCurrentTeamScore = sequelize.define('WatterBottlingCurrentTeamScore', {
     // id column is here just to pleasure sequelize

@@ -1,9 +1,11 @@
 /* eslint-disable no-console, max-len, no-sync */
+'use strict'
+
+Promise = require('bluebird')
 const fs = require('fs')
 const path = require('path')
 const parse = require('csv-parse/lib/sync')
 const stringify = require('csv-stringify/lib/sync')
-const Promise = require('bluebird')
 const request = require('request-promise')
 const readlineSync = require('readline-sync')
 const nodemailer = require('nodemailer')

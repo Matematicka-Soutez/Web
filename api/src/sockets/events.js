@@ -1,3 +1,5 @@
+'use strict'
+
 const SOCKET_NOTIFICATION_MESSAGE_TYPE = {
   AUTHENTICATED: {
     type: 'authenticated',

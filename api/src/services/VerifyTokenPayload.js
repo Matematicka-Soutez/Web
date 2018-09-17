@@ -1,4 +1,6 @@
-const Promise = require('bluebird')
+'use strict'
+
+Promise = require('bluebird')
 const configIdleTimeoutSec = require('../../../config').auth.jwt.idleTimeoutSec
 const AbstractService = require('../../../core/services/AbstractService')
 const appErrors = require('../../../core/errors/application')

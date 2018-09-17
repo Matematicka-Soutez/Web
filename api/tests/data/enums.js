@@ -1,3 +1,5 @@
+'use strict'
+
 const db = require('../../src/database')
 const enums = require('../../../core/enums')
 

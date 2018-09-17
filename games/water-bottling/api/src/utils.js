@@ -1,3 +1,5 @@
+'use strict'
+
 const appErrors = require('../../../../core/errors/application')
 const gameEnums = require('../../core/enums')
 const gameConfig = require('../../config.json')

@@ -1,3 +1,5 @@
+'use strict'
+
 const GetAllByCompetitionVenueService = require('../../services/room/GetAllByCompetitionVenue')
 const appErrors = require('../../../../core/errors/application')
 const responseErrors = require('../../../../core/errors/response')

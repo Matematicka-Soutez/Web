@@ -1,3 +1,5 @@
+'use strict'
+
 const _ = require('lodash')
 const repository = require('../repository')
 const gameConfig = require('../../../config.json')

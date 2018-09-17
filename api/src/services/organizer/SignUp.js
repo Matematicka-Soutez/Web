@@ -1,3 +1,5 @@
+'use strict'
+
 const enums = require('../../../../core/enums')
 const TransactionalService = require('../../../../core/services/TransactionalService')
 const appErrors = require('../../../../core/errors/application')

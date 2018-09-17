@@ -1,3 +1,5 @@
+'use strict'
+
 const moment = require('moment')
 const AbstractService = require('../../../../core/services/AbstractService')
 const competitionRepository = require('./../../repositories/competition')

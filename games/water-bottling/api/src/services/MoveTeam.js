@@ -1,3 +1,5 @@
+'use strict'
+
 const utils = require('../utils')
 const repository = require('../repository')
 const gameEnums = require('../../../core/enums')

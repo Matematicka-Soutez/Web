@@ -1,3 +1,5 @@
+'use strict'
+
 const enumize = require('../../../core/enumize')
 
 const DIRECTIONS = enumize({

@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const Address = sequelize.define('Address', {
     titleLine1: { type: DataTypes.STRING, allowNull: false, field: 'title_line1' },

@@ -1,3 +1,6 @@
+/* eslint-disable max-classes-per-file */
+'use strict'
+
 const logger = require('../logger').errorLogger
 
 class AppError extends Error {

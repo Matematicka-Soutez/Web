@@ -1,3 +1,5 @@
+'use strict'
+
 const jsonschema = require('jsonschema')
 const moment = require('moment')
 const _ = require('lodash')
@@ -28,7 +30,7 @@ function emailValidator(options) {
   }
   options.minLength = 1
   options.maxLength = 80
-  options.pattern = /^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i // eslint-disable-line max-len
+  options.pattern = /^[-a-z0-9~!$%^&*_=+}{'?]+(\.[-a-z0-9~!$%^&*_=+}{'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/iu // eslint-disable-line max-len
   return options
 }
 
@@ -43,10 +45,10 @@ function passwordValidator(options) {
 }
 
 function advancePasswordValidation(value) {
-  const lowerCasePatt = new RegExp(/^(?=.*[a-z]).+$/)
-  const upperCasePatt = new RegExp(/^(?=.*[A-Z]).+$/)
-  const digitPatt = new RegExp(/^(?=.*\d).+$/)
-  const specialPatt = new RegExp(/^(?=.*[_\W]).+$/)
+  const lowerCasePatt = /^(?=.*[a-z]).+$/u
+  const upperCasePatt = /^(?=.*[A-Z]).+$/u
+  const digitPatt = /^(?=.*\d).+$/u
+  const specialPatt = /^(?=.*[_\W]).+$/u
 
   if (!(lowerCasePatt.test(value) && upperCasePatt.test(value))
     || !(digitPatt.test(value) || specialPatt.test(value))

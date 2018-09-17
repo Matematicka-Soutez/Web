@@ -1,3 +1,5 @@
+'use strict'
+
 const responseParsers = require('../responseParsers')
 const LoginService = require('../../services/teacher/Login')
 const SignUpService = require('../../services/teacher/SignUp')

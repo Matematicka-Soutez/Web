@@ -1,3 +1,5 @@
+'use strict'
+
 const repository = require('../repository')
 const gameConfig = require('../../../config.json')
 const AbstractService = require('./../../../../../core/services/AbstractService')

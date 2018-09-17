@@ -1,3 +1,5 @@
+'use strict'
+
 const _ = require('lodash')
 const TransactionalService = require('./../../../../core/services/TransactionalService')
 const venueRepository = require('./../../repositories/venue')

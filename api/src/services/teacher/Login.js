@@ -1,3 +1,5 @@
+'use strict'
+
 const AbstractService = require('../../../../core/services/AbstractService')
 const appErrors = require('../../../../core/errors/application')
 const validator = require('../../utils/validators')

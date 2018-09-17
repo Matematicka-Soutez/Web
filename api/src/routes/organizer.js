@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+'use strict'
+
 const Router = require('koa-router')
 const rooms = require('../handlers/organizer/rooms')
 const venues = require('../handlers/organizer/venues')

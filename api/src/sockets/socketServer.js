@@ -1,3 +1,5 @@
+'use strict'
+
 const io = require('socket.io')
 const { createClient } = require('redis')
 const adapter = require('socket.io-redis')

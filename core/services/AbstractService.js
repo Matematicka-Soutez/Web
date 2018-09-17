@@ -1,3 +1,5 @@
+'use strict'
+
 const shortId = require('shortid')
 const traverse = require('traverse')
 const _ = require('lodash')

@@ -1,3 +1,5 @@
+'use strict'
+
 const GetTimerService = require('../../services/competition/GetTimer')
 const appErrors = require('../../../../core/errors/application')
 const responseErrors = require('../../../../core/errors/response')

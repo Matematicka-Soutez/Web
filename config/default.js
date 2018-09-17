@@ -1,4 +1,5 @@
 /* eslint-disable no-process-env */
+'use strict'
 
 const pkg = require('../package')
 

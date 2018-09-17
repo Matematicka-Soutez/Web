@@ -1,8 +1,10 @@
 /* eslint-disable no-console, max-len, no-sync */
+'use strict'
+
+Promise = require('bluebird')
 const fs = require('fs')
 const path = require('path')
 const parse = require('csv-parse/lib/sync')
-const Promise = require('bluebird')
 const _ = require('lodash')
 const config = require('../../config/index')
 const enums = require('../../core/enums')

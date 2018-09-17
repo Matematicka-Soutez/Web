@@ -1,3 +1,5 @@
+'use strict'
+
 const _ = require('lodash')
 const db = require('../../../../api/src/database')
 const appErrors = require('../../../../core/errors/application')

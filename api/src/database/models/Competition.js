@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const Competition = sequelize.define('Competition', {
     name: { type: DataTypes.STRING, allowNull: false, field: 'name' },

@@ -1,4 +1,6 @@
-const Promise = require('bluebird')
+'use strict'
+
+Promise = require('bluebird')
 const _ = require('lodash')
 const enums = require('../../../core/enums')
 const {

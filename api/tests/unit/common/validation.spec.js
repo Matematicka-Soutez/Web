@@ -1,10 +1,10 @@
 /* eslint-disable max-len */
-
-const validators = require('../../../api/utils/validators')
-const appErrors = require('../../../api/utils/errors/application')
-const validationUtils = require('../../../core/validation')
+'use strict'
 
 require('chai').should()
+const validators = require('../../../src/utils/validators')
+const appErrors = require('../../../../core/errors/application')
+const validationUtils = require('../../../../core/validation')
 
 describe('Common FE/BE Validation', () => {
   describe('User name validation', () => {

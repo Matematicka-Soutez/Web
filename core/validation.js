@@ -1,7 +1,9 @@
+'use strict'
+
 const _ = require('lodash')
 
 function isLatinString(str) {
-  return (_.isString(str) && /^([\u0000-\u024F]|[\u2000-\u206F])*$/.test(str)) || _.isNil(str) // eslint-disable-line no-control-regex, max-len
+  return (_.isString(str) && /^([\u0000-\u024F]|[\u2000-\u206F])*$/u.test(str)) || _.isNil(str) // eslint-disable-line no-control-regex, max-len
     ? { valid: true }
     : { valid: false, message: 'api.errors.notALatinString' }
 }
@@ -13,7 +15,7 @@ function numberInString(string, formatMessage = null, messages = null) {
     return validResponse
   }
 
-  return /\d/.test(string)
+  return /\d/u.test(string)
     ? {
       valid: false,
       message: formatMessage && messages
@@ -29,7 +31,7 @@ function containsSpecialCharacter(string, formatMessage = null, messages = null)
     return validResponse
   }
 
-  if (string.match(/^[',.-]+$/)) {
+  if (string.match(/^[',.-]+$/u)) {
     return {
       valid: false,
       message: formatMessage && messages
@@ -38,7 +40,7 @@ function containsSpecialCharacter(string, formatMessage = null, messages = null)
     }
   }
 
-  const matches = string.match(/[$&§+:;_`~±\\/{}=?@#|<>^()[\]*"%!]/g)
+  const matches = string.match(/[$&§+:;_`~±\\/{}=?@#|<>^()[\]*"%!]/gu)
   if (matches) {
     const invalidCharacters = _.uniq(matches)
     const invalidCharactersString = invalidCharacters.join(', ')
@@ -66,7 +68,7 @@ function allUppercase(string, formatMessage = null, messages = null) {
     return validResponse
   }
 
-  return /^[A-Z\s.\-']+$/.test(string)
+  return /^[A-Z\s.\-']+$/u.test(string)
     ? {
       valid: false,
       message: formatMessage && messages
@@ -82,7 +84,7 @@ function allLowercase(string, formatMessage = null, messages = null) {
     return validResponse
   }
 
-  return /^[a-z\s.\-']+$/.test(string)
+  return /^[a-z\s.\-']+$/u.test(string)
     ? {
       valid: false,
       message: formatMessage && messages

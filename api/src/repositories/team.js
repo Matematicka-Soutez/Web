@@ -1,4 +1,6 @@
-const Promise = require('bluebird')
+'use strict'
+
+Promise = require('bluebird')
 const appErrors = require('../../../core/errors/application')
 const db = require('./../database')
 const parsers = require('./repositoryParsers')

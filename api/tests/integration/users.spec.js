@@ -1,50 +1,53 @@
+'use strict'
+
 // const should = require('chai').should()
 const request = require('supertest')
 // const moment = require('moment')
 const _ = require('lodash')
 const initDb = require('../data/init')
-const db = require('./../../api/database')
+const db = require('./../../src/database')
 // const login = require('./utils/login').loginUser
 // const enums = require('./../../core/enums')
 // const crypto = require('./../../api/utils/crypto')
 const helpers = require('./utils/helpers')
 
 describe('User API endpoints: /api/users', function userAPI() {
-  before(function before() {
+  before(function() {
     this.timeout(5000)
   })
 
-  describe('SignUp: /api/users', function signup() {
-    before(async function before() {
+  describe('SignUp: /api/organizers', function signup() {
+    before(async function() {
       this.data = await initDb()
     })
 
     it('FAIL 400 - invalid email', function invalidEmail() {
-      const newcomer = _.cloneDeep(this.data.users.newcomer)
+      const newcomer = _.cloneDeep(this.data.organizers.newcomer)
       newcomer.email = 'fake_mail'
       return request(this.server)
-        .post('/api/users')
+        .post('/api/organizers')
         .send(newcomer)
-        .expect('Content-Type', /json/)
+        .expect('Content-Type', /json/u)
         .expect(400, { message: 'Invalid or missing request data.', type: 'BAD_REQUEST' })
     })
 
     it('SUCCESS 201 - create user', async function createUser() {
       // Expectations
-      const expectedResponse = _.cloneDeep(this.data.users.newcomer)
+      const expectedResponse = _.cloneDeep(this.data.organizers.newcomer)
       expectedResponse.confirmed = false
+      delete expectedResponse.password
       // Action
-      const payload = _.cloneDeep(this.data.users.newcomer)
+      const payload = _.cloneDeep(this.data.organizers.newcomer)
       const res = await request(this.server)
-        .post('/api/users')
+        .post('/api/organizers')
         .send(payload)
-        .expect('Content-Type', /json/)
+        .expect('Content-Type', /json/u)
         .expect(201)
       // Validation
       expectedResponse.accessToken = res.body.accessToken
       expectedResponse.id = res.body.id
       res.body.should.be.deep.equal(expectedResponse)
-      const user = await db.User.find({ where: { email: this.data.users.newcomer.email } })
+      const user = await db.Organizer.find({ where: { email: this.data.organizers.newcomer.email } })
       helpers.checkDateRangeValidity(user.lastLoginAt)
     })
 
@@ -55,11 +58,11 @@ describe('User API endpoints: /api/users', function userAPI() {
         message: { duplicate: true, emailExists: true },
       }
       // Action
-      const payload = _.cloneDeep(this.data.users.newcomer)
+      const payload = _.cloneDeep(this.data.organizers.newcomer)
       const res = await request(this.server)
-        .post('/api/users')
+        .post('/api/organizers')
         .send(payload)
-        .expect('Content-Type', /json/)
+        .expect('Content-Type', /json/u)
         .expect(409)
       // Validation
       conflictError.message.duplicateResetPasswordToken = res.body.message.duplicateResetPasswordToken
@@ -1300,52 +1303,6 @@ describe('User API endpoints: /api/users', function userAPI() {
   //           should.not.equal(userAfter.publicToken, publicTokenBefore)
   //         })
   //     })
-  //   })
-  // })
-
-  // describe('PUT /api/users/me/reits/:reitId/interest', () => {
-  //   before(function before() {
-  //     return userDb.init()
-  //       .then(() => accountDb())
-  //       .then(() => login(userDb.users.ordinal)
-  //         .then(ordinal => this.user = ordinal))
-  //   })
-
-  //   it('should update interest for logged user', function test() {
-  //     const userId = 1
-  //     const reitId = 2
-  //     return db.UserReitInterest.destroy({ where: { userId, reitId } })
-  //       .then(() => request(this.app)
-  //         .put(`/api/auth/users/me/reits/${reitId}/interest`)
-  //         .set('Authorization', `JWT ${this.user.accessToken}`)
-  //         .expect(200)
-  //         .then(res => {
-  //           res.body.should.be.deep.equal({})
-
-  //           return db.UserReitInterest.find({ where: { userId, reitId } })
-  //         })
-  //         .then(interest => {
-  //           interest.dataValues.reitId.should.be.equal(reitId)
-  //           interest.dataValues.userId.should.be.equal(userId)
-  //         }))
-  //   })
-
-  //   it('should not update interest for logged user if reit does\'t allow interest', function test() {
-  //     const userId = 1
-  //     const reitId = 3
-  //     return db.UserReitInterest.destroy({ where: { userId, reitId } })
-  //       .then(() => request(this.app)
-  //         .put(`/api/auth/users/me/reits/${reitId}/interest`)
-  //         .set('Authorization', `JWT ${this.user.accessToken}`)
-  //         .expect(400))
-  //   })
-
-  //   it('should not update interest for not existing reit', function test() {
-  //     const reitId = 77
-  //     return request(this.app)
-  //       .put(`/api/auth/users/me/reits/${reitId}/interest`)
-  //       .set('Authorization', `JWT ${this.user.accessToken}`)
-  //       .expect(404)
   //   })
   // })
 })

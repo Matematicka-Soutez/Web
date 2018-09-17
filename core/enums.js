@@ -1,3 +1,5 @@
+'use strict'
+
 const enumize = require('./enumize')
 
 const COUNTRIES = enumize({

@@ -1,5 +1,7 @@
+'use strict'
+
+Promise = require('bluebird')
 const request = require('request-promise')
-const Promise = require('bluebird')
 const config = require('../../../../config/index')
 
 const AUTH = 'JWT TOKEN' // eslint-disable-line max-len

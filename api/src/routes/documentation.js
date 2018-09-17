@@ -1,3 +1,5 @@
+'use strict'
+
 const path = require('path')
 const compose = require('koa-compose')
 const koaStatic = require('koa-static')

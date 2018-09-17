@@ -1,3 +1,5 @@
+'use strict'
+
 const TransactionalService = require('../../../../core/services/TransactionalService')
 const crypto = require('../../utils/crypto')
 const teacherRepository = require('./../../repositories/teacher')

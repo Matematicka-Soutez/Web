@@ -1,6 +1,9 @@
+/* eslint-disable max-classes-per-file */
+'use strict'
+
 require('chai').should()
-const AbstractService = require('../../../api/services/AbstractService')
-const appErrors = require('../../../api/utils/errors/application')
+const AbstractService = require('../../../../core/services/AbstractService')
+const appErrors = require('../../../../core/errors/application')
 
 describe('Abstract service', () => {
   it('should run correctly on valid input data', () => {

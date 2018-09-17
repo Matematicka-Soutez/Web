@@ -1,10 +1,5 @@
-import { isEmpty } from 'lodash' // TODO: fuck lodash on FE
-
 const TOKEN_KEY = 'jwtToken'
 const USER_INFO = 'userInfo'
-
-const parse = JSON.parse
-const stringify = JSON.stringify
 
 const auth = {
 
@@ -40,11 +35,11 @@ const auth = {
 
   get(key) {
     if (localStorage && localStorage.getItem(key)) {
-      return parse(localStorage.getItem(key)) || null
+      return JSON.parse(localStorage.getItem(key)) || null
     }
 
     if (sessionStorage && sessionStorage.getItem(key)) {
-      return parse(sessionStorage.getItem(key)) || null
+      return JSON.parse(sessionStorage.getItem(key)) || null
     }
 
     return null
@@ -59,16 +54,16 @@ const auth = {
   },
 
   set(value, key, isLocalStorage) {
-    if (isEmpty(value)) {
+    if (!value || value.length === 0) {
       return null
     }
 
     if (isLocalStorage && localStorage) {
-      return localStorage.setItem(key, stringify(value))
+      return localStorage.setItem(key, JSON.stringify(value))
     }
 
     if (sessionStorage) {
-      return sessionStorage.setItem(key, stringify(value))
+      return sessionStorage.setItem(key, JSON.stringify(value))
     }
 
     return null

@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+'use strict'
 
 const cluster = require('cluster')
 const bunyan = require('bunyan')

@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (sequelize, DataTypes) => {
   const TeamMember = sequelize.define('TeamMember', {
     firstName: { type: DataTypes.STRING, allowNull: false, field: 'first_name' },

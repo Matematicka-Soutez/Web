@@ -1,3 +1,5 @@
+'use strict'
+
 const authorizeToken = require('../utils/authorize')
 const events = require('./events')
 

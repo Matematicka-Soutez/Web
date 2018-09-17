@@ -1,9 +1,11 @@
+'use strict'
+
 const appErrors = require('../../../../core/errors/application')
+const responseErrors = require('../../../../core/errors/response')
 const UpdatePasswordAuthenticatedService = require('./../../services/teacher/UpdatePasswordAuthenticated') // eslint-disable-line max-len
 // const UpdatePersonalInfoService = require('./../../services/teacher/UpdatePersonalInfo')
 const ResendConfirmEmailService = require('./../../services/teacher/ResendConfirmEmail')
 // const GetUsersPersonalInfo = require('./../../services/teacher/GetUsersPersonalInfo')
-const responseErrors = require('../../../../core/errors/response')
 
 
 module.exports = {

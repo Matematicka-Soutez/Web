@@ -1,5 +1,7 @@
+'use strict'
+
 const request = require('supertest')
-const app = require('../../../api/app')
+const app = require('../../../src/app')
 
 module.exports = {
   loginUser,
@@ -11,7 +13,7 @@ async function loginUser(body) {
   const response = await request(app)
     .post('/api/session/user')
     .send(body)
-    .expect('Content-Type', /json/)
+    .expect('Content-Type', /json/u)
     .expect(200)
   return response.body
 }
@@ -20,7 +22,7 @@ async function loginOrganizer(body) {
   const response = await request(app)
     .post('/api/session/admin')
     .send(body)
-    .expect('Content-Type', /json/)
+    .expect('Content-Type', /json/u)
     .expect(200)
   return response.body
 }

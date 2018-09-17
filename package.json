@@ -9,8 +9,8 @@
     "build": "cd web && node scripts/build.js",
     "postinstall": "cp web/scripts/ModuleScopePlugin.js node_modules/react-dev-utils/ModuleScopePlugin.js && npm run build",
     "test": "npm run test-be && npm run test-fe",
-    "test-be": "docker-compose up -d --force-recreate && sleep 2s && NODE_ENV=test node_modules/.bin/mocha --opts api/tests/mocha.opts tests",
-    "test-fe": "NODE_ENV=test node web/scripts/test.js --env=jsdom --watchAll",
+    "test-be": "docker-compose up -d --force-recreate && sleep 2s && NODE_ENV=test node_modules/.bin/mocha --opts api/tests/mocha.opts api/tests/",
+    "test-fe": "cd web && NODE_ENV=test node scripts/test.js --env=jsdom --coverage",
     "eslint": "node_modules/.bin/eslint ./",
     "eslint-fix": "node_modules/.bin/eslint ./ --fix",
     "snyk": "snyk auth $SNYK_TOKEN && snyk test",
@@ -112,7 +112,7 @@
     "file-loader": "1.1.5",
     "html-webpack-plugin": "2.29.0",
     "istanbul": "^0.4.5",
-    "jest": "20.0.4",
+    "jest": "23.6.0",
     "mocha": "^5.2.0",
     "mocha-http-detect": "^0.2.0",
     "nock": "^10.0.0",
@@ -133,21 +133,21 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "<rootDir>/client/src/**/*.{js,jsx,mjs}"
+      "<rootDir>/web/src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
-      "<rootDir>/client/config/polyfills.js"
+      "<rootDir>/web/config/polyfills.js"
     ],
     "testMatch": [
-      "<rootDir>/client/src/**/__tests__/**/*.{js,jsx,mjs}",
-      "<rootDir>/client/src/**/?(*.)(spec|test).{js,jsx,mjs}"
+      "<rootDir>/web/src/**/__tests__/**/*.{js,jsx,mjs}",
+      "<rootDir>/web/src/**/?(*.)(spec|test).{js,jsx,mjs}"
     ],
     "testEnvironment": "node",
     "testURL": "http://localhost",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/client/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/client/config/jest/fileTransform.js"
+      "^.+\\.css$": "<rootDir>/web/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/web/config/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
