@@ -7,15 +7,16 @@ node_modules
 
 # Generated files
 .nyc_output/**
-coverage/**
-dist/**
-build/**
+api/coverage/**
+web/coverage/**
+web/dist/**
+web/build/**
 
 # Local configuration
 .env
-scripts/importData/*
-scripts/draftsmen.csv
-scripts/draftsmen-access.csv
+api/scripts/importData/*
+api/scripts/draftsmen.csv
+api/scripts/draftsmen-access.csv
 
 # System files
 .DS_Store

@@ -19,17 +19,17 @@ install: node_modules
 
 lint:
 	$(call log,"Running ESLint ...")
-	$(bin)eslint --ext .js ./client ./server ./common ./games
+	$(bin)eslint --ext .js ./web ./api ./core ./games
 	$(call log,"ESLint run completed.")
 
 test: install
 	$(call log,"Running tests ...")
-	NODE_ENV=test $(bin)mocha --opts ./tests/mocha.opts ./tests
+	NODE_ENV=test $(bin)mocha --opts ./api/tests/mocha.opts ./api/tests
 	$(call log,"Tests completed.")
 
 coverage: install
 	$(call log,"Generating coverage ...")
-	NODE_ENV=test $(bin)nyc --report-dir server-coverage $(bin)mocha --opts ./tests/mocha.opts ./tests
+	NODE_ENV=test $(bin)nyc --report-dir api/coverage $(bin)mocha --opts ./api/tests/mocha.opts ./api/tests
 	$(call log,"Coverage report generated.")
 
 security-test:
@@ -40,17 +40,17 @@ security-test:
 clean:
 	$(call log,"Cleaning ...")
 	rm -rf ./.nyc_output
-	rm -rf ./server-coverage
+	rm -rf ./api/coverage
 	$(call log,"Clean done.")
 
 run:
-	node server/cluster.js | $(bin)bunyan
+	node api/src/cluster.js | $(bin)bunyan
 
 debug:
-	node --inspect-brk server/app.js | $(bin)bunyan
+	node --inspect-brk api/src/app.js | $(bin)bunyan
 
 watch:
-	$(bin)nodemon --watch ./server --exec "node ./server/app.js | $(bin)bunyan"
+	$(bin)nodemon --watch ./api/src --exec "node ./api/src/app.js | $(bin)bunyan"
 
 # ------ Infrastructure commands ----------------------------------------------
 
