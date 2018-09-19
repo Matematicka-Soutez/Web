@@ -6,6 +6,12 @@ html {
   font-size: 15pt;
 }
 
+@media (max-width: 768px) {
+  body, html {
+    font-size: 12pt;
+  }
+}
+
 body {
   font-family: "Roboto";
   color: #212121;
@@ -79,18 +85,18 @@ h2 {
 
 .masthead {
   text-align: center;
-  min-height: 30rem;
+  min-height: 20rem;
   position: relative;
   display: table;
   width: 100%;
   height: auto;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
+  padding-top: 1.5rem;
+  padding-bottom: 5rem;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover; }
 .masthead h1 {
-  font-size: 2rem;
+  font-size: 1.7rem;
   margin: 0;
   padding: 0; }
 .masthead h1::-moz-selection {
@@ -105,8 +111,13 @@ h2 {
   margin-top: 2.5rem;
   margin-bottom: 1.5rem;
 }
-@media (min-width: 992px) {
+.masthead a {
+  margin: 5px;
+}
+@media (min-width: 768px) {
   .masthead {
+    padding-top: 8rem;
+    padding-bottom: 0rem;
     height: 100vh; }
   .masthead h1 {
     font-size: 2.1rem; } }
@@ -118,4 +129,13 @@ h2 {
 
 .timeplan, .masthead {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), #ffd42d;
+}
+
+.lead {
+  text-align: left;
+}
+@media (min-width: 768px) {
+  .lead {
+    text-align: justify;
+  }
 }

@@ -67,20 +67,20 @@ class RegistrationSection extends Component {
       <ScrollableAnchor id="registrace">
         <section className="content-section registration">
           <Grid container justify="center" spacing={24}>
-            <Grid item xs={10} sm={8} lg={6} style={{ textAlign: 'justify' }}>
+            <Grid item xs={10} sm={8} lg={6}>
               <div className="content-section-heading">
                 <h2 className="mb-5">Registrace</h2>
               </div>
               {this.state.remainingTime > 0 ? timer : codeInput}
-              <p>
-                Registrovat týmy bude možné od úterý 2. 10. 2018 7:30 ráno.
+              <p className="lead">
+                Registrovat týmy bude možné od úterý 2.&nbsp;10.&nbsp;2018 7:30 ráno.
                 Do té doby si prosím připravte kontaktní údaje na doprovázejícího učitele,
                 {' '}<strong>školní registrační kód</strong>,
                 název přihlašovaného týmu a celá jména jeho členů.
               </p>
               <br />
               <h2>Nemáte registrační kód?</h2>
-              <p>
+              <p className="lead">
                 Pokud se vaše škola MaSa již účastnila, nejpozději týden před zahájením registrací
                 by registrační kód měl mít pedagog, který týmy posledně přihlašoval.
                 Pokud tomu tak není, napište nám na{' '}
@@ -89,7 +89,7 @@ class RegistrationSection extends Component {
               </p>
               <br />
               <h2>Účastníte se poprvé?</h2>
-              <p>
+              <p className="lead">
                 To máme radost! Pošlete nám prosím krátký email s kontaktem na vaši školu na {' '}
                 <a href="mailto:maso-soutez@googlegroups.com">maso-soutez@googlegroups.com</a>
                 {' '}a my vám obratem pošleme pozvánku se všemi potřebnými pokyny.

@@ -4,18 +4,6 @@ const log = require('../../../core/logger').logger
 const responseErrors = require('../../../core/errors/response')
 const { authorizeToken } = require('../utils/authorize')
 
-function authenticateTokenJWT(ctx) {
-  if (!ctx) {
-    throw new Error('Context is missing in authenticateToken function!')
-  }
-  const parsedAuthHeader = parseAuthHeader(ctx.header.authorization)
-  if (!parsedAuthHeader || !parsedAuthHeader.value
-    || !parsedAuthHeader.scheme || parsedAuthHeader.scheme.toLowerCase() !== 'jwt') {
-    return null
-  }
-  return authorizeToken(parsedAuthHeader.value, ctx)
-}
-
 async function authenticateTeacher(ctx, next) {
   const data = await authenticateTokenJWT(ctx)
   if (!data || !data.teacher || !data.teacher.id) {
@@ -36,6 +24,18 @@ async function authenticateOrganizer(ctx, next) {
   return next()
 }
 
+function authenticateTokenJWT(ctx) {
+  if (!ctx) {
+    throw new Error('Context is missing in authenticateToken function!')
+  }
+  const parsedAuthHeader = parseAuthHeader(ctx.header.authorization)
+  if (!parsedAuthHeader || !parsedAuthHeader.value
+    || !parsedAuthHeader.scheme || parsedAuthHeader.scheme.toLowerCase() !== 'jwt') {
+    return null
+  }
+  return authorizeToken(parsedAuthHeader.value, ctx)
+}
+
 function parseAuthHeader(hdrValue) {
   const re = /(\S+)\s+(\S+)/u
   if (!hdrValue || typeof hdrValue !== 'string') {
@@ -48,5 +48,4 @@ function parseAuthHeader(hdrValue) {
 module.exports = {
   authenticateTeacher,
   authenticateOrganizer,
-  parseAuthHeader,
 }

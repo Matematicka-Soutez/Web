@@ -7,6 +7,11 @@ section.timeline-outer {
   width: 80%;
   margin: 0 0 0 auto;
 }
+@media (max-width: 768px) {
+  section.timeline-outer {
+    width: 100%;
+  }
+}
 /* Timeline */
 
 .timeline {
@@ -103,10 +108,8 @@ Responsive Stuff
     min-width: 0;
     font-size: 13px;
   }
-  .timeline .event:nth-child(1)::before,
-  .timeline .event:nth-child(3)::before,
-  .timeline .event:nth-child(5)::before {
-    top: 38px;
+  .timeline .event::before {
+    top: 25px;
   }
   .timeline h3 {
     font-size: 16px;

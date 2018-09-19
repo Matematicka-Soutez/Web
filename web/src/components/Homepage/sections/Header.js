@@ -19,7 +19,6 @@ const Header = () => (
           style={{ backgroundColor: '#333', color: '#eee' }}>
           Registrace
         </Button>
-        &nbsp;&nbsp;
         <Button
           className="js-scroll-trigger"
           variant="outlined"

@@ -11,15 +11,15 @@ function CurrentEditionSection() {
     <ScrollableAnchor id="aktualni">
       <section className="content-section current-edition">
         <Grid container justify="center" spacing={24}>
-          <Grid item xs={10} sm={8} lg={6} style={{ textAlign: 'justify' }}>
+          <Grid item xs={10} sm={8} lg={6}>
             <div className="content-section-heading">
               <h2 className="mb-5">Podzimní MaSo 2018</h2>
             </div>
-            <p>
-              V pořadí 24. MaSo uspořádáme v úterý <strong>6. 11. 2018</strong> na
+            <p className="lead">
+              V pořadí 24. MaSo uspořádáme v úterý <strong>6.&nbsp;11.&nbsp;2018</strong> na
               následujících dvou místech. Kapacity jsou omezené, proto prosím neváhejte
               s registrací. První kolo registrací spustíme v
-              úterý 2. 10. 2018 v 7:30 ráno.
+              úterý 2.&nbsp;10.&nbsp;2018 v 7:30 ráno.
             </p>
 
             <Grid container justify="center" spacing={24}>

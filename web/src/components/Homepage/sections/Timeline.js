@@ -31,7 +31,7 @@ const TimeplanSection = () => (
               <li className="event" data-date="9:50 – 11:45">
                 <h3>Soutěž</h3>
                 <p>
-                  Řešení příkladů se simultánním hraním doprovodné hry.
+                  Čas na samotnou hru a řešení příkladů.
                 </p>
               </li>
               <li className="event" data-date="11:45 – 12:45">
@@ -44,7 +44,7 @@ const TimeplanSection = () => (
               <li className="event" data-date="13:00">
                 <h3>Předpokládaný konec soutěže</h3>
                 <p>
-                  Gratulace vítězům a ukončení soutěže.
+                  Vyhlášení výsledků a ukončení soutěže.
                 </p>
               </li>
             </ul>

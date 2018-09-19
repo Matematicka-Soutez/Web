@@ -7,7 +7,7 @@ const AboutSection = () => (
   <ScrollableAnchor id="o-soutezi">
     <section className="content-section">
       <Grid container justify="center" spacing={24}>
-        <Grid item xs={10} sm={8} lg={6} style={{ textAlign: 'justify' }}>
+        <Grid item xs={10} sm={8} lg={6}>
           <div className="content-section-heading">
             <h2 className="mb-5">O soutěži</h2>
           </div>
