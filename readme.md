@@ -1,76 +1,54 @@
-# MaSo web
+# MaSo - Matematická Soutěž
 
 [![Build Status](https://travis-ci.org/snEk42/MaSo.svg?branch=master)](https://travis-ci.org/snEk42/MaSo)
 
-## What's included
+Web application automating processes around MaSo (math competition) preparation and organization.
+Competition description available at <http://maso.mff.cuni.cz> (czech only).
 
-- Koa 2
-- Mocha tests with Instanbul (Nyc) code coverage
-- ESlint with STRV JavaScript rules
-- Sequelize migrations
-- Database initialization with Docker
-- Swagger documentation
-- Travis build configuration
-- Snyk security check
+![homepage image](header.png)
 
-## Running the project
+## Development setup
 
 ### Prerequisites
 
 - install Node.js current release (<https://nodejs.org/en/>)
-- instal Docker (<https://docs.docker.com/engine/installation/mac/>)
+- install Docker (<https://docs.docker.com/engine/installation/mac/>)
 
-### Run
+### Setup
 
-1. `npm i` - to install Node.js packages
-2. start Docker
-3. `make infra` - to initialize project services (starts the Postgres database)
-4. rename `.env-sample` file in the project root to `.env` and setup your connection string values (if you are running database with docker you can use default values)
-5. `make db-migrate` - to migrate database to the latest version
-6. `make run` - to start the API server
-7. open <http://localhost:3000>
-
-### Documentation
-
-- run the project and open `http://localhost:3000/docs`
-
-## Available commands
-
-> To turn on make autocomplete put the code below into your `.bash_profile`
+Clone Maso repository
 
 ```bash
-complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
+git clone https://github.com/snEk42/MaSo.git
 ```
 
-### Infrastructure
+Install packages
 
-- `make infra-restart` - restarts all project services
-- `make infra-start` - starts all project services
-- `make infra-stop` - stops all project services
+```bash
+npm install
+```
 
-### Code QA
+Run automatically reloaded development server (Services like postgres, redis, ...
+are run in a docker container automatically, but you might run into port collision problems.)
 
-- `make lint` - runs ESlint
-- `make test` - runs Mocha tests
-- `make coverage` - generates Istanbul coverage
-- `make clean` - removes generated files
-- `make security-test` - runs security test
+```bash
+npm run dev
+```
 
-### Database
+## Testing
 
-- `make db-migrate` - runs sequelize database migrations (dev database)
-- `make db-migrate-test` - the same as above for test database
-- `make db-reset` - resets database into initial state (reverts all migrations, seeds the database and migrates to the latest version)
-- `make db-reset-test` - the same as above for test database
+We put emphasis on testing our code, though we're not able to follow through every time.
+You should add at least API tests when contributing and fix the ones you break by your change.
 
-### Server start
+You can run both API and fronted tests by
 
-- `make run` - runs the API server
-- `make debug` - runs code in debug mode
-- `make watch` - runs server in the watch mode (autorestarts when change is made)
+```bash
+npm run tests
+```
 
-## Integrations
+## Contributing
 
-Sendgrid (email service, email campaigns)
-New Relic (monitoring)
-Logentries (serchable logs)
+We're preparing this project to be contributor friendly. Unfortunately it's not the case yet,
+but if you're interested already, please ping us at maso-soutez@googlegroups.com. You don't
+even have to be a developer, we seek all people interested in math and additional ways of
+educating children.
