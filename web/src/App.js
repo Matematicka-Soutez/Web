@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Homepage from './components/Homepage'
 import GameContainer from './components/Game'
 import TeamInputContainer from './components/TeamInput'
+import RegistrationContainer from './components/Registration'
 import ResultsContainer from './components/Results'
 // import PrivateRoute from './components/PrivateRoute'
 import './App.css'
@@ -26,6 +27,8 @@ function App() {
             <Route exact path="/vysledky" component={ResultsContainer} />
             <Route exact path="/hra" component={GameContainer} />
             <Route path="/input/:jwtToken" component={TeamInputContainer} />
+            <Route path="/registrace" component={RegistrationContainer} />
+            <Route path="/registrace/:schoolToken" component={RegistrationContainer} />
           </Switch>
         </div>
       </MuiThemeProvider>

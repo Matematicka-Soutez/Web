@@ -120,7 +120,11 @@ h2 {
     padding-bottom: 0rem;
     height: 100vh; }
   .masthead h1 {
-    font-size: 2.1rem; } }
+    font-size: 2.1rem; }
+  .masthead .registration {
+    margin-top: -4rem;
+  }
+}
 
 .current-edition, .footer {
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), #2196f3;

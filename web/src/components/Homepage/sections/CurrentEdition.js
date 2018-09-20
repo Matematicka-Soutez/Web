@@ -21,6 +21,10 @@ function CurrentEditionSection() {
               s registrací. První kolo registrací spustíme v
               úterý 2.&nbsp;10.&nbsp;2018 v 7:30 ráno.
             </p>
+            <p className="lead">
+              Podrobné informace najdete v{' '}
+              <a href="/documents/organizacni_pokyny.pdf">organizačních pokynech</a>.
+            </p>
 
             <Grid container justify="center" spacing={24}>
               <Grid item md={6}>

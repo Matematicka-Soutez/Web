@@ -34,14 +34,14 @@ const TimeplanSection = () => (
                   Čas na samotnou hru a řešení příkladů.
                 </p>
               </li>
-              <li className="event" data-date="11:45 – 12:45">
+              <li className="event" data-date="11:45 – 12:15">
                 <h3>Vyhodnocení výsledků</h3>
                 <p>
                   Čas vyhrazený pro pořadatele k vyhodnocení soutěže. V jeho průběhu se soutěžící
                   mohou občerstvit a zahrát si připravené deskové hry.
                 </p>
               </li>
-              <li className="event" data-date="13:00">
+              <li className="event" data-date="12:15 – 12:45">
                 <h3>Předpokládaný konec soutěže</h3>
                 <p>
                   Vyhlášení výsledků a ukončení soutěže.

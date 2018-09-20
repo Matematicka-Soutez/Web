@@ -41,7 +41,8 @@ const AboutSection = () => (
             Během hry je povoleno používat papír a tužku,
             ostatní pomůcky jako tabulky (a další literatura), kalkulačky, rýsovací pomůcky,
             elektronická zařízení jsou zakázány.
-            Hry a příklady, které se již na MaSu objevily, najdete v Archivu.
+            Hry a příklady, které se již na MaSu objevily, najdete v{' '}
+            <a href="http://maso.mff.cuni.cz/old/archiv">Archivu</a>.
           </p>
           <br />
           <Button
