@@ -83,4 +83,7 @@ module.exports = env => ({
     apiKey: process.env.SENDGRID_API_KEY || false,
     fromAddress: 'info@maso.mff.cuni.cz',
   },
+  aesop: {
+    schoolSourceUrl: 'https://ovvp.mff.cuni.cz/out/skoly.csv',
+  },
 })

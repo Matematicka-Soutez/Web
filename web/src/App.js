@@ -27,8 +27,8 @@ function App() {
             <Route exact path="/vysledky" component={ResultsContainer} />
             <Route exact path="/hra" component={GameContainer} />
             <Route path="/input/:jwtToken" component={TeamInputContainer} />
-            <Route path="/registrace" component={RegistrationContainer} />
             <Route path="/registrace/:schoolToken" component={RegistrationContainer} />
+            <Route path="/registrace" component={RegistrationContainer} />
           </Switch>
         </div>
       </MuiThemeProvider>

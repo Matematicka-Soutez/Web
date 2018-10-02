@@ -9,7 +9,7 @@ import { formattedMS } from '../../../utils/time'
 class RegistrationSection extends Component {
   constructor(props) {
     super(props)
-    const registrationOpens = new Date('2018-10-02T05:30:00.000Z').getTime()
+    const registrationOpens = new Date('2018-10-03T05:30:00.000Z').getTime()
     const currentTime = new Date().getTime()
     const difference = registrationOpens - currentTime
     this.state = {
@@ -39,9 +39,18 @@ class RegistrationSection extends Component {
     const timer = (
       <Card>
         <CardContent>
-          <Typography color="textSecondary">
-            Registraci spouštíme za
+          <Typography
+            variant="headline"
+            component="h1">
+            Pozor
           </Typography>
+          <br />
+          <Typography color="textSecondary">
+            Z technických důvodů musíme registraci o 24 hodin odložit.
+            Omlouváme se za prodlení a s ním spojené komplikace. Registrovat se bude možné
+            zítra (středa 3. 10.) od 7:30, tedy za
+          </Typography>
+          <br />
           <Typography
             variant="headline"
             component="h1"
@@ -73,7 +82,7 @@ class RegistrationSection extends Component {
               </div>
               {this.state.remainingTime > 0 ? timer : codeInput}
               <p className="lead">
-                Registrovat týmy bude možné od úterý 2.&nbsp;10.&nbsp;2018 7:30 ráno.
+                Registrovat týmy bude možné od středy 3.&nbsp;10.&nbsp;2018 7:30 ráno.
                 Do té doby si prosím připravte kontaktní údaje na doprovázejícího učitele,
                 {' '}<strong>školní registrační kód</strong>,
                 název přihlašovaného týmu a celá jména jeho členů.

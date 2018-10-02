@@ -11,7 +11,7 @@ import masoLogo from '../../static/images/maso_logo.png'
 class RegistrationContainer extends Component {
   constructor(props) {
     super(props)
-    const registrationOpens = new Date('2018-10-02T05:30:00.000Z').getTime()
+    const registrationOpens = new Date('2018-10-03T05:30:00.000Z').getTime()
     const currentTime = new Date().getTime()
     const difference = registrationOpens - currentTime
     this.state = {
@@ -47,9 +47,18 @@ class RegistrationContainer extends Component {
           <Grid item xs={10} sm={8} lg={6}>
             <Card className="registration">
               <CardContent>
-                <Typography color="textSecondary">
-                  Registraci spouštíme za
+                <Typography
+                  variant="headline"
+                  component="h1">
+                  Pozor
                 </Typography>
+                <br />
+                <Typography color="textSecondary">
+                  Z technických důvodů musíme registraci o 24 hodin odložit.
+                  Omlouváme se za prodlení a s ním spojené komplikace. Registrovat se bude možné
+                  zítra (středa 3. 10.) od 7:30, tedy za
+                </Typography>
+                <br />
                 <Typography
                   variant="headline"
                   component="h1"
