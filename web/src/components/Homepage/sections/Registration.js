@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import ScrollableAnchor from 'react-scrollable-anchor'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import Typography from '@material-ui/core/Typography'
-import { formattedMS } from '../../../utils/time'
+import RegistrationTimer from '../../Registration/RegistrationTimer'
+import RegistrationCodeInput from '../../Registration/RegistrationCodeInput'
 
 class RegistrationSection extends Component {
   constructor(props) {
@@ -35,43 +34,14 @@ class RegistrationSection extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
   render() {
-    const timer = (
-      <Card>
-        <CardContent>
-          <Typography
-            variant="headline"
-            component="h1">
-            Pozor
-          </Typography>
-          <br />
-          <Typography color="textSecondary">
-            Z technických důvodů musíme registraci o 24 hodin odložit.
-            Omlouváme se za prodlení a s ním spojené komplikace. Registrovat se bude možné
-            zítra (středa 3. 10.) od 7:30, tedy za
-          </Typography>
-          <br />
-          <Typography
-            variant="headline"
-            component="h1"
-            style={{ fontSize: '1.9rem', color: '#2196f3', marginBottom: -10 }}>
-            {formattedMS(this.state.remainingTime)}
-          </Typography>
-        </CardContent>
-      </Card>
-    )
-    const codeInput = (
-      <Card>
-        <CardContent>
-          <Typography color="textSecondary">
-            Zadejte školní registrační kód
-          </Typography>
-          <Typography gutterBottom variant="headline" component="h1">
-            INPUT
-          </Typography>
-        </CardContent>
-      </Card>
-    )
+    const content = this.state.remainingTime > 0
+      ? <RegistrationTimer remainingTime={this.state.remainingTime} />
+      : <RegistrationCodeInput />
     return (
       <ScrollableAnchor id="registrace">
         <section className="content-section registration">
@@ -80,7 +50,9 @@ class RegistrationSection extends Component {
               <div className="content-section-heading">
                 <h2 className="mb-5">Registrace</h2>
               </div>
-              {this.state.remainingTime > 0 ? timer : codeInput}
+              <Card>
+                {content}
+              </Card>
               <p className="lead">
                 Registrovat týmy bude možné od středy 3.&nbsp;10.&nbsp;2018 7:30 ráno.
                 Do té doby si prosím připravte kontaktní údaje na doprovázejícího učitele,

@@ -36,6 +36,10 @@ class RegistrationContainer extends Component {
     }
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timer)
+  }
+
   render() {
     const content = this.state.remainingTime >= 0
       ? <RegistrationTimer remainingTime={this.state.remainingTime} />

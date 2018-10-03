@@ -20,7 +20,7 @@ class AddTeamForm extends Component {
         grade2: '',
         grade3: '',
         grade4: '',
-        competitionVenueId: 0,
+        competitionVenueId: '',
       },
     }
     this.onSubmit = this.onSubmit.bind(this)
@@ -56,6 +56,9 @@ class AddTeamForm extends Component {
     || event.target.grade2.value === ''
     || event.target.grade3.value === '') {
       newErrors.push('Ročníky všech členů musí být vyplněny.')
+    }
+    if (event.target.competitionVenueId.value === '') {
+      newErrors.push('Vyberte prosím, kde bude tým soutěžit.')
     }
     if (newErrors.length > 0) {
       this.setState({ errors: newErrors })

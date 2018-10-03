@@ -17,7 +17,7 @@ const TeamPrintout = ({ teams }) => (
 
 function displayTeam(team) {
   return (
-    <React.Fragment>
+    <React.Fragment key={team.id}>
       <Typography variant="subheading" style={{ textAlign: 'left' }} gutterBottom>
         {team.name} ({team.competitionVenue.venue.name})
       </Typography>

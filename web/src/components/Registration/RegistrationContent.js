@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import AddTeamForm from './AddTeamForm'
@@ -20,10 +20,7 @@ class RegistrationContent extends Component {
       .then(
         result => {
           if (result.type === 'BAD_REQUEST') {
-            this.setState({
-              school: {},
-              error: true,
-            })
+            this.props.history.push('/#registrace')
           } else {
             this.setState(result)
           }
@@ -33,10 +30,7 @@ class RegistrationContent extends Component {
         // exceptions from actual bugs in components.
         error => {
           console.log(error) // eslint-disable-line no-console
-          this.setState({
-            school: {},
-            error: true,
-          })
+          this.props.history.push('/#registrace')
         },
       )
   }
@@ -55,9 +49,6 @@ class RegistrationContent extends Component {
           </Typography>
         </CardContent>
       )
-    }
-    if (this.state.error) {
-      return <Redirect to={{ pathname: '/' }} />
     }
     const registration = (
       <React.Fragment>
@@ -100,8 +91,9 @@ class RegistrationContent extends Component {
 }
 
 RegistrationContent.propTypes = {
+  history: PropTypes.object.isRequired,
   schoolToken: PropTypes.string.isRequired,
 }
 
 
-export default RegistrationContent
+export default withRouter(RegistrationContent)
