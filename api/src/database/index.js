@@ -22,7 +22,7 @@ pgSetTypeParsers({
   },
 })
 
-const sequelize = new Sequelize(config.database.connectionString, config.database)
+const sequelize = new Sequelize(config.database.connectionString, config.database.options)
 const db = {}
 
 function importModels(modelsPath) {

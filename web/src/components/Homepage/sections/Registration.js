@@ -108,7 +108,6 @@ class RegistrationSection extends Component {
         </section>
       </ScrollableAnchor>
     )
-
   }
 }
 

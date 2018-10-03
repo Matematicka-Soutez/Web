@@ -12,7 +12,7 @@ const db = require('../src/database/index')
 const crypto = require('../src/utils/crypto')
 const initEnums = require('../tests/data/enums')
 const initStatic = require('../tests/data/static')
-const initUsers = require('../tests/data/users')
+// const initUsers = require('../tests/data/users')
 
 async function syncDb() {
   try {
@@ -25,7 +25,7 @@ async function syncDb() {
       await initEnums()
       await initStatic()
       await importOldDb()
-      await initUsers()
+      // await initUsers()
     }
     await db.sequelize.close()
     console.log('DB is synced.')
@@ -39,7 +39,7 @@ async function syncDb() {
 async function importOldDb() {
   const schools = await importSchools()
   await importTeachers(schools)
-  await importTeams(schools)
+  // await importTeams(schools)
 }
 
 function importSchools() {

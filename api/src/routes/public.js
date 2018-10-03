@@ -147,4 +147,7 @@ router.put('/teachers/reset-password', teachers.updatePassword)
 
 router.get('/competitions/current/timer', competitions.getTimer)
 
+router.get('/competitions/current/registration/:schoolToken', competitions.getSchoolRegistrations)
+router.post('/competitions/current/registration/:schoolToken', competitions.registerSchoolTeam)
+
 module.exports = router.routes()

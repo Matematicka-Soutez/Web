@@ -15,10 +15,11 @@ if (config.newRelic.licenseKey) {
 
 const sensitiveAttributes = ['password']
 
+// TODO: Load competition dynamicaly
 module.exports = class AbstractService {
   constructor() {
     this.uuid = shortId.generate()
-    this.competitionId = 1
+    this.competitionId = 2
   }
 
   async execute(inputData) {

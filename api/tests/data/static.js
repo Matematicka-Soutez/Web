@@ -28,7 +28,7 @@ function initVenues() {
     defaultCapacity: 86,
     address: {
       titleLine1: '',
-      titleLine2: 'Budova MFF UK',
+      titleLine2: 'Matematicko-fyzikální fakulta UK',
       street: 'Malostranské náměstí 25',
       city: 'Praha 1',
       zip: '110 00',
@@ -39,10 +39,10 @@ function initVenues() {
     defaultCapacity: 30,
     address: {
       titleLine1: '',
-      titleLine2: 'Budova FI MUNI',
-      street: 'Botanická 68a',
-      city: 'Brno',
-      zip: '602 00',
+      titleLine2: 'Gymnázium Matyáše Lercha',
+      street: 'Žižkova ulice 980/55',
+      city: 'Brno - Veveří',
+      zip: '616 00',
       countryId: enums.COUNTRIES.CZECH_REPUBLIC.id,
     },
   }]
@@ -72,7 +72,7 @@ function initRooms(venues) {
     venueId: venues[0].id,
   }, {
     id: 5,
-    name: 'MUNI',
+    name: 'GML',
     defaultCapacity: 30,
     venueId: venues[1].id,
   }]
@@ -98,6 +98,19 @@ function initCompetitions(games) {
     registrationRound2: new Date('2018-04-25T07:30:00.000Z'),
     registrationRound3: new Date('2018-05-02T07:30:00.000Z'),
     registrationEnd: new Date('2018-05-09T23:00:00.000Z'),
+    isPublic: true,
+    invitationEmailSent: true,
+    organizerId: null,
+    gameId: games[0].id,
+  }, {
+    name: 'Podzimní MaSo 2018',
+    date: new Date('2018-11-06T06:30:00.000Z'),
+    start: new Date('2018-11-06T08:00:00.000Z'),
+    end: new Date('2018-11-06T09:30:00.000Z'),
+    registrationRound1: new Date('2018-10-02T05:30:00.000Z'),
+    registrationRound2: new Date('2018-10-16T05:30:00.000Z'),
+    registrationRound3: new Date('2018-10-23T05:30:00.000Z'),
+    registrationEnd: new Date('2018-10-30T21:00:00.000Z'),
     isPublic: true,
     invitationEmailSent: true,
     organizerId: null,

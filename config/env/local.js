@@ -7,7 +7,7 @@ module.exports = {
       dialectOptions: {
         ssl: false,
       },
+      logging: true,
     },
-    logging: true,
   },
 }
