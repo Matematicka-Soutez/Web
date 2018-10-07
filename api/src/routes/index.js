@@ -19,7 +19,7 @@ const apiRouter = new Router()
 router.use(errorsHandler.handleErrors)
 
 // Force redirect http requests to https
-if (config.env === 'production') {
+if (config.env === 'production' || config.env === 'staging') {
   apiRouter.use((ctx, next) => {
     if (ctx.headers['x-forwarded-proto'] !== 'https') {
       throw new responseErrors.ForbiddenError('Https is required.')
