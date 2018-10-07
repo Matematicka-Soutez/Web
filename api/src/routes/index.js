@@ -6,9 +6,9 @@ const {
   publicGameRoutes,
 } = require('../../../games/water-bottling/api/src/routes')
 const config = require('../../../config')
-const errorsHandler = require('../handlers/errors')
+const errorsHandler = require('../controllers/errors')
 const responseErrors = require('../../../core/errors/response')
-const passportHandler = require('../handlers/passport')
+const passportHandler = require('../controllers/passport')
 const publicRoutes = require('./public')
 const teacherRoutes = require('./teacher')
 const organizerRoutes = require('./organizer')

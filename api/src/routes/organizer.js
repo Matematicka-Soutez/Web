@@ -2,9 +2,9 @@
 'use strict'
 
 const Router = require('koa-router')
-const rooms = require('../handlers/organizer/rooms')
-const venues = require('../handlers/organizer/venues')
-// const user = require('../handlers/admin/user')
+const rooms = require('../controllers/organizer/rooms')
+const venues = require('../controllers/organizer/venues')
+// const user = require('../controllers/admin/user')
 
 const router = new Router()
 

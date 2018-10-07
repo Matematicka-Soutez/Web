@@ -2,10 +2,10 @@
 'use strict'
 
 const Router = require('koa-router')
-const teachers = require('./../handlers/public/teachers')
-const organizers = require('./../handlers/public/organizers')
-const competitions = require('./../handlers/public/competitions')
-// const optionalToken = require('./../handlers/passport').optionalToken
+const teachers = require('../controllers/public/teachers')
+const organizers = require('../controllers/public/organizers')
+const competitions = require('../controllers/public/competitions')
+// const optionalToken = require('./../controllers/passport').optionalToken
 
 const router = new Router()
 

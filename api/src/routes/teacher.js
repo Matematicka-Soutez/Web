@@ -2,7 +2,7 @@
 'use strict'
 
 const Router = require('koa-router')
-const teachers = require('../handlers/teacher/teachers')
+const teachers = require('../controllers/teacher/teachers')
 
 const router = new Router()
 

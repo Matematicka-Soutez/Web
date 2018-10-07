@@ -1,17 +1,17 @@
 'use strict'
 
 const Router = require('koa-router')
-const handlers = require('./handlers')
+const controllers = require('./controllers')
 
 const publicRouter = new Router()
-publicRouter.get('/grid', handlers.getCurrentGrid)
-publicRouter.get('/results', handlers.getResults)
+publicRouter.get('/grid', controllers.getCurrentGrid)
+publicRouter.get('/results', controllers.getResults)
 
 const organizerRouter = new Router()
-organizerRouter.put('/init', handlers.initGame)
-organizerRouter.put('/move', handlers.moveTeam)
-organizerRouter.put('/revert-move', handlers.revertMove)
-organizerRouter.get('/teams/:teamId/position', handlers.getTeamPosition)
+organizerRouter.put('/init', controllers.initGame)
+organizerRouter.put('/move', controllers.moveTeam)
+organizerRouter.put('/revert-move', controllers.revertMove)
+organizerRouter.get('/teams/:teamId/position', controllers.getTeamPosition)
 
 module.exports = {
   publicGameRoutes: publicRouter.routes(),
