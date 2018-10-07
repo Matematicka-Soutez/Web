@@ -47,7 +47,7 @@ async function registerSchoolTeam(ctx) {
       throw new responseErrors.BadRequestError('Škola nebyla nalezena.')
     }
     if (err instanceof appErrors.CannotBeDoneError) {
-      throw new responseErrors.ConflictError('V tuto chvíli nemůžete registrovat více než jeden tým na školu.') // eslint-disable-line max-len
+      throw new responseErrors.ConflictError(err.message)
     }
     throw err
   }

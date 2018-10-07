@@ -30,12 +30,11 @@ module.exports = class RegisterSchoolTeamService extends TransactionalService {
     }
   }
 
-  // TODO: Make this competition agnostic
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
     const school = await schoolRepository.findByAccessCode(this.data.schoolToken, dbTransaction)
     if (school.teams && school.teams.length > 0) {
-      throw new appErrors.CannotBeDoneError()
+      throw new appErrors.CannotBeDoneError('V tuto chvíli nemůžete registrovat více než jeden tým na školu.') // eslint-disable-line max-len
     }
     const team = await teamRepository.create({
       name: this.data.teamName.trim(),
