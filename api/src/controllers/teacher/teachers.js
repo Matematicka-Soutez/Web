@@ -55,7 +55,7 @@ module.exports = {
 
 async function updatePasswordAuthenticated(ctx) {
   try {
-    ctx.body = await new UpdatePasswordAuthenticatedService()
+    ctx.body = await new UpdatePasswordAuthenticatedService(ctx.state)
       .execute({
         teacherId: ctx.state.teacher.id,
         oldPassword: ctx.request.body.oldPassword,
@@ -77,7 +77,7 @@ async function updatePasswordAuthenticated(ctx) {
 
 async function resendConfirmEmail(ctx) {
   try {
-    ctx.body = await new ResendConfirmEmailService()
+    ctx.body = await new ResendConfirmEmailService(ctx.state)
       .execute({
         id: ctx.state.teacher.id,
         publicToken: ctx.state.teacher.publicToken,

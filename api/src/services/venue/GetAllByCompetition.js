@@ -12,7 +12,7 @@ module.exports = class GetAllByCompetitionService extends AbstractService {
   }
 
   async run() {
-    const compVenues = await venueRepository.findCompetitionVenues(this.competitionId)
+    const compVenues = await venueRepository.findCompetitionVenues(this.competition.id)
     return compVenues.map(compVenue => ({
       id: compVenue.venue.id,
       name: compVenue.venue.name,

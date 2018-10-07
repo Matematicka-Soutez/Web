@@ -8,7 +8,7 @@ const responseErrors = require('../../../../core/errors/response')
 
 async function getTimer(ctx) {
   try {
-    ctx.body = await new GetTimerService().execute({})
+    ctx.body = await new GetTimerService(ctx.state).execute({})
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
       throw new responseErrors.BadRequestError('Soutěž nebyla nalezena.')
@@ -19,7 +19,7 @@ async function getTimer(ctx) {
 
 async function getSchoolRegistrations(ctx) {
   try {
-    ctx.body = await new GetSchoolRegistrationsService().execute({
+    ctx.body = await new GetSchoolRegistrationsService(ctx.state).execute({
       schoolToken: ctx.params.schoolToken,
     })
   } catch (err) {
@@ -32,7 +32,7 @@ async function getSchoolRegistrations(ctx) {
 
 async function registerSchoolTeam(ctx) {
   try {
-    ctx.body = await new RegisterSchoolTeamService().execute({
+    ctx.body = await new RegisterSchoolTeamService(ctx.state).execute({
       schoolToken: ctx.params.schoolToken,
       teamName: ctx.request.body.teamName,
       competitionVenueId: parseInt(ctx.request.body.competitionVenueId),

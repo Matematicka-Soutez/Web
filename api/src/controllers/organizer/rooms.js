@@ -10,7 +10,7 @@ module.exports = {
 
 async function getAllByCompetitionVenue(ctx) {
   try {
-    ctx.body = await new GetAllByCompetitionVenueService()
+    ctx.body = await new GetAllByCompetitionVenueService(ctx.state)
       .execute({
         venueId: ctx.request.body.venueId,
       })

@@ -10,7 +10,7 @@ module.exports = {
 
 async function getAllByCompetition(ctx) {
   try {
-    ctx.body = await new GetAllByCompetitionService().execute({})
+    ctx.body = await new GetAllByCompetitionService(ctx.state).execute({})
   } catch (err) {
     if (err instanceof appErrors.UnauthorizedError || err instanceof appErrors.NotFoundError) {
       throw new responseErrors.UnauthorizedError('Invalid credentials.')

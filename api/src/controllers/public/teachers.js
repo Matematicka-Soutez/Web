@@ -11,7 +11,7 @@ const responseErrors = require('../../../../core/errors/response')
 
 async function updatePassword(ctx) {
   try {
-    ctx.body = await new UpdatePasswordService()
+    ctx.body = await new UpdatePasswordService(ctx.state)
       .execute({
         token: ctx.request.body.token,
         password: ctx.request.body.password,
@@ -32,7 +32,7 @@ async function updatePassword(ctx) {
 
 async function resetPassword(ctx) {
   try {
-    ctx.body = await new ResetPasswordService()
+    ctx.body = await new ResetPasswordService(ctx.state)
       .execute({
         email: ctx.request.body.email,
         duplicateResetPasswordToken: ctx.request.body.duplicateResetPasswordToken,
@@ -53,7 +53,7 @@ async function resetPassword(ctx) {
 
 async function confirmEmail(ctx) {
   try {
-    ctx.body = await new ConfirmEmailService()
+    ctx.body = await new ConfirmEmailService(ctx.state)
       .execute({
         confirmToken: ctx.request.body.token,
       })
@@ -67,7 +67,7 @@ async function confirmEmail(ctx) {
 
 async function login(ctx) {
   try {
-    ctx.body = await new LoginService()
+    ctx.body = await new LoginService(ctx.state)
       .execute({
         email: ctx.request.body.username,
         password: ctx.request.body.password,
@@ -85,7 +85,7 @@ async function login(ctx) {
 
 async function signUp(ctx) {
   try {
-    const teacher = await new SignUpService()
+    const teacher = await new SignUpService(ctx.state)
       .execute({
         title: ctx.request.body.title,
         firstName: ctx.request.body.firstName,

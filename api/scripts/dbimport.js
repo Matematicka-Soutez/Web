@@ -93,7 +93,7 @@ function importTeachers(schools) {
   })
 }
 
-function importTeams(schools) {
+function importTeams(schools) { // eslint-disable-line no-unused-vars
   const input = fs.readFileSync(path.resolve(__dirname, 'importData/druzstva.csv'))
   const teams = parse(input, { columns: true, delimiter: ';' })
   return Promise.map(teams, async team => {

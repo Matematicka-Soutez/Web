@@ -109,7 +109,7 @@ function parseDob(dob) {
     throw new Error('Parameter \'dob\' is mandatory.')
   }
   if (moment.utc(dob, 'MM-DD-YYYY').isValid() === false) {
-    throw new appErrors.ValidationError('api.errors.user.DOBInvalid')
+    throw new appErrors.ValidationError('Datum narození není platné.')
   }
   return new Date(moment.utc(dob, 'MM-DD-YYYY').format())
 }

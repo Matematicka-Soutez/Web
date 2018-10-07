@@ -15,7 +15,7 @@ module.exports = class GetAllByCompetitionVenueService extends AbstractService {
 
   async run() {
     const cvrooms = await roomRepository.findCompetitionVenueRooms(
-      this.competitionId,
+      this.competition.id,
       this.data.venueId,
     )
     return cvrooms.map(cvroom => ({

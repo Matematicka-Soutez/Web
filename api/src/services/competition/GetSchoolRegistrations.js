@@ -19,7 +19,7 @@ module.exports = class GetSchoolRegistrationsService extends AbstractService {
   run() {
     return Promise.all([
       schoolRepository.findByAccessCode(this.data.schoolToken),
-      venueRepository.findCompetitionVenues(this.competitionId),
+      venueRepository.findCompetitionVenues(this.competition.id),
     ]).spread((school, venues) => ({
       school,
       venues: venues.map(venue => ({

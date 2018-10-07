@@ -2,7 +2,6 @@
 
 const moment = require('moment')
 const AbstractService = require('../../../../core/services/AbstractService')
-const competitionRepository = require('./../../repositories/competition')
 
 module.exports = class GetTimerService extends AbstractService {
   schema() {
@@ -12,12 +11,11 @@ module.exports = class GetTimerService extends AbstractService {
     }
   }
 
-  async run() {
-    const competition = await competitionRepository.findById(this.competitionId)
+  run() {
     const now = moment()
     return {
-      start: moment(competition.start).diff(now),
-      end: moment(competition.end).diff(now),
+      start: moment(this.competition.start).diff(now),
+      end: moment(this.competition.end).diff(now),
     }
   }
 }

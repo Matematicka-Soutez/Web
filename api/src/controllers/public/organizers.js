@@ -8,7 +8,7 @@ const responseErrors = require('../../../../core/errors/response')
 
 async function login(ctx) {
   try {
-    ctx.body = await new OrganizerLoginService()
+    ctx.body = await new OrganizerLoginService(ctx.state)
       .execute({
         email: ctx.request.body.username,
         password: ctx.request.body.password,
@@ -26,7 +26,7 @@ async function login(ctx) {
 
 async function signUp(ctx) {
   try {
-    const organizer = await new OrganizerSignUpService()
+    const organizer = await new OrganizerSignUpService(ctx.state)
       .execute({
         firstName: ctx.request.body.firstName,
         lastName: ctx.request.body.lastName,

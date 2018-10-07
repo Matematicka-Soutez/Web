@@ -30,6 +30,8 @@ module.exports = class RegisterSchoolTeamService extends TransactionalService {
     }
   }
 
+  // TODO: Check if registration is open and competitionVenue is under current competition
+  // TODO: Implement registration rounds
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
     const school = await schoolRepository.findByAccessCode(this.data.schoolToken, dbTransaction)

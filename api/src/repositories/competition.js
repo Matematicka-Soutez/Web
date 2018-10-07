@@ -17,7 +17,7 @@ async function findCurrentCompetition(dbTransaction) {
   const competitions = await db.Competition.findAll({
     where: {
       date: {
-        [db.sequelize.Op.gte]: moment().subtract(1, 'day').toDate(),
+        [db.sequelize.Op.gte]: moment().subtract(7, 'day').toDate(),
       },
     },
     include: [{

@@ -8,16 +8,6 @@ const errorLogger = require('../../../core/logger').errorLogger
 module.exports = {
   handleNotFound,
   handleErrors,
-  catchHandler,
-}
-
-function catchHandler(err, mappings) {
-  mappings.forEach(mapping => {
-    if (err instanceof mapping[0]) {
-      throw new mapping[1](...mapping[2])
-    }
-  })
-  throw err
 }
 
 function handleNotFound() {

@@ -17,9 +17,9 @@ const sensitiveAttributes = ['password']
 
 // TODO: Load competition dynamicaly
 module.exports = class AbstractService {
-  constructor() {
+  constructor(state = {}) {
     this.uuid = shortId.generate()
-    this.competitionId = 2
+    this.competition = state.competition
   }
 
   async execute(inputData) {

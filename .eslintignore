@@ -1,2 +1,4 @@
 /node_modules/*
 /web/build/*
+/web/coverage/*
+/api/coverage/*
