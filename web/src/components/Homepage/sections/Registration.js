@@ -75,13 +75,6 @@ class RegistrationSection extends Component {
                 <a href="mailto:maso-soutez@googlegroups.com">maso-soutez@googlegroups.com</a>
                 {' '}a my vám obratem pošleme pozvánku se všemi potřebnými pokyny.
               </p>
-              <br />
-              <h2>Přihlášené týmy</h2>
-              <p className="lead">
-                To máme radost! Pošlete nám prosím krátký email s kontaktem na vaši školu na{' '}
-                <a href="mailto:maso-soutez@googlegroups.com">maso-soutez@googlegroups.com</a>
-                {' '}a my vám obratem pošleme pozvánku se všemi potřebnými pokyny.
-              </p>
             </Grid>
           </Grid>
         </section>
