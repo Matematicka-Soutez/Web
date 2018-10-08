@@ -54,9 +54,9 @@ class RegistrationSection extends Component {
                 {content}
               </Card>
               <p className="lead">
-                Registrovat týmy bude možné od středy 3.&nbsp;10.&nbsp;2018 7:30 ráno.
-                Do té doby si prosím připravte kontaktní údaje na doprovázejícího učitele,
-                {' '}<strong>školní registrační kód</strong>,
+                Nyní je možné registrovat první tým za školu. Druhý tým bude možné (v případě
+                zbývající kapacity) registrovat od úterý 16.&nbsp;10.&nbsp;2018 7:30 ráno.
+                Pro registraci potřebujete <strong>školní registrační kód</strong>,
                 název přihlašovaného týmu a celá jména jeho členů.
               </p>
               <br />
@@ -71,7 +71,14 @@ class RegistrationSection extends Component {
               <br />
               <h2>Účastníte se poprvé?</h2>
               <p className="lead">
-                To máme radost! Pošlete nám prosím krátký email s kontaktem na vaši školu na {' '}
+                To máme radost! Pošlete nám prosím krátký email s kontaktem na vaši školu na{' '}
+                <a href="mailto:maso-soutez@googlegroups.com">maso-soutez@googlegroups.com</a>
+                {' '}a my vám obratem pošleme pozvánku se všemi potřebnými pokyny.
+              </p>
+              <br />
+              <h2>Přihlášené týmy</h2>
+              <p className="lead">
+                To máme radost! Pošlete nám prosím krátký email s kontaktem na vaši školu na{' '}
                 <a href="mailto:maso-soutez@googlegroups.com">maso-soutez@googlegroups.com</a>
                 {' '}a my vám obratem pošleme pozvánku se všemi potřebnými pokyny.
               </p>

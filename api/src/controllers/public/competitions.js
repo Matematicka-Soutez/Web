@@ -1,6 +1,7 @@
 'use strict'
 
 const GetTimerService = require('../../services/competition/GetTimer')
+const GetTeamsByVenueService = require('../../services/competition/GetTeamsByVenue')
 const GetSchoolRegistrationsService = require('../../services/competition/GetSchoolRegistrations')
 const RegisterSchoolTeamService = require('../../services/competition/RegisterSchoolTeam')
 const appErrors = require('../../../../core/errors/application')
@@ -9,6 +10,17 @@ const responseErrors = require('../../../../core/errors/response')
 async function getTimer(ctx) {
   try {
     ctx.body = await new GetTimerService(ctx.state).execute({})
+  } catch (err) {
+    if (err instanceof appErrors.NotFoundError) {
+      throw new responseErrors.BadRequestError('Soutěž nebyla nalezena.')
+    }
+    throw err
+  }
+}
+
+async function getTeams(ctx) {
+  try {
+    ctx.body = await new GetTeamsByVenueService(ctx.state).execute({})
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
       throw new responseErrors.BadRequestError('Soutěž nebyla nalezena.')
@@ -55,6 +67,7 @@ async function registerSchoolTeam(ctx) {
 
 module.exports = {
   getTimer,
+  getTeams,
   getSchoolRegistrations,
   registerSchoolTeam,
 }

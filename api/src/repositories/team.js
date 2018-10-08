@@ -24,6 +24,37 @@ async function findByName(name, dbTransaction) {
   return parsers.parseTeam(team)
 }
 
+async function findAllByVenue(competitionId, dbTransaction) {
+  if (!competitionId) {
+    throw new Error('competitionId is required')
+  }
+  const venues = await db.CompetitionVenue.findAll({
+    where: { competitionId },
+    include: [{
+      model: db.Venue,
+      as: 'venue',
+      required: true,
+    }, {
+      model: db.Team,
+      as: 'teams',
+      attributes: ['id', 'name'],
+      required: false,
+      include: [{
+        model: db.School,
+        as: 'school',
+        attributes: ['id', 'fullName'],
+        required: false,
+      }],
+    }],
+    order: [
+      db.sequelize.literal('"venue"."name" DESC'),
+      db.sequelize.literal('"teams"."createdAt" ASC'),
+    ],
+    transaction: dbTransaction,
+  })
+  return parsers.parseCompetitionVenues(venues)
+}
+
 async function create(team, members, dbTransaction) {
   const createdTeam = await db.Team.create(team, { transaction: dbTransaction })
   if (members && members.length > 0) {
@@ -49,6 +80,7 @@ function bulkUpdate(updates, dbTrannsaction) {
 module.exports = {
   findById,
   findByName,
+  findAllByVenue,
   create,
   bulkUpdate,
 }
