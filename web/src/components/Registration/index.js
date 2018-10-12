@@ -28,9 +28,9 @@ class RegistrationContainer extends Component {
 
   tick() {
     if (this.state.remainingTime > 0) {
-      this.setState({
-        remainingTime: this.state.remainingTime - 1000,
-      })
+      this.setState(state => ({
+        remainingTime: state.remainingTime - 1000,
+      }))
     } else {
       clearInterval(this.timer)
     }

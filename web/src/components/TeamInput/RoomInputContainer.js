@@ -26,15 +26,12 @@ class RoomInputContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.teams && nextProps.teams.length > 0) {
-      this.setState({
-        value: this.state.value,
-        teams: nextProps.teams,
-      })
+      this.setState({ teams: nextProps.teams })
     }
   }
 
   handleChange = (event, value) => { // eslint-disable-line no-shadow
-    this.setState({ value, teams: this.state.teams })
+    this.setState({ value })
   };
 
   render() {

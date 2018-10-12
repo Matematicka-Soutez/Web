@@ -28,7 +28,6 @@ class GameContainer extends Component {
       this.setState({
         loaded: true,
         timer,
-        displayChange: this.state.displayChange,
       })
     } catch (err) {
       // TODO: proper logging

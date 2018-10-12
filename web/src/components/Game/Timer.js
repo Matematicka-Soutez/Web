@@ -23,10 +23,12 @@ class Timer extends Component {
   }
 
   tick() {
+    const start = this.state.start - 1000
+    const end = this.state.end - 1000
     this.setState({
-      start: this.state.start - 1000,
-      end: this.state.end - 1000,
-      phase: getPhase(this.state.start, this.state.end),
+      start,
+      end,
+      phase: getPhase(start, end),
     })
   }
 

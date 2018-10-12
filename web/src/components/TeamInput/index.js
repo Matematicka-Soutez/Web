@@ -26,7 +26,6 @@ class InputContainer extends Component {
       const res = await fetch('/api/org/venues', { headers })
       const venues = await res.json()
       this.setState({
-        jwtToken: this.state.jwtToken,
         value: 1,
         evenRooms: true,
         venues,
@@ -38,11 +37,11 @@ class InputContainer extends Component {
   }
 
   handleChange = (event, value) => { // eslint-disable-line no-shadow
-    this.setState({ ...this.state, value })
+    this.setState({ value })
   }
 
   handleSwitch = event => { // eslint-disable-line no-shadow
-    this.setState({ ...this.state, evenRooms: event.target.checked })
+    this.setState({ evenRooms: event.target.checked })
   }
 
   render() {
