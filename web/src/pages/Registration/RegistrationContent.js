@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
+import { API_ADDRESS } from '../../config'
 import AddTeamForm from './AddTeamForm'
 import TeamPrintout from './TeamPrintout'
 
@@ -15,7 +16,7 @@ class RegistrationContent extends Component {
   }
 
   componentWillMount() {
-    fetch(`${process.env.REACT_APP_SERVER_ADDRESS}api/competitions/current/registration/${this.state.schoolToken}`) // eslint-disable-line no-process-env, max-len
+    fetch(`${API_ADDRESS}/api/competitions/current/registration/${this.state.schoolToken}`) // eslint-disable-line no-process-env, max-len
       .then(res => res.json())
       .then(
         result => {

@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
+import { API_ADDRESS } from '../../config'
 
 const GRADES = [5, 6, 7, 8, 9]
 const MEMBER_INPUTS = [1, 2, 3, 4]
@@ -90,7 +91,7 @@ class AddTeamForm extends Component {
         grade: event.target.grade4.value,
       })
     }
-    fetch(`${process.env.REACT_APP_SERVER_ADDRESS}api/competitions/current/registration/${this.state.school.accessCode}`, { // eslint-disable-line no-process-env, max-len
+    fetch(`${API_ADDRESS}/api/competitions/current/registration/${this.state.school.accessCode}`, { // eslint-disable-line no-process-env, max-len
       method: 'POST',
       headers: {
         Accept: 'application/json',

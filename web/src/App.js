@@ -1,11 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import Homepage from './components/Homepage'
-import GameContainer from './components/Game'
-import TeamInputContainer from './components/TeamInput'
-import RegistrationContainer from './components/Registration'
-import ResultsContainer from './components/Results'
+import Homepage from './pages/Homepage'
+import GameScreen from './pages/GameScreen/index'
+import GameInput from './pages/GameInput'
+import Registration from './pages/Registration'
+import Results from './pages/Results'
 // import PrivateRoute from './components/PrivateRoute'
 import './App.css'
 
@@ -23,12 +23,11 @@ function App() {
         <div className="App">
           <Switch>
             <Route exact path="/" component={Homepage} />
-
-            <Route exact path="/vysledky" component={ResultsContainer} />
-            <Route exact path="/hra" component={GameContainer} />
-            <Route path="/input/:jwtToken" component={TeamInputContainer} />
-            <Route path="/registrace/:schoolToken" component={RegistrationContainer} />
-            <Route path="/registrace" component={RegistrationContainer} />
+            <Route exact path="/vysledky" component={Results} />
+            <Route path="/hra/admin/:jwtToken" component={GameInput} />
+            <Route exact path="/hra" component={GameScreen} />
+            <Route path="/registrace/:schoolToken" component={Registration} />
+            <Route path="/registrace" component={Registration} />
           </Switch>
         </div>
       </MuiThemeProvider>

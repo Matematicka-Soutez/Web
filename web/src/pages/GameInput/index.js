@@ -1,3 +1,5 @@
+// TODO: split into container and component, remove nested arrays
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import AppBar from '@material-ui/core/AppBar'
@@ -6,6 +8,7 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
+import { API_ADDRESS } from '../../config'
 import RoomInputContainer from './RoomInputContainer'
 
 class InputContainer extends Component {
@@ -23,7 +26,7 @@ class InputContainer extends Component {
   async componentWillMount() {
     try {
       const headers = { Authorization: `JWT ${this.state.jwtToken}` }
-      const res = await fetch('/api/org/venues', { headers })
+      const res = await fetch(`${API_ADDRESS}/api/org/competitions/current/venues`, { headers })
       const venues = await res.json()
       this.setState({
         value: 1,

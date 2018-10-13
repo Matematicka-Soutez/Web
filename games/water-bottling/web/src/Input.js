@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import { API_ADDRESS } from '../../../../web/src/config'
 import InputControls from './components/InputControls'
 import SimpleGrid from './components/SimpleGrid'
 import TeamSummary from './components/TeamSummary'
@@ -19,7 +20,7 @@ class Input extends Component {
     try {
       if (this.props.teamId) {
         const res = await fetch(
-          `/api/org/game/teams/${this.props.teamId}/position`,
+          `${API_ADDRESS}/api/org/competitions/current/game/teams/${this.props.teamId}/position`,
           { headers: { Authorization: `JWT ${this.props.jwtToken}` } },
         )
         const position = await res.json()
@@ -32,7 +33,7 @@ class Input extends Component {
 
   async moveTeam(direction) {
     try {
-      const res = await fetch('/api/org/game/move', {
+      const res = await fetch(`${API_ADDRESS}/api/org/competitions/current/game/move`, {
         headers: {
           Authorization: `JWT ${this.props.jwtToken}`,
           Accept: 'application/json',
@@ -58,7 +59,7 @@ class Input extends Component {
 
   async revertMove() {
     try {
-      const res = await fetch('/api/org/game/revert-move', {
+      const res = await fetch(`${API_ADDRESS}/api/org/competitions/current/game/revert-move`, {
         headers: {
           Authorization: `JWT ${this.props.jwtToken}`,
           Accept: 'application/json',

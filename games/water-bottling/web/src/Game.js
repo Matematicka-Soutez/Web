@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { API_ADDRESS } from '../../../../web/src/config'
 import Grid from './components/Grid'
 
 class Game extends Component {
@@ -14,7 +15,7 @@ class Game extends Component {
 
   async componentWillMount() {
     try {
-      const res = await fetch('/api/game/grid')
+      const res = await fetch(`${API_ADDRESS}/api/competitions/current/game/grid`)
       const grid = await res.json()
       this.setState(grid)
     } catch (err) {

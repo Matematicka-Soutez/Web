@@ -12,7 +12,7 @@ const nodemailer = require('nodemailer')
 const _ = require('lodash')
 
 const SERVER = 'https://maso23.herokuapp.com'
-const INPUT_LINK = `${SERVER}/input/`
+const INPUT_LINK = `${SERVER}/hra/admin/`
 
 async function generateLinks() {
   try {

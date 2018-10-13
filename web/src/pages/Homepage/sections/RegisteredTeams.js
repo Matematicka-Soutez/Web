@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ScrollableAnchor from 'react-scrollable-anchor'
 import Grid from '@material-ui/core/Grid'
+import { API_ADDRESS } from '../../../config'
 
 class RegisteredTeamsSection extends Component {
 
@@ -10,7 +11,7 @@ class RegisteredTeamsSection extends Component {
   }
 
   componentWillMount() {
-    fetch(`${process.env.REACT_APP_SERVER_ADDRESS}api/competitions/current/teams`) // eslint-disable-line no-process-env, max-len
+    fetch(`${API_ADDRESS}/api/competitions/current/teams`) // eslint-disable-line no-process-env, max-len
       .then(res => res.json())
       .then(
         result => this.setState({ teamsByVenue: result }),

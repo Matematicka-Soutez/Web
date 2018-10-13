@@ -1,3 +1,5 @@
+// TODO: split into container and component
+
 import React, { Component } from 'react'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
@@ -6,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
+import { API_ADDRESS } from '../../config'
 
 const rootStyle = {
   margin: '16px 8px 8px 8px',
@@ -33,7 +36,7 @@ class ResultsContainer extends Component {
 
   async componentWillMount() {
     try {
-      const res = await fetch('/api/game/results')
+      const res = await fetch(`${API_ADDRESS}/api/competitions/current/game/results`)
       const results = await res.json()
       this.setState({ results })
     } catch (err) {

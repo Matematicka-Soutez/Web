@@ -1,7 +1,7 @@
 import openSocket from 'socket.io-client'
+import { API_ADDRESS } from '../config'
 
-// TODO: proper configuration
-const socket = openSocket(process.env.REACT_APP_SERVER_ADDRESS) // eslint-disable-line no-process-env, max-len
+const socket = openSocket(API_ADDRESS)
 
 function subscribeToDisplayChange(cb) {
   socket.on('displayChange', displayChangeData => cb(null, displayChangeData))

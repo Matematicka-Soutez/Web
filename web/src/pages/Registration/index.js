@@ -41,16 +41,15 @@ class RegistrationContainer extends Component {
   }
 
   render() {
-    const content = this.state.remainingTime >= 0
-      ? <RegistrationTimer remainingTime={this.state.remainingTime} />
-      : <RegistrationContent schoolToken={this.state.schoolToken} />
     return (
       <header className="masthead d-flex">
         <Grid container justify="center" spacing={24}>
           <Grid item xs={10} sm={8} lg={6}>
             <img className="registration" src={masoLogo} alt="MaSo" style={{ width: 150 }} />
             <Card>
-              {content}
+              {this.state.remainingTime >= 0
+                ? <RegistrationTimer remainingTime={this.state.remainingTime} />
+                : <RegistrationContent schoolToken={this.state.schoolToken} />}
             </Card>
           </Grid>
         </Grid>

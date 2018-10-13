@@ -2,8 +2,9 @@ import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Game from '../../../../games/water-bottling/web/src/Game'
 import masoLogo from '../../static/images/maso_logo.png'
-import { subscribeToDisplayChange } from '../../sockets'
-import Timer from './Timer'
+import { subscribeToDisplayChange } from '../../sockets/index'
+import { API_ADDRESS } from '../../config'
+import Timer from './components/Timer'
 
 class GameContainer extends Component {
   constructor(props) {
@@ -23,7 +24,7 @@ class GameContainer extends Component {
 
   async componentWillMount() {
     try {
-      const res = await fetch('/api/competitions/current/timer')
+      const res = await fetch(`${API_ADDRESS}/api/competitions/current/timer`)
       const timer = await res.json()
       this.setState({
         loaded: true,
@@ -43,7 +44,7 @@ class GameContainer extends Component {
       <Fragment>
         <header className="App-header">
           <div className="App-logo">
-            <Link to="/input">
+            <Link to="/hra/admin">
               <img src={masoLogo} alt="logo" />
             </Link>
           </div>

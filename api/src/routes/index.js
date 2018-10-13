@@ -35,11 +35,11 @@ apiRouter.use(setCurrentCompetition)
 // Routes
 apiRouter.use(publicRoutes)
 apiRouter.use('/teacher', authenticateTeacher, teacherRoutes)
-apiRouter.use('/org', authenticateOrganizer, organizerRoutes)
+apiRouter.use('/org/competitions/current', authenticateOrganizer, organizerRoutes)
 
 // Game routes
-apiRouter.use('/game', publicGameRoutes)
-apiRouter.use('/org/game', authenticateOrganizer, organizerGameRoutes)
+apiRouter.use('/competitions/current/game', publicGameRoutes)
+apiRouter.use('/org/competitions/current/game', authenticateOrganizer, organizerGameRoutes)
 
 apiRouter.use(handleNotFound)
 
