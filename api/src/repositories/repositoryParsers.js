@@ -275,6 +275,21 @@ function parseTeacher(teacher) {
   return parsed
 }
 
+function parseSolvedProblem(problem) {
+  if (!problem) {
+    return problem
+  }
+  const parsed = {}
+  parsed.id = problem.id
+  parsed.competitionId = problem.competitionId
+  parsed.teamId = problem.teamId
+  parsed.problemNumber = problem.problemNumber
+  parsed.cancelled = problem.cancelled
+  parsed.createdAt = problem.createdAt
+  parsed.updatedAt = problem.updatedAt
+  return parsed
+}
+
 module.exports = {
   parseTeams,
   parseTeam,
@@ -292,4 +307,5 @@ module.exports = {
   parseOrganizer,
   parseTeachers,
   parseTeacher,
+  parseSolvedProblem,
 }

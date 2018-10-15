@@ -24,6 +24,18 @@ async function findByName(name, dbTransaction) {
   return parsers.parseTeam(team)
 }
 
+async function findByNumberAndCompetition(number, competitionId, dbTransaction) {
+  // TODO: Actually search by competition
+  const team = await db.Team.findOne({
+    where: { number },
+    transaction: dbTransaction,
+  })
+  if (!team) {
+    throw new appErrors.NotFoundError()
+  }
+  return parsers.parseTeam(team)
+}
+
 async function findAllByVenue(competitionId, dbTransaction) {
   if (!competitionId) {
     throw new Error('competitionId is required')
@@ -80,6 +92,7 @@ function bulkUpdate(updates, dbTrannsaction) {
 module.exports = {
   findById,
   findByName,
+  findByNumberAndCompetition,
   findAllByVenue,
   create,
   bulkUpdate,

@@ -19,6 +19,7 @@ module.exports = env => ({
       text: false,
       json: true,
       multipart: false,
+      strict: false,
     },
     cors: {
       origin: '*',

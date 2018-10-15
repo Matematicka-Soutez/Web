@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     firstName: { type: DataTypes.STRING, allowNull: true, field: 'first_name' },
     lastName: { type: DataTypes.STRING, allowNull: true, field: 'last_name' },
     password: { type: DataTypes.STRING, allowNull: true, field: 'password' },
+    problemScanningToken: { type: DataTypes.STRING, allowNull: true, field: 'problem_scanning_token' },
     /* ADMINISTRATIVE PROPERTIES */
     disabled: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'disabled' },
     publicToken: { type: DataTypes.STRING, field: 'public_token' },
@@ -31,6 +32,11 @@ module.exports = (sequelize, DataTypes) => {
     Organizer.belongsTo(models.Role, {
       as: 'role',
       foreignKey: { name: 'roleId', field: 'role_id', allowNull: false },
+      onDelete: 'RESTRICT',
+    })
+    Organizer.hasMany(models.SolvedProblem, {
+      as: 'updatedProblems',
+      foreignKey: { name: 'lastUpdatedBy', field: 'last_updated_by' },
       onDelete: 'RESTRICT',
     })
     // Organizer.hasMany(models.Competition, {

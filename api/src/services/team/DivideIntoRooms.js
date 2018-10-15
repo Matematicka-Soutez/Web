@@ -25,7 +25,7 @@ const EXCEPTIONS = [{
 module.exports = class DivideIntoRoomsService extends TransactionalService {
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
-    const cvenues = await venueRepository.findCompetitionVenues(this.competitionId, dbTransaction)
+    const cvenues = await venueRepository.findCompetitionVenues(this.competition.id, dbTransaction)
     addVenueStartingNumbers(cvenues)
     const updates = _.map(cvenues, cvenue => {
       this.log('info', `Venue: ${cvenue.venue.name}`)

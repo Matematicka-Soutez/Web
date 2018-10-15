@@ -18,8 +18,8 @@ module.exports = class GetTeamPositionService extends AbstractService {
 
   async run() {
     const team = await teamRepository.findById(this.data.teamId)
-    const position = await repository.findTeamPosition(this.competitionId, this.data.teamId)
-    const score = await repository.getTeamScore(this.competitionId, this.data.teamId)
+    const position = await repository.findTeamPosition(this.competition.id, this.data.teamId)
+    const score = await repository.getTeamScore(this.competition.id, this.data.teamId)
     return {
       team,
       score,

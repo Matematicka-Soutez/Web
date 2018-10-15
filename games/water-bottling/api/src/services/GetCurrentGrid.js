@@ -16,7 +16,7 @@ module.exports = class GetCurrentGridService extends AbstractService {
   }
 
   async run() {
-    const fields = await repository.getGrid(this.competitionId)
+    const fields = await repository.getGrid(this.competition.id)
     return {
       fields,
       size: {

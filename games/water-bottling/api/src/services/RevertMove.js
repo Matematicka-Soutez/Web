@@ -19,7 +19,7 @@ module.exports = class RevertMoveService extends TransactionalService {
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
     const currentPosition = await repository.findTeamPosition(
-      this.competitionId,
+      this.competition.id,
       this.data.teamId,
       dbTransaction,
     )

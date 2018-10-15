@@ -12,7 +12,7 @@ module.exports = class GetCurrentGridService extends AbstractService {
   }
 
   async run() {
-    const results = await repository.getResults(this.competitionId)
+    const results = await repository.getResults(this.competition.id)
     return results
   }
 }

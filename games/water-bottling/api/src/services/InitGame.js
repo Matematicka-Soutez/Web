@@ -24,18 +24,18 @@ module.exports = class InitGameService extends TransactionalService {
 
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
-    const grid = generateGridFromConfig(this.competitionId)
-    const venues = await venueRepository.findCompetitionVenues(this.competitionId, dbTransaction)
+    const grid = generateGridFromConfig(this.competition.id)
+    const venues = await venueRepository.findCompetitionVenues(this.competition.id, dbTransaction)
     const teams = _.filter(
       _.flatten(_.map(venues, 'teams')),
       ['arrived', true],
     )
     const initialPositions = generatePositionsFromConfig(
-      this.competitionId,
+      this.competition.id,
       teams,
       this.data.organizerId,
     )
-    await repository.clearGameData(this.competitionId, dbTransaction)
+    await repository.clearGameData(this.competition.id, dbTransaction)
     await Promise.all([
       repository.createGrid(grid, dbTransaction),
       repository.createTeamPositions(initialPositions, dbTransaction),

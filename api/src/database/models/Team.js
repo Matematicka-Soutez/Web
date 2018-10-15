@@ -3,8 +3,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Team = sequelize.define('Team', {
     name: { type: DataTypes.STRING, allowNull: false, field: 'name' },
-    number: { type: DataTypes.INTEGER, allowNull: true, field: 'number' },
-    DR_ID: { type: DataTypes.INTEGER, allowNull: true, field: 'DR_ID' },
+    number: { type: DataTypes.INTEGER, allowNull: true, field: 'number', unique: true },
+    DR_ID: { type: DataTypes.INTEGER, allowNull: true, field: 'DR_ID', unique: true }, // TODO: remove, not used anymore
     arrived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'arrived' },
     solvedProblems: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0, field: 'solved_problems' },
   }, {
@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
   Team.associate = models => {
     Team.hasMany(models.TeamMember, {
       as: 'members',
+      foreignKey: { name: 'teamId', field: 'team_id' },
+      onDelete: 'RESTRICT',
+    })
+    Team.hasMany(models.SolvedProblem, {
+      as: 'problems',
       foreignKey: { name: 'teamId', field: 'team_id' },
       onDelete: 'RESTRICT',
     })

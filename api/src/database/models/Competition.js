@@ -44,6 +44,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: { name: 'organizerId', field: 'organizer_id' },
       onDelete: 'RESTRICT',
     })
+    Competition.hasMany(models.SolvedProblem, {
+      as: 'solvedProblems',
+      foreignKey: { name: 'competitionId', field: 'competition_id' },
+      onDelete: 'RESTRICT',
+    })
   }
 
   return Competition

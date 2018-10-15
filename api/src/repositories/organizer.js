@@ -25,8 +25,17 @@ async function findByEmail(email, dbTransaction) {
   return parsers.parseOrganizer(organizer)
 }
 
+async function findByProblemScanningToken(token, dbTransaction) {
+  const organizer = await db.Organizer.findOne({
+    where: { problemScanningToken: token },
+    transaction: dbTransaction,
+  })
+  return parsers.parseOrganizer(organizer)
+}
+
 module.exports = {
   create,
   findById,
   findByEmail,
+  findByProblemScanningToken,
 }
