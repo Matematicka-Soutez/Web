@@ -4,13 +4,6 @@ const AbstractService = require('../../../../core/services/AbstractService')
 const venueRepository = require('./../../repositories/venue')
 
 module.exports = class GetAllByCompetitionService extends AbstractService {
-  schema() {
-    return {
-      type: 'Object',
-      properties: {},
-    }
-  }
-
   async run() {
     const compVenues = await venueRepository.findCompetitionVenues(this.competition.id)
     return compVenues.map(compVenue => ({

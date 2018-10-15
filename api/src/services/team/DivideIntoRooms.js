@@ -23,13 +23,6 @@ const EXCEPTIONS = [{
 }]
 
 module.exports = class DivideIntoRoomsService extends TransactionalService {
-  schema() {
-    return {
-      type: 'Object',
-      properties: {},
-    }
-  }
-
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
     const cvenues = await venueRepository.findCompetitionVenues(this.competitionId, dbTransaction)
