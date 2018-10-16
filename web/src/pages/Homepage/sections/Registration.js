@@ -54,10 +54,9 @@ class RegistrationSection extends Component {
                 }
               </Card>
               <p className="lead">
-                Nyní je možné registrovat první tým za školu. Druhý tým bude možné (v případě
-                zbývající kapacity) registrovat od úterý 16.&nbsp;10.&nbsp;2018 7:30 ráno.
-                Pro registraci potřebujete <strong>školní registrační kód</strong>,
-                název přihlašovaného týmu a celá jména jeho členů.
+                Kapacita soutěže byla naplněna a již není možné registrovat další týmy.
+                Omlouváme se všem, na které se nedostalo. Na jaro připravujeme pro MaSo
+                nové prostory s větší kapacitou, kde už by se mělo dostat na všechny.
               </p>
               <br />
               <h2>Nemáte registrační kód?</h2>
