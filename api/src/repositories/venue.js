@@ -40,6 +40,19 @@ async function findCompetitionVenues(competitionId, dbTransaction) {
   return parsers.parseCompetitionVenues(venues)
 }
 
+async function findCompetitionVenueById(id, dbTransaction) {
+  const venue = await db.CompetitionVenue.findById(id, {
+    include: [{
+      model: db.Team,
+      as: 'teams',
+      required: false,
+    }],
+    transaction: dbTransaction,
+  })
+  return parsers.parseCompetitionVenue(venue)
+}
+
 module.exports = {
   findCompetitionVenues,
+  findCompetitionVenueById,
 }

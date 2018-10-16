@@ -2,15 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 
-const TeamPrintout = ({ teams }) => (
+const TeamPrintoutComponent = ({ teams }) => (
   <React.Fragment>
     <Typography
       variant="headline"
       component="h2"
-      style={{ textAlign: 'left', fontSize: '120%' }}>
+      style={{ textAlign: 'left', fontSize: '120%' }} gutterBottom>
       Přihlášené týmy
     </Typography>
-    <br />
     {teams.map(displayTeam)}
   </React.Fragment>
 )
@@ -32,9 +31,9 @@ function displayMember(member) {
   return `${member.firstName} ${member.lastName} (${member.grade})`
 }
 
-TeamPrintout.propTypes = {
+TeamPrintoutComponent.propTypes = {
   teams: PropTypes.array.isRequired,
 }
 
 
-export default TeamPrintout
+export default TeamPrintoutComponent

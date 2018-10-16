@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ScrollableAnchor from 'react-scrollable-anchor'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import RegistrationTimer from '../../Registration/RegistrationTimer'
+import RegistrationCountdownComponent from '../../Registration/components/RegistrationCountdownComponent' // eslint-disable-line max-len
 import RegistrationCodeInput from '../../Registration/RegistrationCodeInput'
 
 class RegistrationSection extends Component {
@@ -49,7 +49,7 @@ class RegistrationSection extends Component {
               </div>
               <Card>
                 {this.state.remainingTime > 0
-                  ? <RegistrationTimer remainingTime={this.state.remainingTime} />
+                  ? <RegistrationCountdownComponent remainingTime={this.state.remainingTime} />
                   : <RegistrationCodeInput />
                 }
               </Card>
