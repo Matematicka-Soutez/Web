@@ -14,7 +14,7 @@ class RegistrationContainer extends Component {
     this.state = {
       schoolToken: this.props.match.params.schoolToken,
     }
-    this.switchRoundTimer = null
+    this.switchRoundTimeout = null
   }
 
   componentWillMount() {
@@ -26,8 +26,8 @@ class RegistrationContainer extends Component {
             this.props.history.push('/#registrace')
           } else {
             this.setState(result)
-            if (this.state.currentRound < 4) {
-              this.switchRoundTimer = setTimeout(
+            if (result.currentRound < 4) {
+              this.switchRoundTimeout = setTimeout(
                 () => this.switchRound(),
                 result.registrationRounds[result.currentRound].remainingTime,
               )
@@ -57,14 +57,14 @@ class RegistrationContainer extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.switchRoundTimer)
+    clearTimeout(this.switchRoundTimeout)
   }
 
   render() {
     if (!this.state.school) {
       return <RegistrationLoaderComponent />
     }
-    const remainingTime = this.state.registrationRounds[this.state.currentRound].remainingTime
+    const currentRound = this.state.registrationRounds[this.state.currentRound]
     return (
       <header className="masthead d-flex">
         <Grid container justify="center" spacing={24}>
@@ -72,8 +72,11 @@ class RegistrationContainer extends Component {
             <img className="registration" src={masoLogo} alt="MaSo" style={{ width: 150 }} />
             <Card>
               {this.state.currentRound === 0
-                ? <RegistrationCountdownComponent remainingTime={remainingTime} />
-                : <OpenRegistration registrationState={this.state} />}
+                ? <RegistrationCountdownComponent remainingTime={currentRound.remainingTime} />
+                : <OpenRegistration
+                  school={this.state.school}
+                  venues={this.state.venues}
+                  registrationRound={currentRound} />}
             </Card>
           </Grid>
         </Grid>

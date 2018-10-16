@@ -163,9 +163,9 @@ class AddTeamForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <Typography
-        variant="headline"
-        component="h2"
-        style={{ textAlign: 'left', fontSize: '120%' }}>
+          variant="headline"
+          component="h2"
+          style={{ textAlign: 'left', fontSize: '120%' }}>
           Registrovat nový tým
         </Typography>
         <Grid container spacing={24}>

@@ -1,4 +1,4 @@
-// TODO: Make option dates dynnamic
+// TODO: Make option dates dynamic
 const REGISTRATION_OPTIONS = {
   1: {
     unfilled: 'Právě probíhá první kolo registrací. Nyní můžete přihlásit první tým.',

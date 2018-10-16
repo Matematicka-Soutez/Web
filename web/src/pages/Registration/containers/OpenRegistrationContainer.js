@@ -10,14 +10,25 @@ import TeamPrintoutComponent from '../components/TeamPrintoutComponent'
 class OpenRegistrationContainer extends Component {
   constructor(props) {
     super(props)
-    this.state = props.registrationState
+    this.state = {
+      school: props.school,
+      venues: props.venues,
+      registrationRound: props.registrationRound,
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(state => ({
+      school: nextProps.school || state.school,
+      venues: nextProps.venues || state.venues,
+      registrationRound: nextProps.registrationRound || state.registrationRound,
+    }))
   }
 
   render() {
-    const { school, venues } = this.state
-    const currentRound = this.state.registrationRounds[this.state.currentRound]
-    const registrationOptions = getRegistrationOptions(school, venues, currentRound)
-    const reachedTeamLimit = hasReachedTeamLimit(school, currentRound)
+    const { school, venues, registrationRound } = this.state
+    const registrationOptions = getRegistrationOptions(school, venues, registrationRound)
+    const reachedTeamLimit = hasReachedTeamLimit(school, registrationRound)
     const hasTeamsAlready = (school.teams || []).length > 0
     return (
       <CardContent>
@@ -43,7 +54,9 @@ class OpenRegistrationContainer extends Component {
 }
 
 OpenRegistrationContainer.propTypes = {
-  registrationState: PropTypes.object.isRequired,
+  registrationRound: PropTypes.object.isRequired,
+  school: PropTypes.object.isRequired,
+  venues: PropTypes.array.isRequired,
 }
 
 
