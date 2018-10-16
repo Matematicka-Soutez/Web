@@ -6,7 +6,7 @@ const {
   publicGameRoutes,
 } = require('../../../games/water-bottling/api/src/routes')
 const config = require('../../../config')
-const { setCurrentCompetition } = require('../middleware/competition')
+const setCurrentCompetition = require('../middleware/competition')
 const { authenticateTeacher, authenticateOrganizer } = require('../middleware/authentication')
 const { handleErrors, handleNotFound } = require('../middleware/errors')
 const responseErrors = require('../../../core/errors/response')

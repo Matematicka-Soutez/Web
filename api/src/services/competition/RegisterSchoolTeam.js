@@ -1,9 +1,10 @@
 'use strict'
 
-const appErrors = require('../../../../core/errors/application')
 const TransactionalService = require('../../../../core/services/TransactionalService')
+const registrationUtils = require('../../utils/registration')
 const schoolRepository = require('./../../repositories/school')
 const teamRepository = require('./../../repositories/team')
+const venueRepository = require('./../../repositories/venue')
 
 module.exports = class RegisterSchoolTeamService extends TransactionalService {
   schema() {
@@ -30,14 +31,15 @@ module.exports = class RegisterSchoolTeamService extends TransactionalService {
     }
   }
 
-  // TODO: Check if registration is open and competitionVenue is under current competition
-  // TODO: Implement registration rounds
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
     const school = await schoolRepository.findByAccessCode(this.data.schoolToken, dbTransaction)
-    if (school.teams && school.teams.length > 0) {
-      throw new appErrors.CannotBeDoneError('V tuto chvíli nemůžete registrovat více než jeden tým na školu.') // eslint-disable-line max-len
-    }
+    registrationUtils.checkRegistrationRoundRequirements(this.competition, school)
+    const competitionVenue = await venueRepository.findCompetitionVenueById(
+      this.data.competitionVenueId,
+      dbTransaction,
+    )
+    registrationUtils.checkCompetitionVenueRequirements(this.competition, competitionVenue)
     const team = await teamRepository.create({
       name: this.data.teamName.trim(),
       schoolId: school.id,

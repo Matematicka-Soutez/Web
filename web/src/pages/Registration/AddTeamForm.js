@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import MenuItem from '@material-ui/core/MenuItem'
 import TextField from '@material-ui/core/TextField'
+import Typography from '@material-ui/core/Typography'
 import { API_ADDRESS } from '../../config'
 
 const GRADES = [5, 6, 7, 8, 9]
@@ -161,6 +162,12 @@ class AddTeamForm extends Component {
     )
     return (
       <form onSubmit={this.onSubmit}>
+        <Typography
+          variant="headline"
+          component="h2"
+          style={{ textAlign: 'left', fontSize: '120%' }}>
+          Registrovat nový tým
+        </Typography>
         <Grid container spacing={24}>
           <Grid item xs={12}>
             <TextField
@@ -216,7 +223,7 @@ function venueMenuItem(venue) {
     <MenuItem
       key={venue.id}
       value={venue.id}
-      disabled={venue.remainingCapacity === 0}>
+      disabled={venue.remainingCapacity <= 0}>
       {venue.name} (zbývá {venue.remainingCapacity} míst)
     </MenuItem>
   )
