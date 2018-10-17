@@ -29,6 +29,8 @@ class OpenRegistrationContainer extends Component {
     const { school, venues, registrationRound } = this.state
     const registrationOptions = getRegistrationOptions(school, venues, registrationRound)
     const reachedTeamLimit = hasReachedTeamLimit(school, registrationRound)
+    const isAnyRemainingCapacity = venues.map(venue => venue.remainingCapacity > 0).includes(true)
+    const showForm = !reachedTeamLimit && isAnyRemainingCapacity
     const hasTeamsAlready = (school.teams || []).length > 0
     return (
       <CardContent>
@@ -45,8 +47,8 @@ class OpenRegistrationContainer extends Component {
         </Typography>
         <br />
         {hasTeamsAlready && <TeamPrintoutComponent teams={school.teams} />}
-        {hasTeamsAlready && !reachedTeamLimit && <br />}
-        {!reachedTeamLimit && <AddTeamForm school={school} venues={venues} />}
+        {hasTeamsAlready && showForm && <br />}
+        {showForm && <AddTeamForm school={school} venues={venues} />}
         <br />
       </CardContent>
     )
