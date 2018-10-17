@@ -1,19 +1,15 @@
 /* eslint-disable no-console */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {
-  KeyboardArrowLeft,
-  KeyboardArrowRight,
-  KeyboardArrowUp,
-  KeyboardArrowDown,
-  FlashOn,
-} from '@material-ui/icons'
-import {
-  Button,
-  Paper,
-  Typography,
-  Grid,
-} from '@material-ui/core'
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
+import KeyboardArrowUp from '@material-ui/icons/KeyboardArrowUp'
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown'
+import FlashOn from '@material-ui/icons/FlashOn'
+import Button from '@material-ui/core/Button'
+import Paper from '@material-ui/core/Paper'
+import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
