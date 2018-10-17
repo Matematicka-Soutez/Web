@@ -35,6 +35,7 @@ async function initUsers() {
     password: 'Password123!',
     confirmed: true,
     roleId: enums.ROLES.DRAFTSMAN.id,
+    problemScanningToken: 'zluty-bagr',
   }
 
   const admin = {
@@ -44,6 +45,7 @@ async function initUsers() {
     password: 'Password123!',
     confirmed: true,
     roleId: enums.ROLES.ADMIN.id,
+    problemScanningToken: 'super-tajny-token',
   }
 
   return {

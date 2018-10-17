@@ -29,12 +29,12 @@ class ResponseError extends Error {
  *    HTTP/1.1 400 BadRequest
  *    {
  *      "type": "BAD_REQUEST",
- *      "message": "Invalid or missing request data."
+ *      "message": "Požadavek postrádá nebo obsahuje neplatná data."
  *    }
  */
 class BadRequestError extends ResponseError {
   constructor(message) {
-    super(message || 'Invalid or missing request data.', 'BAD_REQUEST', 400)
+    super(message || 'Požadavek postrádá nebo obsahuje neplatná data.', 'BAD_REQUEST', 400)
   }
 }
 

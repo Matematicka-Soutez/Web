@@ -24,6 +24,7 @@ async function initStatic() {
 
 function initVenues() {
   const venues = [{
+    id: 1,
     name: 'Praha',
     defaultCapacity: 86,
     address: {
@@ -35,6 +36,7 @@ function initVenues() {
       countryId: enums.COUNTRIES.CZECH_REPUBLIC.id,
     },
   }, {
+    id: 2,
     name: 'Brno',
     defaultCapacity: 30,
     address: {
@@ -90,6 +92,7 @@ function initGames() {
 
 function initCompetitions(games) {
   const competitions = [{
+    id: 1,
     name: 'Jarní MaSo 2018',
     date: new Date('2018-05-16T08:30:00.000Z'),
     start: new Date('2018-05-16T10:00:00.000Z'),
@@ -103,6 +106,7 @@ function initCompetitions(games) {
     organizerId: null,
     gameId: games[0].id,
   }, {
+    id: 2,
     name: 'Podzimní MaSo 2018',
     date: new Date('2018-11-06T06:30:00.000Z'),
     start: new Date('2018-11-06T08:00:00.000Z'),

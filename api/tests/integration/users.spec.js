@@ -28,7 +28,7 @@ describe('User API endpoints: /api/users', function userAPI() {
         .post('/api/organizers')
         .send(newcomer)
         .expect('Content-Type', /json/u)
-        .expect(400, { message: 'Invalid or missing request data.', type: 'BAD_REQUEST' })
+        .expect(400, { message: 'Požadavek postrádá nebo obsahuje neplatná data.', type: 'BAD_REQUEST' })
     })
 
     it('SUCCESS 201 - create user', async function createUser() {
@@ -836,7 +836,7 @@ describe('User API endpoints: /api/users', function userAPI() {
   //       address.state.should.deep.equal(res.address.state)
   //       res.incompleteData.should.equal(false)
   //     }
-  //     this.badRequestError = { message: 'Invalid or missing request data.', type: 'BAD_REQUEST' }
+  //     this.badRequestError = { message: 'Požadavek postrádá nebo obsahuje neplatná data.', type: 'BAD_REQUEST' }
   //     return accountDb()
   //       .then(() => login(userDb.users.confirmed))
   //       .then(userData => this.user = userData)

@@ -3,10 +3,10 @@
 const appErrors = require('../../../../core/errors/application')
 const TransactionalService = require('../../../../core/services/TransactionalService')
 const organizerRepository = require('./../../repositories/organizer')
-const problemRepository = require('./../../repositories/problem')
+const teamSolutionRepository = require('./../../repositories/teamSolution')
 const teamRepository = require('./../../repositories/team')
 
-module.exports = class UpdateSolvedProblemService extends TransactionalService {
+module.exports = class UpdateTeamSolutionService extends TransactionalService {
   schema() {
     return {
       type: 'Object',
@@ -14,7 +14,7 @@ module.exports = class UpdateSolvedProblemService extends TransactionalService {
         teamNumber: { type: 'integer', required: true, minimum: 1 },
         problemNumber: { type: 'integer', required: true, minimum: 1, maximum: 100 },
         password: { type: 'string', required: true, minLength: 1, maxLength: 40 },
-        cancelled: { type: 'boolean', required: true, enum: [true, false] },
+        action: { type: 'string', required: true, enum: ['add', 'cancel'] },
       },
     }
   }
@@ -33,12 +33,12 @@ module.exports = class UpdateSolvedProblemService extends TransactionalService {
       this.competition.id,
       dbTransaction,
     )
-    return problemRepository.upsertSolvedProblem({
+    return teamSolutionRepository.createTeamSolutionChange({
       competitionId: this.competition.id,
       teamId: team.id,
       problemNumber: this.data.problemNumber,
-      lastUpdatedBy: organizer.id,
-      cancelled: this.data.cancelled,
+      createdBy: organizer.id,
+      solved: this.data.action === 'add',
     }, dbTransaction)
   }
 }
