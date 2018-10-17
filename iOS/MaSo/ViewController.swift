@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var tableView: UITableView!
     
@@ -84,7 +85,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
                     return
                 }
                 
-                scannerVC.passwordEntry = text
+                NetworkManager.shared.password = passwordCell.passwordTextField.text
                 if let navigationController = self?.navigationController {
                     navigationController.pushViewController(scannerVC, animated: true)
                 }

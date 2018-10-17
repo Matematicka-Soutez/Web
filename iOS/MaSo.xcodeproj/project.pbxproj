@@ -22,6 +22,7 @@
 		4490AB9B2170A64400D61984 /* QRScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4490AB9A2170A64400D61984 /* QRScannerVC.swift */; };
 		4490AB9F2170A68E00D61984 /* QRScannerVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */; };
 		4490ABA12170B51900D61984 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4490ABA02170B51900D61984 /* NetworkManager.swift */; };
+		44C42D8D217604640036F432 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C42D8C217604640036F432 /* DatabaseManager.swift */; };
 		44E59A7D2175D2890003957A /* QR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E59A7C2175D2890003957A /* QR.swift */; };
 		C766D0CC48AA6C2A132A837D /* Pods_MaSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFEC9F0813777EBBE5A2DBC /* Pods_MaSo.framework */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		4490AB9A2170A64400D61984 /* QRScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerVC.swift; sourceTree = "<group>"; };
 		4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRScannerVC.storyboard; sourceTree = "<group>"; };
 		4490ABA02170B51900D61984 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		44C42D8C217604640036F432 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		44E59A7C2175D2890003957A /* QR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QR.swift; sourceTree = "<group>"; };
 		DDB34A77C652D6FCB8FD4D8F /* Pods-MaSo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaSo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaSo/Pods-MaSo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,9 +105,10 @@
 		4490AB872170991700D61984 /* MaSo */ = {
 			isa = PBXGroup;
 			children = (
+				44C42D8B217604430036F432 /* Services */,
+				44C42D8A217604340036F432 /* Model */,
 				4442BCC12174952900DF4CE6 /* Views */,
 				4490AB882170991700D61984 /* AppDelegate.swift */,
-				44E59A7C2175D2890003957A /* QR.swift */,
 				4490AB8A2170991700D61984 /* ViewController.swift */,
 				4490AB8C2170991700D61984 /* Main.storyboard */,
 				4490AB8F2170991800D61984 /* Assets.xcassets */,
@@ -113,11 +116,27 @@
 				4490AB942170991800D61984 /* Info.plist */,
 				4490AB9A2170A64400D61984 /* QRScannerVC.swift */,
 				4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */,
-				4490ABA02170B51900D61984 /* NetworkManager.swift */,
-				443307E52174DC2D00FCDF02 /* QRManager.swift */,
 				443307E72174EC5F00FCDF02 /* Errors.swift */,
 			);
 			path = MaSo;
+			sourceTree = "<group>";
+		};
+		44C42D8A217604340036F432 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44E59A7C2175D2890003957A /* QR.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		44C42D8B217604430036F432 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4490ABA02170B51900D61984 /* NetworkManager.swift */,
+				443307E52174DC2D00FCDF02 /* QRManager.swift */,
+				44C42D8C217604640036F432 /* DatabaseManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		C4FEB039B07E46350B70E609 /* Pods */ = {
@@ -227,10 +246,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MaSo/Pods-MaSo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -245,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				443307E62174DC2D00FCDF02 /* QRManager.swift in Sources */,
+				44C42D8D217604640036F432 /* DatabaseManager.swift in Sources */,
 				4490ABA12170B51900D61984 /* NetworkManager.swift in Sources */,
 				4490AB8B2170991700D61984 /* ViewController.swift in Sources */,
 				4490AB892170991700D61984 /* AppDelegate.swift in Sources */,

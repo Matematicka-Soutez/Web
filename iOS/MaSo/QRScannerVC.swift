@@ -10,7 +10,6 @@ import AVFoundation
 import UIKit
 
 class QRScannerVC: UIViewController {
-    var passwordEntry: String?
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
@@ -67,8 +66,6 @@ class QRScannerVC: UIViewController {
         }
         
         captureSession.startRunning()
-        
-        print("\(passwordEntry)")
     }
 }
 
@@ -87,9 +84,8 @@ extension QRScannerVC: AVCaptureMetadataOutputObjectsDelegate {
                 }
                 qrCodeFrameView?.frame = barCodeObj.bounds
                 
-                if let value = metadataObj.stringValue, let password = passwordEntry {
-                    NetworkManager.shared.signAssignment(for: value, with: password)
-                    
+                if let value = metadataObj.stringValue{
+                    QRManager.shared.process(with: value)
                 }
             }
         }
