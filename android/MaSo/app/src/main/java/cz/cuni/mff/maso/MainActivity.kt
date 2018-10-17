@@ -1,23 +1,19 @@
 package cz.cuni.mff.maso
 
-import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_main.fab
-import kotlinx.android.synthetic.main.activity_main.toolbar
+import cz.cuni.mff.maso.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+interface MainView {
+	fun onNextClicked()
+}
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_main)
-		setSupportActionBar(toolbar)
+class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainView>() {
+	override val layoutResId: Int = R.layout.activity_main
+	override val viewModel by lazy { initViewModel<MainViewModel>() }
+	override val view = object : MainView {
+		override fun onNextClicked() {
 
-		fab.setOnClickListener { view ->
-			Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-				.setAction("Action", null).show()
 		}
 	}
 
