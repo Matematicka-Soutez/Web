@@ -32,6 +32,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.budiyev.android:code-scanner:2.0.1'
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.8'
     androidTestImplementation 'androidx.test:runner:1.1.0-beta02'

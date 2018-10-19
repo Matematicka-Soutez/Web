@@ -2,4 +2,6 @@
 	<string name="app_name">MaSo</string>
 	<string name="action_settings">Settings</string>
 	<string name="password_hint">Password</string>
+	<string name="error_camera_permission_denied">Cannot scan QR codes, camera permission denied</string>
+	<string name="error_qr_code_format_not_valid">This is not a valid QR code</string>
 </resources>
