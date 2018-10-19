@@ -1,4 +1,4 @@
-package cz.cuni.mff.maso
+package cz.cuni.mff.maso.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

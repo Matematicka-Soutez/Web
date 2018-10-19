@@ -1,4 +1,4 @@
-package cz.cuni.mff.maso
+package cz.cuni.mff.maso.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +8,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
+import cz.cuni.mff.maso.BR
+import cz.cuni.mff.maso.R
 import cz.cuni.mff.maso.tools.EventObserver
 
 abstract class BaseActivity<B : ViewDataBinding, VM : ViewModelInterface, V> : AppCompatActivity() {

@@ -1,8 +1,11 @@
-package cz.cuni.mff.maso
+package cz.cuni.mff.maso.ui.password
 
 import android.view.Menu
 import android.view.MenuItem
+import cz.cuni.mff.maso.R
 import cz.cuni.mff.maso.databinding.ActivityMainBinding
+import cz.cuni.mff.maso.ui.BaseActivity
+import cz.cuni.mff.maso.ui.qr.QrScanActivity
 
 interface MainView {
 	fun onNextClicked()
@@ -13,7 +16,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel, MainView>(
 	override val viewModel by lazy { initViewModel<MainViewModel>() }
 	override val view = object : MainView {
 		override fun onNextClicked() {
-
+			if (viewModel.updatePassword()) {
+				startActivity(QrScanActivity.newIntent(this@MainActivity))
+			}
 		}
 	}
 
