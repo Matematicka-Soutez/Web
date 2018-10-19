@@ -25,14 +25,35 @@ android {
     dataBinding.enabled true
 }
 
+ext {
+	retrofitVersion = '2.3.0'
+	moshi = '1.6.0'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+	//Support libraries
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-alpha2'
     implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.budiyev.android:code-scanner:2.0.1'
+
+	// Retrofit
+	implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+	implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+	implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+	// Moshi
+	kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi"
+	implementation "com.squareup.moshi:moshi:$moshi"
+	implementation "com.squareup.moshi:moshi-adapters:$moshi"
+
+	//QR code scanner
+	implementation 'com.budiyev.android:code-scanner:2.0.1'
+
+	//Tests
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.robolectric:robolectric:3.8'
     androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
