@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -20,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
 import cz.cuni.mff.maso.R
 import cz.cuni.mff.maso.api.ErrorType
+import cz.cuni.mff.maso.api.RequestTypeEnum
 import cz.cuni.mff.maso.api.Status
 import cz.cuni.mff.maso.databinding.ActivityQrScanBinding
 import cz.cuni.mff.maso.ui.BaseActivity
@@ -80,6 +83,21 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 				Status.LOADING -> showProgress()
 			}
 		})
+		initSpinner()
+	}
+
+	private fun initSpinner() {
+		val options = resources.getStringArray(R.array.request_options)
+		val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, options)
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+		binding.spinnerSelector.setAdapter(adapter)
+		binding.spinnerSelector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+			override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+				viewModel.requestType = if (i == 1) RequestTypeEnum.CANCEL else RequestTypeEnum.ADD
+			}
+
+			override fun onNothingSelected(adapterView: AdapterView<*>) {}
+		}
 	}
 
 	private fun showProgress() {

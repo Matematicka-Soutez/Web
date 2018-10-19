@@ -14,4 +14,13 @@
 	<string name="global_network_parse_fail">Unable to process response from server</string>
 	<string name="team_label">Team id: %1$d</string>
 	<string name="problem_label">Problem number: %1$d</string>
+	<string name="add_qr_code">Add QR Code</string>
+	<string name="cancel_qr_code">Cancel QR Code</string>
+	<string name="title_request_success_add">QR code successfully added</string>
+	<string name="title_request_success_cancel">QR code successfully canceled</string>
+
+	<array name="request_options">
+		<item>@string/add_qr_code</item>
+		<item>@string/cancel_qr_code</item>
+	</array>
 </resources>
