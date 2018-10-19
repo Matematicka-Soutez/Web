@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.ToJson
+import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import cz.cuni.mff.maso.App
 import cz.cuni.mff.maso.BuildConfig
 import okhttp3.Interceptor
@@ -14,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.io.IOException
+import java.util.Date
 import java.util.concurrent.TimeUnit
 
 private const val URL_BASE = "https://maso-staging.herokuapp.com/api/"
@@ -37,6 +39,7 @@ object RetrofitHelper {
 	}
 
 	private fun provideMoshi(): Moshi = Moshi.Builder()
+		.add(Date::class.java, Rfc3339DateJsonAdapter().nullSafe())
 		.add(RequestTypeAdapter())
 		.build()
 
