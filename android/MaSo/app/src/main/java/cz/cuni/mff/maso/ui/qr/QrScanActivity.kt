@@ -26,7 +26,7 @@ import cz.cuni.mff.maso.ui.BaseActivity
 import cz.cuni.mff.maso.ui.password.PasswordActivity
 
 private const val PERMISSION_CAMERA_CODE = 69
-private const val HIDE_SUCCESS_DELAY = 3000L
+private const val HIDE_SUCCESS_DELAY = 10000L
 
 interface QrScanView {
 	fun cancelSuccess()

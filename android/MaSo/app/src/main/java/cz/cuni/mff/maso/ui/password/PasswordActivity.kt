@@ -2,8 +2,10 @@ package cz.cuni.mff.maso.ui.password
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import cz.cuni.mff.maso.R
 import cz.cuni.mff.maso.databinding.ActivityPasswordBinding
+import cz.cuni.mff.maso.tools.Preferences
 import cz.cuni.mff.maso.ui.BaseActivity
 import cz.cuni.mff.maso.ui.qr.QrScanActivity
 
@@ -31,6 +33,13 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding, PasswordViewModel
 	companion object {
 		fun newIntent(context: Context, changePassword: Boolean = false) = Intent(context, PasswordActivity::class.java).apply {
 			putExtra(ARG_CHANGE_PASSWORD, (if (changePassword) 1 else 0).toByte())
+		}
+	}
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		if (!displayBackArrow() && !Preferences.getPassword().isNullOrEmpty()) {
+			startActivity(QrScanActivity.newIntent(this))
 		}
 	}
 }
