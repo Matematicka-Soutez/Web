@@ -5,6 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -17,6 +19,7 @@ import com.google.zxing.BarcodeFormat
 import cz.cuni.mff.maso.R
 import cz.cuni.mff.maso.databinding.ActivityQrScanBinding
 import cz.cuni.mff.maso.ui.BaseActivity
+import cz.cuni.mff.maso.ui.password.PasswordActivity
 
 private const val PERMISSION_CAMERA_CODE = 69
 
@@ -33,7 +36,9 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	}
 
 	companion object {
-		fun newIntent(context: Context) = Intent(context, QrScanActivity::class.java)
+		fun newIntent(context: Context) = Intent(context, QrScanActivity::class.java).apply {
+			flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+		}
 	}
 
 	private lateinit var codeScanner: CodeScanner
@@ -41,6 +46,21 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setupScanning()
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu): Boolean {
+		menuInflater.inflate(R.menu.menu_qr, menu)
+		return super.onCreateOptionsMenu(menu)
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		when (item.itemId) {
+			R.id.action_change_password -> {
+				startActivity(PasswordActivity.newIntent(this, true))
+				return true
+			}
+		}
+		return super.onOptionsItemSelected(item)
 	}
 
 	override fun onStart() {

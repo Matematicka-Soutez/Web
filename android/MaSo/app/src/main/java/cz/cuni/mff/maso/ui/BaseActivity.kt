@@ -1,6 +1,7 @@
 package cz.cuni.mff.maso.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -31,6 +32,14 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModelInterface, V> : A
 			setSupportActionBar(it)
 			supportActionBar?.setDisplayHomeAsUpEnabled(displayBackArrow())
 		}
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		if (item.itemId == android.R.id.home) {
+			finish()
+			return true
+		}
+		return super.onOptionsItemSelected(item)
 	}
 
 	open fun displayBackArrow() = false
