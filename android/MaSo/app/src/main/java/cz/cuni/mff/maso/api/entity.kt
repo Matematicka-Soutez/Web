@@ -2,6 +2,7 @@ package cz.cuni.mff.maso.api
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import java.util.Date
 
 @JsonClass(generateAdapter = true)
 data class ErrorEntity(
@@ -18,6 +19,26 @@ data class ErrorItem(
 )
 
 data class QrCodeEntity(val teamId: Int, val problemId: Int)
+
+@JsonClass(generateAdapter = true)
+data class QrRequestEntity(
+	@Json(name = "action") val action: RequestTypeEnum,
+	@Json(name = "team") val teamId: Int,
+	@Json(name = "problem") val problemId: Int,
+	@Json(name = "password") val password: String
+)
+
+@JsonClass(generateAdapter = true)
+data class QrResponseEntity(
+	@Json(name = "id") val id: Int,
+	@Json(name = "competitionId") val competitionId: Int,
+	@Json(name = "teamId") val teamId: Int,
+	@Json(name = "problemNumber") val problemId: Int,
+	@Json(name = "solved") val solved: Boolean,
+	@Json(name = "createdBy") val createdById: Int,
+	@Json(name = "createdAt") val createdAt: Date,
+	@Json(name = "updatedAt") val updatedAt: Date
+)
 
 enum class RequestTypeEnum(val value: String) {
 	ADD("add"), CANCEL("cancel")

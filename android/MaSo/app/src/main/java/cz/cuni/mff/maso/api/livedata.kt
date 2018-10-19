@@ -10,7 +10,6 @@ import retrofit2.CallAdapter
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import java.io.FileNotFoundException
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.net.SocketTimeoutException
@@ -63,20 +62,12 @@ data class Resource<out T>(val status: Status, val data: T?, val message: String
 
 enum class ErrorType(val type: String) {
 	UNKNOWN_HOST("E_UNKNOWN_HOST"),
-	FILE_NOT_FOUND("E_FILE_NOT_FOUND"),
 	TIMEOUT("E_TIMEOUT"),
 	PARSE("E_PARSE"),
 	NO_CONNECTIVITY("E_NO_CONNECTIVITY"),
-	INVALID_CREDENTIALS("E_INVALID_CREDENTIALS"),
-	UNSUPPORTED_MEDIA_TYPE("E_UNSUPPORTED_MEDIA_TYPE"),
-	INVALID_TOKEN("E_INVALID_TOKEN"),
-	UNAUTHORIZED("E_UNAUTHORIZED"),
-	NOT_FOUND("E_NOT_FOUND"),
-	CONFLICT("E_CONFLICT"),
-	INVALID_BODY("E_INVALID_BODY"),
-	FORBIDDEN("E_FORBIDDEN"),
-	INVALID_AGE("E_AGE_FORBIDDEN"),
-	UNKNOWN("E_UNKNOWN")
+	UNAUTHORIZED("UNAUTHORIZED"),
+	BAD_REQUEST("BAD_REQUEST"),
+	UNKNOWN("UNKNOWN")
 }
 
 /**
@@ -92,7 +83,6 @@ sealed class ApiResponse<T> {
 			error.printStackTrace()
 			return ApiErrorResponse(error.message ?: "unknown error", when (error) {
 				is UnknownHostException -> ErrorType.UNKNOWN_HOST.type
-				is FileNotFoundException -> ErrorType.FILE_NOT_FOUND.type
 				is SocketTimeoutException -> ErrorType.TIMEOUT.type
 				is JsonDataException,
 				is MalformedJsonException,
