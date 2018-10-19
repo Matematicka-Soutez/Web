@@ -44,13 +44,13 @@ data class NetworkState private constructor(
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-data class Resource<out T>(val status: Status, val data: T?, val message: String?, val errorType: String?) {
+data class Resource<out T>(val status: Status, val data: T?, val message: String?, val errorType: ErrorType?) {
 	companion object {
 		fun <T> success(data: T?): Resource<T> {
 			return Resource(Status.SUCCESS, data, null, null)
 		}
 
-		fun <T> error(msg: String, errorType: String, data: T?): Resource<T> {
+		fun <T> error(msg: String, errorType: ErrorType, data: T?): Resource<T> {
 			return Resource(Status.ERROR, data, msg, errorType)
 		}
 
@@ -82,15 +82,15 @@ sealed class ApiResponse<T> {
 		fun <T> create(error: Throwable): ApiErrorResponse<T> {
 			error.printStackTrace()
 			return ApiErrorResponse(error.message ?: "unknown error", when (error) {
-				is UnknownHostException -> ErrorType.UNKNOWN_HOST.type
-				is SocketTimeoutException -> ErrorType.TIMEOUT.type
+				is UnknownHostException -> ErrorType.UNKNOWN_HOST
+				is SocketTimeoutException -> ErrorType.TIMEOUT
 				is JsonDataException,
 				is MalformedJsonException,
 				is ParseException,
 				is NumberFormatException,
-				is ClassCastException -> ErrorType.PARSE.type
-				is NoConnectivityException -> ErrorType.NO_CONNECTIVITY.type
-				else -> ErrorType.UNKNOWN.type
+				is ClassCastException -> ErrorType.PARSE
+				is NoConnectivityException -> ErrorType.NO_CONNECTIVITY
+				else -> ErrorType.UNKNOWN
 			})
 		}
 
@@ -107,7 +107,15 @@ sealed class ApiResponse<T> {
 					ApiEmptyResponse()
 				} else {
 					val error = response.errorBody()?.string()?.let { errorAdapter.fromJson(it) }
-					if (error != null) ApiErrorResponse(error.message, error.type ?: ErrorType.UNKNOWN.type)
+					if (error != null) ApiErrorResponse(error.message, when (error.type ?: ErrorType.UNKNOWN.type) {
+						ErrorType.BAD_REQUEST.type -> ErrorType.BAD_REQUEST
+						ErrorType.NO_CONNECTIVITY.type -> ErrorType.NO_CONNECTIVITY
+						ErrorType.PARSE.type -> ErrorType.PARSE
+						ErrorType.UNKNOWN_HOST.type -> ErrorType.UNKNOWN_HOST
+						ErrorType.TIMEOUT.type -> ErrorType.TIMEOUT
+						ErrorType.UNAUTHORIZED.type -> ErrorType.UNAUTHORIZED
+						else -> ErrorType.UNKNOWN
+					})
 					else ApiErrorResponse("unknown error")
 				}
 			}
@@ -122,7 +130,7 @@ class ApiEmptyResponse<T> : ApiResponse<T>()
 
 data class ApiSuccessResponse<T>(val body: T) : ApiResponse<T>()
 
-data class ApiErrorResponse<T>(val errorMessage: String, val errorType: String = ErrorType.UNKNOWN.type) : ApiResponse<T>()
+data class ApiErrorResponse<T>(val errorMessage: String, val errorType: ErrorType = ErrorType.UNKNOWN) : ApiResponse<T>()
 
 /**
  * A Retrofit adapter that converts the Call into a LiveData of ApiResponse.

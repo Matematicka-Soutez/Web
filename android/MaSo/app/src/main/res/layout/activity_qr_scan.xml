@@ -8,6 +8,7 @@
 		<variable
 			name="viewModel"
 			type="cz.cuni.mff.maso.ui.qr.QrScanViewModel" />
+		<import type="cz.cuni.mff.maso.api.ErrorType" />
 	</data>
 
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,21 +30,148 @@
 
 		</com.google.android.material.appbar.AppBarLayout>
 
-		<com.budiyev.android.codescanner.CodeScannerView
-			android:id="@+id/scanner_view"
+		<FrameLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			app:autoFocusButtonColor="@android:color/white"
-			app:autoFocusButtonVisible="true"
-			app:flashButtonColor="@android:color/white"
-			app:flashButtonVisible="true"
-			app:frameColor="@android:color/white"
-			app:frameCornersSize="50dp"
-			app:frameAspectRatioWidth="1"
-			app:frameAspectRatioHeight="1"
-			app:frameSize="0.5"
-			app:frameThickness="2dp"
-			app:maskColor="#77000000" />
+			android:layout_height="match_parent">
+
+			<com.budiyev.android.codescanner.CodeScannerView
+				android:id="@+id/scanner_view"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				app:autoFocusButtonColor="@android:color/white"
+				app:autoFocusButtonVisible="true"
+				app:flashButtonColor="@android:color/white"
+				app:flashButtonVisible="true"
+				app:frameColor="@android:color/white"
+				app:frameCornersSize="50dp"
+				app:frameAspectRatioWidth="1"
+				app:frameAspectRatioHeight="1"
+				app:frameSize="0.5"
+				app:frameThickness="2dp"
+				app:maskColor="#77000000" />
+
+			<FrameLayout
+				android:id="@+id/progress_container"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:background="@color/black_transparent">
+
+				<ProgressBar
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center" />
+			</FrameLayout>
+
+			<LinearLayout
+				android:id="@+id/success_container"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:clickable="true"
+				android:focusable="true"
+				android:gravity="center"
+				android:orientation="vertical"
+				android:onClick="@{() -> view.cancelSuccess()}"
+				android:background="@color/black_transparent">
+
+				<ImageView
+					android:layout_width="@dimen/status_icon_size"
+					android:layout_height="@dimen/status_icon_size"
+					android:layout_gravity="center"
+					android:padding="@dimen/status_icon_margin"
+					android:background="@drawable/bg_success"
+					app:srcCompat="@drawable/ic_success" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="48dp"
+					android:layout_marginEnd="48dp"
+					android:layout_marginTop="16dp"
+					android:padding="4dp"
+					android:text="@{@string/team_label(viewModel.request.data.teamId)}"
+					android:background="@color/colorAccent"
+					android:textColor="@android:color/white"
+					android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="48dp"
+					android:layout_marginEnd="48dp"
+					android:layout_marginTop="16dp"
+					android:padding="4dp"
+					android:text="@{@string/problem_label(viewModel.request.data.problemId)}"
+					android:background="@color/colorAccent"
+					android:textColor="@android:color/white"
+					android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/fail_container"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:clickable="true"
+				android:focusable="true"
+				android:orientation="vertical"
+				android:onClick="@{() -> view.cancelFail()}"
+				android:background="@color/black_transparent">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="48dp"
+					android:layout_marginEnd="48dp"
+					android:layout_marginBottom="16dp"
+					android:padding="6dp"
+					android:text="@string/error_overlay_title"
+					android:background="@color/colorAccent"
+					android:textColor="@android:color/white"
+					android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+				<ImageView
+					android:layout_width="@dimen/status_icon_size"
+					android:layout_height="@dimen/status_icon_size"
+					android:layout_gravity="center"
+					android:padding="@dimen/status_icon_margin"
+					android:background="@drawable/bg_fail"
+					app:srcCompat="@drawable/ic_fail" />
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginStart="48dp"
+					android:layout_marginEnd="48dp"
+					android:layout_marginTop="16dp"
+					android:padding="4dp"
+					android:text="@{viewModel.request.message}"
+					android:background="@color/colorAccent"
+					android:textColor="@android:color/white"
+					android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal">
+
+					<com.google.android.material.button.MaterialButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="16dp"
+						android:text="@string/cancel"
+						android:onClick="@{() -> view.cancelFail()}"
+						style="@style/Widget.Bonder.Button.TextButton.Black" />
+
+					<com.google.android.material.button.MaterialButton
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@{viewModel.request.errorType == ErrorType.UNAUTHORIZED ? @string/action_change_password : @string/retry}"
+						android:onClick="@{() -> view.actionFail()}"
+						style="@style/Widget.Bonder.Button.TextButton.Yellow" />
+				</LinearLayout>
+			</LinearLayout>
+		</FrameLayout>
 
 	</LinearLayout>
 </layout>

@@ -4,4 +4,14 @@
 	<string name="password_hint">Password</string>
 	<string name="error_camera_permission_denied">Cannot scan QR codes, camera permission denied</string>
 	<string name="error_qr_code_format_not_valid">This is not a valid QR code</string>
+	<string name="cancel">Cancel</string>
+	<string name="retry">Retry</string>
+	<string name="error_overlay_title">QR code submission failed</string>
+	<string name="global_network_offline">No Internet connection available</string>
+	<string name="global_network_fail">Communication with server failed</string>
+	<string name="global_network_unknown_host">Cannot establish a connection to the server</string>
+	<string name="global_network_timeout">Connection timed out</string>
+	<string name="global_network_parse_fail">Unable to process response from server</string>
+	<string name="team_label">Team id: %1$d</string>
+	<string name="problem_label">Problem number: %1$d</string>
 </resources>

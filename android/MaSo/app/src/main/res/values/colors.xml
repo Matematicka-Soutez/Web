@@ -4,4 +4,7 @@
 	<color name="colorPrimaryDark">#e1bb2d</color>
 	<color name="colorAccent">#333333</color>
 	<color name="disabled">#bbbbbb</color>
+	<color name="success">#00a100</color>
+	<color name="fail">#a60000</color>
+	<color name="black_transparent">#99000000</color>
 </resources>
