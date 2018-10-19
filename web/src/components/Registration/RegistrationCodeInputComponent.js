@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 
-class RegistrationCodeInput extends Component {
+class RegistrationCodeInputComponent extends Component {
   constructor(props) {
     super(props)
     this.onChange = this.onChange.bind(this)
@@ -40,9 +40,9 @@ class RegistrationCodeInput extends Component {
   }
 }
 
-RegistrationCodeInput.propTypes = {
+RegistrationCodeInputComponent.propTypes = {
   history: PropTypes.object.isRequired,
 }
 
 
-export default withRouter(RegistrationCodeInput)
+export default withRouter(RegistrationCodeInputComponent)

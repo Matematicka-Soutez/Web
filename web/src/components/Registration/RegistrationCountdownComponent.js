@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import CardContent from '@material-ui/core/CardContent'
 import Typography from '@material-ui/core/Typography'
-import { formattedMS } from '../../../utils/time'
+import { formattedMS } from '../../utils/time'
 
 // 1 second refresh interval
 const REFRESH_INTERVAL = 1000

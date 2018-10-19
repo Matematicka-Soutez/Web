@@ -3,11 +3,11 @@
 const moment = require('moment')
 const appErrors = require('../../../core/errors/application')
 
-function checkCompetitionVenueRequirements(competition, competitionVenue) {
+function checkCompetitionVenueRequirements(competition, competitionVenue, options = {}) {
   if (!competitionVenue || competitionVenue.competitionId !== competition.id) {
     throw new appErrors.CannotBeDoneError('Do tohoto soutěžního místa tým nelze přihlásit.')
   }
-  if (competitionVenue.capacity <= (competitionVenue.teams || []).length) {
+  if (!options.isUpdate && competitionVenue.capacity <= (competitionVenue.teams || []).length) {
     const message = 'Omlouváme se, kapacita soutěžního místa již byla zaplněna.'
     throw new appErrors.CannotBeDoneError(message)
   }

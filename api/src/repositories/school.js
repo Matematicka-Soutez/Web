@@ -13,6 +13,7 @@ async function findByAccessCode(accessCode, dbTransaction) {
     include: [{
       model: db.Team,
       as: 'teams',
+      order: [['createdAt', 'DESC']],
       include: [{
         model: db.TeamMember,
         as: 'members',

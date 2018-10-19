@@ -149,7 +149,8 @@ router.get('/competitions/current/timer', competitions.getTimer)
 router.get('/competitions/current/teams', competitions.getTeams)
 
 router.get('/competitions/current/registration/:schoolToken', competitions.getSchoolRegistrations)
-router.post('/competitions/current/registration/:schoolToken', competitions.registerSchoolTeam)
+router.post('/competitions/current/registration/:schoolToken', competitions.createSchoolTeam)
+router.put('/competitions/current/registration/:schoolToken', competitions.updateSchoolTeam)
 
 router.put('/competitions/current/team-solutions', competitions.updateTeamSolution)
 
