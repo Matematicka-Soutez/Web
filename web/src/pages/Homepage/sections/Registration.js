@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import ScrollableAnchor from 'react-scrollable-anchor'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import RegistrationCountdownComponent from '../../Registration/components/RegistrationCountdownComponent' // eslint-disable-line max-len
-import RegistrationCodeInput from '../../Registration/RegistrationCodeInput'
+import RegistrationCountdownComponent from '../../../components/Registration/RegistrationCountdownComponent' // eslint-disable-line max-len
+import RegistrationCodeInput from '../../../components/Registration/RegistrationCodeInputComponent'
 
 class RegistrationSection extends Component {
   constructor(props) {

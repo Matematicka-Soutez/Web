@@ -5,8 +5,27 @@ const appErrors = require('../../../core/errors/application')
 const db = require('./../database')
 const parsers = require('./repositoryParsers')
 
-async function findById(id, dbTransaction) {
-  const team = await db.Team.findById(id, { transaction: dbTransaction })
+async function findById(id, options = {}, dbTransaction) {
+  const include = []
+  if (options.includeSchool) {
+    include.push({
+      model: db.School,
+      as: 'school',
+      attributes: ['id', 'fullName'],
+      required: true,
+    })
+  }
+  if (options.includeTeamMembers) {
+    include.push({
+      model: db.TeamMember,
+      as: 'members',
+      required: false,
+    })
+  }
+  const team = await db.Team.findById(id, {
+    include,
+    transaction: dbTransaction,
+  })
   if (!team) {
     throw new appErrors.NotFoundError()
   }
@@ -78,12 +97,20 @@ async function create(team, members, dbTransaction) {
   return parsers.parseTeam(createdTeam)
 }
 
-function bulkUpdate(updates, dbTrannsaction) {
-  const requests = updates.map(update => db.Team.update(
-    update,
+async function update(id, data, dbTransaction) {
+  const team = await db.Team.update(data, {
+    where: { id },
+    transaction: dbTransaction,
+  })
+  return parsers.parseTeam(team)
+}
+
+function bulkUpdate(updates, dbTransaction) {
+  const requests = updates.map(data => db.Team.update(
+    data,
     {
-      where: { id: update.id },
-      transaction: dbTrannsaction,
+      where: { id: data.id },
+      transaction: dbTransaction,
     },
   ))
   return Promise.all(requests)
@@ -95,5 +122,6 @@ module.exports = {
   findByNumberAndCompetition,
   findAllByVenue,
   create,
+  update,
   bulkUpdate,
 }

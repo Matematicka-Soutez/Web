@@ -4,9 +4,9 @@ import Card from '@material-ui/core/Card'
 import Grid from '@material-ui/core/Grid'
 import masoLogo from '../../static/images/maso_logo.png'
 import { API_ADDRESS } from '../../config'
-import OpenRegistration from './containers/OpenRegistrationContainer'
-import RegistrationCountdownComponent from './components/RegistrationCountdownComponent'
-import RegistrationLoaderComponent from './components/RegistrationLoaderComponent'
+import RegistrationCountdownComponent from '../../components/Registration/RegistrationCountdownComponent'// eslint-disable-line max-len
+import RegistrationLoaderComponent from '../../features/Registration/components/RegistrationLoaderComponent'// eslint-disable-line max-len
+import OpenRegistration from './OpenRegistrationContainer'
 
 class RegistrationContainer extends Component {
   constructor(props) {
