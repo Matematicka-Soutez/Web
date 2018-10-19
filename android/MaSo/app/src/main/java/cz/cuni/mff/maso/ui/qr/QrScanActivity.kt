@@ -7,8 +7,10 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
@@ -17,14 +19,19 @@ import com.budiyev.android.codescanner.ScanMode
 import com.google.android.material.snackbar.Snackbar
 import com.google.zxing.BarcodeFormat
 import cz.cuni.mff.maso.R
+import cz.cuni.mff.maso.api.ErrorType
+import cz.cuni.mff.maso.api.Status
 import cz.cuni.mff.maso.databinding.ActivityQrScanBinding
 import cz.cuni.mff.maso.ui.BaseActivity
 import cz.cuni.mff.maso.ui.password.PasswordActivity
 
 private const val PERMISSION_CAMERA_CODE = 69
+private const val HIDE_SUCCESS_DELAY = 3000L
 
 interface QrScanView {
-
+	fun cancelSuccess()
+	fun cancelFail()
+	fun actionFail()
 }
 
 class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrScanView>() {
@@ -32,7 +39,24 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override val layoutResId = R.layout.activity_qr_scan
 	override val viewModel by lazy { initViewModel<QrScanViewModel>() }
 	override val view = object : QrScanView {
+		override fun cancelSuccess() {
+			binding.successContainer.visibility = View.GONE
+			startScanning()
+		}
 
+		override fun cancelFail() {
+			binding.failContainer.visibility = View.GONE
+			startScanning()
+		}
+
+		override fun actionFail() {
+			binding.failContainer.visibility = View.GONE
+			if (viewModel.request.value?.errorType == ErrorType.UNAUTHORIZED) {
+				startPasswordActivity()
+			} else {
+				viewModel.retry()
+			}
+		}
 	}
 
 	companion object {
@@ -46,6 +70,34 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setupScanning()
+		binding.failContainer.visibility = View.GONE
+		binding.progressContainer.visibility = View.GONE
+		binding.successContainer.visibility = View.GONE
+		viewModel.request.observe(this, Observer {
+			when (it.status) {
+				Status.SUCCESS -> animateSuccess()
+				Status.ERROR -> animateFail()
+				Status.LOADING -> showProgress()
+			}
+		})
+	}
+
+	private fun showProgress() {
+		binding.progressContainer.visibility = View.VISIBLE
+	}
+
+	private fun animateFail() {
+		binding.progressContainer.visibility = View.GONE
+		binding.failContainer.visibility = View.VISIBLE
+	}
+
+	private fun animateSuccess() {
+		binding.progressContainer.visibility = View.GONE
+		binding.successContainer.visibility = View.VISIBLE
+		binding.successContainer.postDelayed({
+			binding.successContainer.visibility = View.GONE
+			startScanning()
+		}, HIDE_SUCCESS_DELAY)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -56,11 +108,15 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		when (item.itemId) {
 			R.id.action_change_password -> {
-				startActivity(PasswordActivity.newIntent(this, true))
+				startPasswordActivity()
 				return true
 			}
 		}
 		return super.onOptionsItemSelected(item)
+	}
+
+	private fun startPasswordActivity() {
+		startActivity(PasswordActivity.newIntent(this, true))
 	}
 
 	override fun onStart() {

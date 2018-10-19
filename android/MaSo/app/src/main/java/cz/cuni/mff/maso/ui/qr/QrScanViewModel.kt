@@ -1,6 +1,16 @@
 package cz.cuni.mff.maso.ui.qr
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import cz.cuni.mff.maso.api.MasoRequest
 import cz.cuni.mff.maso.api.QrCodeEntity
+import cz.cuni.mff.maso.api.QrRequestEntity
+import cz.cuni.mff.maso.api.QrResponseEntity
+import cz.cuni.mff.maso.api.RequestTypeEnum
+import cz.cuni.mff.maso.api.Resource
+import cz.cuni.mff.maso.api.RetrofitHelper
+import cz.cuni.mff.maso.tools.Preferences
 import cz.cuni.mff.maso.ui.BaseViewModel
 import java.util.regex.Pattern
 
@@ -9,18 +19,28 @@ class QrScanViewModel : BaseViewModel() {
 	private val patternAll = Pattern.compile("T\\d+P\\d+")
 	private val patternTeam = Pattern.compile("T(\\d+)")
 	private val patternProblem = Pattern.compile("P(\\d+)")
+	private val requestEntity = MutableLiveData<QrRequestEntity?>()
+	val request: LiveData<Resource<QrResponseEntity>> = Transformations.switchMap(requestEntity) { it ->
+		it?.let { RetrofitHelper.createRequest(RetrofitHelper.instance.create(MasoRequest::class.java).sendQrCode(it)) }
+	}
 
 	fun processQrCodeResult(text: String?): Boolean {
 		val qrCodeEntity = extractDataFromQrCode(text)
-		if (qrCodeEntity != null) {
-			callApiRequest()
+		qrCodeEntity?.let {
+			callApiRequest(QrRequestEntity(RequestTypeEnum.ADD, it.teamId, it.problemId, Preferences.getPassword()!!))
 			return true
 		}
 		return false
 	}
 
-	private fun callApiRequest() {
+	fun retry() {
+		val tempRequestEntity = requestEntity.value?.copy()
+		requestEntity.value = null
+		requestEntity.value = tempRequestEntity
+	}
 
+	private fun callApiRequest(requestBody: QrRequestEntity) {
+		requestEntity.postValue(requestBody)
 	}
 
 	private fun extractDataFromQrCode(text: String?): QrCodeEntity? {
