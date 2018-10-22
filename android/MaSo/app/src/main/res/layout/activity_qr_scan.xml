@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+	>
 
 	<data>
 		<variable
@@ -55,6 +56,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_marginTop="16dp"
+				app:cardElevation="0dp"
 				android:layout_gravity="center_horizontal">
 
 				<androidx.appcompat.widget.AppCompatSpinner
@@ -65,139 +67,155 @@
 					android:layout_marginBottom="8dp" />
 			</androidx.cardview.widget.CardView>
 
-			<FrameLayout
+			<com.google.android.material.card.MaterialCardView
 				android:id="@+id/progress_container"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent"
-				android:background="@color/black_transparent">
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center"
+				android:background="@color/black_transparent"
+				app:cardCornerRadius="4dp"
+				app:cardBackgroundColor="@color/colorPrimary">
 
 				<ProgressBar
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
+					android:layout_margin="16dp"
 					android:layout_gravity="center" />
-			</FrameLayout>
+			</com.google.android.material.card.MaterialCardView>
 
-			<LinearLayout
+			<FrameLayout
 				android:id="@+id/success_container"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:clickable="true"
 				android:focusable="true"
-				android:gravity="center"
-				android:orientation="vertical"
-				android:onClick="@{() -> view.cancelSuccess()}"
-				android:background="@color/black_transparent">
+				android:background="@color/black_transparent"
+				android:onClick="@{() -> view.cancelSuccess()}">
 
-				<TextView
+				<androidx.cardview.widget.CardView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="48dp"
-					android:layout_marginEnd="48dp"
-					android:layout_marginBottom="16dp"
-					android:padding="6dp"
-					android:text="@{viewModel.request.data.solved ? @string/title_request_success_add : @string/title_request_success_cancel}"
-					android:background="@color/colorAccent"
-					android:textColor="@android:color/white"
-					android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+					android:layout_gravity="center">
 
-				<ImageView
-					android:layout_width="@dimen/status_icon_size"
-					android:layout_height="@dimen/status_icon_size"
-					android:layout_gravity="center"
-					android:padding="@dimen/status_icon_margin"
-					android:background="@drawable/bg_success"
-					app:srcCompat="@drawable/ic_success" />
+					<LinearLayout
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_margin="16dp"
+						android:gravity="center"
+						android:orientation="vertical">
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="48dp"
-					android:layout_marginEnd="48dp"
-					android:layout_marginTop="16dp"
-					android:padding="4dp"
-					android:text="@{@string/team_label(viewModel.request.data.teamId)}"
-					android:background="@color/colorAccent"
-					android:textColor="@android:color/white"
-					android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="16dp"
+							android:padding="6dp"
+							android:text="@{viewModel.request.data.solved ? @string/title_request_success_add : @string/title_request_success_cancel}"
+							android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="48dp"
-					android:layout_marginEnd="48dp"
-					android:layout_marginTop="16dp"
-					android:padding="4dp"
-					android:text="@{@string/problem_label(viewModel.request.data.problemId)}"
-					android:background="@color/colorAccent"
-					android:textColor="@android:color/white"
-					android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+						<ImageView
+							android:layout_width="@dimen/status_icon_size"
+							android:layout_height="@dimen/status_icon_size"
+							android:layout_gravity="center"
+							android:padding="@dimen/status_icon_margin"
+							android:background="@drawable/bg_success"
+							app:srcCompat="@drawable/ic_success" />
 
-			</LinearLayout>
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="48dp"
+							android:layout_marginEnd="48dp"
+							android:layout_marginTop="16dp"
+							android:padding="4dp"
+							android:text="@{@string/team_label(viewModel.request.data.teamId)}"
+							android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
 
-			<LinearLayout
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="48dp"
+							android:layout_marginEnd="48dp"
+							android:layout_marginTop="16dp"
+							android:padding="4dp"
+							android:text="@{@string/problem_label(viewModel.request.data.problemId)}"
+							android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+					</LinearLayout>
+
+				</androidx.cardview.widget.CardView>
+			</FrameLayout>
+
+			<FrameLayout
 				android:id="@+id/fail_container"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:gravity="center"
 				android:clickable="true"
 				android:focusable="true"
-				android:orientation="vertical"
-				android:onClick="@{() -> view.cancelFail()}"
-				android:background="@color/black_transparent">
+				android:background="@color/black_transparent"
+				android:onClick="@{() -> view.cancelFail()}">
 
-				<TextView
+				<androidx.cardview.widget.CardView
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginStart="48dp"
-					android:layout_marginEnd="48dp"
-					android:layout_marginBottom="16dp"
-					android:padding="6dp"
-					android:text="@string/error_overlay_title"
-					android:background="@color/colorAccent"
-					android:textColor="@android:color/white"
-					android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
-
-				<ImageView
-					android:layout_width="@dimen/status_icon_size"
-					android:layout_height="@dimen/status_icon_size"
 					android:layout_gravity="center"
-					android:padding="@dimen/status_icon_margin"
-					android:background="@drawable/bg_fail"
-					app:srcCompat="@drawable/ic_fail" />
+					android:clickable="true">
 
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="48dp"
-					android:layout_marginEnd="48dp"
-					android:layout_marginTop="16dp"
-					android:padding="4dp"
-					android:text="@{viewModel.request.message}"
-					android:background="@color/colorAccent"
-					android:textColor="@android:color/white"
-					android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
-
-				<LinearLayout
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:orientation="horizontal">
-
-					<com.google.android.material.button.MaterialButton
+					<LinearLayout
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_marginEnd="16dp"
-						android:text="@string/cancel"
-						android:onClick="@{() -> view.cancelFail()}"
-						style="@style/Widget.Bonder.Button.TextButton.Black" />
+						android:layout_margin="16dp"
+						android:gravity="center"
+						android:orientation="vertical">
 
-					<com.google.android.material.button.MaterialButton
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="@{viewModel.request.errorType == ErrorType.UNAUTHORIZED ? @string/action_change_password : @string/retry}"
-						android:onClick="@{() -> view.actionFail()}"
-						style="@style/Widget.Bonder.Button.TextButton.Yellow" />
-				</LinearLayout>
-			</LinearLayout>
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginBottom="16dp"
+							android:padding="6dp"
+							android:text="@string/error_overlay_title"
+							android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+						<ImageView
+							android:layout_width="@dimen/status_icon_size"
+							android:layout_height="@dimen/status_icon_size"
+							android:layout_gravity="center"
+							android:padding="@dimen/status_icon_margin"
+							android:background="@drawable/bg_fail"
+							app:srcCompat="@drawable/ic_fail" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginStart="48dp"
+							android:layout_marginEnd="48dp"
+							android:layout_marginTop="16dp"
+							android:padding="4dp"
+							android:text="@{viewModel.request.message}"
+							android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+						<LinearLayout
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:orientation="horizontal">
+
+							<com.google.android.material.button.MaterialButton
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginEnd="16dp"
+								android:text="@string/cancel"
+								android:onClick="@{() -> view.cancelFail()}"
+								style="@style/Widget.Bonder.Button.TextButton.Black" />
+
+							<com.google.android.material.button.MaterialButton
+								android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:text="@{viewModel.request.errorType == ErrorType.UNAUTHORIZED ? @string/action_change_password : @string/retry}"
+								android:onClick="@{() -> view.actionFail()}"
+								style="@style/Widget.Bonder.Button.TextButton.Yellow" />
+						</LinearLayout>
+					</LinearLayout>
+				</androidx.cardview.widget.CardView>
+			</FrameLayout>
 		</FrameLayout>
 
 	</LinearLayout>
