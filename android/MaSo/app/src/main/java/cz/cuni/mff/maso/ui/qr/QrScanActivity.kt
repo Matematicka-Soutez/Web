@@ -79,8 +79,8 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		setupScanning()
 		viewModel.request.observe(this, Observer {
 			when (it.status) {
-				Status.SUCCESS -> animateSuccess()
-				Status.ERROR -> animateFail()
+				Status.SUCCESS -> if (viewModel.state.value == QrScreenState.PROGRESS) showSuccess()
+				Status.ERROR -> if (viewModel.state.value == QrScreenState.PROGRESS) showFail()
 				Status.LOADING -> showProgress()
 			}
 		})
@@ -115,11 +115,11 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		viewModel.state.value = QrScreenState.PROGRESS
 	}
 
-	private fun animateFail() {
+	private fun showFail() {
 		viewModel.state.value = QrScreenState.ERROR
 	}
 
-	private fun animateSuccess() {
+	private fun showSuccess() {
 		viewModel.state.value = QrScreenState.SUCCESS
 		viewModel.runDelayTimer()
 	}
