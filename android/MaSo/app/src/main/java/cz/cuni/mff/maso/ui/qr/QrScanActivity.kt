@@ -42,6 +42,8 @@ interface QrScanView {
 
 class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrScanView>() {
 
+	var snackBar: Snackbar? = null
+
 	override val layoutResId = R.layout.activity_qr_scan
 	override val viewModel by lazy { initViewModel<QrScanViewModel>() }
 	override val view = object : QrScanView {
@@ -182,12 +184,12 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 					viewModel.state.value = QrScreenState.SCANNING
 				} else {
 					viewModel.state.value = QrScreenState.PERMISSION_REQUIRED
-					Snackbar.make(binding.root, R.string.error_camera_permission_denied, Snackbar.LENGTH_INDEFINITE)
+					snackBar = Snackbar.make(binding.root, R.string.error_camera_permission_denied, Snackbar.LENGTH_INDEFINITE)
 						.setAction(R.string.action_settings) {
 							openAppSettings()
 						}
 						.setActionTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-						.show()
+					snackBar?.show()
 				}
 				return
 			}
@@ -202,6 +204,7 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 
 	private fun startScanning() {
 		codeScanner.startPreview()
+		snackBar?.dismiss()
 	}
 
 	private fun stopScanning() {
