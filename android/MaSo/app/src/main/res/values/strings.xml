@@ -18,6 +18,7 @@
 	<string name="cancel_qr_code">Cancel QR Code</string>
 	<string name="title_request_success_add">QR code successfully added</string>
 	<string name="title_request_success_cancel">QR code successfully canceled</string>
+	<string name="action_settings">Settings</string>
 
 	<array name="request_options">
 		<item>@string/add_qr_code</item>

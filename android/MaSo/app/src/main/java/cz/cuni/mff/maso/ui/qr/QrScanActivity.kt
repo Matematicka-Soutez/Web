@@ -4,7 +4,9 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -29,12 +31,12 @@ import cz.cuni.mff.maso.ui.BaseActivity
 import cz.cuni.mff.maso.ui.password.PasswordActivity
 
 private const val PERMISSION_CAMERA_CODE = 69
-private const val HIDE_SUCCESS_DELAY = 10000L
 
 interface QrScanView {
 	fun cancelSuccess()
 	fun cancelFail()
 	fun actionFail()
+	fun cameraPermissionClicked()
 }
 
 class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrScanView>() {
@@ -42,18 +44,22 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override val layoutResId = R.layout.activity_qr_scan
 	override val viewModel by lazy { initViewModel<QrScanViewModel>() }
 	override val view = object : QrScanView {
+		override fun cameraPermissionClicked() {
+			requestCameraPermission()
+		}
+
 		override fun cancelSuccess() {
-			binding.successContainer.visibility = View.GONE
+			viewModel.state.value = QrScreenState.SCANNING
 			startScanning()
 		}
 
 		override fun cancelFail() {
-			binding.failContainer.visibility = View.GONE
+			viewModel.state.value = QrScreenState.SCANNING
 			startScanning()
 		}
 
 		override fun actionFail() {
-			binding.failContainer.visibility = View.GONE
+			viewModel.state.value = QrScreenState.SCANNING
 			if (viewModel.request.value?.errorType == ErrorType.UNAUTHORIZED) {
 				startPasswordActivity()
 			} else {
@@ -73,14 +79,20 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setupScanning()
-		binding.failContainer.visibility = View.GONE
-		binding.progressContainer.visibility = View.GONE
-		binding.successContainer.visibility = View.GONE
 		viewModel.request.observe(this, Observer {
 			when (it.status) {
 				Status.SUCCESS -> animateSuccess()
 				Status.ERROR -> animateFail()
 				Status.LOADING -> showProgress()
+			}
+		})
+		viewModel.state.observe(this, Observer {
+			binding.progressContainer.visibility = if (it == QrScreenState.PROGRESS) View.VISIBLE else View.GONE
+			binding.successContainer.visibility = if (it == QrScreenState.SUCCESS) View.VISIBLE else View.GONE
+			binding.failContainer.visibility = if (it == QrScreenState.ERROR) View.VISIBLE else View.GONE
+			binding.permissionContainer.visibility = if (it == QrScreenState.PERMISSION_REQUIRED) View.VISIBLE else View.GONE
+			if (it == QrScreenState.SCANNING) {
+				viewModel.cancelDelayTimer()
 			}
 		})
 		initSpinner()
@@ -90,9 +102,9 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		val options = resources.getStringArray(R.array.request_options)
 		val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, options)
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-		binding.spinnerSelector.setAdapter(adapter)
+		binding.spinnerSelector.adapter = adapter
 		binding.spinnerSelector.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-			override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+			override fun onItemSelected(adapterView: AdapterView<*>, view: View?, i: Int, l: Long) {
 				viewModel.requestType = if (i == 1) RequestTypeEnum.CANCEL else RequestTypeEnum.ADD
 			}
 
@@ -101,21 +113,16 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	}
 
 	private fun showProgress() {
-		binding.progressContainer.visibility = View.VISIBLE
+		viewModel.state.value = QrScreenState.PROGRESS
 	}
 
 	private fun animateFail() {
-		binding.progressContainer.visibility = View.GONE
-		binding.failContainer.visibility = View.VISIBLE
+		viewModel.state.value = QrScreenState.ERROR
 	}
 
 	private fun animateSuccess() {
-		binding.progressContainer.visibility = View.GONE
-		binding.successContainer.visibility = View.VISIBLE
-		binding.successContainer.postDelayed({
-			binding.successContainer.visibility = View.GONE
-			startScanning()
-		}, HIDE_SUCCESS_DELAY)
+		viewModel.state.value = QrScreenState.SUCCESS
+		viewModel.runDelayTimer()
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -140,10 +147,14 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override fun onStart() {
 		super.onStart()
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-			ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), PERMISSION_CAMERA_CODE)
+			requestCameraPermission()
 		} else {
 			startScanning()
 		}
+	}
+
+	private fun requestCameraPermission() {
+		ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), PERMISSION_CAMERA_CODE)
 	}
 
 	override fun onStop() {
@@ -161,7 +172,10 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 					// contacts-related task you need to do.
 					startScanning()
 				} else {
-					Snackbar.make(binding.root, R.string.error_camera_permission_denied, Snackbar.LENGTH_LONG)
+					viewModel.state.value = QrScreenState.PERMISSION_REQUIRED
+					Snackbar.make(binding.root, R.string.error_camera_permission_denied, Snackbar.LENGTH_LONG).setAction(R.string.action_settings) {
+						openAppSettings()
+					}
 				}
 				return
 			}
@@ -210,6 +224,14 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 
 			}
 		}
+	}
+
+	private fun openAppSettings() {
+		val intent = Intent()
+		intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+		val uri = Uri.fromParts("package", packageName, null)
+		intent.data = uri
+		startActivity(intent)
 	}
 
 }

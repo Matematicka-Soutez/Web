@@ -1,5 +1,6 @@
 package cz.cuni.mff.maso.ui.qr
 
+import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -14,7 +15,14 @@ import cz.cuni.mff.maso.tools.Preferences
 import cz.cuni.mff.maso.ui.BaseViewModel
 import java.util.regex.Pattern
 
+private const val HIDE_SUCCESS_DELAY = 10000L
+
 class QrScanViewModel : BaseViewModel() {
+
+	val state = MutableLiveData<QrScreenState>().apply { value = QrScreenState.SCANNING }
+
+	private var delayHandler: Handler? = null
+	private var delayRunnable: Runnable? = null
 
 	private val patternAll = Pattern.compile("T\\d+P\\d+")
 	private val patternTeam = Pattern.compile("T(\\d+)")
@@ -67,4 +75,24 @@ class QrScanViewModel : BaseViewModel() {
 		return null
 	}
 
+	override fun onCleared() {
+		super.onCleared()
+		cancelDelayTimer()
+	}
+
+	fun runDelayTimer() {
+		delayHandler = Handler()
+		delayRunnable = Runnable {
+			state.value = QrScreenState.SCANNING
+		}
+		delayHandler!!.postDelayed(delayRunnable, HIDE_SUCCESS_DELAY)
+	}
+
+	fun cancelDelayTimer() {
+		delayRunnable?.run {
+			delayHandler?.removeCallbacks(this)
+			delayHandler = null
+			delayRunnable = null
+		}
+	}
 }
