@@ -149,11 +149,15 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 			requestCameraPermission()
 		} else {
+			if (viewModel.state.value == QrScreenState.PERMISSION_REQUIRED) {
+				viewModel.state.value = QrScreenState.SCANNING
+			}
 			startScanning()
 		}
 	}
 
 	private fun requestCameraPermission() {
+		viewModel.state.value = QrScreenState.SCANNING
 		ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), PERMISSION_CAMERA_CODE)
 	}
 
@@ -173,9 +177,12 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 					startScanning()
 				} else {
 					viewModel.state.value = QrScreenState.PERMISSION_REQUIRED
-					Snackbar.make(binding.root, R.string.error_camera_permission_denied, Snackbar.LENGTH_LONG).setAction(R.string.action_settings) {
-						openAppSettings()
-					}
+					Snackbar.make(binding.root, R.string.error_camera_permission_denied, Snackbar.LENGTH_INDEFINITE)
+						.setAction(R.string.action_settings) {
+							openAppSettings()
+						}
+						.setActionTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+						.show()
 				}
 				return
 			}
