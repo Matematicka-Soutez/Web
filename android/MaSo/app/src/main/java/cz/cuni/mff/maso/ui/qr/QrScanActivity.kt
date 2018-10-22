@@ -37,6 +37,7 @@ interface QrScanView {
 	fun cancelFail()
 	fun actionFail()
 	fun cameraPermissionClicked()
+	fun enterManually()
 }
 
 class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrScanView>() {
@@ -44,6 +45,10 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override val layoutResId = R.layout.activity_qr_scan
 	override val viewModel by lazy { initViewModel<QrScanViewModel>() }
 	override val view = object : QrScanView {
+		override fun enterManually() {
+
+		}
+
 		override fun cameraPermissionClicked() {
 			requestCameraPermission()
 		}
