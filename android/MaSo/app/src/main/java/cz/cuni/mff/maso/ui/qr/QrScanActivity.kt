@@ -50,12 +50,10 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 
 		override fun cancelSuccess() {
 			viewModel.state.value = QrScreenState.SCANNING
-			startScanning()
 		}
 
 		override fun cancelFail() {
 			viewModel.state.value = QrScreenState.SCANNING
-			startScanning()
 		}
 
 		override fun actionFail() {
@@ -88,11 +86,12 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		})
 		viewModel.state.observe(this, Observer {
 			binding.progressContainer.visibility = if (it == QrScreenState.PROGRESS) View.VISIBLE else View.GONE
-			binding.successContainer.visibility = if (it == QrScreenState.SUCCESS) View.VISIBLE else View.GONE
-			binding.failContainer.visibility = if (it == QrScreenState.ERROR) View.VISIBLE else View.GONE
+			binding.successContainer.visibility = if (it == QrScreenState.SUCCESS) View.VISIBLE else View.INVISIBLE
+			binding.failContainer.visibility = if (it == QrScreenState.ERROR) View.VISIBLE else View.INVISIBLE
 			binding.permissionContainer.visibility = if (it == QrScreenState.PERMISSION_REQUIRED) View.VISIBLE else View.GONE
 			if (it == QrScreenState.SCANNING) {
 				viewModel.cancelDelayTimer()
+				startScanning()
 			}
 		})
 		initSpinner()
@@ -151,8 +150,9 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		} else {
 			if (viewModel.state.value == QrScreenState.PERMISSION_REQUIRED) {
 				viewModel.state.value = QrScreenState.SCANNING
+			} else if (viewModel.state.value == QrScreenState.SCANNING) {
+				startScanning()
 			}
-			startScanning()
 		}
 	}
 
@@ -174,7 +174,7 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 				if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
 					// permission was granted, yay! Do the
 					// contacts-related task you need to do.
-					startScanning()
+					viewModel.state.value = QrScreenState.SCANNING
 				} else {
 					viewModel.state.value = QrScreenState.PERMISSION_REQUIRED
 					Snackbar.make(binding.root, R.string.error_camera_permission_denied, Snackbar.LENGTH_INDEFINITE)

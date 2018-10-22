@@ -118,8 +118,8 @@
 							android:layout_height="@dimen/status_icon_size"
 							android:layout_gravity="center"
 							android:padding="@dimen/status_icon_margin"
-							android:background="@drawable/bg_success"
-							app:srcCompat="@drawable/ic_success" />
+							android:background="@{viewModel.request.data.solved ? @drawable/bg_success : @drawable/bg_cancel_success}"
+							android:src="@{viewModel.request.data.solved ? @drawable/ic_success : @drawable/ic_cancel_success}" />
 
 						<TextView
 							android:layout_width="wrap_content"
