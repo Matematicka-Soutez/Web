@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+
+	<data>
+		<variable
+			name="view"
+			type="cz.cuni.mff.maso.ui.qr.QrScanView" />
+		<variable
+			name="viewModel"
+			type="cz.cuni.mff.maso.ui.qr.QrScanViewModel" />
+		<import type="cz.cuni.mff.maso.api.ErrorType" />
+	</data>
+
+	<androidx.cardview.widget.CardView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="16dp"
+			android:gravity="center"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				android:padding="6dp"
+				android:text="@{viewModel.request.data.solved ? @string/title_request_success_add : @string/title_request_success_cancel}"
+				android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+			<ImageView
+				android:layout_width="@dimen/status_icon_size"
+				android:layout_height="@dimen/status_icon_size"
+				android:layout_gravity="center"
+				android:padding="@dimen/status_icon_margin"
+				android:background="@{viewModel.request.data.solved ? @drawable/bg_success : @drawable/bg_cancel_success}"
+				android:src="@{viewModel.request.data.solved ? @drawable/ic_success : @drawable/ic_cancel_success}" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="48dp"
+				android:layout_marginEnd="48dp"
+				android:layout_marginTop="16dp"
+				android:padding="4dp"
+				android:text="@{@string/team_label(viewModel.request.data.teamId)}"
+				android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="48dp"
+				android:layout_marginEnd="48dp"
+				android:layout_marginTop="16dp"
+				android:padding="4dp"
+				android:text="@{@string/problem_label(viewModel.request.data.problemId)}"
+				android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+		</LinearLayout>
+
+	</androidx.cardview.widget.CardView>
+
+</layout>

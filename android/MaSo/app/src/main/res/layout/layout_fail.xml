@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<data>
+		<variable
+			name="view"
+			type="cz.cuni.mff.maso.ui.qr.QrScanView" />
+		<variable
+			name="viewModel"
+			type="cz.cuni.mff.maso.ui.qr.QrScanViewModel" />
+		<import type="cz.cuni.mff.maso.api.ErrorType" />
+	</data>
+
+	<androidx.cardview.widget.CardView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center"
+		android:clickable="true">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="16dp"
+			android:gravity="center"
+			android:orientation="vertical">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				android:padding="6dp"
+				android:text="@string/error_overlay_title"
+				android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+			<ImageView
+				android:layout_width="@dimen/status_icon_size"
+				android:layout_height="@dimen/status_icon_size"
+				android:layout_gravity="center"
+				android:padding="@dimen/status_icon_margin"
+				android:background="@drawable/bg_fail"
+				app:srcCompat="@drawable/ic_fail" />
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="48dp"
+				android:layout_marginEnd="48dp"
+				android:layout_marginTop="16dp"
+				android:padding="4dp"
+				android:text="@{viewModel.request.message}"
+				android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1" />
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal">
+
+				<com.google.android.material.button.MaterialButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="16dp"
+					android:text="@string/cancel"
+					android:onClick="@{() -> view.cancelFail()}"
+					style="@style/Widget.Bonder.Button.TextButton.Black" />
+
+				<com.google.android.material.button.MaterialButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@{viewModel.request.errorType == ErrorType.UNAUTHORIZED ? @string/action_change_password : @string/retry}"
+					android:onClick="@{() -> view.actionFail()}"
+					style="@style/Widget.Bonder.Button.TextButton.Yellow" />
+			</LinearLayout>
+		</LinearLayout>
+	</androidx.cardview.widget.CardView>
+
+</layout>
