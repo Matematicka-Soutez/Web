@@ -16,8 +16,8 @@
 	<string name="problem_label">Číslo úlohy: %1$d</string>
 	<string name="add_qr_code">Přidat QR kód</string>
 	<string name="cancel_qr_code">Zrušit QR kód</string>
-	<string name="title_request_success_add">QR kód úspěšně přidán</string>
-	<string name="title_request_success_cancel">QR kód úspěšně zrušen</string>
+	<string name="title_request_success_add">Úloha byla úspěšně přidána</string>
+	<string name="title_request_success_cancel">Úloha byla úspěšně zrušena</string>
 	<string name="action_settings">Nastavení</string>
 	<string name="camera_permission_denied_title">Čtečka QR kódů vyžaduje přístup ke kameře</string>
 	<string name="allow_camera_permission_btn">Povolit přístup ke kameře</string>
