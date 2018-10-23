@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	>
 
 	<data>
@@ -10,6 +11,7 @@
 			name="viewModel"
 			type="cz.cuni.mff.maso.ui.qr.QrScanViewModel" />
 		<import type="cz.cuni.mff.maso.api.ErrorType" />
+		<import type="cz.cuni.mff.maso.R" />
 	</data>
 
 	<androidx.cardview.widget.CardView
@@ -40,7 +42,7 @@
 				android:layout_gravity="center"
 				android:padding="@dimen/status_icon_margin"
 				android:background="@{viewModel.request.data.solved ? @drawable/bg_success : @drawable/bg_cancel_success}"
-				android:src="@{viewModel.request.data.solved ? @drawable/ic_success : @drawable/ic_cancel_success}" />
+				app:srcImage="@{viewModel.request.data.solved ? R.drawable.ic_success : R.drawable.ic_cancel_success}" />
 
 			<TextView
 				android:layout_width="wrap_content"
