@@ -226,6 +226,7 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	}
 
 	private fun stopScanning() {
+		codeScanner.releaseResources()
 		codeScanner.stopPreview()
 	}
 
