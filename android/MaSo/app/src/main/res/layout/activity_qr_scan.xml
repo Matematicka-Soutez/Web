@@ -99,8 +99,10 @@
 				android:layout_height="match_parent"
 				android:clickable="true"
 				android:focusable="true"
+				android:paddingStart="32dp"
+				android:paddingEnd="32dp"
 				android:background="@color/black_transparent"
-				android:onClick="@{() -> view.cancelSuccess()}">
+				android:onClick="@{() -> view.cancelOverlay()}">
 
 				<include
 					layout="@layout/layout_success"
@@ -115,8 +117,10 @@
 				android:layout_height="match_parent"
 				android:clickable="true"
 				android:focusable="true"
+				android:paddingStart="32dp"
+				android:paddingEnd="32dp"
 				android:background="@color/black_transparent"
-				android:onClick="@{() -> view.cancelFail()}">
+				android:onClick="@{() -> view.cancelOverlay()}">
 
 				<include
 					layout="@layout/layout_fail"

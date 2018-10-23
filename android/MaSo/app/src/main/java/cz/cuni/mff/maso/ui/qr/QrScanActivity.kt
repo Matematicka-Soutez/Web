@@ -33,33 +33,28 @@ import cz.cuni.mff.maso.ui.password.PasswordActivity
 private const val PERMISSION_CAMERA_CODE = 69
 
 interface QrScanView {
-	fun cancelSuccess()
-	fun cancelFail()
+	fun cancelOverlay()
 	fun actionFail()
 	fun cameraPermissionClicked()
 	fun enterManually()
 }
 
-class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrScanView>() {
-
+class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrScanView>(), ManualFillInDialogListener {
 	var snackBar: Snackbar? = null
 
 	override val layoutResId = R.layout.activity_qr_scan
+
 	override val viewModel by lazy { initViewModel<QrScanViewModel>() }
 	override val view = object : QrScanView {
 		override fun enterManually() {
-
+			ManualFillInDialogFragment.newInstance().show(supportFragmentManager, ManualFillInDialogFragment.TAG)
 		}
 
 		override fun cameraPermissionClicked() {
 			requestCameraPermission()
 		}
 
-		override fun cancelSuccess() {
-			viewModel.state.value = QrScreenState.SCANNING
-		}
-
-		override fun cancelFail() {
+		override fun cancelOverlay() {
 			viewModel.state.value = QrScreenState.SCANNING
 		}
 
@@ -72,13 +67,12 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 			}
 		}
 	}
-
 	companion object {
+
 		fun newIntent(context: Context) = Intent(context, QrScanActivity::class.java).apply {
 			flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 		}
 	}
-
 	private lateinit var codeScanner: CodeScanner
 
 	override fun onCreate(savedInstanceState: Bundle?) {
@@ -93,15 +87,21 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		})
 		viewModel.state.observe(this, Observer {
 			binding.progressContainer.visibility = if (it == QrScreenState.PROGRESS) View.VISIBLE else View.GONE
-			binding.successContainer.visibility = if (it == QrScreenState.SUCCESS) View.VISIBLE else View.INVISIBLE
-			binding.failContainer.visibility = if (it == QrScreenState.ERROR) View.VISIBLE else View.INVISIBLE
+			binding.successContainer.visibility = if (it == QrScreenState.SUCCESS) View.VISIBLE else View.GONE
+			binding.failContainer.visibility = if (it == QrScreenState.ERROR) View.VISIBLE else View.GONE
 			binding.permissionContainer.visibility = if (it == QrScreenState.PERMISSION_REQUIRED) View.VISIBLE else View.GONE
 			if (it == QrScreenState.SCANNING) {
 				viewModel.cancelDelayTimer()
 				startScanning()
+			} else {
+				stopScanning()
 			}
 		})
 		initSpinner()
+	}
+
+	override fun onDataEntered(teamNo: Int, problemNo: Int) {
+		viewModel.sendRequest(teamNo, problemNo)
 	}
 
 	private fun initSpinner() {

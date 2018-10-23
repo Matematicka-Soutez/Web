@@ -22,6 +22,11 @@
 	<string name="camera_permission_denied_title">QR code reader needs camera permission</string>
 	<string name="allow_camera_permission_btn">Allow camera</string>
 	<string name="enter_manually">Enter data manually</string>
+	<string name="manual_fill_in_title">Enter team and problem number manually</string>
+	<string name="team_number_hint">Team Number</string>
+	<string name="submit_btn">Submit</string>
+	<string name="problem_number_hint">Problem Number</string>
+	<string name="error_invalid_data">Invalid data</string>
 
 	<array name="request_options">
 		<item>@string/add_qr_code</item>
