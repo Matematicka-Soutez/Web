@@ -1,35 +1,30 @@
 <resources>
 	<string name="app_name">MaSo</string>
-	<string name="action_change_password">Change password</string>
-	<string name="password_hint">Password</string>
-	<string name="error_camera_permission_denied">Cannot scan QR codes, camera permission denied</string>
-	<string name="error_qr_code_format_not_valid">This is not a valid QR code</string>
-	<string name="cancel">Cancel</string>
-	<string name="retry">Retry</string>
-	<string name="error_overlay_title">QR code submission failed</string>
-	<string name="global_network_offline">No Internet connection available</string>
-	<string name="global_network_fail">Communication with server failed</string>
-	<string name="global_network_unknown_host">Cannot establish a connection to the server</string>
-	<string name="global_network_timeout">Connection timed out</string>
-	<string name="global_network_parse_fail">Unable to process response from server</string>
-	<string name="team_label">Team id: %1$d</string>
-	<string name="problem_label">Problem number: %1$d</string>
-	<string name="add_qr_code">Add QR Code</string>
-	<string name="cancel_qr_code">Cancel QR Code</string>
-	<string name="title_request_success_add">QR code successfully added</string>
-	<string name="title_request_success_cancel">QR code successfully cancelled</string>
-	<string name="action_settings">Settings</string>
-	<string name="camera_permission_denied_title">QR code reader needs camera permission</string>
-	<string name="allow_camera_permission_btn">Allow camera</string>
-	<string name="enter_manually">Enter data manually</string>
-	<string name="manual_fill_in_title">Enter team and problem number manually</string>
-	<string name="team_number_hint">Team Number</string>
-	<string name="submit_btn">Submit</string>
-	<string name="problem_number_hint">Problem Number</string>
-	<string name="error_invalid_data">Invalid data</string>
-
-	<array name="request_options">
-		<item>@string/add_qr_code</item>
-		<item>@string/cancel_qr_code</item>
-	</array>
+	<string name="action_change_password">Změnit heslo</string>
+	<string name="password_hint">Heslo</string>
+	<string name="error_camera_permission_denied">Nelze načíst QR kód, je vyžadován přístup ke kameře</string>
+	<string name="error_qr_code_format_not_valid">Tento QR kód není platný</string>
+	<string name="cancel">Zrušit</string>
+	<string name="retry">Zkusit znovu</string>
+	<string name="error_overlay_title">Zpracování QR kódu se nezdařilo</string>
+	<string name="global_network_offline">Nemáte přístup k internetu</string>
+	<string name="global_network_fail">Komunikace se serverem selhala</string>
+	<string name="global_network_unknown_host">Nepodařilo se připojit k serveru</string>
+	<string name="global_network_timeout">Časový limit pro připojení vypršel</string>
+	<string name="global_network_parse_fail">Nepodařilo se zpracovat data</string>
+	<string name="team_label">Číslo týmu: %1$d</string>
+	<string name="problem_label">Číslo úlohy: %1$d</string>
+	<string name="add_qr_code">Přidat QR kód</string>
+	<string name="cancel_qr_code">Zrušit QR kód</string>
+	<string name="title_request_success_add">QR kód úspěšně přidán</string>
+	<string name="title_request_success_cancel">QR kód úspěšně zrušen</string>
+	<string name="action_settings">Nastavení</string>
+	<string name="camera_permission_denied_title">Čtečka QR kódů vyžaduje přístup ke kameře</string>
+	<string name="allow_camera_permission_btn">Povolit přístup ke kameře</string>
+	<string name="enter_manually">Zadat data manuálně</string>
+	<string name="manual_fill_in_title">Zadejte číslo týmu a úlohy manuálně</string>
+	<string name="team_number_hint">Číslo týmu</string>
+	<string name="problem_number_hint">Číslo úlohy</string>
+	<string name="submit_btn">Potvrdit</string>
+	<string name="error_invalid_data">Neplatná data</string>
 </resources>
