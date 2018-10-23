@@ -62,7 +62,6 @@ class ManualFillInDialogFragment : DialogFragment() {
 					Toast.makeText(context, R.string.error_invalid_data, Toast.LENGTH_LONG).show()
 				}
 			}
-
 		}
 		return binding.root
 	}

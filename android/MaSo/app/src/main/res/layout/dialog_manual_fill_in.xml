@@ -9,6 +9,8 @@
 		<variable
 			name="viewModel"
 			type="cz.cuni.mff.maso.ui.qr.ManualFillInViewModel" />
+
+		<import type="android.text.TextUtils" />
 	</data>
 
 	<LinearLayout
@@ -81,6 +83,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/submit_btn"
+				android:enabled="@{!TextUtils.isEmpty(viewModel.teamId) &amp;&amp; !TextUtils.isEmpty(viewModel.problemId)}"
 				android:onClick="@{() -> view.onSubmitClicked()}"
 				style="@style/Widget.Bonder.Button.TextButton.Yellow" />
 		</LinearLayout>
