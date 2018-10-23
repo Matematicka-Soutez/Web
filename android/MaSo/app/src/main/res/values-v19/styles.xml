@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-	<style name="Widget.Bonder.Button.TextButton.Black" parent="@style/Widget.MaterialComponents.Button.TextButton">
-		<item name="android:textColor">@android:color/white</item>
-		<item name="backgroundTint">@color/colorAccent</item>
-	</style>
-</resources>

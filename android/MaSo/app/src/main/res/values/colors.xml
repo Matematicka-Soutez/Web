@@ -7,4 +7,5 @@
 	<color name="success">#00a100</color>
 	<color name="fail">#a60000</color>
 	<color name="black_transparent">#99000000</color>
+	<color name="ripple_dark">#666666</color>
 </resources>

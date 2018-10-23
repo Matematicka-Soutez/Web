@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="Widget.Bonder.Button.TextButton.Black" parent="@style/Widget.Bonder.Button.TextButton.BlackBase">
+		<item name="rippleColor">@color/ripple_dark</item>
+	</style>
+</resources>
