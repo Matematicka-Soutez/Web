@@ -1,5 +1,6 @@
 package cz.cuni.mff.maso.ui.qr
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import cz.cuni.mff.maso.tools.showKeyboardDelayed
 
 interface ManualFillInDialogListener {
 	fun onDataEntered(teamNo: Int, problemNo: Int)
+	fun onDismissed()
 }
 
 interface ManualFillInView {
@@ -69,5 +71,15 @@ class ManualFillInDialogFragment : DialogFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		binding.teamIdInput.showKeyboardDelayed()
+	}
+
+	override fun onDismiss(dialog: DialogInterface?) {
+		super.onDismiss(dialog)
+		listener.onDismissed()
+	}
+
+	override fun onCancel(dialog: DialogInterface?) {
+		super.onCancel(dialog)
+		listener.onDismissed()
 	}
 }

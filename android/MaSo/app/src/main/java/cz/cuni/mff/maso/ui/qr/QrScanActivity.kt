@@ -2,6 +2,7 @@ package cz.cuni.mff.maso.ui.qr
 
 import android.Manifest
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -40,14 +41,26 @@ interface QrScanView {
 }
 
 class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrScanView>(), ManualFillInDialogListener {
-	var snackBar: Snackbar? = null
+	private var snackBar: Snackbar? = null
 
 	override val layoutResId = R.layout.activity_qr_scan
 
 	override val viewModel by lazy { initViewModel<QrScanViewModel>() }
+
 	override val view = object : QrScanView {
 		override fun enterManually() {
-			ManualFillInDialogFragment.newInstance().show(supportFragmentManager, ManualFillInDialogFragment.TAG)
+			stopScanning()
+			ManualFillInDialogFragment.newInstance().apply {
+				(object : DialogInterface {
+					override fun dismiss() {
+						startScanning()
+					}
+
+					override fun cancel() {
+						startScanning()
+					}
+				})
+			}.show(supportFragmentManager, ManualFillInDialogFragment.TAG)
 		}
 
 		override fun cameraPermissionClicked() {
@@ -67,14 +80,14 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 			}
 		}
 	}
-	companion object {
 
+	companion object {
 		fun newIntent(context: Context) = Intent(context, QrScanActivity::class.java).apply {
 			flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 		}
 	}
-	private lateinit var codeScanner: CodeScanner
 
+	private lateinit var codeScanner: CodeScanner
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setupScanning()
@@ -99,9 +112,14 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		})
 		initSpinner()
 	}
-
 	override fun onDataEntered(teamNo: Int, problemNo: Int) {
 		viewModel.sendRequest(teamNo, problemNo)
+	}
+
+	override fun onDismissed() {
+		if (viewModel.state.value == QrScreenState.SCANNING) {
+			startScanning()
+		}
 	}
 
 	private fun initSpinner() {
