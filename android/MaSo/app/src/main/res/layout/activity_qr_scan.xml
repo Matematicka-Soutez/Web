@@ -51,12 +51,13 @@
 				app:frameThickness="2dp"
 				app:maskColor="#77000000" />
 
-			<androidx.cardview.widget.CardView
+			<FrameLayout
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:layout_marginTop="16dp"
+				android:layout_marginTop="4dp"
+				android:layout_marginBottom="4dp"
 				android:layout_gravity="center_horizontal"
-				app:cardElevation="0dp">
+				android:background="@drawable/bg_gray_round">
 
 				<androidx.appcompat.widget.AppCompatSpinner
 					android:id="@+id/spinner_selector"
@@ -64,7 +65,7 @@
 					android:layout_height="wrap_content"
 					android:paddingBottom="12dp"
 					android:paddingTop="12dp" />
-			</androidx.cardview.widget.CardView>
+			</FrameLayout>
 
 			<com.google.android.material.button.MaterialButton
 				android:layout_width="wrap_content"
