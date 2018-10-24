@@ -36,7 +36,7 @@ class QrScanViewModel : BaseViewModel() {
 	fun processQrCodeResult(text: String?): Boolean {
 		val qrCodeEntity = extractDataFromQrCode(text)
 		qrCodeEntity?.let {
-			sendRequest(it.teamId, it.problemId)
+			sendRequest(it.teamId, it.problemId, requestType)
 			return true
 		}
 		return false
@@ -96,7 +96,7 @@ class QrScanViewModel : BaseViewModel() {
 		}
 	}
 
-	fun sendRequest(teamId: Int, problemId: Int) {
+	fun sendRequest(teamId: Int, problemId: Int, requestType: RequestTypeEnum) {
 		callApiRequest(QrRequestEntity(requestType, teamId, problemId, Preferences.getPassword()!!))
 	}
 }

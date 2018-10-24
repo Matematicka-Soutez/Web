@@ -29,6 +29,21 @@
 			android:text="@string/manual_fill_in_title"
 			android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
 
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="4dp"
+			android:layout_marginBottom="4dp"
+			android:background="@drawable/bg_gray_round">
+
+			<androidx.appcompat.widget.AppCompatSpinner
+				android:id="@+id/spinner_selector"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:paddingBottom="12dp"
+				android:paddingTop="12dp" />
+		</FrameLayout>
+
 		<com.google.android.material.textfield.TextInputLayout
 			android:layout_width="256dp"
 			android:layout_height="wrap_content"

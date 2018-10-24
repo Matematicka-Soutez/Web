@@ -50,6 +50,7 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	override val view = object : QrScanView {
 		override fun enterManually() {
 			stopScanning()
+			binding.spinnerSelector.visibility = View.GONE
 			ManualFillInDialogFragment.newInstance().apply {
 				(object : DialogInterface {
 					override fun dismiss() {
@@ -112,14 +113,16 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		})
 		initSpinner()
 	}
-	override fun onDataEntered(teamNo: Int, problemNo: Int) {
-		viewModel.sendRequest(teamNo, problemNo)
+
+	override fun onDataEntered(teamNo: Int, problemNo: Int, requestType: RequestTypeEnum) {
+		viewModel.sendRequest(teamNo, problemNo, requestType)
 	}
 
 	override fun onDismissed() {
 		if (viewModel.state.value == QrScreenState.SCANNING) {
 			startScanning()
 		}
+		binding.spinnerSelector.visibility = View.VISIBLE
 	}
 
 	private fun initSpinner() {

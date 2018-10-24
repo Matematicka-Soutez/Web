@@ -6,15 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProviders
 import cz.cuni.mff.maso.R
+import cz.cuni.mff.maso.api.RequestTypeEnum
 import cz.cuni.mff.maso.databinding.DialogManualFillInBinding
 import cz.cuni.mff.maso.tools.showKeyboardDelayed
 
 interface ManualFillInDialogListener {
-	fun onDataEntered(teamNo: Int, problemNo: Int)
+	fun onDataEntered(teamNo: Int, problemNo: Int, requestType: RequestTypeEnum)
 	fun onDismissed()
 }
 
@@ -59,7 +61,7 @@ class ManualFillInDialogFragment : DialogFragment() {
 				val teamId = viewModel.teamId.value?.toIntOrNull()
 				val problemId = viewModel.problemId.value?.toIntOrNull()
 				if (teamId != null && problemId != null) {
-					listener.onDataEntered(teamId, problemId)
+					listener.onDataEntered(teamId, problemId, if (binding.spinnerSelector.selectedItemPosition == 1) RequestTypeEnum.CANCEL else RequestTypeEnum.ADD)
 					dismiss()
 				} else {
 					Toast.makeText(context, R.string.error_invalid_data, Toast.LENGTH_LONG).show()
@@ -73,6 +75,14 @@ class ManualFillInDialogFragment : DialogFragment() {
 		super.onViewCreated(view, savedInstanceState)
 		dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
 		binding.teamIdInput.showKeyboardDelayed()
+		initSpinner()
+	}
+
+	private fun initSpinner() {
+		val options = resources.getStringArray(R.array.request_options)
+		val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, options)
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+		binding.spinnerSelector.adapter = adapter
 	}
 
 	override fun onDismiss(dialog: DialogInterface?) {
