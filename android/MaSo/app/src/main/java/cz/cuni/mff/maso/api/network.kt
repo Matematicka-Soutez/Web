@@ -24,12 +24,12 @@ import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-private const val URL_BASE = "https://maso-staging.herokuapp.com/"
+private val URL_BASE = if (BuildConfig.DEBUG) "https://maso-staging.herokuapp.com/" else "https://maso23.herokuapp.com/"
 
 object RetrofitHelper {
 
 	val instance by lazy { createRetrofit(createOkHttpClient(provideLoggingInterceptor()), URL_BASE, provideMoshi(), LiveDataCallAdapterFactory()) }
-	val executors by lazy { AppExecutors(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3), MainThreadExecutor(App.instance)) }
+	private val executors by lazy { AppExecutors(Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3), MainThreadExecutor(App.instance)) }
 
 	private fun createOkHttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
 		val builder = OkHttpClient.Builder()
