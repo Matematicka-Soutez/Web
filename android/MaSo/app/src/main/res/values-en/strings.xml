@@ -5,6 +5,7 @@
 	<!--<string name="error_camera_permission_denied">Cannot scan QR codes, camera permission denied</string>-->
 	<!--<string name="error_qr_code_format_not_valid">This is not a valid QR code</string>-->
 	<!--<string name="cancel">Cancel</string>-->
+	<!--<string name="back">Back</string>-->
 	<!--<string name="retry">Retry</string>-->
 	<!--<string name="error_overlay_title">QR code submission failed</string>-->
 	<!--<string name="global_network_offline">No Internet connection available</string>-->
@@ -27,4 +28,5 @@
 	<!--<string name="submit_btn">Submit</string>-->
 	<!--<string name="problem_number_hint">Problem Number</string>-->
 	<!--<string name="error_invalid_data">Invalid data</string>-->
+	<!--<string name="privacy_policy">Privacy Policy</string>-->
 </resources>

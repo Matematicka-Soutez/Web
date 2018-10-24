@@ -28,4 +28,5 @@
 	<string name="problem_number_hint">Číslo úlohy</string>
 	<string name="submit_btn">Potvrdit</string>
 	<string name="error_invalid_data">Neplatná data</string>
+	<string name="privacy_policy">Ochrana soukromí</string>
 </resources>

@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import cz.cuni.mff.maso.BR
 import cz.cuni.mff.maso.R
 import cz.cuni.mff.maso.tools.EventObserver
+import cz.cuni.mff.maso.ui.privacypolicy.PrivacyPolicyActivity
 
 abstract class BaseActivity<B : ViewDataBinding, VM : ViewModelInterface, V> : AppCompatActivity() {
 
@@ -40,6 +41,10 @@ abstract class BaseActivity<B : ViewDataBinding, VM : ViewModelInterface, V> : A
 			return true
 		}
 		return super.onOptionsItemSelected(item)
+	}
+
+	protected fun startPrivacyPolicyActivity() {
+		startActivity(PrivacyPolicyActivity.newIntent(this))
 	}
 
 	open fun displayBackArrow() = false

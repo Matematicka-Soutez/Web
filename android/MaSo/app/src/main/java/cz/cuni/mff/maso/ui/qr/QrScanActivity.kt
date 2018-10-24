@@ -153,6 +153,7 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
+		menuInflater.inflate(R.menu.menu_privacy_policy, menu)
 		menuInflater.inflate(R.menu.menu_qr, menu)
 		return super.onCreateOptionsMenu(menu)
 	}
@@ -161,6 +162,10 @@ class QrScanActivity : BaseActivity<ActivityQrScanBinding, QrScanViewModel, QrSc
 		when (item.itemId) {
 			R.id.action_change_password -> {
 				startPasswordActivity()
+				return true
+			}
+			R.id.action_privacy_policy -> {
+				startPrivacyPolicyActivity()
 				return true
 			}
 		}

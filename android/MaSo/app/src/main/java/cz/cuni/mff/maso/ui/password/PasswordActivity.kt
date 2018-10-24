@@ -3,6 +3,8 @@ package cz.cuni.mff.maso.ui.password
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import cz.cuni.mff.maso.R
 import cz.cuni.mff.maso.databinding.ActivityPasswordBinding
 import cz.cuni.mff.maso.tools.Preferences
@@ -41,5 +43,20 @@ class PasswordActivity : BaseActivity<ActivityPasswordBinding, PasswordViewModel
 		if (!displayBackArrow() && !Preferences.getPassword().isNullOrEmpty()) {
 			startActivity(QrScanActivity.newIntent(this))
 		}
+	}
+
+	override fun onCreateOptionsMenu(menu: Menu): Boolean {
+		menuInflater.inflate(R.menu.menu_privacy_policy, menu)
+		return super.onCreateOptionsMenu(menu)
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		when (item.itemId) {
+			R.id.action_privacy_policy -> {
+				startPrivacyPolicyActivity()
+				return true
+			}
+		}
+		return super.onOptionsItemSelected(item)
 	}
 }
