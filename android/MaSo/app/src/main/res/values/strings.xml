@@ -5,6 +5,7 @@
 	<string name="error_camera_permission_denied">Nelze načíst QR kód, je vyžadován přístup ke kameře</string>
 	<string name="error_qr_code_format_not_valid">Tento QR kód není platný</string>
 	<string name="cancel">Zrušit</string>
+	<string name="back">Zpět</string>
 	<string name="retry">Zkusit znovu</string>
 	<string name="error_overlay_title">Zpracování QR kódu se nezdařilo</string>
 	<string name="global_network_offline">Nemáte přístup k internetu</string>
