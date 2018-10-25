@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4414F1B62179D3BC00B2FF43 /* ActionChooserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414F1B52179D3BC00B2FF43 /* ActionChooserVC.swift */; };
+		4414F1B82179D3E300B2FF43 /* ActionChooserVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4414F1B72179D3E300B2FF43 /* ActionChooserVC.storyboard */; };
 		443307E62174DC2D00FCDF02 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443307E52174DC2D00FCDF02 /* QRManager.swift */; };
-		443307E82174EC5F00FCDF02 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443307E72174EC5F00FCDF02 /* Errors.swift */; };
 		4442BCCB21749FBC00DF4CE6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442BCCA21749FBC00DF4CE6 /* Colors.swift */; };
 		4442BCD22174B7F000DF4CE6 /* LogoCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442BCD02174B7F000DF4CE6 /* LogoCellItem.swift */; };
 		4442BCD32174B7F000DF4CE6 /* LogoCellItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442BCD12174B7F000DF4CE6 /* LogoCellItem.xib */; };
 		4442BCD62174B8F600DF4CE6 /* PasswordCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442BCD42174B8F600DF4CE6 /* PasswordCellItem.swift */; };
 		4442BCD72174B8F600DF4CE6 /* PasswordCellItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4442BCD52174B8F600DF4CE6 /* PasswordCellItem.xib */; };
+		446C2664217DDE25003F9304 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C2663217DDE25003F9304 /* Action.swift */; };
+		446C2668217DE1EC003F9304 /* Toast.xib in Resources */ = {isa = PBXBuildFile; fileRef = 446C2667217DE1EC003F9304 /* Toast.xib */; };
+		446C266C217DE51E003F9304 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446C266B217DE51E003F9304 /* Toast.swift */; };
 		4490AB892170991700D61984 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4490AB882170991700D61984 /* AppDelegate.swift */; };
 		4490AB8B2170991700D61984 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4490AB8A2170991700D61984 /* ViewController.swift */; };
 		4490AB8E2170991700D61984 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4490AB8C2170991700D61984 /* Main.storyboard */; };
@@ -30,13 +34,17 @@
 /* Begin PBXFileReference section */
 		0CFEC9F0813777EBBE5A2DBC /* Pods_MaSo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaSo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEF4C3CD8EC5F61749F3714 /* Pods-MaSo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaSo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaSo/Pods-MaSo.release.xcconfig"; sourceTree = "<group>"; };
+		4414F1B52179D3BC00B2FF43 /* ActionChooserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionChooserVC.swift; sourceTree = "<group>"; };
+		4414F1B72179D3E300B2FF43 /* ActionChooserVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActionChooserVC.storyboard; sourceTree = "<group>"; };
 		443307E52174DC2D00FCDF02 /* QRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRManager.swift; sourceTree = "<group>"; };
-		443307E72174EC5F00FCDF02 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		4442BCCA21749FBC00DF4CE6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4442BCD02174B7F000DF4CE6 /* LogoCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoCellItem.swift; sourceTree = "<group>"; };
 		4442BCD12174B7F000DF4CE6 /* LogoCellItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoCellItem.xib; sourceTree = "<group>"; };
 		4442BCD42174B8F600DF4CE6 /* PasswordCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCellItem.swift; sourceTree = "<group>"; };
 		4442BCD52174B8F600DF4CE6 /* PasswordCellItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordCellItem.xib; sourceTree = "<group>"; };
+		446C2663217DDE25003F9304 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		446C2667217DE1EC003F9304 /* Toast.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Toast.xib; sourceTree = "<group>"; };
+		446C266B217DE51E003F9304 /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		4490AB852170991700D61984 /* MaSo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaSo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4490AB882170991700D61984 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4490AB8A2170991700D61984 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -72,14 +80,46 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4442BCC12174952900DF4CE6 /* Views */ = {
+		4414F1B92179D9B900B2FF43 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				4442BCCA21749FBC00DF4CE6 /* Colors.swift */,
+				4414F1BA2179D9CC00B2FF43 /* Storyboards */,
+				4490AB8F2170991800D61984 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		4414F1BA2179D9CC00B2FF43 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4414F1B72179D3E300B2FF43 /* ActionChooserVC.storyboard */,
+				4490AB8C2170991700D61984 /* Main.storyboard */,
+				4490AB912170991800D61984 /* LaunchScreen.storyboard */,
+				4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		4414F1BB2179D9F000B2FF43 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4414F1B52179D3BC00B2FF43 /* ActionChooserVC.swift */,
+				4490AB8A2170991700D61984 /* ViewController.swift */,
+				4490AB9A2170A64400D61984 /* QRScannerVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		4442BCC12174952900DF4CE6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
 				4442BCD02174B7F000DF4CE6 /* LogoCellItem.swift */,
 				4442BCD12174B7F000DF4CE6 /* LogoCellItem.xib */,
-				4442BCD42174B8F600DF4CE6 /* PasswordCellItem.swift */,
 				4442BCD52174B8F600DF4CE6 /* PasswordCellItem.xib */,
+				4442BCD42174B8F600DF4CE6 /* PasswordCellItem.swift */,
+				446C2667217DE1EC003F9304 /* Toast.xib */,
+				446C266B217DE51E003F9304 /* Toast.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -105,18 +145,13 @@
 		4490AB872170991700D61984 /* MaSo */ = {
 			isa = PBXGroup;
 			children = (
+				4414F1BB2179D9F000B2FF43 /* Controllers */,
+				4414F1B92179D9B900B2FF43 /* Resources */,
 				44C42D8B217604430036F432 /* Services */,
 				44C42D8A217604340036F432 /* Model */,
 				4442BCC12174952900DF4CE6 /* Views */,
 				4490AB882170991700D61984 /* AppDelegate.swift */,
-				4490AB8A2170991700D61984 /* ViewController.swift */,
-				4490AB8C2170991700D61984 /* Main.storyboard */,
-				4490AB8F2170991800D61984 /* Assets.xcassets */,
-				4490AB912170991800D61984 /* LaunchScreen.storyboard */,
 				4490AB942170991800D61984 /* Info.plist */,
-				4490AB9A2170A64400D61984 /* QRScannerVC.swift */,
-				4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */,
-				443307E72174EC5F00FCDF02 /* Errors.swift */,
 			);
 			path = MaSo;
 			sourceTree = "<group>";
@@ -125,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				44E59A7C2175D2890003957A /* QR.swift */,
+				446C2663217DDE25003F9304 /* Action.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -209,9 +245,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4490AB932170991800D61984 /* LaunchScreen.storyboard in Resources */,
+				4414F1B82179D3E300B2FF43 /* ActionChooserVC.storyboard in Resources */,
 				4442BCD32174B7F000DF4CE6 /* LogoCellItem.xib in Resources */,
 				4490AB902170991800D61984 /* Assets.xcassets in Resources */,
 				4442BCD72174B8F600DF4CE6 /* PasswordCellItem.xib in Resources */,
+				446C2668217DE1EC003F9304 /* Toast.xib in Resources */,
 				4490AB8E2170991700D61984 /* Main.storyboard in Resources */,
 				4490AB9F2170A68E00D61984 /* QRScannerVC.storyboard in Resources */,
 			);
@@ -268,16 +306,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				443307E62174DC2D00FCDF02 /* QRManager.swift in Sources */,
+				446C2664217DDE25003F9304 /* Action.swift in Sources */,
 				44C42D8D217604640036F432 /* DatabaseManager.swift in Sources */,
+				4414F1B62179D3BC00B2FF43 /* ActionChooserVC.swift in Sources */,
 				4490ABA12170B51900D61984 /* NetworkManager.swift in Sources */,
 				4490AB8B2170991700D61984 /* ViewController.swift in Sources */,
 				4490AB892170991700D61984 /* AppDelegate.swift in Sources */,
 				4442BCD62174B8F600DF4CE6 /* PasswordCellItem.swift in Sources */,
 				4442BCD22174B7F000DF4CE6 /* LogoCellItem.swift in Sources */,
 				4442BCCB21749FBC00DF4CE6 /* Colors.swift in Sources */,
-				443307E82174EC5F00FCDF02 /* Errors.swift in Sources */,
 				44E59A7D2175D2890003957A /* QR.swift in Sources */,
 				4490AB9B2170A64400D61984 /* QRScannerVC.swift in Sources */,
+				446C266C217DE51E003F9304 /* Toast.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -43,6 +43,16 @@ class DatabaseManager {
         }
     }
     
+    func remove(code: QR) {
+        let result = query(for: code)
+        
+        try! realm.write {
+            if let qr = result.first {
+                realm.delete(qr)
+            }
+        }
+    }
+    
     func isSubmitted (code: QR) -> Bool {
         let result = query(for: code)
         

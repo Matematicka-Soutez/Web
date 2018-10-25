@@ -12,9 +12,12 @@ import Alamofire
 class NetworkManager {
     static let shared = NetworkManager()
     var password: String?
+
+    
     let endpointUrl = URL(string: "https://maso-staging.herokuapp.com/api/competitions/current/team-solutions")
 
-    func submitRequest (teamId: Int,  problemId: Int, action: String) {
+    // TODO: - group request parameters in router, Moya
+    func submitRequest(teamId: Int,  problemId: Int, action: String, success: (() -> Void)?, failure: ((String) -> Void)?) {
         if let pwd = password, let url = endpointUrl {
             let paramaters: Parameters = [
                 "action": action,
@@ -23,14 +26,37 @@ class NetworkManager {
                 "password": pwd
             ]
             
-            Alamofire.request(url, method: .put, parameters: paramaters, encoding: URLEncoding.default, headers: nil).responseData { response in
-                if response.result.isSuccess {
+            Alamofire.request(url, method: .put, parameters: paramaters, encoding: JSONEncoding.default, headers: nil)
+                .validate()
+                .responseJSON { response in
+                    
+                // todp: switch
+                switch response.result {
+                case .success:
                     print("The code was sent")
-                } else {
-                    print(response.error)
+                    success?()
+                    
+                case .failure(let error):
+                    
+                    guard let data = response.data else {
+                        // Data == nil, handle general error
+                        failure?(error.localizedDescription)
+                        return
+                    }
+                    
+                    do {
+                        let errorJson = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+                        let errorMsg = errorJson?["message"] as? String ?? "Neznama chyba"
+                        failure?(errorMsg)
+                    } catch {
+                        failure?("Neznama chyba")
+                    }
                 }
             }
         }
     }
 }
 
+
+// Router - moya, which you will pass to submitRequest
+//

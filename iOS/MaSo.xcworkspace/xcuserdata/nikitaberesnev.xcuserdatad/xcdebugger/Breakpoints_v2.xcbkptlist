@@ -17,38 +17,6 @@
             endingLineNumber = "25"
             landmarkName = "signAssignment(for:with:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "MaSo.NetworkManager.signAssignment(for: Swift.String, with: Swift.String) -&gt; ()"
-                  moduleName = "MaSo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/MaSo/NetworkManager.swift"
-                  timestampString = "561370373.376145"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "692">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DefaultDataResponse) -&gt; () in MaSo.NetworkManager.signAssignment(for: Swift.String, with: Swift.String) -&gt; ()"
-                  moduleName = "MaSo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/MaSo/NetworkManager.swift"
-                  timestampString = "561370373.378545"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -65,6 +33,118 @@
             endingLineNumber = "26"
             landmarkName = "signAssignment(for:with:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Views/Toast.swift"
+            timestampString = "562090280.365995"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "Toast"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Views/Toast.swift"
+            timestampString = "562090280.36608"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "Toast"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MaSo.Toast.(update in _E20FAC4ADAE92573776F88402F57D98F)(to: MaSo.Toast.(Height in _E20FAC4ADAE92573776F88402F57D98F)) -&gt; ()"
+                  moduleName = "MaSo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Views/Toast.swift"
+                  timestampString = "561894596.5941679"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in MaSo.Toast.(update in _E20FAC4ADAE92573776F88402F57D98F)(to: MaSo.Toast.(Height in _E20FAC4ADAE92573776F88402F57D98F)) -&gt; ()"
+                  moduleName = "MaSo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Views/Toast.swift"
+                  timestampString = "561894596.600291"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Controllers/ActionChooserVC.swift"
+            timestampString = "562090328.914615"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "addButtonPressed(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MaSo.ActionChooserVC.addButtonPressed(__C.UIButton) -&gt; ()"
+                  moduleName = "MaSo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Controllers/ActionChooserVC.swift"
+                  timestampString = "562090329.245537"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "1215">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String) -&gt; () in MaSo.ActionChooserVC.addButtonPressed(__C.UIButton) -&gt; ()"
+                  moduleName = "MaSo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Controllers/ActionChooserVC.swift"
+                  timestampString = "562090329.247402"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "35"
+                  endingLineNumber = "35"
+                  offsetFromSymbolStart = "43">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

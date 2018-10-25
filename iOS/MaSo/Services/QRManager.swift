@@ -11,6 +11,7 @@ import AVFoundation
 
 class QRManager {
     static let shared = QRManager()
+    var action: Action?
     
     private func parseCode(qr code: String) -> QR? {
         var qr = code
@@ -28,21 +29,55 @@ class QRManager {
         }
     }
     
-    func process(with qr: String) {
-        if let parsedCode = parseCode(qr: qr) {
-            if DatabaseManager.shared.checkIfExists(code: parsedCode) {
-                if !DatabaseManager.shared.isSubmitted(code: parsedCode) {
-                    NetworkManager.shared.submitRequest(teamId: parsedCode.teamId, problemId: parsedCode.problemId, action: "add")
-                    DatabaseManager.shared.markAsSubmitted(code: parsedCode)
-                }
-            } else {
-                DatabaseManager.shared.save(qr: parsedCode)
-                NetworkManager.shared.submitRequest(teamId: parsedCode.teamId, problemId: parsedCode.problemId, action: "add")
-                DatabaseManager.shared.markAsSubmitted(code: parsedCode)
-            }
+    private func parseCode(teamId: String, problemId: String) -> QR? {
+        if let team = Int(teamId), let problem = Int(problemId) {
+            return QR.create(teamId: team, problemId: problem)
         } else {
-            print("Invalid format")
+            return nil
         }
     }
     
+    func process(with qr: String, completion: @escaping (String) -> Void) {
+        if let code = parseCode(qr: qr) {
+            executeAction(parsedCode: code) { (message) in
+                completion(message)
+            }
+        }
+    }
+    
+    func process(with teamdId: String, and problemId: String, completion: @escaping (String) -> Void) {
+        if let code = parseCode(teamId: teamdId, problemId: problemId) {
+            executeAction(parsedCode: code) { (message) in
+                completion(message)
+            }
+        }
+    }
+    
+    private func executeAction(parsedCode: QR, completion: @escaping (String) -> Void) {
+        if let action = action {
+            switch action {
+            case .add:
+                if !DatabaseManager.shared.checkIfExists(code: parsedCode)  {
+                    NetworkManager.shared.submitRequest(teamId: parsedCode.teamId, problemId: parsedCode.problemId, action: action.rawValue, success: {
+                        DatabaseManager.shared.save(qr: parsedCode)
+                        DatabaseManager.shared.markAsSubmitted(code: parsedCode)
+                        completion("Success")
+                    }) { (errorMessage) in
+                        DatabaseManager.shared.save(qr: parsedCode)
+                        completion(errorMessage)
+                    }
+                }
+                
+            case .cancel:
+                if DatabaseManager.shared.checkIfExists(code: parsedCode) && DatabaseManager.shared.isSubmitted(code: parsedCode) {
+                    NetworkManager.shared.submitRequest(teamId: parsedCode.teamId, problemId: parsedCode.problemId, action: action.rawValue, success: {
+                        DatabaseManager.shared.remove(code: parsedCode)
+                        completion("The code was removed")
+                    }) { (errorMessage) in
+                        completion(errorMessage)
+                    }
+                }
+            }
+        }
+    }
 }
