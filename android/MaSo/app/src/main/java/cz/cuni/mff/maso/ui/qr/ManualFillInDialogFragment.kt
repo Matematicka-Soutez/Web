@@ -58,10 +58,10 @@ class ManualFillInDialogFragment : DialogFragment() {
 			}
 
 			override fun onSubmitClicked() {
-				val teamId = viewModel.teamId.value?.toIntOrNull()
+				val teamNumber = viewModel.teamNumber.value?.toIntOrNull()
 				val problemId = viewModel.problemId.value?.toIntOrNull()
-				if (teamId != null && problemId != null) {
-					listener.onDataEntered(teamId, problemId, if (binding.spinnerSelector.selectedItemPosition == 1) RequestTypeEnum.CANCEL else RequestTypeEnum.ADD)
+				if (teamNumber != null && problemId != null) {
+					listener.onDataEntered(teamNumber, problemId, if (binding.spinnerSelector.selectedItemPosition == 1) RequestTypeEnum.CANCEL else RequestTypeEnum.ADD)
 					dismiss()
 				} else {
 					Toast.makeText(context, R.string.error_invalid_data, Toast.LENGTH_LONG).show()
@@ -74,7 +74,7 @@ class ManualFillInDialogFragment : DialogFragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
-		binding.teamIdInput.showKeyboardDelayed()
+		binding.teamNumberInput.showKeyboardDelayed()
 		initSpinner()
 	}
 

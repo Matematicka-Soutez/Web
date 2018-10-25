@@ -18,12 +18,12 @@ data class ErrorItem(
 	@Json(name = "field") val field: String
 )
 
-data class QrCodeEntity(val teamId: Int, val problemId: Int)
+data class QrCodeEntity(val teamNumber: Int, val problemId: Int)
 
 @JsonClass(generateAdapter = true)
 data class QrRequestEntity(
 	@Json(name = "action") val action: RequestTypeEnum,
-	@Json(name = "team") val teamId: Int,
+	@Json(name = "team") val teamNumber: Int,
 	@Json(name = "problem") val problemId: Int,
 	@Json(name = "password") val password: String
 )
@@ -33,6 +33,7 @@ data class QrResponseEntity(
 	@Json(name = "id") val id: Int,
 	@Json(name = "competitionId") val competitionId: Int,
 	@Json(name = "teamId") val teamId: Int,
+	@Json(name = "teamNumber") val teamNumber: Int,
 	@Json(name = "problemNumber") val problemId: Int,
 	@Json(name = "solved") val solved: Boolean,
 	@Json(name = "createdBy") val createdById: Int,

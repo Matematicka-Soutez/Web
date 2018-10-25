@@ -54,12 +54,12 @@
 			style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
 			<com.google.android.material.textfield.TextInputEditText
-				android:id="@+id/team_id_input"
+				android:id="@+id/team_number_input"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:inputType="numberSigned"
 				android:hint="@string/team_number_hint"
-				android:text="@={viewModel.teamId}" />
+				android:text="@={viewModel.teamNumber}"/>
 
 		</com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +98,7 @@
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/submit_btn"
-				android:enabled="@{!TextUtils.isEmpty(viewModel.teamId) &amp;&amp; !TextUtils.isEmpty(viewModel.problemId)}"
+				android:enabled="@{!TextUtils.isEmpty(viewModel.teamNumber) &amp;&amp; !TextUtils.isEmpty(viewModel.problemId)}"
 				android:onClick="@{() -> view.onSubmitClicked()}"
 				style="@style/Widget.Bonder.Button.TextButton.Yellow" />
 		</LinearLayout>
