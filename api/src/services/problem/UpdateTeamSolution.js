@@ -33,12 +33,15 @@ module.exports = class UpdateTeamSolutionService extends TransactionalService {
       this.competition.id,
       dbTransaction,
     )
-    return teamSolutionRepository.createTeamSolutionChange({
+    const teamSolution = await teamSolutionRepository.createTeamSolutionChange({
       competitionId: this.competition.id,
       teamId: team.id,
       problemNumber: this.data.problemNumber,
       createdBy: organizer.id,
       solved: this.data.action === 'add',
     }, dbTransaction)
+
+    teamSolution.teamNumber = team.number
+    return teamSolution
   }
 }
