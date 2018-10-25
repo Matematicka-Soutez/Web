@@ -36,7 +36,7 @@ class QrScanViewModel : BaseViewModel() {
 	fun processQrCodeResult(text: String?): Boolean {
 		val qrCodeEntity = extractDataFromQrCode(text)
 		qrCodeEntity?.let {
-			sendRequest(it.teamId, it.problemId, requestType)
+			sendRequest(it.teamNumber, it.problemId, requestType)
 			return true
 		}
 		return false
@@ -58,18 +58,18 @@ class QrScanViewModel : BaseViewModel() {
 			if (!patternAll.matcher(text).find()) {
 				return null
 			}
-			var teamId: Int? = null
+			var teamNumber: Int? = null
 			var problemId: Int? = null
 			val teamMatcher = patternTeam.matcher(text)
 			val problemMatcher = patternProblem.matcher(text)
 			if (teamMatcher.find()) {
-				teamId = teamMatcher.group(1).toIntOrNull()
+				teamNumber = teamMatcher.group(1).toIntOrNull()
 			}
 			if (problemMatcher.find()) {
 				problemId = problemMatcher.group(1).toIntOrNull()
 			}
-			if (teamId != null && problemId != null) {
-				return QrCodeEntity(teamId, problemId)
+			if (teamNumber != null && problemId != null) {
+				return QrCodeEntity(teamNumber, problemId)
 			}
 		}
 		return null
@@ -96,7 +96,7 @@ class QrScanViewModel : BaseViewModel() {
 		}
 	}
 
-	fun sendRequest(teamId: Int, problemId: Int, requestType: RequestTypeEnum) {
-		callApiRequest(QrRequestEntity(requestType, teamId, problemId, Preferences.getPassword()!!))
+	fun sendRequest(teamNumber: Int, problemId: Int, requestType: RequestTypeEnum) {
+		callApiRequest(QrRequestEntity(requestType, teamNumber, problemId, Preferences.getPassword()!!))
 	}
 }
