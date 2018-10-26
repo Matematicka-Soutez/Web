@@ -13,11 +13,6 @@ class Toast: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     
-    private enum Height: CGFloat {
-        case hidden = 0
-        case shown = 150
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -31,13 +26,13 @@ class Toast: UIView {
     func setup() {
         Bundle.main.loadNibNamed("Toast", owner: self, options: nil)
         addSubview(contentView)
-        self.layer.cornerRadius = 5
+        contentView.backgroundColor = Colors.tintBrownColor
+        contentView.layer.cornerRadius = 10
         self.isHidden = true
     }
     
     func displayToast(message: String) {
         messageLabel.text = message
-        //update(to: Toast.Height.shown)
         animateAppear()
     }
 
@@ -46,7 +41,7 @@ class Toast: UIView {
             self.transform = CGAffineTransform(translationX: 0, y: -self.bounds.size.height)
             self.isHidden = false
         }
-        UIView.animate(withDuration: 2, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.transform = .identity
         }) { [weak self] (_) in
             self?.animateDissapear()
@@ -55,7 +50,7 @@ class Toast: UIView {
     }
     
     private func animateDissapear() {
-        UIView.animate(withDuration: 2, delay: 2, animations: {
+        UIView.animate(withDuration: 0.5, delay: 2, animations: {
             self.transform = CGAffineTransform(translationX: 0, y: -self.bounds.size.height)
         }) { [weak self] (_) in
             self?.isHidden = true

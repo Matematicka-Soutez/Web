@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4414F1B62179D3BC00B2FF43 /* ActionChooserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4414F1B52179D3BC00B2FF43 /* ActionChooserVC.swift */; };
-		4414F1B82179D3E300B2FF43 /* ActionChooserVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4414F1B72179D3E300B2FF43 /* ActionChooserVC.storyboard */; };
 		443307E62174DC2D00FCDF02 /* QRManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 443307E52174DC2D00FCDF02 /* QRManager.swift */; };
 		4442BCCB21749FBC00DF4CE6 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442BCCA21749FBC00DF4CE6 /* Colors.swift */; };
 		4442BCD22174B7F000DF4CE6 /* LogoCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4442BCD02174B7F000DF4CE6 /* LogoCellItem.swift */; };
@@ -26,6 +24,7 @@
 		4490AB9B2170A64400D61984 /* QRScannerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4490AB9A2170A64400D61984 /* QRScannerVC.swift */; };
 		4490AB9F2170A68E00D61984 /* QRScannerVC.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */; };
 		4490ABA12170B51900D61984 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4490ABA02170B51900D61984 /* NetworkManager.swift */; };
+		44A374882181BEA8007EF4F2 /* UITextField+NextDoneToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A374872181BEA8007EF4F2 /* UITextField+NextDoneToolbar.swift */; };
 		44C42D8D217604640036F432 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C42D8C217604640036F432 /* DatabaseManager.swift */; };
 		44E59A7D2175D2890003957A /* QR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44E59A7C2175D2890003957A /* QR.swift */; };
 		C766D0CC48AA6C2A132A837D /* Pods_MaSo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CFEC9F0813777EBBE5A2DBC /* Pods_MaSo.framework */; };
@@ -34,8 +33,6 @@
 /* Begin PBXFileReference section */
 		0CFEC9F0813777EBBE5A2DBC /* Pods_MaSo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaSo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEF4C3CD8EC5F61749F3714 /* Pods-MaSo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaSo.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaSo/Pods-MaSo.release.xcconfig"; sourceTree = "<group>"; };
-		4414F1B52179D3BC00B2FF43 /* ActionChooserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionChooserVC.swift; sourceTree = "<group>"; };
-		4414F1B72179D3E300B2FF43 /* ActionChooserVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ActionChooserVC.storyboard; sourceTree = "<group>"; };
 		443307E52174DC2D00FCDF02 /* QRManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRManager.swift; sourceTree = "<group>"; };
 		4442BCCA21749FBC00DF4CE6 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		4442BCD02174B7F000DF4CE6 /* LogoCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoCellItem.swift; sourceTree = "<group>"; };
@@ -55,6 +52,7 @@
 		4490AB9A2170A64400D61984 /* QRScannerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerVC.swift; sourceTree = "<group>"; };
 		4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QRScannerVC.storyboard; sourceTree = "<group>"; };
 		4490ABA02170B51900D61984 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		44A374872181BEA8007EF4F2 /* UITextField+NextDoneToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+NextDoneToolbar.swift"; sourceTree = "<group>"; };
 		44C42D8C217604640036F432 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		44E59A7C2175D2890003957A /* QR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QR.swift; sourceTree = "<group>"; };
 		DDB34A77C652D6FCB8FD4D8F /* Pods-MaSo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaSo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaSo/Pods-MaSo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -86,6 +84,7 @@
 				4442BCCA21749FBC00DF4CE6 /* Colors.swift */,
 				4414F1BA2179D9CC00B2FF43 /* Storyboards */,
 				4490AB8F2170991800D61984 /* Assets.xcassets */,
+				44A374872181BEA8007EF4F2 /* UITextField+NextDoneToolbar.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -93,7 +92,6 @@
 		4414F1BA2179D9CC00B2FF43 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				4414F1B72179D3E300B2FF43 /* ActionChooserVC.storyboard */,
 				4490AB8C2170991700D61984 /* Main.storyboard */,
 				4490AB912170991800D61984 /* LaunchScreen.storyboard */,
 				4490AB9E2170A68E00D61984 /* QRScannerVC.storyboard */,
@@ -104,7 +102,6 @@
 		4414F1BB2179D9F000B2FF43 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				4414F1B52179D3BC00B2FF43 /* ActionChooserVC.swift */,
 				4490AB8A2170991700D61984 /* ViewController.swift */,
 				4490AB9A2170A64400D61984 /* QRScannerVC.swift */,
 			);
@@ -245,7 +242,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4490AB932170991800D61984 /* LaunchScreen.storyboard in Resources */,
-				4414F1B82179D3E300B2FF43 /* ActionChooserVC.storyboard in Resources */,
 				4442BCD32174B7F000DF4CE6 /* LogoCellItem.xib in Resources */,
 				4490AB902170991800D61984 /* Assets.xcassets in Resources */,
 				4442BCD72174B8F600DF4CE6 /* PasswordCellItem.xib in Resources */,
@@ -308,10 +304,10 @@
 				443307E62174DC2D00FCDF02 /* QRManager.swift in Sources */,
 				446C2664217DDE25003F9304 /* Action.swift in Sources */,
 				44C42D8D217604640036F432 /* DatabaseManager.swift in Sources */,
-				4414F1B62179D3BC00B2FF43 /* ActionChooserVC.swift in Sources */,
 				4490ABA12170B51900D61984 /* NetworkManager.swift in Sources */,
 				4490AB8B2170991700D61984 /* ViewController.swift in Sources */,
 				4490AB892170991700D61984 /* AppDelegate.swift in Sources */,
+				44A374882181BEA8007EF4F2 /* UITextField+NextDoneToolbar.swift in Sources */,
 				4442BCD62174B8F600DF4CE6 /* PasswordCellItem.swift in Sources */,
 				4442BCD22174B7F000DF4CE6 /* LogoCellItem.swift in Sources */,
 				4442BCCB21749FBC00DF4CE6 /* Colors.swift in Sources */,

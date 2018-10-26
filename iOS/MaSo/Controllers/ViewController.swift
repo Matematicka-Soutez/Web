@@ -80,13 +80,13 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             passwordCell.textFieldHandler = { [weak self] text in
-                guard let actionChooserVC = UIStoryboard(name: "ActionChooserVC", bundle: nil).instantiateInitialViewController() as? ActionChooserVC else {
-                    assertionFailure("Storyboard ActionChooserVC couldn't be found")
+                guard let scannerVC = UIStoryboard(name: "QRScannerVC", bundle: nil).instantiateInitialViewController() as? QRScannerVC else {
+                    assertionFailure("Storyboard QRScannner couldn't be found")
                     return
                 }
                 
                 NetworkManager.shared.password = passwordCell.passwordTextField.text
-                self?.present(actionChooserVC, animated: true, completion: nil)
+                self?.present(scannerVC, animated: true, completion: nil)
             }
             
             passwordCell.awakeFromNib()

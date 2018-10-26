@@ -20,8 +20,12 @@ class DatabaseManager {
     }
     
     func save(qr: QR) {
-        try! realm.write {
-            realm.add(qr)
+        let result = query(for: qr)
+        
+        if result.count == 0 {
+            try! realm.write {
+                realm.add(qr)
+            }
         }
     }
     

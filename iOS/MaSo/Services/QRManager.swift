@@ -11,9 +11,9 @@ import AVFoundation
 
 class QRManager {
     static let shared = QRManager()
-    var action: Action?
+    var action = Action.add
     
-    private func parseCode(qr code: String) -> QR? {
+    func parseCode(qr code: String) -> QR? {
         var qr = code
         
         if qr.starts(with: "T") && qr.contains("P") {
@@ -54,10 +54,10 @@ class QRManager {
     }
     
     private func executeAction(parsedCode: QR, completion: @escaping (String) -> Void) {
-        if let action = action {
             switch action {
             case .add:
-                if !DatabaseManager.shared.checkIfExists(code: parsedCode)  {
+                if (!DatabaseManager.shared.checkIfExists(code: parsedCode)) ||
+                    (!DatabaseManager.shared.isSubmitted(code: parsedCode)){
                     NetworkManager.shared.submitRequest(teamId: parsedCode.teamId, problemId: parsedCode.problemId, action: action.rawValue, success: {
                         DatabaseManager.shared.save(qr: parsedCode)
                         DatabaseManager.shared.markAsSubmitted(code: parsedCode)
@@ -75,7 +75,6 @@ class QRManager {
                         completion("The code was removed")
                     }) { (errorMessage) in
                         completion(errorMessage)
-                    }
                 }
             }
         }

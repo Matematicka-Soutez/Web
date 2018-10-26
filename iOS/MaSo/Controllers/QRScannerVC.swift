@@ -10,25 +10,42 @@ import AVFoundation
 import UIKit
 
 class QRScannerVC: UIViewController {
+    //MARK: Properties
     var captureSession = AVCaptureSession()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var toastNotification: Toast!
+    @IBOutlet weak var scannerMenuView: UIView!
+    @IBOutlet weak var scannerMenuHeight: NSLayoutConstraint!
+    @IBOutlet weak var actionChooser: UISegmentedControl!
+    @IBOutlet weak var teamTextField: UITextField! {
+        didSet {
+            teamTextField?.addNextToolbar(onNext: (target: self, action: #selector(nextButtonTappedFromNumericKeyboard)))
+        }
+    }
+    @IBOutlet weak var problemTextField: UITextField! {
+        didSet {
+            problemTextField?.addDoneToolbar(onDone: (target: self, action: #selector(doneButtonTappedFromNumericKeyboard)))
+        }
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        registerForKeyboardNotifications()
+        
         let captureDevice: AVCaptureDevice?
         
+        #if targetEnvironment(simulator)
+        #else
         if #available(iOS 10.0, *) {
             let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
             captureDevice = deviceDiscoverySession.devices.first
         } else {
             captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         }
-        
         
         
         do {
@@ -59,6 +76,8 @@ class QRScannerVC: UIViewController {
         }
         view.layer.addSublayer(previewLayer)
         
+        captureSession.startRunning()
+        #endif
         
         qrCodeFrameView = UIView()
         if let qrCodeFrameView = qrCodeFrameView {
@@ -68,17 +87,105 @@ class QRScannerVC: UIViewController {
             view.bringSubviewToFront(qrCodeFrameView)
         }
         
-        cancelButton.layer.cornerRadius = 30
-        cancelButton.backgroundColor = UIColor.white
-        view.bringSubviewToFront(cancelButton)
-        view.bringSubviewToFront(toastNotification)
-        captureSession.startRunning()
+        setupView()
+        
     }
     
+    
+    //MARK: UI setup method
+    private func setupView() {
+        cancelButton.layer.cornerRadius = 20
+        cancelButton.backgroundColor = UIColor.white
+        scannerMenuView.layer.cornerRadius = 20
+        scannerMenuView.backgroundColor = Colors.mainYellow
+        actionChooser.tintColor = Colors.tintBrownColor
+        teamTextField.tintColor = Colors.tintBrownColor
+        problemTextField.tintColor = Colors.tintBrownColor
+        view.bringSubviewToFront(cancelButton)
+        view.bringSubviewToFront(toastNotification)
+        view.bringSubviewToFront(scannerMenuView)
+    }
+    
+    //MARK: Keyboard Handling Methods
+    private func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+        
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        adjustHeight(showing: true, notification: notification)
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        adjustHeight(showing: false, notification: notification)
+    }
+    
+    private func adjustHeight(showing: Bool, notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        guard let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        guard let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else { return }
+        
+        let changeInHeight = keyboardSize.height * (showing ? 1 : -1)
+        
+        self.view.layoutIfNeeded()
+        self.scannerMenuHeight.constant += changeInHeight
+        
+        UIView.animate(withDuration: animationDuration,
+                       delay: 0,
+                       options: UIView.AnimationOptions(rawValue: curve),
+                       animations: {
+                        self.view.layoutIfNeeded()
+                    }, completion: nil)
+    }
+    
+    //MARK: UI action methods
     @IBAction func cancelButtonPressed() {
         self.dismiss(animated: true, completion: nil)
     }
-
+    
+    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+        teamTextField.resignFirstResponder()
+        problemTextField.resignFirstResponder()
+    }
+    
+    
+    @IBAction func actionChanged(_ sender: UISegmentedControl) {
+        switch actionChooser.selectedSegmentIndex {
+        case 0:
+            QRManager.shared.action = Action.add
+            print("Add action was chosen")
+        case 1:
+            QRManager.shared.action = Action.cancel
+            print("Cancel action was chosen")
+        default:
+            QRManager.shared.action = Action.add
+        }
+    }
+    
+    @objc func nextButtonTappedFromNumericKeyboard() {
+        problemTextField.becomeFirstResponder()
+    }
+    
+    @objc func doneButtonTappedFromNumericKeyboard() {
+        if let teamID = teamTextField.text, let problemID = problemTextField.text {
+            if teamID.isEmpty || problemID.isEmpty {
+                toastNotification.displayToast(message: "Please fill all text fields")
+                problemTextField.resignFirstResponder()
+            } else {
+                QRManager.shared.process(with: teamID, and: problemID) { [weak self] (message) in
+                    self?.toastNotification.displayToast(message: message)
+                    self?.problemTextField.resignFirstResponder()
+                }
+            }
+        }
+    }
 }
 
 extension QRScannerVC: AVCaptureMetadataOutputObjectsDelegate {
@@ -97,6 +204,10 @@ extension QRScannerVC: AVCaptureMetadataOutputObjectsDelegate {
                 qrCodeFrameView?.frame = barCodeObj.bounds
                 
                 if let value = metadataObj.stringValue {
+                    if let qrInfo = QRManager.shared.parseCode(qr: value) {
+                        teamTextField.text = String(qrInfo.teamId)
+                        problemTextField.text = String(qrInfo.problemId)
+                    }
                     QRManager.shared.process(with: value, completion: { [weak self] message in
                         self?.toastNotification.displayToast(message: message)
                     })

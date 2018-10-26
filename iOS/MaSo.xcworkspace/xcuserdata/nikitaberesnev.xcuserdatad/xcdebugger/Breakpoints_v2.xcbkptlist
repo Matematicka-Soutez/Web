@@ -42,13 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MaSo/Views/Toast.swift"
-            timestampString = "562090280.365995"
+            timestampString = "562260693.098475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "Toast"
-            landmarkType = "3">
+            startingLineNumber = "66"
+            endingLineNumber = "66">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,13 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MaSo/Views/Toast.swift"
-            timestampString = "562090280.36608"
+            timestampString = "562260693.098869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "Toast"
-            landmarkType = "3">
+            startingLineNumber = "66"
+            endingLineNumber = "66">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -113,35 +109,115 @@
             endingLineNumber = "35"
             landmarkName = "addButtonPressed(_:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Controllers/QRScannerVC.swift"
+            timestampString = "562260693.099221"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "metadataOutput(_:didOutput:from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Controllers/QRScannerVC.swift"
+            timestampString = "562260693.099297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "doneButtonTappedFromNumericKeyboard()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Services/QRManager.swift"
+            timestampString = "562171471.8058929"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "executeAction(parsedCode:completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Controllers/QRScannerVC.swift"
+            timestampString = "562260693.099384"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "handleTap(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MaSo/Controllers/QRScannerVC.swift"
+            timestampString = "562260693.0994461"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "doneButtonTappedFromNumericKeyboard()"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "MaSo.ActionChooserVC.addButtonPressed(__C.UIButton) -&gt; ()"
+                  symbolName = "MaSo.QRScannerVC.doneButtonTappedFromNumericKeyboard() -&gt; ()"
                   moduleName = "MaSo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Controllers/ActionChooserVC.swift"
-                  timestampString = "562090329.245537"
+                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Controllers/QRScannerVC.swift"
+                  timestampString = "562259572.9746259"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "1215">
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "1634">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.String) -&gt; () in MaSo.ActionChooserVC.addButtonPressed(__C.UIButton) -&gt; ()"
+                  symbolName = "closure #1 (Swift.String) -&gt; () in MaSo.QRScannerVC.doneButtonTappedFromNumericKeyboard() -&gt; ()"
                   moduleName = "MaSo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Controllers/ActionChooserVC.swift"
-                  timestampString = "562090329.247402"
+                  urlString = "file:///Users/nikitaberesnev/Developer/MaSo/iOS/MaSo/Controllers/QRScannerVC.swift"
+                  timestampString = "562259572.977295"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
                   offsetFromSymbolStart = "43">
                </Location>
             </Locations>
