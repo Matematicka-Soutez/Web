@@ -56,10 +56,4 @@ class Toast: UIView {
             self?.isHidden = true
         }
     }
-//    private func update(to height: Toast.Height) {
-//        UIView.animate(withDuration: 0.5) { [weak self] in
-//            self?.contentViewHeight.constant = height.rawValue
-//            self?.layoutIfNeeded()
-//        }
-//    }
 }

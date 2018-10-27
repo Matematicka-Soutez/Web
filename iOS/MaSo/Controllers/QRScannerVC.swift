@@ -18,6 +18,7 @@ class QRScannerVC: UIViewController {
     @IBOutlet weak var toastNotification: Toast!
     @IBOutlet weak var scannerMenuView: UIView!
     @IBOutlet weak var scannerMenuHeight: NSLayoutConstraint!
+    @IBOutlet weak var scannerMenuBottom: NSLayoutConstraint!
     @IBOutlet weak var actionChooser: UISegmentedControl!
     @IBOutlet weak var teamTextField: UITextField! {
         didSet {
@@ -132,11 +133,11 @@ class QRScannerVC: UIViewController {
         guard let animationDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
         guard let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? UInt else { return }
         
-        let changeInHeight = keyboardSize.height * (showing ? 1 : -1)
+        let changeInHeight = showing ? (keyboardSize.height - 15) : -15
         
         self.view.layoutIfNeeded()
-        self.scannerMenuHeight.constant += changeInHeight
-        
+//        self.scannerMenuHeight.constant += changeInHeight
+        self.scannerMenuBottom.constant = changeInHeight
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
                        options: UIView.AnimationOptions(rawValue: curve),

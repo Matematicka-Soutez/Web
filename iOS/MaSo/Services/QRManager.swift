@@ -66,6 +66,8 @@ class QRManager {
                         DatabaseManager.shared.save(qr: parsedCode)
                         completion(errorMessage)
                     }
+                } else {
+                    completion("The code was already sent")
                 }
                 
             case .cancel:
@@ -76,7 +78,10 @@ class QRManager {
                     }) { (errorMessage) in
                         completion(errorMessage)
                 }
-            }
+                } else {
+                    DatabaseManager.shared.remove(code: parsedCode)
+                    completion("The code was removed from DB")
+                }
         }
     }
 }

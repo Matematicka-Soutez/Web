@@ -112,6 +112,7 @@
                         <outlet property="actionChooser" destination="Git-Fq-Vis" id="40k-bJ-kLl"/>
                         <outlet property="cancelButton" destination="YtO-1g-K2S" id="uB9-CF-k5N"/>
                         <outlet property="problemTextField" destination="a91-Wc-L3X" id="RAp-QQ-ej2"/>
+                        <outlet property="scannerMenuBottom" destination="VQA-Ko-9jb" id="ERa-hj-0XZ"/>
                         <outlet property="scannerMenuHeight" destination="HMI-pe-r6X" id="4sb-wG-g9P"/>
                         <outlet property="scannerMenuView" destination="19w-bU-9hu" id="BLo-bc-dhG"/>
                         <outlet property="teamTextField" destination="49N-rC-NJs" id="IWb-GT-WRU"/>
