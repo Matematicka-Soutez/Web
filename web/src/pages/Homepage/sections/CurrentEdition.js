@@ -32,7 +32,7 @@ function CurrentEditionSection() {
                   <CardMedia frameBorder="0" style={{ border: 0 }} component="iframe"
                     src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJARqUH-KUC0cRyL3tboAzqoc&key=AIzaSyDdAnTl-DjPQY_p8vJ8E_g6MjlUiGngGrA" /> {/* eslint-disable-line max-len */}
                   <CardContent>
-                    <Typography gutterBottom variant="headline" component="h2">
+                    <Typography gutterBottom variant="h5">
                       Praha
                     </Typography>
                     <Typography component="p" variant="caption">
@@ -51,7 +51,7 @@ function CurrentEditionSection() {
                   <CardMedia frameBorder="0" style={{ border: 0 }} component="iframe"
                     src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJxcUpbz6UEkcR4JO3h4GMCc4&key=AIzaSyDdAnTl-DjPQY_p8vJ8E_g6MjlUiGngGrA" /> {/* eslint-disable-line max-len */}
                   <CardContent>
-                    <Typography gutterBottom variant="headline" component="h2">
+                    <Typography gutterBottom variant="h5">
                       Brno
                     </Typography>
                     <Typography component="p" variant="caption">

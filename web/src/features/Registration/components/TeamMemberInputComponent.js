@@ -60,7 +60,7 @@ class TeamMemberInputComponent extends Component {
             key={member && member.id}
             memberNumber={number}
             required={required}
-            value={(member && member.grade) || ''}
+            value={(member && member.grade) || 0}
           />
         </Grid>
       </React.Fragment>

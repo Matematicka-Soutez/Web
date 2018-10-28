@@ -37,7 +37,7 @@ class TeamSummary extends Component {
     return (
       <div className="inputControls">
         <Paper className={classes.root} elevation={2}>
-          <Typography variant="headline" component="h3">
+          <Typography variant="h5">
           Informace
           </Typography>
           <Table className={classes.table}>

@@ -65,8 +65,7 @@ class ResultsContainer extends Component {
       <div className="results">
         <Paper style={rootStyle}>
           <Typography
-            variant="headline"
-            component="h2"
+            variant="h5"
             style={{ textAlign: 'center', marginBottom: 16 }}>
             Výsledky jarního MaSa 2018
           </Typography>

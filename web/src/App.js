@@ -14,6 +14,9 @@ const theme = createMuiTheme({
     primary: { main: '#2196f3' },
     secondary: { main: '#ffd42d' },
   },
+  typography: {
+    useNextVariants: true,
+  },
 })
 
 function App() {

@@ -24,7 +24,7 @@ class RegistrationCodeInputComponent extends Component {
         <Typography color="textSecondary">
           Zadejte školní registrační kód
         </Typography>
-        <Typography variant="headline" component="h1">
+        <Typography variant="h5">
           <form>
             <TextField
               id="outlined-bare"

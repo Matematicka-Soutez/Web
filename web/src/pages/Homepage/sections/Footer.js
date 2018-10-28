@@ -7,7 +7,7 @@ const FooterSection = () => (
     <Grid container justify="center" spacing={24}>
       <Grid item xs={10} sm={8} lg={6}>
         <br />
-        <Typography variant="subheading" gutterBottom
+        <Typography variant="subtitle1" gutterBottom
           align="center" style={{ color: 'white' }}>
           Pokud máte k soutěži jakékoliv dotazy, neváhejte nám napsat na<br />
           <a href="mailto:maso-soutez@googlegroups.com">maso-soutez@googlegroups.com</a>

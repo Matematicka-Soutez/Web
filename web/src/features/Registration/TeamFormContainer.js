@@ -79,8 +79,7 @@ class TeamFormContainer extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <Typography
-          variant="headline"
-          component="h2"
+          variant="h5"
           style={{ textAlign: 'left', fontSize: '120%' }}>
           {team ? 'Editace týmu' : 'Registrovat nový tým'}
         </Typography>

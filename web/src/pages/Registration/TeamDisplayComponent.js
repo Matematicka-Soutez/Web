@@ -18,7 +18,7 @@ class TeamDisplayComponent extends Component {
     const { team, teamEditEnabled } = this.props
     return (
       <React.Fragment key={team.id}>
-        <Typography variant="subheading" style={{ textAlign: 'left' }} gutterBottom>
+        <Typography variant="subtitle1" style={{ textAlign: 'left' }} gutterBottom>
           {team.name} ({team.competitionVenue.venue.name})
           <Button
             style={{ float: 'right' }}
