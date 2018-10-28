@@ -105,6 +105,8 @@ class QRScannerVC: UIViewController {
         view.bringSubviewToFront(cancelButton)
         view.bringSubviewToFront(toastNotification)
         view.bringSubviewToFront(scannerMenuView)
+        toastNotification.contentView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: toastNotification.frame.height)
+        toastNotification.layoutIfNeeded()
     }
     
     //MARK: Keyboard Handling Methods
@@ -205,10 +207,6 @@ extension QRScannerVC: AVCaptureMetadataOutputObjectsDelegate {
                 qrCodeFrameView?.frame = barCodeObj.bounds
                 
                 if let value = metadataObj.stringValue {
-                    if let qrInfo = QRManager.shared.parseCode(qr: value) {
-                        teamTextField.text = String(qrInfo.teamId)
-                        problemTextField.text = String(qrInfo.problemId)
-                    }
                     QRManager.shared.process(with: value, completion: { [weak self] message in
                         self?.toastNotification.displayToast(message: message)
                     })

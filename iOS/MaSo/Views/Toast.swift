@@ -13,6 +13,8 @@ class Toast: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var messageLabel: UILabel!
     
+    var isPresenting: Bool = false
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -29,14 +31,17 @@ class Toast: UIView {
         contentView.backgroundColor = Colors.tintBrownColor
         contentView.layer.cornerRadius = 10
         self.isHidden = true
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     func displayToast(message: String) {
+        guard !isPresenting else { return }
         messageLabel.text = message
         animateAppear()
     }
 
     private func animateAppear() {
+        isPresenting = true
         if self.bounds.minY == 0 {
             self.transform = CGAffineTransform(translationX: 0, y: -self.bounds.size.height)
             self.isHidden = false
@@ -54,6 +59,7 @@ class Toast: UIView {
             self.transform = CGAffineTransform(translationX: 0, y: -self.bounds.size.height)
         }) { [weak self] (_) in
             self?.isHidden = true
+            self?.isPresenting = false
         }
     }
 }
