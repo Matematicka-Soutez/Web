@@ -44,7 +44,7 @@ class InputControls extends Component {
     return (
       <div className="inputControls">
         <Paper className={classes.root} elevation={2}>
-          <Typography variant="headline" component="h3">
+          <Typography variant="h5">
           Ovládání
           </Typography>
           <Grid container justify="center">

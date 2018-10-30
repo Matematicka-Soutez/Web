@@ -44,7 +44,7 @@ class OpenRegistrationContainer extends Component {
     return (
       <CardContent>
         <br />
-        <Typography variant="headline" component="h2">
+        <Typography variant="h5">
           Registrace
         </Typography>
         <Typography color="textSecondary">

@@ -46,8 +46,7 @@ class RegistrationCountdownComponent extends Component {
         </Typography>
         <br />
         <Typography
-          variant="headline"
-          component="h1"
+          variant="h5"
           style={{ fontSize: '1.9rem', color: '#2196f3', marginBottom: -10 }}>
           {formattedMS(remainingTime)}
         </Typography>

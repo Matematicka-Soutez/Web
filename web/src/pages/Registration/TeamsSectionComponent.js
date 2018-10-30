@@ -6,8 +6,7 @@ import TeamDisplayComponent from './TeamDisplayComponent'
 const TeamsSectionComponent = ({ teams, editTeam, teamEditEnabled }) => (
   <React.Fragment>
     <Typography
-      variant="headline"
-      component="h2"
+      variant="h5"
       style={{ textAlign: 'left', fontSize: '120%' }} gutterBottom>
       Přihlášené týmy
     </Typography>
