@@ -26,7 +26,7 @@ function median(values) {
 
 function addRemainingTime(tournament) {
   tournament.remainingTime = tournament.number >= gameConfig.game.lastTournamentNumber
-    ? -42
+    ? -42000
     : moment().endOf('minute').diff(moment())
   return tournament
 }
