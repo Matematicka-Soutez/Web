@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
-import Game from '../../../../games/water-bottling/web/src/Game'
+import Game from '../../../../games/game-of-trust/web/src/Game'
 import masoLogo from '../../static/images/maso_logo.png'
 import { subscribeToDisplayChange } from '../../sockets/index'
 import { API_ADDRESS } from '../../config'

@@ -7,18 +7,11 @@ const teamRepository = require('./../../repositories/team')
 
 const EXCEPTIONS = [{
   venueId: 1,
-  roomId: 2,
-  DR_ID: 1136,
-  number: 25,
-}, {
-  venueId: 1,
   roomId: 1,
-  DR_ID: 1245,
   number: 1,
 }, {
   venueId: 1,
   roomId: 1,
-  DR_ID: 0,
   number: 2,
 }]
 
@@ -96,10 +89,10 @@ module.exports = class DivideIntoRoomsService extends TransactionalService {
           throw new Error(`Invalid exception declared, room not found: ${exception}`)
         }
         if (exception.DR_ID === 0) {
-          cvroom.teams.push({ id: 0, DR_ID: 0, number: exception.number })
+          cvroom.teams.push({ id: 0, number: exception.number })
           return
         }
-        const team = cvenue.teams.find(tm => tm.DR_ID === exception.DR_ID)
+        const team = cvenue.teams.find(tm => tm.number === exception.number)
         if (!team) {
           throw new Error(`Invalid exception declared, team not found: ${exception}`)
         }
@@ -137,7 +130,10 @@ function getTeamUpdates(cvenue) {
 
 function applyOrder(order, teams) {
   let teamIndex = 0
-  for (let i = 0; i < order.length; i++) {
+  for (let i = 0; i < order.length; i++, teamIndex++) {
+    if (!teams[teamIndex]) {
+      continue
+    }
     while (teams[teamIndex].number) {
       teamIndex++
     }

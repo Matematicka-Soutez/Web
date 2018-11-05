@@ -83,14 +83,20 @@ function initRooms(venues) {
 
 function initGames() {
   const games = [{
+    id: 1,
     name: 'Lahvování vody',
     description: 'TBA',
     folder: 'water-bottling',
+  }, {
+    id: 2,
+    name: 'Game of trust',
+    description: 'TBA',
+    folder: 'game-of-trust',
   }]
   return Promise.map(games, game => createGame(game))
 }
 
-function initCompetitions(games) {
+function initCompetitions() {
   const competitions = [{
     id: 1,
     name: 'Jarní MaSo 2018',
@@ -104,7 +110,7 @@ function initCompetitions(games) {
     isPublic: true,
     invitationEmailSent: true,
     organizerId: null,
-    gameId: games[0].id,
+    gameId: 1,
   }, {
     id: 2,
     name: 'Podzimní MaSo 2018',
@@ -118,13 +124,13 @@ function initCompetitions(games) {
     isPublic: true,
     invitationEmailSent: true,
     organizerId: null,
-    gameId: games[0].id,
+    gameId: 2,
   }]
   return Promise.map(competitions, competition => createCompetition(competition))
 }
 
 async function initCompetitionVenues(competitions, venues) {
-  const competitionVenues = await Promise.map(
+  const competitionVenues = await Promise.mapSeries(
     competitions,
     competition => Promise.mapSeries(
       venues,
@@ -157,6 +163,26 @@ function initCompetitionVenueRooms(competitionVenues, rooms) {
     capacity: rooms[3].defaultCapacity,
   }, {
     competitionVenueId: competitionVenues[1].id,
+    roomId: rooms[4].id,
+    capacity: rooms[4].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[2].id,
+    roomId: rooms[0].id,
+    capacity: rooms[0].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[2].id,
+    roomId: rooms[1].id,
+    capacity: rooms[1].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[2].id,
+    roomId: rooms[2].id,
+    capacity: rooms[2].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[2].id,
+    roomId: rooms[3].id,
+    capacity: rooms[3].defaultCapacity,
+  }, {
+    competitionVenueId: competitionVenues[3].id,
     roomId: rooms[4].id,
     capacity: rooms[4].defaultCapacity,
   }]

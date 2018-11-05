@@ -1,7 +1,13 @@
 'use strict'
 
+const ioEmitter = require('socket.io-emitter')
+const config = require('../../../config')
 const authorizeToken = require('../utils/authorize')
 const events = require('./events')
+const { parseRedisConnectionString } = require('./utils')
+
+const redisConfig = parseRedisConnectionString(config.redis.connectionString)
+const Emitter = ioEmitter({ port: redisConfig.port, host: redisConfig.host })
 
 const getDisplayRoom = () => 'display'
 const getOrganizerRoomId = organizerId => `org${organizerId}`
@@ -58,8 +64,17 @@ const publishDisplayChange = displayChange => {
     .emit('displayChange', displayChange)
 }
 
+const publishDisplayChangeFromWorker = displayChange => {
+  if (!displayChange) {
+    throw new Error('displayChange is required when publishing display change')
+  }
+  return Emitter.to(getDisplayRoom())
+    .emit('displayChange', displayChange)
+}
+
 module.exports = {
   publishToTeam,
   initPublish,
   publishDisplayChange,
+  publishDisplayChangeFromWorker,
 }

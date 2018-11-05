@@ -12,20 +12,20 @@ const db = require('../src/database/index')
 const crypto = require('../src/utils/crypto')
 const initEnums = require('../tests/data/enums')
 const initStatic = require('../tests/data/static')
-// const initUsers = require('../tests/data/users')
+const initUsers = require('../tests/data/users')
 
 async function syncDb() {
+  if (config.env === 'production' || config.env === 'staging') {
+    throw new Error('!!! dbsync can\'t be run in production or staging !!!')
+  }
   try {
     const force = config.env === 'local' || config.env === 'test'
-    if (config.env === 'production' || config.env === 'staging') {
-      throw new Error('!!! dbsync can\'t be run in production or staging !!!')
-    }
     await db.sequelize.sync({ force })
     if (force === true) {
       await initEnums()
       await initStatic()
       await importOldDb()
-      // await initUsers()
+      await initUsers()
     }
     await db.sequelize.close()
     console.log('DB is synced.')
