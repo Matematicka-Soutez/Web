@@ -6,6 +6,7 @@ const gameConfig = require('../config.json')
 const log = require('../../../core/logger').workerLogger
 const ScoreTeamsService = require('../api/src/services/ScoreTeams')
 const GetTournamentResultsService = require('../api/src/services/GetTournamentResults')
+const GetResultsService = require('../api/src/services/GetResults')
 const socket = require('./../../../api/src/sockets/publish')
 
 function init(competition) {
@@ -17,6 +18,10 @@ function init(competition) {
       competition: { id: competition.id },
     }).execute()
     await socket.publishDisplayChangeFromWorker(tournament)
+    const results = await new GetResultsService({
+      competition: { id: competition.id },
+    }).execute()
+    await socket.publishResultsChangeFromWorker(results)
     log.info(`Game of trust evaluation ended ${new Date()}`)
   }
 

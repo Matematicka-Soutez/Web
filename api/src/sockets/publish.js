@@ -10,6 +10,7 @@ const redisConfig = parseRedisConnectionString(config.redis.connectionString)
 const Emitter = ioEmitter({ port: redisConfig.port, host: redisConfig.host })
 
 const getDisplayRoom = () => 'display'
+const getResultsRoom = () => 'results'
 const getOrganizerRoomId = organizerId => `org${organizerId}`
 const getTeamRoomId = teamId => `team${teamId}`
 
@@ -45,6 +46,11 @@ const initPublish = server => {
       const roomId = getDisplayRoom()
       return client.join(roomId)
     })
+    client.on('subscribeToResultsChange', () => {
+      publishToClient(client, 'resultsChange')
+      const roomId = getResultsRoom()
+      return client.join(roomId)
+    })
   })
 }
 
@@ -72,9 +78,18 @@ const publishDisplayChangeFromWorker = displayChange => {
     .emit('displayChange', displayChange)
 }
 
+const publishResultsChangeFromWorker = results => {
+  if (!results) {
+    throw new Error('results are required when publishing results change')
+  }
+  return Emitter.to(getResultsRoom())
+    .emit('resultsChange', results)
+}
+
 module.exports = {
   publishToTeam,
   initPublish,
   publishDisplayChange,
   publishDisplayChangeFromWorker,
+  publishResultsChangeFromWorker,
 }

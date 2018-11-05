@@ -8,4 +8,13 @@ function subscribeToDisplayChange(cb) {
   socket.emit('subscribeToDisplayChange', 1000)
 }
 
-export { subscribeToDisplayChange }
+function subscribeToResultsChange(cb) {
+  socket.on('resultsChange', results => cb(null, results))
+  socket.emit('subscribeToResultsChange', 1000)
+}
+
+export {
+  subscribeToDisplayChange,
+  subscribeToResultsChange,
+}
+

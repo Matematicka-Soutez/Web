@@ -85,10 +85,8 @@ class ResultsContainer extends Component {
               <TableHead>
                 <TableRow>
                   <TableCell numeric style={smallColumnWidth}>Pořadí</TableCell>
-                  <TableCell numeric style={smallColumnWidth}>Číslo týmu</TableCell>
                   <TableCell style={smallPadding}>Název týmu</TableCell>
                   <TableCell style={smallPadding}>Škola</TableCell>
-                  <TableCell style={smallPadding}>Soutěžící</TableCell>
                   <TableCell style={smallColumnWidth}>Místnost</TableCell>
                   <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
                   Body ve hře
@@ -105,15 +103,10 @@ class ResultsContainer extends Component {
                     <TableCell numeric component="th" scope="row" style={smallColumnWidth}>
                       {row.place}
                     </TableCell>
-                    <TableCell numeric style={smallColumnWidth}>{row.teamNumber}</TableCell>
                     <TableCell style={{ ...smallPadding, fontWeight: 'bold' }}>
                       {row.teamName}
                     </TableCell>
                     <TableCell style={smallPadding}>{row.school}</TableCell>
-                    <TableCell style={smallPadding}>
-                      {row.teamMembers.map(member =>
-                        <span key={member.id}>{member.name}<br /></span>)}
-                    </TableCell>
                     <TableCell style={smallColumnWidth}>{row.room}</TableCell>
                     <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
                       {row.gameScore}
