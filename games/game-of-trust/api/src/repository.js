@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 'use strict'
 
 const moment = require('moment')
@@ -5,8 +6,6 @@ const _ = require('lodash')
 const db = require('../../../../api/src/database')
 const appErrors = require('../../../../core/errors/application')
 const gameConfig = require('../../config.json')
-
-const PROBLEM_POINT_VALUE = gameConfig.game.problemPointValue
 
 async function getTournamentResults(competitionId, dbTransaction) {
   const tournament = await db.GameOfTrustTournament.findOne({
@@ -26,42 +25,46 @@ async function getTournamentResults(competitionId, dbTransaction) {
 }
 
 async function getResults(competitionId, dbTransaction) {
-  const results = await db.GameOfTrustCurrentTeamScore.findAll({
-    where: { competitionId },
-    attributes: [
-      'teamId',
-      'gameScore',
-      [db.sequelize.literal(`"game_score" + ("solved_problems" * ${PROBLEM_POINT_VALUE})`), 'totalScore'], // eslint-disable-line max-len
-    ],
-    include: [{
-      attributes: [
-        'name',
-        'number',
-        [db.sequelize.literal(`("solved_problems" * ${PROBLEM_POINT_VALUE})`), 'problemScore'],
-        'solvedProblems',
-      ],
-      model: db.Team,
-      as: 'team',
-      include: [{
-        attributes: ['shortName'],
-        model: db.School,
-        as: 'school',
-      }, {
-        attributes: ['id', 'firstName', 'lastName'],
-        model: db.TeamMember,
-        as: 'members',
-      }, {
-        attributes: ['roomId'],
-        model: db.CompetitionVenueRoom,
-        as: 'competitionVenueRoom',
-        include: [{
-          attributes: ['name'],
-          model: db.Room,
-          as: 'room',
-        }],
-      }],
-    }],
-    order: [[db.sequelize.literal('"totalScore"'), 'DESC']],
+  const query = `
+    SELECT "GameOfTrustCurrentTeamScore"."game_score" AS "gameScore",
+       "game_score" + (COALESCE("team"."solved_problems_override", "team->solvedProblemCounts"."solved_problems", 0) * :problemPointValue)
+                                                  AS "totalScore",
+       "team"."id"                                AS "teamId",
+       "team"."name"                              AS "teamName",
+       "team"."number"                            AS "teamNumber",
+       (COALESCE("team"."solved_problems_override", "team->solvedProblemCounts"."solved_problems", 0) * :problemPointValue)
+                                                  AS "problemScore",
+       COALESCE("team"."solved_problems_override", "team->solvedProblemCounts"."solved_problems", 0)
+                                                  AS "solvedProblems",
+       "team->school"."id"                        AS "schoolId",
+       "team->school"."short_name"                AS "schoolShortName",
+       "team->members"."id"                       AS "teamMemberId",
+       "team->members"."first_name" || ' ' || "team->members"."last_name"
+                                                  AS "teamMemberName",
+       "team->competitionVenueRoom"."id"          AS "competitionVenueRoomId",
+       "team->competitionVenueRoom->room"."id"    AS "roomId",
+       "team->competitionVenueRoom->room"."name"  AS "roomName"
+    FROM "GameOfTrustCurrentTeamScores" AS "GameOfTrustCurrentTeamScore"
+           LEFT OUTER JOIN (
+        "Teams" AS "team"
+            LEFT OUTER JOIN "Schools" AS "team->school" ON "team"."school_id" = "team->school"."id"
+            LEFT OUTER JOIN "TeamMembers" AS "team->members" ON "team"."id" = "team->members"."team_id"
+            LEFT OUTER JOIN "CompetitionVenueRooms" AS "team->competitionVenueRoom" ON "team"."competition_venue_room_id" =
+                                                                                       "team->competitionVenueRoom"."id"
+            LEFT OUTER JOIN "Rooms" AS "team->competitionVenueRoom->room" ON "team->competitionVenueRoom"."room_id" =
+                                                                             "team->competitionVenueRoom->room"."id"
+            LEFT OUTER JOIN "TeamSolvedProblemCounts" AS "team->solvedProblemCounts" ON
+          "team"."id" = "team->solvedProblemCounts"."team_id" AND "team->solvedProblemCounts"."competition_id" = :competitionId)
+             ON "GameOfTrustCurrentTeamScore"."team_id" = "team"."id"
+    WHERE "GameOfTrustCurrentTeamScore"."competition_id" = ${competitionId}
+    ORDER BY "totalScore" DESC;`
+  const results = await db.sequelize.query(query, {
+    type: db.sequelize.QueryTypes.SELECT,
+    replacements: {
+      competitionId,
+      problemPointValue: gameConfig.game.problemPointValue,
+    },
+    raw: true,
     transaction: dbTransaction,
   })
   return parseResults(results)
@@ -229,32 +232,33 @@ function parseResults(results) {
   if (!results) {
     return results
   }
+  const parsed = _.orderBy(_.map(
+    _.groupBy(results, 'teamId'),
+    (members, teamId) => ({
+      teamId,
+      teamName: members[0].teamName,
+      teamNumber: members[0].teamNumber,
+      school: members[0].schoolShortName,
+      teamMembers: members.map(member => ({
+        id: member.teamMemberId,
+        name: member.teamMemberName,
+      })),
+      room: members[0].roomName,
+      gameScore: parseScore(members[0].gameScore),
+      problemScore: parseScore(members[0].problemScore),
+      totalScore: parseScore(members[0].totalScore),
+      totalScoreRaw: members[0].totalScore,
+    }),
+  ), 'totalScoreRaw', 'desc')
   let place = 1
   let lastScore = -1
-  const parsed = []
-  results.forEach(result => {
-    const res = parseResult(result)
-    if (lastScore !== res.totalScoreRaw) {
-      res.place = `${place}.`
-      lastScore = res.totalScoreRaw
+  parsed.forEach(team => {
+    if (lastScore !== team.totalScoreRaw) {
+      team.place = `${place}.`
+      lastScore = team.totalScoreRaw
     }
-    parsed.push(res)
     place++
   })
-  return parsed
-}
-
-function parseResult(result) {
-  const parsed = {}
-  parsed.teamName = result.team.name
-  parsed.teamNumber = result.team.number
-  parsed.school = result.team.school.shortName
-  parsed.teamMembers = parseTeamMembers(result.team.members)
-  parsed.room = result.team.competitionVenueRoom.room.name
-  parsed.gameScore = parseScore(result.gameScore)
-  parsed.problemScore = result.team.dataValues.problemScore
-  parsed.totalScore = parseScore(result.dataValues.totalScore)
-  parsed.totalScoreRaw = result.dataValues.totalScore
   return parsed
 }
 
@@ -264,14 +268,6 @@ function parseScore(number) {
     return `${str.substr(0, str.length - 3)} ${str.substr(-3)}`
   }
   return str
-}
-
-function parseTeamMembers(members) {
-  return members
-    .map(member => ({
-      id: member.id,
-      name: `${member.firstName} ${member.lastName}`,
-    }))
 }
 
 

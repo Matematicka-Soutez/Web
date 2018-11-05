@@ -3,7 +3,7 @@
     "defaultStrategy": 6,
     "lastTournamentNumber": 90,
     "strategyLifespan": 4,
-    "problemPointValue": 30,
+    "problemPointValue": 1500,
     "repetitions": 10,
     "initialMistakeRate": 0
   },

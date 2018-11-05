@@ -6,6 +6,8 @@ const GetSchoolRegistrationsService = require('../../services/competition/GetSch
 const CreateTeamService = require('../../services/competition/CreateTeam')
 const UpdateTeamService = require('../../services/competition/UpdateTeam')
 const UpdateTeamSolutionService = require('../../services/problem/UpdateTeamSolution')
+const socket = require('../../sockets/publish')
+const GameResultsService = require('../../../../games/game-of-trust/api/src/services/GetResults')
 const appErrors = require('../../../../core/errors/application')
 const responseErrors = require('../../../../core/errors/response')
 
@@ -102,6 +104,9 @@ async function updateTeamSolution(ctx) {
       password: ctx.request.body.password,
       action: ctx.request.body.action,
     })
+    // TODO: We cannot reference game results here
+    const results = await new GameResultsService(ctx.state).execute()
+    await socket.publishResultsChange(results)
   } catch (err) {
     if (err instanceof appErrors.UnauthorizedError) {
       throw new responseErrors.UnauthorizedError('Heslo není platné.')

@@ -91,7 +91,7 @@ class ResultsContainer extends Component {
                   <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
                   Body ve hře
                   </TableCell>
-                  <TableCell numeric style={smallColumnWidth}>Body za příklady</TableCell>
+                  <TableCell numeric>Body za příklady</TableCell>
                   <TableCell numeric style={{ ...smallPadding, minWidth: 55 }}>
                   Body celkem
                   </TableCell>
@@ -111,7 +111,7 @@ class ResultsContainer extends Component {
                     <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
                       {row.gameScore}
                     </TableCell>
-                    <TableCell numeric style={smallColumnWidth}>{row.problemScore}</TableCell>
+                    <TableCell numeric>{row.problemScore}</TableCell>
                     <TableCell numeric style={{ smallPadding, fontWeight: 'bold', minWidth: 55 }}>
                       {row.totalScore}
                     </TableCell>

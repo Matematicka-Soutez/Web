@@ -88,10 +88,6 @@ module.exports = class DivideIntoRoomsService extends TransactionalService {
         if (!cvroom) {
           throw new Error(`Invalid exception declared, room not found: ${exception}`)
         }
-        if (exception.DR_ID === 0) {
-          cvroom.teams.push({ id: 0, number: exception.number })
-          return
-        }
         const team = cvenue.teams.find(tm => tm.number === exception.number)
         if (!team) {
           throw new Error(`Invalid exception declared, team not found: ${exception}`)

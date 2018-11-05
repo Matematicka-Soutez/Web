@@ -78,6 +78,14 @@ const publishDisplayChangeFromWorker = displayChange => {
     .emit('displayChange', displayChange)
 }
 
+const publishResultsChange = results => {
+  if (!results) {
+    throw new Error('results are required when publishing results change')
+  }
+  return socketServer.to(getResultsRoom())
+    .emit('resultsChange', results)
+}
+
 const publishResultsChangeFromWorker = results => {
   if (!results) {
     throw new Error('results are required when publishing results change')
@@ -91,5 +99,6 @@ module.exports = {
   initPublish,
   publishDisplayChange,
   publishDisplayChangeFromWorker,
+  publishResultsChange,
   publishResultsChangeFromWorker,
 }
