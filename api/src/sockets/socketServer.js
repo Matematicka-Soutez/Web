@@ -6,23 +6,7 @@ const adapter = require('socket.io-redis')
 const config = require('../../../config')
 const log = require('../../../core/logger').logger
 const { initPublish } = require('./publish')
-
-const parseRedisConnectionString = connectionString => {
-  const colonSplitted = connectionString.split(':')
-  const withoutPassword = colonSplitted.length === 3
-  if (withoutPassword) {
-    return {
-      host: colonSplitted[1].slice(2),
-      port: Number.parseInt(colonSplitted[3]),
-    }
-  }
-  const passwordHostname = colonSplitted[2].split('@')
-  return {
-    host: passwordHostname[1],
-    port: Number.parseInt(colonSplitted[3]),
-    password: passwordHostname[0],
-  }
-}
+const { parseRedisConnectionString } = require('./utils')
 
 const redisConfig = parseRedisConnectionString(config.redis.connectionString)
 

@@ -1,9 +1,16 @@
 'use strict'
 
+const ioEmitter = require('socket.io-emitter')
+const config = require('../../../config')
 const authorizeToken = require('../utils/authorize')
 const events = require('./events')
+const { parseRedisConnectionString } = require('./utils')
+
+const redisConfig = parseRedisConnectionString(config.redis.connectionString)
+const Emitter = ioEmitter({ port: redisConfig.port, host: redisConfig.host })
 
 const getDisplayRoom = () => 'display'
+const getResultsRoom = () => 'results'
 const getOrganizerRoomId = organizerId => `org${organizerId}`
 const getTeamRoomId = teamId => `team${teamId}`
 
@@ -39,6 +46,11 @@ const initPublish = server => {
       const roomId = getDisplayRoom()
       return client.join(roomId)
     })
+    client.on('subscribeToResultsChange', () => {
+      publishToClient(client, 'resultsChange')
+      const roomId = getResultsRoom()
+      return client.join(roomId)
+    })
   })
 }
 
@@ -58,8 +70,35 @@ const publishDisplayChange = displayChange => {
     .emit('displayChange', displayChange)
 }
 
+const publishDisplayChangeFromWorker = displayChange => {
+  if (!displayChange) {
+    throw new Error('displayChange is required when publishing display change')
+  }
+  return Emitter.to(getDisplayRoom())
+    .emit('displayChange', displayChange)
+}
+
+const publishResultsChange = results => {
+  if (!results) {
+    throw new Error('results are required when publishing results change')
+  }
+  return socketServer.to(getResultsRoom())
+    .emit('resultsChange', results)
+}
+
+const publishResultsChangeFromWorker = results => {
+  if (!results) {
+    throw new Error('results are required when publishing results change')
+  }
+  return Emitter.to(getResultsRoom())
+    .emit('resultsChange', results)
+}
+
 module.exports = {
   publishToTeam,
   initPublish,
   publishDisplayChange,
+  publishDisplayChangeFromWorker,
+  publishResultsChange,
+  publishResultsChangeFromWorker,
 }

@@ -12,6 +12,24 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: false,
   })
 
+  TeamSolution.associate = models => {
+    TeamSolution.belongsTo(models.Competition, {
+      as: 'competition',
+      foreignKey: { name: 'competitionId', field: 'competition_id' },
+      onDelete: 'RESTRICT',
+    })
+    TeamSolution.belongsTo(models.Team, {
+      as: 'team',
+      foreignKey: { name: 'teamId', field: 'team_id' },
+      onDelete: 'RESTRICT',
+    })
+    TeamSolution.belongsTo(models.Organizer, {
+      as: 'author',
+      foreignKey: { name: 'createdBy', field: 'created_by' },
+      onDelete: 'RESTRICT',
+    })
+  }
+
   TeamSolution.sync = options => {
     if (options.force) {
       return sequelize.query(`

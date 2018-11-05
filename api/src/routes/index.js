@@ -4,7 +4,7 @@ const Router = require('koa-router')
 const {
   organizerGameRoutes,
   publicGameRoutes,
-} = require('../../../games/water-bottling/api/src/routes')
+} = require('../../../games/game-of-trust/api/src/routes')
 const config = require('../../../config')
 const setCurrentCompetition = require('../middleware/competition')
 const { authenticateTeacher, authenticateOrganizer } = require('../middleware/authentication')

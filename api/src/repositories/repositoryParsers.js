@@ -14,7 +14,6 @@ function parseTeam(team) {
   parsed.id = team.id
   parsed.name = team.name
   parsed.number = team.number
-  parsed.DR_ID = team.DR_ID
   parsed.arrived = team.arrived
   parsed.schoolId = team.schoolId
   parsed.createdAt = team.createdAt

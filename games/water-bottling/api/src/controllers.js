@@ -20,7 +20,7 @@ module.exports = {
 
 async function getCurrentGrid(ctx) {
   try {
-    ctx.body = await new GetCurrentGridService().execute({})
+    ctx.body = await new GetCurrentGridService(ctx.state).execute({})
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
       throw new responseErrors.UnauthorizedError('Invalid credentials.')
@@ -31,7 +31,7 @@ async function getCurrentGrid(ctx) {
 
 async function getResults(ctx) {
   try {
-    ctx.body = await new GetResultsService().execute({})
+    ctx.body = await new GetResultsService(ctx.state).execute({})
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
       throw new responseErrors.UnauthorizedError('Invalid credentials.')
@@ -42,7 +42,7 @@ async function getResults(ctx) {
 
 async function getTeamPosition(ctx) {
   try {
-    ctx.body = await new GetTeamPositionService().execute({
+    ctx.body = await new GetTeamPositionService(ctx.state).execute({
       teamId: parseInt(ctx.params.teamId, 10),
     })
   } catch (err) {
@@ -56,12 +56,12 @@ async function getTeamPosition(ctx) {
 async function moveTeam(ctx) {
   try {
     const teamId = parseInt(ctx.request.body.teamId, 10)
-    await new MoveTeamService().execute({
+    await new MoveTeamService(ctx.state).execute({
       teamId,
       directionId: parseInt(ctx.request.body.directionId, 10),
       organizerId: ctx.state.organizer.id,
     })
-    ctx.body = await new GetTeamPositionService().execute({
+    ctx.body = await new GetTeamPositionService(ctx.state).execute({
       teamId,
     })
   } catch (err) {
@@ -78,11 +78,11 @@ async function moveTeam(ctx) {
 async function revertMove(ctx) {
   try {
     const teamId = parseInt(ctx.request.body.teamId, 10)
-    await new RevertMoveService().execute({
+    await new RevertMoveService(ctx.state).execute({
       teamId,
       organizerId: ctx.state.organizer.id,
     })
-    ctx.body = await new GetTeamPositionService().execute({
+    ctx.body = await new GetTeamPositionService(ctx.state).execute({
       teamId,
     })
   } catch (err) {
@@ -98,7 +98,7 @@ async function revertMove(ctx) {
 
 async function initGame(ctx) {
   try {
-    ctx.body = await new InitGameService().execute({
+    ctx.body = await new InitGameService(ctx.state).execute({
       organizerId: ctx.state.organizer.id,
     })
   } catch (err) {

@@ -41,8 +41,8 @@ module.exports = class InitGameService extends TransactionalService {
       repository.createTeamPositions(initialPositions, dbTransaction),
     ])
     return {
-      result: 'Initialization successfull.',
-      teamsEnroled: teams.length,
+      result: 'Initialization successful.',
+      teamsEnrolled: teams.length,
     }
   }
 }
