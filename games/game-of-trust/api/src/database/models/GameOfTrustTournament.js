@@ -1,38 +1,38 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-  const GameOfTrustGameRound = sequelize.define('GameOfTrustGameRound', {
+  const GameOfTrustTournament = sequelize.define('GameOfTrustTournament', {
     number: { type: DataTypes.INTEGER, allowNull: false, field: 'number', unique: true },
     mistakeRate: { type: DataTypes.INTEGER, allowNull: false, field: 'mistake_rate', default: 0 },
     start: { type: DataTypes.DATE, allowNull: false, field: 'start' },
     end: { type: DataTypes.DATE, allowNull: false, defaultValue: new Date(), field: 'end' },
   }, {
-    tableName: 'GameOfTrustGameRounds',
+    tableName: 'GameOfTrustTournaments',
     timestamps: true,
   })
 
-  GameOfTrustGameRound.associate = models => {
-    GameOfTrustGameRound.belongsTo(models.Competition, {
+  GameOfTrustTournament.associate = models => {
+    GameOfTrustTournament.belongsTo(models.Competition, {
       as: 'competition',
       foreignKey: { name: 'competitionId', field: 'competition_id' },
       onDelete: 'RESTRICT',
     })
-    GameOfTrustGameRound.hasMany(models.GameOfTrustTeamScore, {
+    GameOfTrustTournament.hasMany(models.GameOfTrustTeamScore, {
       as: 'teamScores',
-      foreignKey: { name: 'gameRoundId', field: 'game_round_id' },
+      foreignKey: { name: 'tournamentId', field: 'tournament_id' },
       onDelete: 'RESTRICT',
     })
-    GameOfTrustGameRound.hasMany(models.GameOfTrustGameRoundStrategy, {
+    GameOfTrustTournament.hasMany(models.GameOfTrustTournamentStrategy, {
       as: 'strategies',
-      foreignKey: { name: 'gameRoundId', field: 'game_round_id' },
+      foreignKey: { name: 'tournamentId', field: 'tournament_id' },
       onDelete: 'RESTRICT',
     })
-    GameOfTrustGameRound.hasOne(models.GameOfTrustGameRound, {
-      as: 'previousRound',
-      foreignKey: { name: 'previousRoundId', field: 'previous_round_id' },
+    GameOfTrustTournament.hasOne(models.GameOfTrustTournament, {
+      as: 'previousTournament',
+      foreignKey: { name: 'previousTournamentId', field: 'previous_tournament_id' },
       onDelete: 'RESTRICT',
     })
   }
 
-  return GameOfTrustGameRound
+  return GameOfTrustTournament
 }

@@ -9,10 +9,10 @@ const gameConfig = require('../../config.json')
 const PROBLEM_POINT_VALUE = gameConfig.game.problemPointValue
 
 async function getTournamentResults(competitionId, dbTransaction) {
-  const tournament = await db.GameOfTrustGameRound.findOne({
+  const tournament = await db.GameOfTrustTournament.findOne({
     where: { competitionId },
     include: [{
-      model: db.GameOfTrustGameRoundStrategy,
+      model: db.GameOfTrustTournamentStrategy,
       require: true,
       as: 'strategies',
     }],
@@ -76,7 +76,7 @@ async function setTeamStrategy(strategy, dbTransaction) {
 }
 
 async function createTournamentStrategies(strategies, dbTransaction) {
-  await db.GameOfTrustGameRoundStrategy.bulkCreate(strategies, { transaction: dbTransaction })
+  await db.GameOfTrustTournamentStrategy.bulkCreate(strategies, { transaction: dbTransaction })
   return true
 }
 
@@ -86,7 +86,7 @@ async function createTeamScores(scores, dbTransaction) {
 }
 
 async function createTournament(tournament, dbTransaction) {
-  const result = await db.GameOfTrustGameRound.create(tournament, {
+  const result = await db.GameOfTrustTournament.create(tournament, {
     returning: true,
     transaction: dbTransaction,
   })
@@ -155,11 +155,11 @@ async function getTeamScore(competitionId, teamId, dbTransaction) {
 
 async function clearGameData(competitionId, dbTransaction) {
   await Promise.all([
-    db.GameOfTrustGameRoundStrategy.destroy({ where: { competitionId }, transaction: dbTransaction }), // eslint-disable-line max-len
+    db.GameOfTrustTournamentStrategy.destroy({ where: { competitionId }, transaction: dbTransaction }), // eslint-disable-line max-len
     db.GameOfTrustTeamScore.destroy({ where: { competitionId }, transaction: dbTransaction }),
     db.GameOfTrustTeamStrategy.destroy({ where: { competitionId }, transaction: dbTransaction }),
   ])
-  await db.GameOfTrustGameRound.destroy({ where: { competitionId }, transaction: dbTransaction })
+  await db.GameOfTrustTournament.destroy({ where: { competitionId }, transaction: dbTransaction })
 }
 
 
@@ -175,7 +175,7 @@ function parseTournament(tournament) {
   parsed.start = tournament.start
   parsed.end = tournament.end
   parsed.competitionId = tournament.competitionId
-  parsed.previousRoundId = tournament.previousRoundId
+  parsed.previousTournamentId = tournament.previousTournamentId
   if (tournament.strategies) {
     parsed.strategies = parseTournamentStrategies(tournament.strategies)
   }

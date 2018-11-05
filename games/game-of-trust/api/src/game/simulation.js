@@ -65,8 +65,8 @@ function getPayoffs(moveA, moveB) {
   throw new Error('Universe broke, wish something.')
 }
 
-function getMistakeRate(roundNumber) {
-  const mistakeRate = Math.floor(roundNumber / 10) / 100
+function getMistakeRate(tournamentNumber) {
+  const mistakeRate = Math.floor(tournamentNumber / 10) / 100
   return gameConfig.game.initialMistakeRate + mistakeRate
 }
 

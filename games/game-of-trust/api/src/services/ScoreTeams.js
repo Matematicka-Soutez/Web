@@ -76,7 +76,7 @@ function getTournamentStrategies(teams, tournamentId, competitionId) {
     )
     return {
       competitionId,
-      gameRoundId: tournamentId,
+      tournamentId,
       strategy,
       teamCount: strategyTeams.length,
       profitSum: _.sum(scores),

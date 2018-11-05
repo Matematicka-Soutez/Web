@@ -47,7 +47,7 @@ function computeRules(competition) {
   }
 
   const ruleStart = getRecurrenceRuleDefaults(start)
-  ruleStart.minute = [new schedule.Range(start.minute(), 59)]
+  ruleStart.minute = [new schedule.Range(start.minute() + 1, 59)]
   ruleStart.hour = start.hour()
   rules.push(ruleStart)
 

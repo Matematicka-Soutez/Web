@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: { name: 'competitionId', field: 'competition_id' },
       onDelete: 'RESTRICT',
     })
-    GameOfTrustTeamScore.belongsTo(models.GameOfTrustGameRound, {
-      as: 'gameRound',
-      foreignKey: { name: 'gameRoundId', field: 'game_round_id' },
+    GameOfTrustTeamScore.belongsTo(models.GameOfTrustTournament, {
+      as: 'tournament',
+      foreignKey: { name: 'tournamentId', field: 'tournament_id' },
       onDelete: 'RESTRICT',
     })
   }

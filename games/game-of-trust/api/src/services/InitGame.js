@@ -48,13 +48,13 @@ function generateDefaults(competitionId, teams) {
     }),
     scores: tournamentId => teams.map(team => ({
       competitionId,
-      gameRoundId: tournamentId,
+      tournamentId,
       teamId: team.id,
       score: 0,
     })),
     strategies: tournamentId => [{
       competitionId,
-      gameRoundId: tournamentId,
+      tournamentId,
       strategy: gameConfig.game.defaultStrategy,
       teamCount: teams.length,
       profitSum: 0,
