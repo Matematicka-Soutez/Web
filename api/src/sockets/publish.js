@@ -1,13 +1,19 @@
 'use strict'
 
 const ioEmitter = require('socket.io-emitter')
+const redis = require('redis')
 const config = require('../../../config')
 const authorizeToken = require('../utils/authorize')
 const events = require('./events')
 const { parseRedisConnectionString } = require('./utils')
 
 const redisConfig = parseRedisConnectionString(config.redis.connectionString)
-const Emitter = ioEmitter({ port: redisConfig.port, host: redisConfig.host })
+const redisClient = redis.createClient({
+  port: redisConfig.port,
+  host: redisConfig.host,
+  auth_pass: redisConfig.password, // eslint-disable-line camelcase
+})
+const Emitter = ioEmitter(redisClient)
 
 const getDisplayRoom = () => 'display'
 const getResultsRoom = () => 'results'
