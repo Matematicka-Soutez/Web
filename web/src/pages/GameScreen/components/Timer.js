@@ -37,7 +37,7 @@ class Timer extends Component {
       <div className="App-timer">
 
         {this.state.phase === 'BEFORE'
-        && <div className="fullHeightCapture">Vítejte na jarním MaSu 2018</div>}
+        && <div className="fullHeightCapture">Vítejte na podzimním MaSu 2018</div>}
 
         {this.state.phase === 'AFTER'
         && <div className="fullHeightCapture" style={{ color: 'red' }}>Hra skončila</div>}
