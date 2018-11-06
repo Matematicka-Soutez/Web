@@ -15,6 +15,7 @@ web/build
 # Local configuration
 .env
 api/scripts/importData/*
+api/scripts/tisk/*
 api/scripts/draftsmen.csv
 api/scripts/draftsmen-access.csv
 
