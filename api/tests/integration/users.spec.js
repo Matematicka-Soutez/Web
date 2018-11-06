@@ -36,6 +36,7 @@ describe('User API endpoints: /api/users', function userAPI() {
       const expectedResponse = _.cloneDeep(this.data.organizers.newcomer)
       expectedResponse.confirmed = false
       delete expectedResponse.password
+      delete expectedResponse.problemScanningToken
       // Action
       const payload = _.cloneDeep(this.data.organizers.newcomer)
       const res = await request(this.server)

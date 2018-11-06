@@ -18,6 +18,7 @@ async function initUsers() {
     lastName: 'Nový',
     email: 'novy@sink.sendgrid.net',
     password: 'Password123!',
+    problemScanningToken: 'jamujici-plostice',
   }
 
   const unconfirmed = {

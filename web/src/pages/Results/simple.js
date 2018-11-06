@@ -106,7 +106,7 @@ class ResultsContainer extends Component {
                     <TableCell style={{ ...smallPadding, fontWeight: 'bold' }}>
                       {row.teamName}
                     </TableCell>
-                    <TableCell style={smallPadding}>{row.school}</TableCell>
+                    <TableCell style={smallPadding}>{row.schoolFull}</TableCell>
                     <TableCell style={smallColumnWidth}>{row.room}</TableCell>
                     <TableCell numeric style={{ ...smallPadding, minWidth: 50 }}>
                       {row.gameScore}

@@ -38,6 +38,7 @@ async function getResults(competitionId, dbTransaction) {
                                                   AS "solvedProblems",
        "team->school"."id"                        AS "schoolId",
        "team->school"."short_name"                AS "schoolShortName",
+       "team->school"."full_name"                 AS "schoolFullName",
        "team->members"."id"                       AS "teamMemberId",
        "team->members"."first_name" || ' ' || "team->members"."last_name"
                                                   AS "teamMemberName",
@@ -239,6 +240,7 @@ function parseResults(results) {
       teamName: members[0].teamName,
       teamNumber: members[0].teamNumber,
       school: members[0].schoolShortName,
+      schoolFull: members[0].schoolFullName,
       teamMembers: members.map(member => ({
         id: member.teamMemberId,
         name: member.teamMemberName,

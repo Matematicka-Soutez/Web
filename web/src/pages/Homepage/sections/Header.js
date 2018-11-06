@@ -15,9 +15,9 @@ const Header = () => (
           variant="contained"
           color="default"
           size="large"
-          href="#registrace"
+          href="/vysledky"
           style={{ backgroundColor: '#333', color: '#eee' }}>
-          Registrace
+          Výsledky
         </Button>
         <Button
           className="js-scroll-trigger"

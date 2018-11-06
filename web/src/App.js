@@ -27,8 +27,8 @@ function App() {
         <div className="App">
           <Switch>
             <Route exact path="/" component={Homepage} />
-            <Route exact path="/vysledky" component={Results} />
-            <Route exact path="/vysledky/kratke" component={ResultsSimple} />
+            <Route exact path="/vysledky" component={ResultsSimple} />
+            <Route exact path="/vysledky/full" component={Results} />
             <Route path="/hra/admin/:jwtToken" component={GameInput} />
             <Route exact path="/hra" component={GameScreen} />
             <Route path="/registrace/:schoolToken" component={Registration} />
