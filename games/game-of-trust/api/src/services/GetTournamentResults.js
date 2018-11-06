@@ -7,7 +7,7 @@ const AbstractService = require('./../../../../../core/services/AbstractService'
 module.exports = class GetTournamentResultsService extends AbstractService {
   async run() {
     const tournament = await repository.getTournamentResults(this.competition.id)
-    utils.addRemainingTime(tournament)
+    utils.addRemainingTime(tournament, this.competition)
     return tournament
   }
 }

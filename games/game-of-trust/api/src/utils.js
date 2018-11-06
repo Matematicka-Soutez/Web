@@ -24,10 +24,14 @@ function median(values) {
   return values[(values.length - 1) >> 1]
 }
 
-function addRemainingTime(tournament) {
-  tournament.remainingTime = tournament.number >= gameConfig.game.lastTournamentNumber
-    ? -42000
-    : moment().endOf('minute').diff(moment())
+function addRemainingTime(tournament, competition) {
+  if (tournament.number === 0) {
+    tournament.remainingTime = moment(competition.start).diff(moment()) + 60000
+  } else if (tournament.number >= gameConfig.game.lastTournamentNumber) {
+    tournament.remainingTime = -42000
+  } else {
+    tournament.remainingTime = moment().endOf('minute').diff(moment())
+  }
   return tournament
 }
 

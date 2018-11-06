@@ -14,13 +14,9 @@ function init(competition) {
     log.info(`Game of trust evaluation started ${invoked}/${new Date()}`)
     await new ScoreTeamsService()
       .execute({ competitionId: competition.id })
-    const tournament = await new GetTournamentResultsService({
-      competition: { id: competition.id },
-    }).execute()
+    const tournament = await new GetTournamentResultsService({ competition }).execute()
     await socket.publishDisplayChangeFromWorker(tournament)
-    const results = await new GetResultsService({
-      competition: { id: competition.id },
-    }).execute()
+    const results = await new GetResultsService({ competition }).execute()
     await socket.publishResultsChangeFromWorker(results)
     log.info(`Game of trust evaluation ended ${new Date()}`)
   }
