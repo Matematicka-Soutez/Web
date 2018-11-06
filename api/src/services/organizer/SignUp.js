@@ -17,6 +17,8 @@ module.exports = class SignUpService extends TransactionalService {
         lastName: validators.validateName({ required: true, maxLength: 80 }),
         email: validators.emailValidator({ required: true }),
         password: validators.passwordValidator({ required: true }),
+        // TODO: validate duplicity
+        problemScanningToken: { type: 'string', required: true, minLength: 8, maxLength: 40 },
       },
     }
   }
@@ -49,5 +51,6 @@ async function parseOrganizerFromRequest(data) {
     email: data.email.toLowerCase(),
     password: await crypto.hashPassword(data.password),
     roleId: enums.ROLES.DRAFTSMAN.id,
+    problemScanningToken: data.problemScanningToken,
   }
 }
