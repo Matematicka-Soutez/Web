@@ -102,21 +102,21 @@ Poznámka: Strategii lze předplatit jen právě na 4 turnaje od kliknutí v zad
 POKYNY PRO MĚNIČE
 Role měniče se nám od tohoto ročníku trochu mění. Jde o první nesmělý krok ke zrychlení vyhodnocování a automatizaci celé soutěže, proto nepanikař, když něco nebude fungovat. I s takovou variantou počítáme a soutěž zvládneme.
 
-Na příkladech se nově objevily QR kódy. Ty slouží pro rychlé zadávání vyřešených úloh do systému. Tvým úkolem bude krom vybírání vyřešených a vydávání nových příkladů týmům také skenování všech vyřešených příkladů. Slouží k tomu jednoduchá aplikace na telefon, kterou stáhneš zde:
+Na příkladech se nově objevily QR kódy. Ty slouží pro rychlé zadávání vyřešených úloh do systému. Tvým úkolem bude krom vybírání vyřešených příkladů a vydávání nových příkladů týmům také skenování všech vyřešených příkladů. Slouží k tomu jednoduchá aplikace na telefon, kterou stáhneš zde:
 
 https://play.google.com/store/apps/details?id=cz.cuni.mff.maso
 
-Aplikaci si prosím nainstaluj a ujisti se, že máš nabitý a k internetu připojený telefon. Klidně ji taky vyzkoušej předem na nějakých přilehlých příkladech, jen nezapomeň přidané příklady zase odebrat. Abys mohl${accessLink.gender === 'f' ? 'a' : ''} příklady skenovat, budeš potřebovat následující kód"
+Aplikaci si prosím nainstaluj a ujisti se, že máš telefon nabitý a spolehlivě připojený k internetu. Aplikaci vyzkoušej předem na nějakých přilehlých příkladech, jen nezapomeň přidané příklady zase odebrat. Abys mohl${accessLink.gender === 'f' ? 'a' : ''} příklady skenovat, budeš potřebovat následující heslo:
 
 ${accessLink.problemScanningToken}
 
-Kód Tě identifikuje v systému. Prosím postarej se, ať se nedostane k dětem. S kódem může aplikaci používat kdokoliv.
+Heslo Tě identifikuje v systému. Prosím postarej se, ať se nedostane k dětem. S heslem může aplikaci používat kdokoliv.
 
-Tip: Pokud kód nelze naskenovat, aplikace umožňuje ho zadat ručně.
+Tip: Pokud QR kód nelze naskenovat, aplikace umožňuje ho zadat ručně.
 Tip 2: Pokud si nejsi jist${accessLink.gender === 'f' ? 'á' : 'ý'} opakované naskenování kódu nic nepokazí.
 Tip 3: Nezapomeň naskenovat i příklady opravené po konci soutěžní doby, jinak se týmům nezapočtou.
 
-Poznámka: Zkoušej kódy skenovat co nejvíc průběžně. Postupem času chceme eliminovat kresliče a proto potřebujeme mít vyřešené příklady v systému ideálně hned po vyřešení. Pokud to nepůjde, dej nám vědět, i to je cená informace.
+Poznámka: Zkoušej kódy skenovat co nejvíc průběžně. Postupem času chceme eliminovat kresliče a proto potřebujeme mít vyřešené příklady v systému ideálně hned po opravení. Pokud to nepůjde, dej mi vědět, i to je cenná informace.
 
 MaSu zdar
 Jirka Erhart
