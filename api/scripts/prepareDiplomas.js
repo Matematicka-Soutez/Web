@@ -54,7 +54,7 @@ async function prepareDiplomas() {
       body: JSON.stringify(diplomaPair),
       encoding: null,
     })
-    await fs.writeFileSync(path.join(__dirname, `./tisk/${index}.pdf`), res)
+    await fs.writeFileSync(path.join(__dirname, `./tisk/${index}.pdf`), res) // eslint-disable-line no-sync, max-len
   })
 
   const specialAwards = {
@@ -76,7 +76,7 @@ async function prepareDiplomas() {
     body: JSON.stringify(specialAwards),
     encoding: null,
   })
-  await fs.writeFileSync(path.join(__dirname, `./tisk/${5}.pdf`), res)
+  await fs.writeFileSync(path.join(__dirname, `./tisk/${5}.pdf`), res) // eslint-disable-line no-sync, max-len
 }
 
 prepareDiplomas()

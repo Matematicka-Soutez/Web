@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { API_ADDRESS } from '../../../../web/src/config'
+import { STRATEGIES } from '../../core/enums'
 import TournamentGraph from './components/TournamentGraph'
 import TournamentLegend from './components/TournamentLegend'
 import TournamentTimer from './components/TournamentTimer'
-import {STRATEGIES} from '../../core/enums'
 import StrategyButton from './components/StrategyButton'
 
 class Game extends Component {

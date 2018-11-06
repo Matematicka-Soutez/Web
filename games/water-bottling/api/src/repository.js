@@ -80,7 +80,7 @@ async function getResults(competitionId, dbTransaction) {
       attributes: [
         'name',
         'number',
-        [db.sequelize.literal(`("solved_problems_override" * ${PROBLEM_POINT_VALUE})`), 'problemScore'],
+        [db.sequelize.literal(`("solved_problems_override" * ${PROBLEM_POINT_VALUE})`), 'problemScore'], // eslint-disable-line max-len
         'solvedProblemsOverride',
       ],
       model: db.Team,
