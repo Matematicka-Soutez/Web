@@ -5,7 +5,7 @@ const request = require('supertest')
 const initDb = require('../data/init')
 const db = require('../../src/database')
 
-describe('Competition API endpoints: /api/competitions', function competitionAPI() {
+describe('Public competition API endpoints: /api/competitions', function competitionAPI() {
   describe('Get Timer: GET /api/competitions/current/timer', function getCompetitionTimer() {
     before(async function() {
       this.data = await initDb()

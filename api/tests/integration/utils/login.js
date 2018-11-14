@@ -18,10 +18,13 @@ async function loginUser(body) {
   return response.body
 }
 
-async function loginOrganizer(body) {
-  const response = await request(app)
-    .post('/api/session/admin')
-    .send(body)
+async function loginOrganizer(server, organizer) {
+  const response = await request(server)
+    .post('/api/session/organizer')
+    .send({
+      username: organizer.email,
+      password: organizer.password,
+    })
     .expect('Content-Type', /json/u)
     .expect(200)
   return response.body

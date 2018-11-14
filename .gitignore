@@ -7,10 +7,10 @@ node_modules
 
 # Generated files
 .nyc_output
-api/coverage
 web/coverage
 web/dist
 web/build
+coverage/
 
 # Local configuration
 .env
