@@ -21,3 +21,4 @@ api/scripts/draftsmen-access.csv
 
 # System files
 .DS_Store
+npm-debug\.log
