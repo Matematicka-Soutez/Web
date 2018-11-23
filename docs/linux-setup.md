@@ -1,9 +1,18 @@
 # Setup for Ubuntu 18.04
 
+ - Git
  - Install Docker
  - Install WebStorm
  - Install Node.js, <i>npm</i> and <i>n</i>
  - Setup WebStorm
+ - Install DataGrip
+
+### Git
+
+Clone MaSo repository
+```bash
+git clone https://github.com/snEk42/MaSo.git
+```
 
 ###  Docker
 You can install Docker by various ways but snap is reliable:
@@ -12,14 +21,14 @@ You can install Docker by various ways but snap is reliable:
 sudo snap install docker
 ```
 
-Alternatives:
+Alternatives (don't use unless):
  - Official Docker CE installation guide (https://docs.docker.com/install/linux/docker-ce/ubuntu/#upgrade-docker-ce)
  - In-built package agent:
    ```bash
    sudo apt-get install docker
    ```
    If docker-compose not included:
-   ```
+   ```bash
    sudo apt-get install docker-compose
    ```
  - Download with curl + add docker-compose:
@@ -36,6 +45,7 @@ Alternatives:
 You can install Webstorm through Ubuntu Software app or download gzip from web (https://www.jetbrains.com/webstorm/download/download-thanks.html) and then follow installation guide.
 
 ### Node.js, <i>npm</i> and <i>n</i>
+
 Get Node.js:
 ```bash
 sudo apt-get install node.js
@@ -44,14 +54,10 @@ Check if <i>npm</i> is included:
 ```bash
 npm -v
 ```
- - If it's not, install it:
+- If it's not, install it:
     ```bash
     sudo apt-get install npm
     ```
-Install libraries:
-```bash
-npm i
-```
 Then install <i>n</i> (version manager) using <i>npm</i>:
 ```bash
 sudo npm -g i n
@@ -60,8 +66,16 @@ In ```package.json``` look up version of Node.js and change your version to that
 ```bash
 n [version_number]
 ```
+
+Install libraries (<b>Run in /MaSo directory!</b>):
+```bash
+npm i
+```
+
 ### Setup WebStorm
 
 Get from another team member ```.idea/``` directory and add it into ```MaSo/``` project
 
+### Install DataGrip
 
+You can get DataGrip easily from Ubuntu Software
