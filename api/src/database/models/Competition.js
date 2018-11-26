@@ -44,8 +44,8 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: { name: 'organizerId', field: 'organizer_id' },
       onDelete: 'RESTRICT',
     })
-    Competition.hasMany(models.SolvedProblem, {
-      as: 'solvedProblems',
+    Competition.hasMany(models.TeamSolutionChange, {
+      as: 'teamSolutionChanges',
       foreignKey: { name: 'competitionId', field: 'competition_id' },
       onDelete: 'RESTRICT',
     })

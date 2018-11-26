@@ -6,6 +6,7 @@ import GameScreen from './pages/GameScreen/index'
 import GameInput from './pages/GameInput'
 import Registration from './pages/Registration'
 import Results from './pages/Results'
+import ResultsSimple from './pages/Results/simple'
 // import PrivateRoute from './components/PrivateRoute'
 import './App.css'
 
@@ -13,6 +14,9 @@ const theme = createMuiTheme({
   palette: {
     primary: { main: '#2196f3' },
     secondary: { main: '#ffd42d' },
+  },
+  typography: {
+    useNextVariants: true,
   },
 })
 
@@ -23,7 +27,8 @@ function App() {
         <div className="App">
           <Switch>
             <Route exact path="/" component={Homepage} />
-            <Route exact path="/vysledky" component={Results} />
+            <Route exact path="/vysledky" component={ResultsSimple} />
+            <Route exact path="/vysledky/full" component={Results} />
             <Route path="/hra/admin/:jwtToken" component={GameInput} />
             <Route exact path="/hra" component={GameScreen} />
             <Route path="/registrace/:schoolToken" component={Registration} />

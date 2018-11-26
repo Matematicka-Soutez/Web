@@ -22,9 +22,6 @@ class RegisteredTeamsSection extends Component {
   }
 
   render() {
-    const content = this.state.teamsByVenue
-      ? this.state.teamsByVenue.map(displayVenue)
-      : <p>Načítání týmů ...</p>
     return (
       <ScrollableAnchor id="registered-teams">
         <section className="content-section registered-teams">
@@ -37,7 +34,9 @@ class RegisteredTeamsSection extends Component {
                 Zde můžete vidět již registrované týmy. Čísla za místem konání
                 udávají počet obsazených míst z celkového počtu dostupných.
               </p>
-              {content}
+              {this.state.teamsByVenue
+                ? this.state.teamsByVenue.map(displayVenue)
+                : <p>Načítání týmů ...</p>}
             </Grid>
           </Grid>
         </section>
@@ -47,13 +46,12 @@ class RegisteredTeamsSection extends Component {
 }
 
 function displayVenue(venue) {
-  const content = venue.teams.length > 0
-    ? <table>{venue.teams.map(displayTeam)}</table>
-    : <p>Zatím není přihlášen žádný tým.</p>
   return (
-    <React.Fragment>
+    <React.Fragment key={venue.id}>
       <h2>{venue.name} ({venue.teams.length} / {venue.capacity})</h2>
-      {content}
+      {venue.teams.length > 0
+        ? <table><tbody>{venue.teams.map(displayTeam)}</tbody></table>
+        : <p>Zatím není přihlášen žádný tým.</p>}
     </React.Fragment>
   )
 }

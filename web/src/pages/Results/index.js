@@ -9,6 +9,7 @@ import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
 import { API_ADDRESS } from '../../config'
+import { subscribeToResultsChange } from '../../sockets/index'
 
 const rootStyle = {
   margin: '16px 8px 8px 8px',
@@ -32,6 +33,16 @@ class ResultsContainer extends Component {
     this.state = {
       results: null,
     }
+    subscribeToResultsChange((err, newResults) => {
+      if (err) {
+        return
+      }
+      if (newResults && newResults !== {}) {
+        this.setState({
+          results: newResults,
+        })
+      }
+    })
   }
 
   async componentWillMount() {
@@ -66,9 +77,8 @@ class ResultsContainer extends Component {
         <Paper style={rootStyle}>
           <Typography
             variant="headline"
-            component="h2"
             style={{ textAlign: 'center', marginBottom: 16 }}>
-            Výsledky jarního MaSa 2018
+            Výsledky podzimního MaSa 2018
           </Typography>
           <Typography component="div">
             <Table style={{ minWidth: 780 }}>

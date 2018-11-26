@@ -1,0 +1,15 @@
+{
+  "game": {
+    "defaultStrategy": 6,
+    "lastTournamentNumber": 90,
+    "strategyLifespan": 4,
+    "problemPointValue": 1500,
+    "repetitions": 10,
+    "initialMistakeRate": 0
+  },
+  "common": {
+    "name": "Game of trust",
+    "routes": "/api/src/routes",
+    "databaseModels": "/api/src/database/models/"
+  }
+}

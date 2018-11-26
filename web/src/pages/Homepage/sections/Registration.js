@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import ScrollableAnchor from 'react-scrollable-anchor'
 import Grid from '@material-ui/core/Grid'
 import Card from '@material-ui/core/Card'
-import RegistrationTimer from '../../Registration/RegistrationTimer'
-import RegistrationCodeInput from '../../Registration/RegistrationCodeInput'
+import RegistrationCountdownComponent from '../../../components/Registration/RegistrationCountdownComponent' // eslint-disable-line max-len
+import RegistrationCodeInput from '../../../components/Registration/RegistrationCodeInputComponent'
 
 class RegistrationSection extends Component {
   constructor(props) {
@@ -49,15 +49,14 @@ class RegistrationSection extends Component {
               </div>
               <Card>
                 {this.state.remainingTime > 0
-                  ? <RegistrationTimer remainingTime={this.state.remainingTime} />
+                  ? <RegistrationCountdownComponent remainingTime={this.state.remainingTime} />
                   : <RegistrationCodeInput />
                 }
               </Card>
               <p className="lead">
-                Nyní je možné registrovat první tým za školu. Druhý tým bude možné (v případě
-                zbývající kapacity) registrovat od úterý 16.&nbsp;10.&nbsp;2018 7:30 ráno.
-                Pro registraci potřebujete <strong>školní registrační kód</strong>,
-                název přihlašovaného týmu a celá jména jeho členů.
+                Kapacita soutěže byla naplněna a již není možné registrovat další týmy.
+                Omlouváme se všem, na které se nedostalo. Na jaro připravujeme pro MaSo
+                nové prostory s větší kapacitou, kde už by se mělo dostat na všechny.
               </p>
               <br />
               <h2>Nemáte registrační kód?</h2>

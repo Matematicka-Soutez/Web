@@ -9,6 +9,8 @@ Competition description available at <http://maso.mff.cuni.cz> (czech only).
 
 ## Development setup
 
+If you are new to Node.js development here is [detailed setup](./docs/linux-setup.md).
+
 ### Prerequisites
 
 - install Node.js current release (<https://nodejs.org/en/>)

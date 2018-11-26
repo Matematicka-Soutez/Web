@@ -4,7 +4,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import { withStyles } from '@material-ui/core/styles'
-import Input from '../../../../games/water-bottling/web/src/Input'
+import Input from '../../../../games/game-of-trust/web/src/Input'
 
 const styles = theme => ({
   tabRoot: {

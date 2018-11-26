@@ -32,6 +32,7 @@ async function signUp(ctx) {
         lastName: ctx.request.body.lastName,
         email: ctx.request.body.email,
         password: ctx.request.body.password,
+        problemScanningToken: ctx.request.body.problemScanningToken,
       })
     ctx.status = 201
     ctx.body = responseParsers.parseOrganizer(organizer)

@@ -18,6 +18,7 @@ async function initUsers() {
     lastName: 'Nový',
     email: 'novy@sink.sendgrid.net',
     password: 'Password123!',
+    problemScanningToken: 'jamujici-plostice',
   }
 
   const unconfirmed = {
@@ -35,6 +36,7 @@ async function initUsers() {
     password: 'Password123!',
     confirmed: true,
     roleId: enums.ROLES.DRAFTSMAN.id,
+    problemScanningToken: 'zluty-bagr',
   }
 
   const admin = {
@@ -44,6 +46,7 @@ async function initUsers() {
     password: 'Password123!',
     confirmed: true,
     roleId: enums.ROLES.ADMIN.id,
+    problemScanningToken: 'super-tajny-token',
   }
 
   return {

@@ -74,14 +74,14 @@ async function getResults(competitionId, dbTransaction) {
     attributes: [
       'teamId',
       'gameScore',
-      [db.sequelize.literal(`"game_score" + ("solved_problems" * ${PROBLEM_POINT_VALUE})`), 'totalScore'], // eslint-disable-line max-len
+      [db.sequelize.literal(`"game_score" + ("solved_problems_override" * ${PROBLEM_POINT_VALUE})`), 'totalScore'], // eslint-disable-line max-len
     ],
     include: [{
       attributes: [
         'name',
         'number',
-        [db.sequelize.literal(`("solved_problems" * ${PROBLEM_POINT_VALUE})`), 'problemScore'],
-        'solvedProblems',
+        [db.sequelize.literal(`("solved_problems_override" * ${PROBLEM_POINT_VALUE})`), 'problemScore'], // eslint-disable-line max-len
+        'solvedProblemsOverride',
       ],
       model: db.Team,
       as: 'team',

@@ -14,7 +14,6 @@ function parseTeam(team) {
   parsed.id = team.id
   parsed.name = team.name
   parsed.number = team.number
-  parsed.DR_ID = team.DR_ID
   parsed.arrived = team.arrived
   parsed.schoolId = team.schoolId
   parsed.createdAt = team.createdAt
@@ -275,7 +274,7 @@ function parseTeacher(teacher) {
   return parsed
 }
 
-function parseSolvedProblem(problem) {
+function parseTeamSolution(problem) {
   if (!problem) {
     return problem
   }
@@ -284,7 +283,8 @@ function parseSolvedProblem(problem) {
   parsed.competitionId = problem.competitionId
   parsed.teamId = problem.teamId
   parsed.problemNumber = problem.problemNumber
-  parsed.cancelled = problem.cancelled
+  parsed.solved = problem.solved
+  parsed.createdBy = problem.createdBy
   parsed.createdAt = problem.createdAt
   parsed.updatedAt = problem.updatedAt
   return parsed
@@ -307,5 +307,5 @@ module.exports = {
   parseOrganizer,
   parseTeachers,
   parseTeacher,
-  parseSolvedProblem,
+  parseTeamSolution,
 }
