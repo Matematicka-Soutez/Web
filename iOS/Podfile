@@ -7,5 +7,6 @@ target 'MaSo' do
 
   # Pods for MaSo
   pod 'Alamofire', '~> 4.7'
+  pod 'RealmSwift'
 
 end
