@@ -21,7 +21,7 @@ If you are new to Node.js development here is [detailed setup](./docs/linux-setu
 Clone Maso repository
 
 ```bash
-git clone https://github.com/snEk42/MaSo.git
+git clone https://github.com/Matematicka-Soutez/Web.git
 ```
 
 Install packages

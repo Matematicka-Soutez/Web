@@ -11,7 +11,7 @@
 
 Clone MaSo repository
 ```bash
-git clone https://github.com/snEk42/MaSo.git
+git clone https://github.com/Matematicka-Soutez/Web.git
 ```
 
 ###  Docker
