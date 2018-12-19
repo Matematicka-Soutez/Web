@@ -15,7 +15,9 @@ git clone https://github.com/Matematicka-Soutez/Web.git
 ```
 
 ###  Docker
-You can install Docker by various ways but snap is reliable:
+Please check [this link](https://www.bretfisher.com/installdocker/) on how to install docker on your system. 
+
+Or if feeling lucky just try:
 
 ```bash
 sudo snap install docker
