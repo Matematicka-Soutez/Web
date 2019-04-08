@@ -1,0 +1,8 @@
+apps:
+  - script: api/src/app.js
+    instances: 2
+    exec_mode: cluster
+    env_production:
+      NODE_ENV: production
+      DATABASE_URL: "postgresql://maso-web@10.10.11.11/maso?sslmode=verify-full"
+      PORT: 80
