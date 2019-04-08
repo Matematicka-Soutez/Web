@@ -36,16 +36,6 @@ function importModels(modelsPath) {
 
 // Import common models
 importModels(`${__dirname}/models`)
-// Import game specific models
-const gamesDir = path.normalize(`${__dirname}/../../../games/`)
-fs.readdirSync(gamesDir)
-  .filter(folder => folder.indexOf('.') !== 0)
-  .forEach(gameFolder => {
-    const gamePath = path.join(gamesDir, gameFolder)
-    const gameConfig = require(path.join(gamePath, './config.json')) // eslint-disable-line global-require, max-len
-
-    importModels(path.join(gamePath, gameConfig.common.databaseModels))
-  })
 
 // Load relations between models
 Object.keys(db).forEach(modelName => {

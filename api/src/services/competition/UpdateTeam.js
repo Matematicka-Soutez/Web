@@ -1,6 +1,6 @@
 'use strict'
 
-Promise = require('promise')
+Promise = require('bluebird')
 const TransactionalService = require('../../../../core/services/TransactionalService')
 const appErrors = require('../../../../core/errors/application')
 const registrationUtils = require('../../utils/registration')

@@ -125,6 +125,20 @@ function initCompetitions() {
     invitationEmailSent: true,
     organizerId: null,
     gameId: 2,
+  }, {
+    id: 3,
+    name: 'Jarní MaSo 2019',
+    date: new Date('2019-05-14T05:00:00.000Z'),
+    start: new Date('2019-05-14T08:00:00.000Z'),
+    end: new Date('2019-05-14T09:30:00.000Z'),
+    registrationRound1: new Date('2019-04-09T07:00:00.000Z'),
+    registrationRound2: new Date('2019-04-23T07:00:00.000Z'),
+    registrationRound3: new Date('2019-04-30T07:00:00.000Z'),
+    registrationEnd: new Date('2019-05-07T22:00:00.000Z'),
+    isPublic: true,
+    invitationEmailSent: true,
+    organizerId: null,
+    gameId: 2,
   }]
   return Promise.map(competitions, competition => createCompetition(competition))
 }

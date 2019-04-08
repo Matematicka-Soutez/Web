@@ -5,9 +5,6 @@ const GetTeamsByVenueService = require('../../services/competition/GetTeamsByVen
 const GetSchoolRegistrationsService = require('../../services/competition/GetSchoolRegistrations')
 const CreateTeamService = require('../../services/competition/CreateTeam')
 const UpdateTeamService = require('../../services/competition/UpdateTeam')
-const UpdateTeamSolutionService = require('../../services/problem/UpdateTeamSolution')
-const socket = require('../../sockets/publish')
-const GameResultsService = require('../../../../games/game-of-trust/api/src/services/GetResults')
 const appErrors = require('../../../../core/errors/application')
 const responseErrors = require('../../../../core/errors/response')
 
@@ -96,33 +93,10 @@ async function updateSchoolTeam(ctx) {
   }
 }
 
-async function updateTeamSolution(ctx) {
-  try {
-    ctx.body = await new UpdateTeamSolutionService(ctx.state).execute({
-      teamNumber: parseInt(ctx.request.body.team),
-      problemNumber: parseInt(ctx.request.body.problem),
-      password: ctx.request.body.password,
-      action: ctx.request.body.action,
-    })
-    // TODO: We cannot reference game results here
-    const results = await new GameResultsService(ctx.state).execute()
-    await socket.publishResultsChange(results)
-  } catch (err) {
-    if (err instanceof appErrors.UnauthorizedError) {
-      throw new responseErrors.UnauthorizedError('Heslo není platné.')
-    }
-    if (err instanceof appErrors.NotFoundError) {
-      throw new responseErrors.BadRequestError('Tým nebyl nalezen.')
-    }
-    throw err
-  }
-}
-
 module.exports = {
   getTimer,
   getTeams,
   getSchoolRegistrations,
   createSchoolTeam,
   updateSchoolTeam,
-  updateTeamSolution,
 }

@@ -152,6 +152,4 @@ router.get('/competitions/current/registration/:schoolToken', competitions.getSc
 router.post('/competitions/current/registration/:schoolToken', competitions.createSchoolTeam)
 router.put('/competitions/current/registration/:schoolToken', competitions.updateSchoolTeam)
 
-router.put('/competitions/current/team-solutions', competitions.updateTeamSolution)
-
 module.exports = router.routes()

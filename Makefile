@@ -19,7 +19,7 @@ install: node_modules
 
 lint:
 	$(call log,"Running ESLint ...")
-	$(bin)eslint --ext .js ./web ./api ./core ./games
+	$(bin)eslint --ext .js ./api ./core
 	$(call log,"ESLint run completed.")
 
 test: install

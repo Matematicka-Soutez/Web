@@ -1,10 +1,6 @@
 'use strict'
 
 const Router = require('koa-router')
-const {
-  organizerGameRoutes,
-  publicGameRoutes,
-} = require('../../../games/game-of-trust/api/src/routes')
 const config = require('../../../config')
 const setCurrentCompetition = require('../middleware/competition')
 const { authenticateTeacher, authenticateOrganizer } = require('../middleware/authentication')
@@ -36,10 +32,6 @@ apiRouter.use(setCurrentCompetition)
 apiRouter.use(publicRoutes)
 apiRouter.use('/teacher', authenticateTeacher, teacherRoutes)
 apiRouter.use('/org/competitions/current', authenticateOrganizer, organizerRoutes)
-
-// Game routes
-apiRouter.use('/competitions/current/game', publicGameRoutes)
-apiRouter.use('/org/competitions/current/game', authenticateOrganizer, organizerGameRoutes)
 
 apiRouter.use(handleNotFound)
 
