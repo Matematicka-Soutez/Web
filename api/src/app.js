@@ -7,7 +7,6 @@ const Koa = require('koa')
 const koaBody = require('koa-body')
 const koaCompress = require('koa-compress')
 const koaCors = require('@koa/cors')
-const koaStatic = require('koa-static')
 const config = require('../../config/index')
 const log = require('../../core/logger').logger
 const routes = require('./routes/index')
@@ -22,9 +21,6 @@ app.server = http.createServer(app.callback())
 app.use(koaCors())
 app.use(koaCompress())
 app.use(koaBody(config.server.bodyParser))
-
-// Serve static files from the React app
-app.use(koaStatic(path.join(__dirname, '../../web/build')))
 
 // Setup routes
 app.use(routes)

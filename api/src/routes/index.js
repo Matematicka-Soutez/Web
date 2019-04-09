@@ -16,14 +16,15 @@ const apiRouter = new Router()
 router.use(handleErrors)
 
 // Force redirect http requests to https
-if (config.env === 'production' || config.env === 'staging') {
-  apiRouter.use((ctx, next) => {
-    if (ctx.headers['x-forwarded-proto'] !== 'https') {
-      throw new responseErrors.ForbiddenError('Https is required.')
-    }
-    return next()
-  })
-}
+// TODO: Disabled util we get a certificate
+// if (config.env === 'production' || config.env === 'staging') {
+//   apiRouter.use((ctx, next) => {
+//     if (ctx.headers['x-forwarded-proto'] !== 'https') {
+//       throw new responseErrors.ForbiddenError('Https is required.')
+//     }
+//     return next()
+//   })
+// }
 
 // Add current competition to all services through middleware
 apiRouter.use(setCurrentCompetition)
