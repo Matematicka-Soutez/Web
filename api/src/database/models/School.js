@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     aesopId: { type: DataTypes.STRING, allowNull: false, field: 'aesop_id' },
     accessCode: { type: DataTypes.STRING, allowNull: false, field: 'access_code' },
   }, {
-    tableName: 'Schools',
-  })
+      tableName: 'Schools',
+    })
 
   School.associate = models => {
     School.hasMany(models.Team, {

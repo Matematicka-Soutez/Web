@@ -6,10 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     number: { type: DataTypes.INTEGER, allowNull: true, field: 'number', unique: true },
     arrived: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false, field: 'arrived' },
     solvedProblemsOverride: { type: DataTypes.INTEGER, allowNull: true, field: 'solved_problems_override' },
+    active: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true, field: 'active' },
   }, {
-    tableName: 'Teams',
-    timestamps: true,
-  })
+      tableName: 'Teams',
+      timestamps: true,
+    })
 
   Team.associate = models => {
     Team.hasMany(models.TeamMember, {

@@ -4,7 +4,7 @@ const appErrors = require('../../../core/errors/application')
 const db = require('./../database')
 const parsers = require('./repositoryParsers')
 
-async function findByAccessCode(accessCode, dbTransaction) {
+async function findByAccessCode(accessCode, competitionId, dbTransaction) {
   if (!accessCode) {
     throw new Error('accessCode is required')
   }
@@ -13,17 +13,22 @@ async function findByAccessCode(accessCode, dbTransaction) {
     include: [{
       model: db.Team,
       as: 'teams',
+      required: false,
+      where: { active: true },
       order: [['createdAt', 'DESC']],
       include: [{
         model: db.TeamMember,
         as: 'members',
+        required: false,
       }, {
         model: db.CompetitionVenue,
         as: 'competitionVenue',
-        attributes: ['id'],
+        required: false,
+        attributes: ['id', 'competitionId'],
         include: [{
           model: db.Venue,
           as: 'venue',
+          required: false,
           attributes: ['id', 'name'],
         }],
       }],

@@ -19,7 +19,7 @@ module.exports = class GetSchoolRegistrationsService extends AbstractService {
   run() {
     return Promise.all([
       // TODO: Make this competition agnostic
-      schoolRepository.findByAccessCode(this.data.schoolToken),
+      schoolRepository.findByAccessCode(this.data.schoolToken, this.competition.id),
       venueRepository.findCompetitionVenues(this.competition.id),
     ]).spread((school, venues) => ({
       school,

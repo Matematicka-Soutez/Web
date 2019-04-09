@@ -38,7 +38,7 @@ module.exports = class UpdateTeamService extends TransactionalService {
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
     // Checks
-    const school = await schoolRepository.findByAccessCode(this.data.schoolToken, dbTransaction)
+    const school = await schoolRepository.findByAccessCode(this.data.schoolToken, this.competition.id, dbTransaction)
     const competitionVenue = await venueRepository.findCompetitionVenueById(
       this.data.competitionVenueId,
       dbTransaction,

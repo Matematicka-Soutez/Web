@@ -33,7 +33,7 @@ module.exports = class RegisterSchoolTeamService extends TransactionalService {
 
   async run() {
     const dbTransaction = await this.createOrGetTransaction()
-    const school = await schoolRepository.findByAccessCode(this.data.schoolToken, dbTransaction)
+    const school = await schoolRepository.findByAccessCode(this.data.schoolToken, this.competition.id, dbTransaction)
     registrationUtils.checkRegistrationRoundRequirements(this.competition, school)
     const competitionVenue = await venueRepository.findCompetitionVenueById(
       this.data.competitionVenueId,

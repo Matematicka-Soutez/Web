@@ -20,7 +20,7 @@ function checkRegistrationRoundRequirements(competition, school) {
   }
   if (school.teams && school.teams.length >= round.teamLimit) {
     const amount = teamAmount(round.teamLimit)
-    const message = `V tuto chvíli nemůžete registrovat více než ${amount} na školu.`
+    const message = `V tuto chvíli nemůžete registrovat více než ${amount} týmů z jedné školy.`
     throw new appErrors.CannotBeDoneError(message)
   }
 }
