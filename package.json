@@ -5,7 +5,7 @@
   "proxy": "http://localhost:3001/",
   "main": "api/src/cluster.js",
   "scripts": {
-    "test": "docker-compose up -d --force-recreate && sleep 2s && NODE_ENV=test node_modules/.bin/mocha --opts api/tests/mocha.opts api/tests/",
+    "test": "docker-compose up -d --force-recreate && sleep 5s && NODE_ENV=test node_modules/.bin/mocha --opts api/tests/mocha.opts api/tests/",
     "eslint": "node_modules/.bin/eslint ./",
     "eslint-fix": "node_modules/.bin/eslint ./ --fix",
     "snyk": "snyk auth $SNYK_TOKEN && snyk test",

@@ -7,7 +7,7 @@ const db = require('../../src/database')
 
 describe('Public competition API endpoints: /api/competitions', function competitionAPI() {
   describe('Get Timer: GET /api/competitions/current/timer', function getCompetitionTimer() {
-    before(async function() {
+    before(async function () {
       this.data = await initDb()
     })
 
@@ -25,7 +25,7 @@ describe('Public competition API endpoints: /api/competitions', function competi
   })
 
   describe('Get Teams By Venue: GET /api/competitions/current/teams', function getTeamsByVenue() {
-    before(async function() {
+    before(async function () {
       this.data = await initDb()
     })
 
@@ -39,7 +39,7 @@ describe('Public competition API endpoints: /api/competitions', function competi
   })
 
   describe('Update team solution: PUT /api/competitions/current/team-solutions', function getTeamsByVenue() {
-    before(async function() {
+    before(async function () {
       this.data = await initDb()
       await db.sequelize.query('UPDATE public."Teams" SET number = id')
     })
@@ -170,5 +170,37 @@ describe('Public competition API endpoints: /api/competitions', function competi
       })
       solution.solved.should.equal(false)
     })
+  })
+
+  describe('Team registration: POST /api/competitions/current/registration/:schoolToken', function teamRegistration() {
+    before(async function () {
+      this.data = await initDb()
+    })
+
+    it('SUCCESS 200 - register team', async function getTeams() {
+      await request(this.server)
+        .post('/api/competitions/current/registration/e5zuke')
+        .send({
+          competitionVenueId: 5,
+          teamName: 'Masožravci',
+          members: [{
+            firstName: 'Jan',
+            lastName: 'Černý',
+            grade: 8,
+          }, {
+            firstName: 'Honza',
+            lastName: 'Bílý',
+            grade: 8,
+          }, {
+            firstName: 'Jitka',
+            lastName: 'Fialová',
+            grade: 8,
+          }]
+        })
+        .expect('Content-Type', /json/u)
+        .expect(200, {})
+      // TODO: finish this with actual team data
+    })
+
   })
 })
