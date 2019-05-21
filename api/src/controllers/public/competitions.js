@@ -55,6 +55,7 @@ async function createSchoolTeam(ctx) {
         grade: parseInt(member.grade),
       })),
     })
+    ctx.status = 201
   } catch (err) {
     if (err instanceof appErrors.NotFoundError) {
       throw new responseErrors.BadRequestError('Škola nebyla nalezena.')

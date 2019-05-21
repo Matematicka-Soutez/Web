@@ -9,7 +9,6 @@ module.exports = {
   parserOptions: {
     sourceType: 'module'
   },
-  parser: 'babel-eslint',
   // If you need to override some rules specifically for this project,
   // you can do so as usual via the rules property.
   // Per-project rules take precedence over rules defined via included

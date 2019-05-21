@@ -63,7 +63,7 @@ module.exports = env => ({
       logging: false,
     },
     connectionString: process.env.DATABASE_URL
-      || 'postgres://postgres@database:5432/maso-local',
+      || 'postgres://postgres@localhost:5432/maso-local',
   },
   redis: {
     connectionString: process.env.REDISCLOUD_URL

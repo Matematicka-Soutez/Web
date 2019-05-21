@@ -123,7 +123,7 @@ async function createSchool(defaults = {}) {
     shortName: `${chance.pickone(typesShort)} ${chance.pickone(whos)}`,
     fullName: `${chance.pickone(types)} ${chance.pickone(whos)}`,
     aesopId: `aesop:${chance.integer({ min: 1, max: 3000 })}`,
-    accessCode: chance.string({ length: 6, pool: 'abcdefghijklmnopqrstuvwxyz1234567890' }),
+    accessCode: chance.string({ length: 6, pool: 'abcdefghjkmnpqrstuvwxyz23456789' }),
     addressId: address.id,
   }, defaults)
   const created = await db.School.create(school)

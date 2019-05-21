@@ -8,10 +8,12 @@ const initStatic = require('./static')
 
 async function init() {
   await db.sequelize.sync({ force: true })
-  await initEnums()
-  await initStatic()
-  await initCommon()
-  return initUsers()
+  return {
+    enums: await initEnums(),
+    static: await initStatic(),
+    common: await initCommon(),
+    ...await initUsers(),
+  }
 }
 
 module.exports = init

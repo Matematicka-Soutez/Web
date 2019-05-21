@@ -92,7 +92,10 @@ async function create(team, members, dbTransaction) {
     createdTeam.members = await db.TeamMember.bulkCreate(members.map(member => ({
       ...member,
       teamId: createdTeam.id,
-    })), { transaction: dbTransaction })
+    })), {
+      returning: true,
+      transaction: dbTransaction,
+    })
   }
   return parsers.parseTeam(createdTeam)
 }
