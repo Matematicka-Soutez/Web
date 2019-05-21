@@ -369,6 +369,58 @@ describe('Public competition API endpoints: /api/competitions', function competi
         grade: 7,
       })
     })
+    it('FAIL 409 Conflict - should allow only 1 team per school during 1st round', async function getTeams() {
+      const school = await createSchool()
+      await db.Competition.update({
+        date: moment().add(7, 'days').toISOString(),
+        registrationRound1: moment().subtract(7, 'days').toISOString(),
+        registrationRound2: moment().add(1, 'days').toISOString(),
+        registrationRound3: moment().add(7, 'days').toISOString(),
+        registrationEnd: moment().add(9, 'days').toISOString(),
+      }, { where: { id: 3 } })
+      await request(this.server)
+        .post(`/api/competitions/current/registration/${school.accessCode}`)
+        .send({
+          competitionVenueId: 5,
+          teamName: 'Masožravci',
+          members: [{
+            firstName: 'Jan',
+            lastName: 'Černý',
+            grade: 8,
+          }, {
+            firstName: 'Honza',
+            lastName: 'Bílý',
+            grade: 8,
+          }, {
+            firstName: 'Jitka',
+            lastName: 'Fialová',
+            grade: 8,
+          }],
+        })
+        .expect('Content-Type', /json/u)
+        .expect(201)
+      await request(this.server)
+        .post(`/api/competitions/current/registration/${school.accessCode}`)
+        .send({
+          competitionVenueId: 5,
+          teamName: 'Masožravci',
+          members: [{
+            firstName: 'Jan',
+            lastName: 'Černý',
+            grade: 8,
+          }, {
+            firstName: 'Honza',
+            lastName: 'Bílý',
+            grade: 8,
+          }, {
+            firstName: 'Jitka',
+            lastName: 'Fialová',
+            grade: 8,
+          }],
+        })
+        .expect('Content-Type', /json/u)
+        .expect(409)
+    })
 
   })
 })
