@@ -40,7 +40,7 @@
     "@material-ui/icons": "^3.0.1",
     "@sendgrid/mail": "^6.3.1",
     "autoprefixer": "7.1.6",
-    "bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "bluebird": "^3.5.2",
     "bunyan": "^1.8.12",
     "chalk": "1.1.3",
