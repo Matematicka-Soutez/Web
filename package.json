@@ -120,7 +120,7 @@
     "mocha": "^5.2.0",
     "mocha-http-detect": "^0.2.0",
     "nock": "^10.0.0",
-    "nodemailer": "^4.6.8",
+    "nodemailer": "^6.4.16",
     "nodemon": "^1.18.4",
     "nyc": "^13.0.1",
     "readline-sync": "^1.4.9",
